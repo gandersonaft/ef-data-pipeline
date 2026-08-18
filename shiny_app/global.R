@@ -19,13 +19,17 @@ library(purrr)
 # empty-state validate(need(...)) call in the mod_*.R files. Used namespaced
 # (jsonlite::fromJSON) in R/mod_qc_review.R instead.
 
-# Read-only shiny_reader role (see supabase/roles.sql). Use Supabase's pooled
-# transaction-mode endpoint (port 6543), not the direct port (5432) -- shinyapps.io
-# does not handle many concurrent long-lived direct connections well.
+# Read-only shiny_reader role (see supabase/roles.sql). Use Supabase's
+# Supavisor SESSION-mode pooler (port 5432), not the direct host (IPv6-only,
+# most hosting has no IPv6 egress) and not transaction mode (port 6543,
+# doesn't support everything a persistent app session needs) -- see
+# .Renviron.example and the main README for the full story. The port default
+# below matches that decision so a missing SUPABASE_DB_PORT fails toward the
+# right pooler mode instead of silently landing on the wrong one.
 db_pool <- pool::dbPool(
   drv = RPostgres::Postgres(),
   host = Sys.getenv("SUPABASE_DB_HOST"),
-  port = as.integer(Sys.getenv("SUPABASE_DB_PORT", "6543")),
+  port = as.integer(Sys.getenv("SUPABASE_DB_PORT", "5432")),
   dbname = Sys.getenv("SUPABASE_DB_NAME", "postgres"),
   user = Sys.getenv("SUPABASE_DB_USER", "shiny_reader"),
   password = Sys.getenv("SUPABASE_DB_PASSWORD"),
