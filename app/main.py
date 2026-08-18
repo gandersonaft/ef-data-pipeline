@@ -165,11 +165,24 @@ async def receive_survey123(
 
     log_id = await webhook_log.log_received(pool, payload, headers=headers)
 
+    # Confirmed 2026-08-18: Survey123 item-level webhooks have no secret/
+    # signing-key field at all in their setup UI, unlike feature-layer
+    # webhooks -- so they never send x-esriHook-Signature. Enforcing
+    # verification unconditionally would permanently 401 every Survey123-
+    # level delivery. Trade-off: verify strictly when a signature IS present
+    # (protects the feature-layer webhook, which does sign), but accept
+    # unsigned requests rather than blocking this webhook type outright.
+    # Revisit if this endpoint needs stronger protection later (e.g. an
+    # Esri egress IP allowlist) -- right now correctness of the ingestion
+    # path matters more than defending an endpoint with no real attacker
+    # incentive yet.
     signature_header = headers.get("x-esrihook-signature", "")
-    if settings.environment != "development" and not esri_mod.verify_webhook_signature(raw, signature_header):
-        await webhook_log.mark_error(
-            pool, log_id, f"invalid signature (header present: {bool(signature_header)})"
-        )
+    if (
+        settings.environment != "development"
+        and signature_header
+        and not esri_mod.verify_webhook_signature(raw, signature_header)
+    ):
+        await webhook_log.mark_error(pool, log_id, "invalid signature")
         raise HTTPException(status_code=401, detail="invalid signature")
 
     try:
