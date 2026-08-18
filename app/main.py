@@ -27,20 +27,10 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
-from app import crud, esri, qc, storage, webhook_log
+from app import esri, processing, storage, webhook_log
 from app.config import get_settings
-from app.db import get_pool, lifespan, transaction
-from app.esri import normalize_guid
-from app.models import (
-    EventAttributes,
-    FishAttributes,
-    Geometry,
-    NormalizedSubmission,
-    PhotoAttributes,
-    RunAttributes,
-    RunWithFish,
-    WidthAttributes,
-)
+from app.db import get_pool, lifespan
+from app.models import NormalizedSubmission
 
 app = FastAPI(title="EF Data Pipeline Webhook Receiver", lifespan=lifespan)
 
@@ -68,13 +58,6 @@ async def crc_challenge(crc_token: str, esri_mod=Depends(get_esri)):
     return {"response_token": esri_mod.compute_crc_response_token(crc_token)}
 
 
-def _attrs(feature) -> dict:
-    """Accepts either a bare attributes dict (our own assembled envelope shape,
-    matching test fixtures) or an Esri {"attributes": {...}} feature wrapper
-    (returned by esri.fetch_full_submission's queryRelatedRecords fallback)."""
-    return feature["attributes"] if isinstance(feature, dict) and "attributes" in feature else feature
-
-
 async def normalize_payload(payload: dict, esri_mod) -> NormalizedSubmission:
     if "event" in payload and "rep_pass" in payload:
         # Our own assembled envelope shape (used by tests/fixtures) — parse directly.
@@ -87,54 +70,7 @@ async def normalize_payload(payload: dict, esri_mod) -> NormalizedSubmission:
     else:
         raise ValueError(f"Unrecognized webhook payload shape: keys={sorted(payload.keys())}")
 
-    event_feature = tree["event"]
-    event = EventAttributes.model_validate(_attrs(event_feature))
-    geometry = None
-    if isinstance(event_feature, dict) and event_feature.get("geometry"):
-        geometry = Geometry.model_validate(event_feature["geometry"])
-
-    pass_list = [RunAttributes.model_validate(_attrs(p)) for p in tree.get("rep_pass", [])]
-    fish_list = [FishAttributes.model_validate(_attrs(f)) for f in tree.get("rep_fish", [])]
-    photo_list = [PhotoAttributes.model_validate(_attrs(p)) for p in tree.get("rep_photos", [])]
-    width_list = [WidthAttributes.model_validate(_attrs(w)) for w in tree.get("rep_widths", [])]
-
-    runs = [
-        RunWithFish(
-            run=run,
-            fish=[f for f in fish_list if normalize_guid(f.parentglobalid) == normalize_guid(run.globalid)],
-        )
-        for run in pass_list
-    ]
-
-    return NormalizedSubmission(
-        event=event, geometry=geometry, runs=runs, photos=photo_list, widths=width_list, raw_payload=payload
-    )
-
-
-async def _download_and_upload_photos(submission: NormalizedSubmission, esri_mod, storage_mod) -> list[tuple]:
-    """Network I/O for attachments, done BEFORE the DB transaction opens."""
-    settings = get_settings()
-    rep_photos_url = f"{settings.agol_feature_service_url.rstrip('/')}/1"  # rep_photos = related table id 1
-
-    uploads: list[tuple] = []
-    for photo in submission.photos:
-        if photo.objectid is None:
-            continue
-        token = await esri_mod.get_token()
-        attachments = await esri_mod.list_attachments(rep_photos_url, photo.objectid, token)
-        for att in attachments:
-            content, content_type = await esri_mod.download_attachment(
-                rep_photos_url, photo.objectid, att.attachment_id, token
-            )
-            ext = storage_mod.ext_from_content_type(content_type)
-            path = storage_mod.build_storage_path(
-                submission.event.survey_date, submission.event.effective_site_code(),
-                normalize_guid(photo.globalid), ext,
-            )
-            await storage_mod.upload_photo(content, content_type, path)
-            url = storage_mod.sign_url(path)
-            uploads.append((photo, path, url, content_type))
-    return uploads
+    return processing.build_normalized_submission(tree, payload)
 
 
 @app.post("/webhook/survey123")
@@ -187,33 +123,11 @@ async def receive_survey123(
 
     try:
         submission = await normalize_payload(payload, esri_mod)
-        photo_uploads = await _download_and_upload_photos(submission, esri_mod, storage_mod)
-
-        async with transaction(pool) as conn:
-            site_id = await crud.upsert_site(conn, submission.event)
-            event_id = await crud.upsert_event(conn, submission, site_id)
-            run_id_map = await crud.upsert_runs(conn, event_id, submission.runs)
-            fish_rows = await crud.upsert_fish(conn, run_id_map, submission.runs)
-            await crud.upsert_widths(conn, event_id, submission.widths)
-            await crud.upsert_photos(conn, event_id, photo_uploads)
-
-            run_pass_no = {
-                run_id_map[normalize_guid(rwf.run.globalid)]: rwf.run.pass_no for rwf in submission.runs
-            }
-            pass_flags = qc.check_pass_progression(fish_rows, run_pass_no)
-            k_flags = qc.check_condition_factor(fish_rows)
-            status, flags = qc.summarize(pass_flags, k_flags)
-            await crud.update_qc(conn, event_id, status, flags)
-
+        result = await processing.process_submission(
+            pool, esri_mod, storage_mod, submission, settings.agol_feature_service_url
+        )
         await webhook_log.mark_processed(pool, log_id)
-        return {
-            "event_id": event_id,
-            "runs": len(run_id_map),
-            "fish": len(fish_rows),
-            "photos": len(photo_uploads),
-            "qc_status": status,
-            "qc_flags": flags,
-        }
+        return result
 
     except (ValidationError, ValueError) as e:
         await webhook_log.mark_error(pool, log_id, str(e))

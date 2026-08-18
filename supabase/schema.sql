@@ -17,6 +17,7 @@ create extension if not exists postgis;
 create extension if not exists pgcrypto;
 
 drop table if exists
+    poll_state,
     webhook_log,
     fish_records,
     electrofishing_runs,
@@ -254,11 +255,24 @@ create table webhook_log (
     received_at       timestamptz not null default now(),
     event_global_id   text,
     payload           jsonb,
+    headers           jsonb,        -- captured for debugging delivery-format/signing issues
     status            text not null default 'received'
                           check (status in ('received', 'processed', 'error')),
     error_detail      text
 );
 create index idx_webhook_log_status on webhook_log (status);
+
+-- ============================================================================
+-- poll_state — high-water mark for scripts/poll_submissions.py, the polling
+-- fallback used while ArcGIS Online's webhook delivery is unreliable (see
+-- README's "Known open items"). One row per polled layer/source; currently
+-- just 'main_layer' (layer 0, i.e. new/updated survey events).
+-- ============================================================================
+create table poll_state (
+    key             text primary key,
+    last_object_id  integer not null default 0,
+    updated_at      timestamptz not null default now()
+);
 
 -- ============================================================================
 -- Fulton's condition factor trigger

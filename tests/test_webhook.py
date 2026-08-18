@@ -32,6 +32,29 @@ async def test_happy_path_insert(client, sample_payload):
     assert body["qc_flags"] == []
 
 
+async def test_one_invalid_fish_row_does_not_lose_the_whole_submission(client, sample_payload):
+    """This form has had required-field validation stripped for testing, so
+    an incomplete fish row (e.g. missing species) is a real, confirmed
+    occurrence -- confirmed 2026-08-18 against live data, where this bug
+    silently dropped 12/12 real submissions' worth of processing entirely.
+    One bad row must cost only that row, not the event/passes/other fish/
+    photos/widths."""
+    payload = json.loads(json.dumps(sample_payload))  # deep copy
+    payload["rep_fish"][0]["attributes"]["species"] = None
+
+    resp = await client.post("/webhook/survey123", content=json.dumps(payload))
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["event_id"] == 1
+    assert body["runs"] == 2
+    assert body["fish"] == 9  # one of the original 10 rows was invalid and skipped
+    assert body["fish_skipped"] == 1
+    assert body["photos"] == 2  # unaffected
+    assert body["qc_status"] == "flagged"
+    assert any(f["type"] == "incomplete_fish_record" and f["count"] == 1 for f in body["qc_flags"])
+
+
 async def test_qc_flag_pass_progression(client, qc_flagged_payload):
     resp = await client.post("/webhook/survey123", content=json.dumps(qc_flagged_payload))
 

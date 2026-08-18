@@ -272,3 +272,9 @@ class NormalizedSubmission(BaseModel):
     photos: list[PhotoAttributes]
     widths: list[WidthAttributes]
     raw_payload: dict
+    # Individual rep_fish rows that failed validation (e.g. missing species --
+    # this form has had required-field validation stripped for testing, so
+    # incomplete rows are a real, expected occurrence, not a hypothetical).
+    # Recorded here rather than letting one bad row crash the entire
+    # submission -- see processing.py's build_normalized_submission().
+    skipped_fish: list[dict] = []

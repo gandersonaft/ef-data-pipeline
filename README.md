@@ -26,11 +26,13 @@ The Survey123 form this pipeline ingests lives at
 - `data/site_data.csv` — copy of the form's site lookup CSV (source: the XLSForm project's
   `media/site_data.csv`). Re-copy from there whenever the master site list changes, then re-run
   `seed_sites.py`.
-- `app/` — FastAPI webhook receiver (`/webhook/survey123`).
+- `app/` — FastAPI webhook receiver (`/webhook/survey123`) and the shared submission-processing pipeline
+  (`app/processing.py`) used by both the webhook and the polling fallback below.
 - `tests/` — pytest suite + fixtures + manual e2e testing notes (`tests/README_e2e.md`).
 - `shiny_app/` — R Shiny reporting portal (3 tabs: Depletion & Density, Length-Frequency & Condition,
   QC & Photo Review).
 - `scripts/reprocess_webhook_log.py` — replay failed webhook deliveries from the `webhook_log` table.
+- `scripts/poll_submissions.py` — **polling fallback**, currently the primary ingestion path (see below).
 
 ## Quick start (local dev)
 
@@ -87,12 +89,53 @@ vs. [Survey123's webhook docs](https://doc.arcgis.com/en/survey123/analyze/webho
   raw body>` — same algorithm as the CRC response, different header than originally guessed
   (`x-esri-webhook-signature`, hex-encoded — wrong on both counts).
 
+## Polling fallback — currently the primary ingestion path
+
+Despite everything above being confirmed correct against Esri's docs, **AGOL has produced zero webhook
+delivery attempts** — not failures, zero attempts — across two independently-configured, correctly-set-up
+webhook mechanisms (a feature-layer webhook and a Survey123 item-level webhook), verified by watching both
+`webhook_log` and Render's raw request logs during real, confirmed Survey123 submissions. Every other
+explanation was ruled out: payload URL, trigger events, source-vs-view, change tracking enabled, CRC
+handshake working correctly when tested manually, unsigned-delivery handling. The org's own admin webhook
+panel (Organization → Settings → Webhooks) would likely show more, but requires admin access not
+available when this was diagnosed. Until that's resolved (admin conversation, or an Esri support case),
+**`scripts/poll_submissions.py` is the real ingestion path**, not a backup:
+
+- Tracks a high-water mark (`poll_state.last_object_id`) against the main layer's objectid.
+- Each run, queries for `objectid > last_object_id`, and for each new event, calls
+  `esri.fetch_full_submission()` (the same queryRelatedRecords fetch the webhook path uses) followed by
+  the same `app/processing.py` upsert+QC pipeline — so there's exactly one code path for "what happens
+  once we know an event's globalid," shared between both entry points.
+- Only catches new submissions (`FeaturesCreated`), not edits to already-processed ones — acceptable
+  since this survey data is essentially write-once in practice.
+- Needs to run on a schedule (Render Cron Job, GitHub Actions scheduled workflow, plain OS cron — not yet
+  decided/deployed as of this writing; run it manually until that's set up).
+
+## Two real bugs this surfaced, worth knowing about if something looks off
+
+- **Wrong relationship id silently dropped every fish record, on every submission, from day one.**
+  `esri.fetch_full_submission()` queried `rep_pass`'s related `rep_fish` records using relationship id
+  `0`, based on an earlier investigation that turned out to be wrong (or the service was republished with
+  different numbering since). The real id, confirmed by querying each layer's `relationships` array
+  directly (`GET {layer}?f=json`), is **4**. This didn't error — `queryRelatedRecords` with a
+  nonexistent relationship id just returns no related records — so every submission "succeeded" with
+  `fish: 0` and nothing looked broken until someone who knew the real catch counts noticed they were
+  missing. If any layer's relationship/layer ids seem to misbehave again, re-verify against the live
+  service; don't trust a prior note (including this one, after another republish).
+- **One invalid fish row used to cost the entire submission.** This form has had required-field
+  validation stripped for testing (see project history), so an incomplete row (e.g. missing `species`) is
+  a real, confirmed occurrence, not a hypothetical. `build_normalized_submission()` used to validate all
+  fish rows in one list comprehension, so a single bad row raised and lost the whole event — passes,
+  other valid fish, photos, widths, everything. Now each row is validated individually; a bad one is
+  skipped, counted (`NormalizedSubmission.skipped_fish`), and surfaced as an `incomplete_fish_record` QC
+  flag rather than silently (or catastrophically) discarded.
+
 ## Known open items
 
 - No `weight` field exists in the current form — `wet_weight_g`/`condition_factor` will be `NULL` for
   all real submissions today. The schema and Shiny app support it for when/if it's added to the form.
 - Photos are site-level only (`rep_photos`), never per-fish.
 - The Extract Changes polling in `resolve_event_global_id()` runs synchronously inside the request
-  handler (up to ~30s cap). If AGOL's own delivery timeout turns out to be shorter than that in
-  practice, this will need to move to a background task (`202 Accepted` immediately, process after) —
-  worth watching once real submission volume tells us how long this actually takes.
+  handler (up to ~30s cap). Moot while the webhook itself isn't delivering anything, but worth revisiting
+  if/when it starts working.
+- `scripts/poll_submissions.py` isn't yet deployed on a schedule anywhere — see "Polling fallback" above.

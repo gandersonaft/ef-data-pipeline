@@ -57,6 +57,19 @@ _DIRECT_CHILD_LAYER_IDS = {1, 2, 3}
 _REP_FISH_LAYER_ID = 4
 _REP_PASS_LAYER_ID = 3
 
+# RELATIONSHIP ids (distinct from layer ids above -- do not conflate them).
+# Confirmed 2026-08-18 by querying each layer's `relationships` array
+# directly (GET {layer}?f=json): rep_pass -> rep_fish is relationship id 4,
+# NOT 0 as originally assumed from an earlier, apparently incorrect
+# investigation. That wrong value silently dropped every fish record on
+# every submission (both webhook and poller, since they share
+# fetch_full_submission()) until caught by a user noticing fish counts were
+# missing from real test data. If any layer's relationship ids seem to
+# behave unexpectedly again, re-verify against the live service rather than
+# trusting a prior note -- these numbers aren't guaranteed stable across a
+# republish.
+_REP_PASS_TO_REP_FISH_RELATIONSHIP_ID = 4
+
 
 def normalize_guid(raw: str | None) -> str | None:
     """Strip braces and lowercase an Esri GlobalID/ParentGlobalID for stable comparisons/storage."""
@@ -324,7 +337,7 @@ async def fetch_full_submission(event_global_id: str, token: str) -> dict:
                     "f": "json",
                     "token": token,
                     "objectIds": pass_object_id,
-                    "relationshipId": 0,  # rep_pass_rep_fish
+                    "relationshipId": _REP_PASS_TO_REP_FISH_RELATIONSHIP_ID,
                     "outFields": "*",
                 },
             )
