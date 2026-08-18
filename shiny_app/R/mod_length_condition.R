@@ -76,5 +76,18 @@ mod_length_condition_server <- function(id, filtered_events, pool) {
         labs(x = "Species", y = "Condition factor (K)") +
         theme_minimal()
     })
+
+    # Outputs living in a bslib::nav_panel that isn't the initially-active tab
+    # can fail to ever receive Shiny's client -> server "became visible, please
+    # compute" signal (confirmed 2026-08-18: server-side render code never
+    # invoked at all -- not slow, never started -- despite the client showing
+    # the tab as active/visible with bound outputs and a perpetual
+    # "recalculating" spinner). Forcing suspendWhenHidden off sidesteps the
+    # whole visibility-detection handshake rather than debugging bslib's tab
+    # integration further; the cost (computing tabs the user hasn't opened
+    # yet) is negligible at this app's data volume.
+    outputOptions(output, "length_hist", suspendWhenHidden = FALSE)
+    outputOptions(output, "weight_scatter", suspendWhenHidden = FALSE)
+    outputOptions(output, "condition_box", suspendWhenHidden = FALSE)
   })
 }

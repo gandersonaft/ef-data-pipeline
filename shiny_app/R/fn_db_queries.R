@@ -43,7 +43,15 @@ filtered_event_ids <- function(pool, catchment = NULL, site_code = NULL,
     q <- q |> dplyr::filter(survey_date >= !!date_range[1], survey_date <= !!date_range[2])
   }
 
-  event_ids <- q |> dplyr::pull(event_id)
+  # event_id is a Postgres bigint, so dplyr::pull() returns an integer64
+  # (bit64 package) vector, not a base R integer/double. base R's intersect()
+  # below is NOT integer64-aware -- it silently reinterprets the 64-bit
+  # integer bit pattern as a double, corrupting every id into a near-zero
+  # denormal float (confirmed 2026-08-18: real event_ids 1-12 became values
+  # like 4.94e-324). Converting to plain integer immediately after pulling
+  # sidesteps this entirely -- event_id will never realistically exceed
+  # 32-bit range for this application.
+  event_ids <- as.integer(q |> dplyr::pull(event_id))
 
   if (!is.null(species) && length(species) > 0 && length(event_ids) > 0) {
     fish_event_ids <- tbl_fish(pool) |>
@@ -51,6 +59,7 @@ filtered_event_ids <- function(pool, catchment = NULL, site_code = NULL,
       dplyr::filter(event_id %in% !!event_ids, species %in% !!species) |>
       dplyr::distinct(event_id) |>
       dplyr::pull(event_id)
+    fish_event_ids <- as.integer(fish_event_ids)
     event_ids <- intersect(event_ids, fish_event_ids)
   }
 
@@ -123,13 +132,30 @@ sign_photo_url <- function(storage_path) {
     return(NA_character_)
   }
 
+  # storage_path segments (site_code in particular, e.g. "3 fishfarm") can
+  # contain spaces and other characters that aren't valid raw in a URL.
+  # req_url_path_append() does NOT auto-encode a single argument containing
+  # embedded "/" separators -- confirmed 2026-08-18: passing the whole path
+  # as one argument produced a literal space in the built URL, which curl
+  # then rejected outright ("Malformed input to a URL function"). Encode
+  # each "/"-separated segment individually so slashes stay as directory
+  # separators while everything else (spaces included) gets escaped.
+  path_segments <- strsplit(storage_path, "/", fixed = TRUE)[[1]]
+  encoded_segments <- vapply(path_segments, utils::URLencode, character(1), reserved = TRUE)
+
+  req <- httr2::request(supabase_url) |>
+    httr2::req_url_path_append("storage/v1/object/sign", bucket)
+  req <- do.call(httr2::req_url_path_append, c(list(req), as.list(encoded_segments)))
+
   resp <- tryCatch(
-    httr2::request(supabase_url) |>
-      httr2::req_url_path_append("storage/v1/object/sign", bucket, storage_path) |>
+    req |>
       httr2::req_headers(Authorization = paste("Bearer", service_key), apikey = service_key) |>
       httr2::req_body_json(list(expiresIn = 3600L)) |>
       httr2::req_perform(),
-    error = function(e) NULL
+    error = function(e) {
+      warning("sign_photo_url failed for '", storage_path, "': ", conditionMessage(e))
+      NULL
+    }
   )
   if (is.null(resp)) {
     return(NA_character_)

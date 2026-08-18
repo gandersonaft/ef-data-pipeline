@@ -87,5 +87,11 @@ mod_qc_review_server <- function(id, pool) {
         )
       }))
     })
+
+    # See mod_length_condition.R for why: outputs in a non-default
+    # bslib::nav_panel tab can otherwise never receive the signal to start
+    # computing at all.
+    outputOptions(output, "flagged_table", suspendWhenHidden = FALSE)
+    outputOptions(output, "photo_gallery", suspendWhenHidden = FALSE)
   })
 }

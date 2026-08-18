@@ -1,11 +1,19 @@
 # DB connection (shiny_reader role -- SELECT-only, see supabase/roles.sql).
-# Use Supabase's pooled/pgbouncer endpoint (6543), not the direct port (5432):
-# shinyapps.io/Posit Connect don't handle many concurrent long-lived direct
-# connections well.
-SUPABASE_DB_HOST=your-project.pooler.supabase.com
-SUPABASE_DB_PORT=6543
+# Use Supabase's Supavisor pooler in SESSION mode (port 5432) -- NOT the
+# direct db.<ref>.supabase.co host (IPv6-only, most hosting has no IPv6
+# egress -- this cost us a failed Render deploy, see the main README) and
+# NOT transaction mode (port 6543, doesn't support everything a persistent
+# app session needs). Get the exact hostname from Supabase Dashboard ->
+# your project -> Connect -> Session pooler -- don't guess it, the
+# aws-<N>-<region> prefix isn't predictable (we hit aws-0- when the real
+# value was aws-1- for an otherwise-identical project). The username MUST
+# include the project ref suffix -- "shiny_reader.<project-ref>", not just
+# "shiny_reader" -- or Supavisor rejects it with a confusing
+# "tenant/user not found" error that looks like a wrong password.
+SUPABASE_DB_HOST=aws-N-your-region.pooler.supabase.com
+SUPABASE_DB_PORT=5432
 SUPABASE_DB_NAME=postgres
-SUPABASE_DB_USER=shiny_reader
+SUPABASE_DB_USER=shiny_reader.your-project-ref
 SUPABASE_DB_PASSWORD=your_password_here
 
 # Used only by the QC & Photo Review tab to generate signed URLs for the

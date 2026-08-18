@@ -15,7 +15,7 @@ server <- function(input, output, session) {
   observeEvent(input$reset_filters, {
     updateSelectInput(session, "catchment", selected = character(0))
     updateSelectInput(session, "site_code", selected = character(0))
-    updateDateRangeInput(session, "date_range", start = NA, end = NA)
+    updateDateRangeInput(session, "date_range", start = "2000-01-01", end = Sys.Date() + 1)
     updateCheckboxGroupInput(session, "species", selected = c("sal", "trt"))
   })
 

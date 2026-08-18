@@ -37,5 +37,11 @@ mod_depletion_server <- function(id, filtered_events, pool) {
         ) |>
         DT::datatable(rownames = FALSE, filter = "top", options = list(pageLength = 15))
     })
+
+    # See mod_length_condition.R for why this is needed: outputs in a
+    # non-default bslib::nav_panel tab can otherwise never receive the signal
+    # to start computing. This tab defaults to active so isn't currently
+    # affected, but keep it consistent in case that ever changes.
+    outputOptions(output, "table", suspendWhenHidden = FALSE)
   })
 }
