@@ -45,6 +45,22 @@ The Survey123 form this pipeline ingests lives at
 7. Run the Shiny app: copy `shiny_app/.Renviron.example` → `shiny_app/.Renviron`, fill in the
    `shiny_reader` credentials, then `R -e "shiny::runApp('shiny_app')"`.
 
+## Deployment (Render)
+
+The webhook receiver is deployed at `https://ef-data-pipeline-webhook.onrender.com` (Render web
+service `ef-data-pipeline-webhook`, Python runtime, auto-deploys from `main`).
+
+**Database connection gotcha that cost us a failed deploy, so it's written down here**: Supabase's
+"direct" connection host (`db.<project-ref>.supabase.co:5432`) is IPv6-only unless you've paid for
+Supabase's IPv4 add-on. Render — like Vercel, GitHub Actions, and Retool — has no IPv6 egress, so a
+direct-host `DATABASE_URL` builds fine and then crashes on startup with `OSError: [Errno 101] Network
+is unreachable` the instant asyncpg tries to connect. Use Supabase's **Supavisor pooler** instead
+(session mode, port 5432): get the exact hostname from Supabase Dashboard → your project → **Connect**
+→ Session pooler. Don't guess the hostname — it's `aws-<N>-<region>.pooler.supabase.com` where `<N>`
+varies per project (we hit `aws-0-` for one eu-west-2 project when the correct value was `aws-1-`), and
+a wrong guess fails with a *different*, confusing error (`tenant/user not found`) rather than a
+DNS/network failure. The pooler username is always `<role>.<project-ref>`, not just `<role>`.
+
 ## Known open items
 
 See the bottom of the implementation plan for the full list; the important ones:
