@@ -12,11 +12,13 @@ import json
 import asyncpg
 
 
-async def log_received(pool: asyncpg.Pool, payload: dict, event_global_id: str | None = None) -> int:
+async def log_received(
+    pool: asyncpg.Pool, payload: dict, event_global_id: str | None = None, headers: dict | None = None
+) -> int:
     async with pool.acquire() as conn:
         row = await conn.fetchrow(
-            "insert into webhook_log (event_global_id, payload) values ($1, $2) returning id",
-            event_global_id, json.dumps(payload),
+            "insert into webhook_log (event_global_id, payload, headers) values ($1, $2, $3) returning id",
+            event_global_id, json.dumps(payload), json.dumps(headers) if headers is not None else None,
         )
         return row["id"]
 

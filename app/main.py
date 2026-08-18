@@ -146,13 +146,31 @@ async def receive_survey123(
 ):
     raw = await request.body()
     settings = get_settings()
-    if settings.environment != "development" and not esri_mod.verify_webhook_signature(
-        raw, request.headers.get("x-esriHook-Signature", "")
-    ):
-        raise HTTPException(status_code=401, detail="invalid signature")
+    headers = dict(request.headers)
 
-    payload = json.loads(raw)
-    log_id = await webhook_log.log_received(pool, payload)
+    # Log first, verify/parse after: we're still discovering the exact wire
+    # format for some webhook sources (e.g. Survey123 item-level webhooks may
+    # sign differently than feature-layer ones), so every delivery attempt
+    # must be captured for inspection even if it fails signature/JSON
+    # parsing -- an unrecognized delivery we can't debug is worse than one
+    # extra logged row.
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError:
+        log_id = await webhook_log.log_received(
+            pool, {"_raw_body_text": raw.decode("utf-8", errors="replace")}, headers=headers
+        )
+        await webhook_log.mark_error(pool, log_id, "payload was not valid JSON")
+        return JSONResponse(status_code=200, content={"status": "rejected", "detail": "invalid JSON"})
+
+    log_id = await webhook_log.log_received(pool, payload, headers=headers)
+
+    signature_header = headers.get("x-esrihook-signature", "")
+    if settings.environment != "development" and not esri_mod.verify_webhook_signature(raw, signature_header):
+        await webhook_log.mark_error(
+            pool, log_id, f"invalid signature (header present: {bool(signature_header)})"
+        )
+        raise HTTPException(status_code=401, detail="invalid signature")
 
     try:
         submission = await normalize_payload(payload, esri_mod)
