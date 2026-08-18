@@ -146,6 +146,12 @@ sign_photo_url <- function(storage_path) {
   req <- httr2::request(supabase_url) |>
     httr2::req_url_path_append("storage/v1/object/sign", bucket)
   req <- do.call(httr2::req_url_path_append, c(list(req), as.list(encoded_segments)))
+  # req_error(is_error = \(resp) FALSE) stops req_perform() throwing on a
+  # non-2xx status, so we can read and log the actual response body below --
+  # httr2's default error condition only exposes a generic "HTTP 400 Bad
+  # Request" summary, not Supabase's own error message, which is what
+  # actually explains a failure.
+  req <- req |> httr2::req_error(is_error = function(resp) FALSE)
 
   resp <- tryCatch(
     req |>
@@ -153,11 +159,19 @@ sign_photo_url <- function(storage_path) {
       httr2::req_body_json(list(expiresIn = 3600L)) |>
       httr2::req_perform(),
     error = function(e) {
-      warning("sign_photo_url failed for '", storage_path, "': ", conditionMessage(e))
+      warning("sign_photo_url request for '", storage_path, "' errored: ", conditionMessage(e))
       NULL
     }
   )
   if (is.null(resp)) {
+    return(NA_character_)
+  }
+
+  if (httr2::resp_status(resp) >= 300) {
+    warning(
+      "sign_photo_url failed for '", storage_path, "': HTTP ", httr2::resp_status(resp),
+      " -- url=", req$url, " body=", httr2::resp_body_string(resp)
+    )
     return(NA_character_)
   }
 
