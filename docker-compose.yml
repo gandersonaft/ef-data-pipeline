@@ -1,0 +1,32 @@
+version: "3.9"
+
+# Local dev only: a throwaway Postgres+PostGIS instance for running schema.sql and the pytest
+# integration tier against, without touching the real Supabase project. Not used in production —
+# production points DATABASE_URL at Supabase directly.
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: efish
+    ports:
+      - "5433:5432"
+    volumes:
+      - efish_pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/efish
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  efish_pgdata:

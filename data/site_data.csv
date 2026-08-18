@@ -1,0 +1,1200 @@
+name,label,catchment,river,situation,easting,northing,x,y
+SACT_L_Gar01,SACT_L_Gar01 - Abhainn Gleann a' Gharaidh - In bend section by old sheilings on Morsgail side of Garry burn,abhainn_ghriomarstaidh,Abhainn Gleann a' Gharaidh,In bend section by old sheilings on Morsgail side of Garry burn,115251,917494,-6.828767,58.05478
+ALLT BUIDHE 1,"ALLT BUIDHE 1 - Allt Buidhe - U/S FROM BRIDGE, OPP. TRACK FOR HOUSE AT BEND.",appin_coastal,Allt Buidhe,"U/S FROM BRIDGE, OPP. TRACK FOR HOUSE AT BEND.",200701,744820,-5.244172,56.552938
+ALLT BUIDHE 2,"ALLT BUIDHE 2 - Allt Buidhe - U/S FROM STEP FALLS, WALL ON RB.",appin_coastal,Allt Buidhe,"U/S FROM STEP FALLS, WALL ON RB.",200982,744663,-5.239488,56.551649
+ALLT BUIDHE 3,ALLT BUIDHE 3 - Allt Buidhe - 150M D/S OF RUIN PLUS 50M D/S OF RB TRIB.,appin_coastal,Allt Buidhe,150M D/S OF RUIN PLUS 50M D/S OF RB TRIB.,202067,744311,-5.221599,56.54895
+Argyll_0195,Argyll_0195 - River Creran - 50 m downstream of Ellerich bridge,appin_coastal,River Creran,50 m downstream of Ellerich bridge,204023,748487,-5.192992,56.587228
+Creran2,Creran2 - River Creran - 100m D/S of bridge,appin_coastal,River Creran,100m D/S of bridge,201958,746701,-5.225194,56.570342
+Creran4A,Creran4A - River Creran - D/S of confluence,appin_coastal,River Creran,D/S of confluence,203767,748305,-5.197016,56.585489
+Creran7D,"Creran7D - River Creran - Upper mainstem, below Salachail house.",appin_coastal,River Creran,"Upper mainstem, below Salachail house.",205653,750888,-5.168298,56.609444
+lola1,lola1 - An Lola - Upstream of Rd bridge,appin_coastal,An Lola,Upstream of Rd bridge,195933,745059,-5.321789,56.553035
+lola5,"lola5 - An Lola - Upper mainstem - Upstream of bdrk section, downstream of old ruin on RB",appin_coastal,An Lola,"Upper mainstem - Upstream of bdrk section, downstream of old ruin on RB",197294,747044,-5.301239,56.571427
+car3,car3 - Carnoch River,ardnamurchan_coastal,Carnoch River,,185440,760282,-5.5048,56.684865
+Allt Gobhlach 1,Allt Gobhlach 1 - Allt Gobhlach - Upstream of weir,arran_coastal,Allt Gobhlach,Upstream of weir,187341,644068,-5.380893,55.643485
+Allt Gobhlach 2,Allt Gobhlach 2 - Allt Gobhlach - Upstream of woody debris weir,arran_coastal,Allt Gobhlach,Upstream of woody debris weir,187408,644046,-5.379813,55.643317
+Allt Gobhlach 3,"Allt Gobhlach 3 - Allt Gobhlach - From step fall up to bend, clearing on LB",arran_coastal,Allt Gobhlach,"From step fall up to bend, clearing on LB",187847,644096,-5.37289,55.643957
+Allt Gobhlach 4,Allt Gobhlach 4 - Allt Gobhlach - Upstream of intake,arran_coastal,Allt Gobhlach,Upstream of intake,188884,643947,-5.356328,55.643072
+Argyll_0354,Argyll_0354 - Glenrosa Water - Downstream of drain entering the right bank,arran_coastal,Glenrosa Water,Downstream of drain entering the right bank,200262,637362,-5.171068,55.588804
+Garbh Allt 1,"Garbh Allt 1 - Garbh Allt - Monyquil farm, upstream of the ford and 10m downstream of watergate",arran_coastal,Garbh Allt,"Monyquil farm, upstream of the ford and 10m downstream of watergate",193923,635438,-5.27004,55.568904
+Garbh Allt 2,Garbh Allt 2 - Garbh Allt - Upstream of bend and big boulder. Left hand side of river,arran_coastal,Garbh Allt,Upstream of bend and big boulder. Left hand side of river,193884,635606,-5.270782,55.570394
+Garbh Allt 3,"Garbh Allt 3 - Garbh Allt - Upstream both sets of falls, upstream of bend up to pool",arran_coastal,Garbh Allt,"Upstream both sets of falls, upstream of bend up to pool",194289,636545,-5.26507,55.578989
+Garbh Allt 4,"Garbh Allt 4 - Garbh Allt - Top site, upstream of intake",arran_coastal,Garbh Allt,"Top site, upstream of intake",194367,636972,-5.264153,55.582853
+COLL01,COLL01 - Allt mor (North) - 2m u/s of rd culvert,coll_coastal,Allt mor (North),2m u/s of rd culvert,124994,763380,-6.491974,56.680985
+COLL02,"COLL02 - Clabhach burn - u/s of ford, u/s of rd bridge",coll_coastal,Clabhach burn,"u/s of ford, u/s of rd bridge",118220,758710,-6.59708,56.635135
+COLL03,COLL03 - Cliad burn - d/s of road crossing,coll_coastal,Cliad burn,d/s of road crossing,120077,759809,-6.568095,56.646089
+COLL04,COLL04 - Loch na cloich burn - u/s from rd bridge,coll_coastal,Loch na cloich burn,u/s from rd bridge,123455,762820,-6.516414,56.675062
+COLL05,COLL05 - Torastan burn - u/s of rd bridge,coll_coastal,Torastan burn,u/s of rd bridge,122674,762262,-6.528518,56.669603
+COLL06,COLL06 - Allt an inbhive - u/s from 2nd watergate u/s of rd.,coll_coastal,Allt an inbhive,u/s from 2nd watergate u/s of rd.,122400,763250,-6.53404,56.678288
+COLL07,COLL07 - Allt a' mhuilinn - u/s of rd/mill house,coll_coastal,Allt a' mhuilinn,u/s of rd/mill house,118611,754869,-6.586545,56.600974
+COLL08,COLL08 - Allt loch na romaird - 250m d/s from rd,coll_coastal,Allt loch na romaird,250m d/s from rd,121126,755859,-6.546779,56.611341
+COLL09,COLL09 - Arinagour burn - 20m u/s of collapsed wooden slat bridge,coll_coastal,Arinagour burn,20m u/s of collapsed wooden slat bridge,122217,758742,-6.53216,56.637808
+COLL09a,COLL09a - Arinagour burn - Lower mainstem. u/s LB trib. junc.,coll_coastal,Arinagour burn,Lower mainstem. u/s LB trib. junc.,122363,758385,-6.529404,56.634697
+COLL10,COLL10 - Allt mor (South) - 15m d/s of rd bridge,coll_coastal,Allt mor (South),15m d/s of rd bridge,116802,754662,-6.615686,56.598031
+COLL11,"COLL11 - Lodge burn - u/s of new build, access lane culvert, d/s of rd fork.",coll_coastal,Lodge burn,"u/s of new build, access lane culvert, d/s of rd fork.",122288,757288,-6.529443,56.624829
+COLL12,"COLL12 - Hyne burn - down access track, 1st 50m section burn that you come to adjacent to track.",coll_coastal,Hyne burn,"down access track, 1st 50m section burn that you come to adjacent to track.",120144,754856,-6.561642,56.601774
+COLLI01,COLLI01 - Allt an ghlinne - 200m u/s of tidal reach,colonsay_coastal,Allt an ghlinne,200m u/s of tidal reach,136178,991566,-6.560326,58.730907
+COLLI02,COLLI02 - Airport burn - U/S of track/ford 100m up from sea on south side of airfield,colonsay_coastal,Airport burn,U/S of track/ford 100m up from sea on south side of airfield,135753,692910,-6.245953,56.055844
+COLLI03,"COLLI03 - Allt staosnaig - D/S of rd, 150m u/s of wall line",colonsay_coastal,Allt staosnaig,"D/S of rd, 150m u/s of wall line",138485,693368,-6.202652,56.061448
+COLLI04,COLLI04 - Abhainn a' mhuilinn - 100 d/s of pond/dam obstacle,colonsay_coastal,Abhainn a' mhuilinn,100 d/s of pond/dam obstacle,139447,696673,-6.190463,56.091587
+COLLI05,COLLI05 - Abhainn a' mhuilinn - 150m u/s of tidal reach,colonsay_coastal,Abhainn a' mhuilinn,150m u/s of tidal reach,140011,697604,-6.182329,56.100237
+COLLI06,COLLI06 - Sruthan na h-ulaidhe - U/S of fenceline that runs down from farm,colonsay_coastal,Sruthan na h-ulaidhe,U/S of fenceline that runs down from farm,141207,999623,-6.483039,58.806084
+BMB01,"BMB01 - Burnmakiman Burn - U/s of gorge, d/s of drained lochan",cowal_and_clyde_sealochs_coast,Burnmakiman Burn,"U/s of gorge, d/s of drained lochan",214144,672413,-4.974986,55.908813
+BMB02,"BMB02 - Burnmakiman Burn - U/s of track culvert - Start @ LWD across stream, finish adj. to end of wall on LB",cowal_and_clyde_sealochs_coast,Burnmakiman Burn,"U/s of track culvert - Start @ LWD across stream, finish adj. to end of wall on LB",213983,672867,-4.97787,55.912825
+Blairbeg 1,Blairbeg 1 - Blairbeg Burn (Clyde) - Downstream of watergate,cowal_and_clyde_sealochs_coast,Blairbeg Burn (Clyde),Downstream of watergate,219243,683210,-4.900771,56.00764
+Blairbeg 2,Blairbeg 2 - Blairbeg Burn (Clyde) - Adjacent to farm house,cowal_and_clyde_sealochs_coast,Blairbeg Burn (Clyde),Adjacent to farm house,219127,683237,-4.902648,56.007838
+Blairbeg 3,Blairbeg 3 - Blairbeg Burn (Clyde) - Upstream of bridge,cowal_and_clyde_sealochs_coast,Blairbeg Burn (Clyde),Upstream of bridge,218856,683234,-4.906986,56.007709
+Blairbeg 4,Blairbeg 4 - Blairbeg Burn (Clyde) - Eas na Beiste confluence,cowal_and_clyde_sealochs_coast,Blairbeg Burn (Clyde),Eas na Beiste confluence,218420,683392,-4.914076,56.008962
+Donich1,Donich1 - Donich Water - 40m D/S of track bridge,cowal_and_clyde_sealochs_coast,Donich Water,40m D/S of track bridge,220199,701904,-4.89804,56.175742
+milt01,"milt01 - Milton Burn - Lower Main-stem, RB channel @ Island u/s of houses",cowal_and_clyde_sealochs_coast,Milton Burn,"Lower Main-stem, RB channel @ Island u/s of houses",215874,674602,-4.948842,55.92912
+Add 10,Add 10 - Tibertich - upstream of falls,eilean_fladday_coastal,,Tibertich - upstream of falls,184644,702548,-5.470239,56.166778
+Add 4,Add 4 - At forestry road junction,eilean_fladday_coastal,,At forestry road junction,191248,694755,-5.357976,56.099821
+Add 5,Add 5 - Downstream of fish pass on hydro intake,eilean_fladday_coastal,,Downstream of fish pass on hydro intake,193267,695768,-5.32636,56.109785
+Add 7,Add 7 - Downstream of Mill at roadside,eilean_fladday_coastal,,Downstream of Mill at roadside,183996,695088,-5.474609,56.099585
+Add 9,Add 9 - Carnasseries car park,eilean_fladday_coastal,,Carnasseries car park,184011,700420,-5.478686,56.147408
+Allt Hallater 1,Allt Hallater 1 - Allt Hallater - Upstream of track bridge,etive_coastal,Allt Hallater,Upstream of track bridge,215388,737475,-5.000385,56.493044
+Allt Hallater 2,"Allt Hallater 2 - Allt Hallater - Right Hand Branch, upstream of track bridge",etive_coastal,Allt Hallater,"Right Hand Branch, upstream of track bridge",215364,737426,-5.00074,56.492595
+Allt a Bhiorain 01,Allt a Bhiorain 01 - Allt a' Bhiorain,etive_coastal,Allt a' Bhiorain,,211400,745400,-5.070813,56.562559
+Esragan01,Esragan01 - River Esragan - d/s track bridge,etive_coastal,River Esragan,d/s track bridge,199063,735059,-5.263235,56.464691
+Esragan02,"Esragan02 - River Esragan - u/s main road bridge, in RB braid",etive_coastal,River Esragan,"u/s main road bridge, in RB braid",198705,735683,-5.269517,56.470135
+Esragan03,Esragan03 - River Esragan - Main channel u/s of island braid,etive_coastal,River Esragan,Main channel u/s of island braid,198741,735751,-5.268986,56.47076
+H1,H1 - River Kinglass - GLIDE UPSTREAM OF BEDROCK SECTION,etive_coastal,River Kinglass,GLIDE UPSTREAM OF BEDROCK SECTION,218233,740673,-4.956476,56.522844
+H10,H10 - Allt dhoireann - LB TRIB @ ISLAND,etive_coastal,Allt dhoireann,LB TRIB @ ISLAND,214753,736129,-5.009727,56.480719
+H11,H11 - Allt chaluim - D/S OF ISLAND BRAID,etive_coastal,Allt chaluim,D/S OF ISLAND BRAID,214060,735782,-5.020715,56.477333
+H12,"H12 - Allt easan - D/S OF WF, U/S OF BRAIDS.",etive_coastal,Allt easan,"D/S OF WF, U/S OF BRAIDS.",213488,735475,-5.029768,56.474353
+H13,H13 - Allt easan - UP THROUGH TREE ENCLOSED SECTION,etive_coastal,Allt easan,UP THROUGH TREE ENCLOSED SECTION,213440,735660,-5.030679,56.475993
+H14,H14 - Allt easan - BETWEEN CONFLUENCE AND FOOT BRIDGE.,etive_coastal,Allt easan,BETWEEN CONFLUENCE AND FOOT BRIDGE.,213461,735715,-5.030378,56.476495
+H2,H2 - River Kinglass - Riffle section d/s of pool d/s of WF,etive_coastal,River Kinglass,Riffle section d/s of pool d/s of WF,218449,740445,-4.952811,56.520882
+H3,H3 - Coire Beithe - U/S OF BEDROCK. FINISH NEXT TO DEER FENCE,etive_coastal,Coire Beithe,U/S OF BEDROCK. FINISH NEXT TO DEER FENCE,218722,640498,-4.880638,55.624168
+H4,H4 - River Kinglass - 100M D/S OF BRIDGE. LB BRAID U/S OF WF.,etive_coastal,River Kinglass,100M D/S OF BRIDGE. LB BRAID U/S OF WF.,218526,639823,-4.883301,55.618038
+H5,H5 - Allt nan clach sgoilte - 60M U/S OF MAINSTEM CONFLUENCE,etive_coastal,Allt nan clach sgoilte,60M U/S OF MAINSTEM CONFLUENCE,218313,739261,-4.954191,56.510206
+H6,"H6 - River Kinglass - U/S OF FALLS, ADJ.,TO TRACK ON RB",etive_coastal,River Kinglass,"U/S OF FALLS, ADJ.,TO TRACK ON RB",217731,738983,-4.96344,56.507487
+H7,H7 - Eas a bhinnein - THROUGH FORD AREA. START JUST BELOW.,etive_coastal,Eas a bhinnein,THROUGH FORD AREA. START JUST BELOW.,217226,738633,-4.971388,56.504151
+H8,H8 - Allt nan clach sgoilte - START NEXT TO OLD TREE TRUNK ON LB NEXT TO COTTAGE,etive_coastal,Allt nan clach sgoilte,START NEXT TO OLD TREE TRUNK ON LB NEXT TO COTTAGE,216841,738310,-4.977407,56.501103
+H9,H9 - Allt dhoireann/Allt cos charragh - U/S OF MAINSTEM CONFLUENCE,etive_coastal,Allt dhoireann/Allt cos charragh,U/S OF MAINSTEM CONFLUENCE,214525,736161,-5.013446,56.480917
+Kinglass 01,Kinglass 01 - River Kinglass,etive_coastal,River Kinglass,,208073,737319,-5.118898,56.48872
+Kinglass 02,Kinglass 02 - River Kinglass - RH channel first braid,etive_coastal,River Kinglass,RH channel first braid,210259,736528,-5.082875,56.48251
+Kinglass 09,Kinglass 09 - River Kinglass - Middle mainstream - acharn ruins - start u/s of RB trib.,etive_coastal,River Kinglass,Middle mainstream - acharn ruins - start u/s of RB trib.,212994,735702,-5.037939,56.476193
+Kinglass 13,Kinglass 13 - River Kinglass,etive_coastal,River Kinglass,,213887,735939,-5.023632,56.478673
+Kinglass 18,Kinglass 18 - River Kinglass,etive_coastal,River Kinglass,,216158,738095,-4.988335,56.498908
+Kinglass 20,Kinglass 20 - River Kinglass,etive_coastal,River Kinglass,,216485,738289,-4.983167,56.500776
+Nant 01,Nant 01 - River Nant - Main riffle d/s of lower bridge,etive_coastal,River Nant,Main riffle d/s of lower bridge,200435,731545,-5.23832,56.433754
+Nant 02,Nant 02 - River Nant - Lower u/s of railway bridge,etive_coastal,River Nant,Lower u/s of railway bridge,200850,731094,-5.231258,56.429884
+Nant 03,"Nant 03 - River Nant - Middle, u/s of road bridge, adjacent to mill house. finish at power lines",etive_coastal,River Nant,"Middle, u/s of road bridge, adjacent to mill house. finish at power lines",200909,730459,-5.229819,56.424213
+Nant 03a,"Nant 03a - River Nant - LB trib of Nant. U/s of hotel, start at fence field line",etive_coastal,River Nant,"LB trib of Nant. U/s of hotel, start at fence field line",200301,730913,-5.240007,56.428029
+Nant 04,Nant 04 - River Nant - D/s of glen nant car park,etive_coastal,River Nant,D/s of glen nant car park,201966,727370,-5.210374,56.39695
+Nant 05,Nant 05 - River Nant - Mid/upper RB trib - u/s of Glenant car park between fallen trees.,etive_coastal,River Nant,Mid/upper RB trib - u/s of Glenant car park between fallen trees.,202049,727116,-5.20884,56.394706
+Nant 06,Nant 06 - River Nant - Upper mainstem - 50m d/s of fish ladder @ easnan,etive_coastal,River Nant,Upper mainstem - 50m d/s of fish ladder @ easnan,201282,726619,-5.220868,56.389926
+Nant 07,Nant 07 - River Nant - Upper mainstem u/s of Eas nan clag WF,etive_coastal,River Nant,Upper mainstem u/s of Eas nan clag WF,201226,726479,-5.221668,56.388647
+Nant 07a,"Nant 07a - River Nant - RB trib of Nant, u/s of Eas nan clag.",etive_coastal,River Nant,"RB trib of Nant, u/s of Eas nan clag.",201216,726413,-5.221779,56.388051
+Noe 01,"Noe 01 - River Noe - d/s of bridge, start u/s of pool adjacent to dump at boulder.",etive_coastal,River Noe,"d/s of bridge, start u/s of pool adjacent to dump at boulder.",204971,734180,-5.166847,56.459288
+Noe 02,Noe 02 - River Noe - Middle mainsteam island RH channel. Start 20m u/s of d/s end of island - finish at LWD.,etive_coastal,River Noe,Middle mainsteam island RH channel. Start 20m u/s of d/s end of island - finish at LWD.,205663,734105,-5.155579,56.458901
+Noe 03,Noe 03 - River Noe - Middle mainstem - u/s of island in riffle section at ford.,etive_coastal,River Noe,Middle mainstem - u/s of island in riffle section at ford.,205782,734083,-5.153635,56.458752
+Noe 04,Noe 04 - River Noe - d/s of falls and sheep pen,etive_coastal,River Noe,d/s of falls and sheep pen,205971,734057,-5.150554,56.458597
+Noe 05,Noe 05 - River Noe - From LB trib confluence upto bend next to fence - start at ford,etive_coastal,River Noe,From LB trib confluence upto bend next to fence - start at ford,205865,734043,-5.152261,56.458428
+SEPA_469064,SEPA_469064 - River Nant - Fished from start of riffle u/s to big boulder RB by layby,etive_coastal,River Nant,Fished from start of riffle u/s to big boulder RB by layby,201473,729059,-5.219628,56.411893
+SEPA_469065,SEPA_469065 - River Nant - Site ends 10m d/s bridge at concrete wall LB,etive_coastal,River Nant,Site ends 10m d/s bridge at concrete wall LB,200467,731498,-5.237766,56.433346
+2ai,2ai - U/S culvert opposite glasshouse,fiaray_coastal,,U/S culvert opposite glasshouse,209107,709744,-5.082084,56.241763
+2bi,"2bi - Allt Riabhachan, U/S salmon leaps, fallen tree on LB marks D/S limit",fiaray_coastal,,"Allt Riabhachan, U/S salmon leaps, fallen tree on LB marks D/S limit",208785,710199,-5.087601,56.245716
+2bii,"2bii - U/S road bridge, above cattle fence, below falls",fiaray_coastal,,"U/S road bridge, above cattle fence, below falls",208490,710072,-5.092262,56.244458
+2ci,"2ci - 200m U/S of mainstem, start at LB moss covered stump in line with RB large boulder",fiaray_coastal,,"200m U/S of mainstem, start at LB moss covered stump in line with RB large boulder",208664,710480,-5.089753,56.248188
+2cii,2cii - Between  A816 and forestry track,fiaray_coastal,,Between  A816 and forestry track,208456,710433,-5.093071,56.247683
+4B,"4B - Eas na do Raibhaich, 30m U/S of bridge on new forestry track",fiaray_coastal,,"Eas na do Raibhaich, 30m U/S of bridge on new forestry track",208705,712420,-5.090496,56.265609
+5b,5b - 25m U/S of confluence with mainstem,fiaray_coastal,,25m U/S of confluence with mainstem,209125,713283,-5.084349,56.27352
+6e,6e - U/S of road culvert,fiaray_coastal,,U/S of road culvert,208644,713432,-5.092213,56.274663
+7E,7E - Upstream of old road bridge,fiaray_coastal,,Upstream of old road bridge,208700,714900,-5.092374,56.287855
+8a,8a - D/S Ladyfield bridge,fiaray_coastal,,D/S Ladyfield bridge,208850,715497,-5.090387,56.293272
+9a,9a - U/S deer fence,fiaray_coastal,,U/S deer fence,216489,709139,-4.962723,56.239243
+9bi,"9bi - U/S of falls, above island and bedrock step",fiaray_coastal,,"U/S of falls, above island and bedrock step",216699,709585,-4.959648,56.243326
+Aray 1,Aray 1 - Riffle / Glide downstream of left hand bend (upstream of castle).,fiaray_coastal,,Riffle / Glide downstream of left hand bend (upstream of castle).,209400,709400,-5.077116,56.238795
+Aray 10a,"Aray 10a - Carness, upstream of parking area",fiaray_coastal,,"Carness, upstream of parking area",209400,717500,-5.082962,56.311462
+Aray 10b,Aray 10b - 100m upstream of  road bridge,fiaray_coastal,,100m upstream of  road bridge,209300,718000,-5.084938,56.315908
+Aray 10c,"Aray 10c - East Tributary, 10m upstream of forestry fence/boundary",fiaray_coastal,,"East Tributary, 10m upstream of forestry fence/boundary",209400,718000,-5.083324,56.315948
+Aray 2,Aray 2 - Downstream of confluence with fish farm burn.,fiaray_coastal,,Downstream of confluence with fish farm burn.,208600,711200,-5.091306,56.254622
+Aray 3,Aray 3 - Downstream of confluence with the Erallich Water. Starting at old shed om right bank.,fiaray_coastal,,Downstream of confluence with the Erallich Water. Starting at old shed om right bank.,208950,712350,-5.086496,56.265079
+Aray 4,Aray 4 - 20m upstream of bridge,fiaray_coastal,,20m upstream of bridge,208850,712400,-5.088144,56.265488
+Aray 4A,Aray 4A - Erallich Water. Downstream of High Blantyre bridge,fiaray_coastal,,Erallich Water. Downstream of High Blantyre bridge,207850,711900,-5.103902,56.260599
+Aray 6B,"Aray 6B - Stronmagachan, upstream from confluence with Allt a Mhagarain",fiaray_coastal,,"Stronmagachan, upstream from confluence with Allt a Mhagarain",208700,714300,-5.091939,56.282473
+Aray 6C,Aray 6C - 50m upstream of confluence with main river,fiaray_coastal,,50m upstream of confluence with main river,208600,714400,-5.093624,56.283329
+Aray 7,Aray 7 - Upstream from large oak tree on right bank,fiaray_coastal,,Upstream from large oak tree on right bank,208800,714700,-5.090616,56.286101
+Aray 7A,Aray 7A - Upper site in Drimfern field. Run and riffle 100m downstream of fence-line,fiaray_coastal,,Upper site in Drimfern field. Run and riffle 100m downstream of fence-line,208800,714800,-5.090688,56.286998
+Aray 7B,"Aray 7B - Middle/upper  of Drimfirn field, riffle/glide downstream of right bend",fiaray_coastal,,"Middle/upper  of Drimfirn field, riffle/glide downstream of right bend",208850,714700,-5.089809,56.286122
+Aray 7C,"Aray 7C - Lower section of Drimfirn field, riffle  glide upstream of power line",fiaray_coastal,,"Lower section of Drimfirn field, riffle  glide upstream of power line",208800,714550,-5.090507,56.284756
+Aray 8,"Aray 8 - Directly below parking space, upstream of old dear fence",fiaray_coastal,,"Directly below parking space, upstream of old dear fence",209100,716300,-5.086935,56.300576
+Aray 9a,Aray 9a - 50m upstream of confluence,fiaray_coastal,,50m upstream of confluence,209200,716650,-5.085574,56.303756
+Aray 9b,"Aray 9b - Upstream of confluence with main river, above stone wall",fiaray_coastal,,"Upstream of confluence with main river, above stone wall",209300,716700,-5.083997,56.304245
+BALNAKAILLY BURN SITE 1,BALNAKAILLY BURN SITE 1 - Balnakailly,island_of_bute_coastal,Balnakailly,,202212,674216,-5.166881,55.920233
+BALNAKAILLY BURN SITE 2,BALNAKAILLY BURN SITE 2 - Balnakailly,island_of_bute_coastal,Balnakailly,,202267,740920,-5.21577,56.518618
+BALNAKAILLY BURN SITE 2B,BALNAKAILLY BURN SITE 2B - Balnakailly,island_of_bute_coastal,Balnakailly,,201936,673697,-5.17091,55.915463
+BALNAKAILLY BURN SITE 3,BALNAKAILLY BURN SITE 3 - Balnakailly,island_of_bute_coastal,Balnakailly,,201949,673480,-5.170543,55.913522
+BALNAKAILLY BURN SITE 4,BALNAKAILLY BURN SITE 4 - Balnakailly,island_of_bute_coastal,Balnakailly,,201996,673257,-5.169629,55.911541
+Argyll_0188,Argyll_0188 - Glencannel River - Downstream of right bank tributary,island_of_mull_coastal,Glencannel River,Downstream of right bank tributary,159631,734657,-5.90139,56.442637
+Argyll_0227,Argyll_0227 - Eas Corrach - 100 m Upstream of farm track bridge,island_of_mull_coastal,Eas Corrach,100 m Upstream of farm track bridge,151400,745654,-6.045054,56.536923
+Argyll_0359,Argyll_0359 - Lussa River (Mull) - Downstream quarter of bend Upstream of riffle.,island_of_mull_coastal,Lussa River (Mull),Downstream quarter of bend Upstream of riffle.,165134,732156,-5.810088,56.422989
+Aros1,Aros1 - Aros River - D/S of stepping stones,island_of_mull_coastal,Aros River,D/S of stepping stones,155449,744907,-5.978675,56.532352
+Aros15,Aros15 - Allt an Tigh Mhor - 10 m Upstream of road crossing,island_of_mull_coastal,Allt an Tigh Mhor,10 m Upstream of road crossing,155583,744755,-5.976359,56.531059
+Aros4,Aros4 - Aros River - 30 d/s of LB trib.,island_of_mull_coastal,Aros River,30 d/s of LB trib.,153884,745475,-6.004594,56.536626
+Aros6,Aros6 - Aros River - Ledmore burn - tri. Joins Aros on LB.,island_of_mull_coastal,Aros River,Ledmore burn - tri. Joins Aros on LB.,152194,745595,-6.032119,56.536814
+Forsa2019_001,Forsa2019_001 - Allt an Doire Bheithe,island_of_mull_coastal,Allt an Doire Bheithe,,159347,738457,-5.909489,56.476552
+Forsa2019_002,Forsa2019_002 - Allt na Laith-dhoire - Upstream of impassable waterfall at 161696 737384,island_of_mull_coastal,Allt na Laith-dhoire,Upstream of impassable waterfall at 161696 737384,161692,737283,-5.870435,56.46722
+Forsa2019_003,Forsa2019_003 - Allt Coire nam Each - Downstream of confluence with Forestry drain,island_of_mull_coastal,Allt Coire nam Each,Downstream of confluence with Forestry drain,160806,741199,-5.888375,56.501872
+Forsa2019_004,Forsa2019_004 - River Forsa - Downstream of boulder weir (above bend),island_of_mull_coastal,River Forsa,Downstream of boulder weir (above bend),160904,739533,-5.885258,56.486989
+Forsa2019_005,Forsa2019_005 - River Forsa - Upstream of Bedrock on right bank to large in-stream boulder by right bank tributary.,island_of_mull_coastal,River Forsa,Upstream of Bedrock on right bank to large in-stream boulder by right bank tributary.,161396,738514,-5.876354,56.478105
+Forsa2019_006,Forsa2019_006 - River Forsa - Mainstem at Killbeg,island_of_mull_coastal,River Forsa,Mainstem at Killbeg,160237,741836,-5.898184,56.507292
+Forsa2019_007,Forsa2019_007 - River Forsa - Mainstem downstream of Allt na Chriche confluence. Braid downstream of broken weir.,island_of_mull_coastal,River Forsa,Mainstem downstream of Allt na Chriche confluence. Braid downstream of broken weir.,160749,740530,-5.888685,56.495846
+Forsa2019_008,Forsa2019_008 - River Forsa - Mainstem upstream of Gaodhail River confluence,island_of_mull_coastal,River Forsa,Mainstem upstream of Gaodhail River confluence,161180,738673,-5.879998,56.47942
+Forsa2019_009,Forsa2019_009 - River Forsa - Mainstem downstream of Tomsleibhe tributary confluence. Site in glide between two large mid-stream boulders,island_of_mull_coastal,River Forsa,Mainstem downstream of Tomsleibhe tributary confluence. Site in glide between two large mid-stream boulders,161635,738100,-5.872105,56.474515
+Forsa2019_010,Forsa2019_010 - River Forsa - Mainstem downstream of Killbeg. Boulder & glide / run downstream of bend,island_of_mull_coastal,River Forsa,Mainstem downstream of Killbeg. Boulder & glide / run downstream of bend,160150,741922,-5.899673,56.508018
+Forsa2019_011,Forsa2019_011 - Allt an Eas Dhuibh - Upstream of back-channel confluence with tributary,island_of_mull_coastal,Allt an Eas Dhuibh,Upstream of back-channel confluence with tributary,160870,740336,-5.886546,56.494169
+Forsa2019_012,Forsa2019_012 - River Forsa - In straightened forestry section downstream of left bank tributary,island_of_mull_coastal,River Forsa,In straightened forestry section downstream of left bank tributary,163856,735725,-5.833984,56.454344
+Forsa2019_013,Forsa2019_013 - River Forsa - Mainstem downstream of Allt Sloc Eoghainn right bank tributary,island_of_mull_coastal,River Forsa,Mainstem downstream of Allt Sloc Eoghainn right bank tributary,162235,737610,-5.86194,56.470426
+Forsa2019_014,Forsa2019_014 - Unnamed tributary - Unamed right bank drain upstream of Pennygown Farm.,island_of_mull_coastal,Unnamed tributary,Unamed right bank drain upstream of Pennygown Farm.,159780,742622,-5.906317,56.514104
+Forsa2019_015,Forsa2019_015 - Allt Goirtein nan Crann - Between two riffles / rock steps,island_of_mull_coastal,Allt Goirtein nan Crann,Between two riffles / rock steps,161182,739840,-5.881035,56.489882
+Forsa2019_016,Forsa2019_016 - River Forsa - Upstream of right bank tributary confluence,island_of_mull_coastal,River Forsa,Upstream of right bank tributary confluence,163545,736324,-5.83956,56.459557
+Forsa2019_017,Forsa2019_017 - Gaodhail River - Between two bedrock steps,island_of_mull_coastal,Gaodhail River,Between two bedrock steps,160610,738224,-5.888819,56.475107
+Forsa2019_018,Forsa2019_018 - River Forsa - Upstream of large pool,island_of_mull_coastal,River Forsa,Upstream of large pool,160516,741436,-5.893293,56.503849
+Forsa2019_019,Forsa2019_019 - River Forsa - Downstream of bend and right bank tributary,island_of_mull_coastal,River Forsa,Downstream of bend and right bank tributary,160695,741246,-5.890218,56.502237
+Forsa2019_020,Forsa2019_020 - River Forsa - Between two bedrock steps,island_of_mull_coastal,River Forsa,Between two bedrock steps,160965,739119,-5.88389,56.483309
+Forsa2019_041,Forsa2019_041 - Allt na Laith-dhoire - 100 m upstream of confluence,island_of_mull_coastal,Allt na Laith-dhoire,100 m upstream of confluence,161692,737860,-5.870962,56.472392
+Forsa2019_042,Forsa2019_042 - River Forsa - First riffle downstream of A849  main road bridge,island_of_mull_coastal,River Forsa,First riffle downstream of A849  main road bridge,159740,742928,-5.907248,56.516826
+Forsa2019_043,Forsa2019_043 - River Forsa - Downstream of weir on main river,island_of_mull_coastal,River Forsa,Downstream of weir on main river,160815,740000,-5.887128,56.491129
+Forsa2019_044,Forsa2019_044 - Allt Coire Fraoich - Upstream of Rhoail,island_of_mull_coastal,Allt Coire Fraoich,Upstream of Rhoail,163332,737563,-5.844132,56.470556
+Forsa2019_045,Forsa2019_045 - River Forsa - Downstream of boulder weir,island_of_mull_coastal,River Forsa,Downstream of boulder weir,161979,737969,-5.866414,56.473514
+Forsa2019_046,Forsa2019_046 - River Forsa - Glide upstream of rock ramp,island_of_mull_coastal,River Forsa,Glide upstream of rock ramp,159932,742363,-5.903614,56.51186
+Forsa2019_047,Forsa2019_047 - River Forsa - Upstream of weir to riffle,island_of_mull_coastal,River Forsa,Upstream of weir to riffle,160882,739422,-5.885512,56.485983
+Forsa2019_048,Forsa2019_048 - River Forsa - Upstream of confluence with forest drain on right bank,island_of_mull_coastal,River Forsa,Upstream of confluence with forest drain on right bank,163287,736989,-5.84434,56.465389
+Forsa2019_049,Forsa2019_049 - River Forsa,island_of_mull_coastal,River Forsa,,162725,737270,-5.853696,56.467625
+Forsa2019_050,Forsa2019_050 - River Forsa - Between riffles upstream of bend with watergate.,island_of_mull_coastal,River Forsa,Between riffles upstream of bend with watergate.,160082,742077,-5.900918,56.509373
+JUALLT01,JUALLT01 - Allt a' Mhuilinn (Badnaban) - Between tidal mark and lower falls on LH braid.,island_of_mull_coastal,Allt a' Mhuilinn (Badnaban),Between tidal mark and lower falls on LH braid.,140279,745425,-6.225162,56.528861
+MUALL01,MUALL01 - Allt a' Mhuilinn (Mull) - BETWEEN TIDAL MARK AND LOWER LH FALLS,island_of_mull_coastal,Allt a' Mhuilinn (Mull),BETWEEN TIDAL MARK AND LOWER LH FALLS,140279,745425,-6.225162,56.528861
+MUALL02,MUALL02 - Allt a' Mhuilinn (Mull) - LH braid on bend u/s of lower falls,island_of_mull_coastal,Allt a' Mhuilinn (Mull),LH braid on bend u/s of lower falls,140300,745507,-6.224904,56.529607
+MUALL03,MUALL03 - Allt a' Mhuilinn (Mull) - RIFFLE SECTION U/S OF 200M LONG DJ SECTION,island_of_mull_coastal,Allt a' Mhuilinn (Mull),RIFFLE SECTION U/S OF 200M LONG DJ SECTION,140367,745413,-6.223724,56.528802
+MUALL04,MUALL04 - Allt a' Mhuilinn (Mull) - ADJACENT TO SHEEPFOLD,island_of_mull_coastal,Allt a' Mhuilinn (Mull),ADJACENT TO SHEEPFOLD,140434,745399,-6.222624,56.528714
+MUALL05,MUALL05 - Allt a' Mhuilinn (Mull) - D/s of impassable falls,island_of_mull_coastal,Allt a' Mhuilinn (Mull),D/s of impassable falls,140586,745500,-6.22026,56.529702
+MUALL06,MUALL06 - Allt a' Mhuilinn (Mull) - U/s of impassable falls. Gorgey section.,island_of_mull_coastal,Allt a' Mhuilinn (Mull),U/s of impassable falls. Gorgey section.,140797,745492,-6.216831,56.529747
+Mingary 1,Mingary 1 - Mingary - Upstream of right bank tributary and island,island_of_mull_coastal,Mingary,Upstream of right bank tributary and island,143327,755114,-6.185341,56.617347
+Mingary 1a,Mingary 1a - Mingary,island_of_mull_coastal,Mingary,,143367,755081,-6.184658,56.617073
+Mingary 1b,Mingary 1b - Mingary - Downstream of footbridge,island_of_mull_coastal,Mingary,Downstream of footbridge,143351,754950,-6.184788,56.615891
+Mingary 2,Mingary 2 - Mingary - Downstream of footbridge,island_of_mull_coastal,Mingary,Downstream of footbridge,143371,154772,-5.677628,51.234263
+Mingary 3a,Mingary 3a - Mingary - Upstream of Island braid. rock wall on right bank,island_of_mull_coastal,Mingary,Upstream of Island braid. rock wall on right bank,143502,754519,-6.181906,56.612111
+Mingary 4,Mingary 4 - Mingary - Middle mainstem,island_of_mull_coastal,Mingary,Middle mainstem,143614,754231,-6.179801,56.609592
+Mingary 4b,Mingary 4b - Mingary - Downstream of new forest fence line,island_of_mull_coastal,Mingary,Downstream of new forest fence line,143647,754141,-6.179176,56.608804
+Mingary 5,Mingary 5 - Mingary - Upper mainstem,island_of_mull_coastal,Mingary,Upper mainstem,143865,753759,-6.175255,56.6055
+Mingary 5a,Mingary 5a - Mingary - 30 m upstream of left bank tributary,island_of_mull_coastal,Mingary,30 m upstream of left bank tributary,144039,753535,-6.172207,56.603588
+Mingary 6a,Mingary 6a - Mingary - Upstream of road. 40 m upstream of cascade obstacle,island_of_mull_coastal,Mingary,Upstream of road. 40 m upstream of cascade obstacle,145134,752198,-6.153102,56.592205
+Mingary 7,Mingary 7 - Mingary Burn - 50m U/S Road bridge,island_of_mull_coastal,Mingary Burn,50m U/S Road bridge,145100,752235,-6.15369,56.592518
+Pmussel_Argyll_005,Pmussel_Argyll_005 - Allt Airgh nan Gamhna - 20 m upstream of confluence,island_of_mull_coastal,Allt Airgh nan Gamhna,20 m upstream of confluence,143112,755358,-6.189077,56.619415
+SEPA 359101,SEPA 359101 - Aros River - 23m d/s left bank trib (Allt Chrioman),island_of_mull_coastal,Aros River,23m d/s left bank trib (Allt Chrioman),153892,745478,-6.004467,56.536657
+SEPA 562116,SEPA 562116 - Ledmore River - start at right bank birch (in bankface),island_of_mull_coastal,Ledmore River,start at right bank birch (in bankface),152124,745747,-6.0334,56.538139
+SEPA 562117,SEPA 562117 - Aros River - d/s stepping stones - from between islands to stepping stones,island_of_mull_coastal,Aros River,d/s stepping stones - from between islands to stepping stones,155459,744900,-5.978506,56.532294
+SEPA 562435,SEPA 562435 - Allt a Chlogaid - 35m u/s Loch Frisa,island_of_mull_coastal,Allt a Chlogaid,35m u/s Loch Frisa,147820,750396,-6.107723,56.577509
+Argyll_0189,Argyll_0189 - Ballygrant Burn - Adjacent to farm building downstream of Loch Ballygrant. Upstream of obstacle.,islay_coastal,Ballygrant Burn,Adjacent to farm building downstream of Loch Ballygrant. Upstream of obstacle.,140044,666050,-6.151371,55.8175
+Argyll_0190,Argyll_0190 - Torra River - 30 m downstream of waterfall obstacle,islay_coastal,Torra River,30 m downstream of waterfall obstacle,135484,654085,-6.212349,55.70781
+Argyll_0222,Argyll_0222 - Barr River - Downstream of waterfall obstacle,islay_coastal,Barr River,Downstream of waterfall obstacle,138452,660643,-6.171518,55.768188
+JUAB01,"JUAB01 - Abhainn Ghlean Aoistail (Jura) - RH braided section, 150m u/s of 1st wier",jura_coastal,Abhainn Ghlean Aoistail (Jura),"RH braided section, 150m u/s of 1st wier",159968,684368,-5.85041,55.992026
+JUAB02,"JUAB02 - Abhainn Ghlean Aoistail (Jura) - LH braid, mainstem",jura_coastal,Abhainn Ghlean Aoistail (Jura),"LH braid, mainstem",160228,684749,-5.846591,55.995572
+JUAB03,JUAB03 - Abhainn Ghlean Aoistail (Jura),jura_coastal,Abhainn Ghlean Aoistail (Jura),,160647,685011,-5.840122,55.99813
+JUAB04,JUAB04 - Abhainn Ghlean Aoistail (Jura) - LB trib. 500m u/s of mainstem,jura_coastal,Abhainn Ghlean Aoistail (Jura),LB trib. 500m u/s of mainstem,160279,685409,-5.846364,56.001514
+JUAB05,JUAB05 - Abhainn Ghlean Aoistail (Jura) - D/S of pond wier,jura_coastal,Abhainn Ghlean Aoistail (Jura),D/S of pond wier,160610,685454,-5.841108,56.002083
+JUAB06,JUAB06 - Abhainn Ghlean Aoistail (Jura) - U/S of pond,jura_coastal,Abhainn Ghlean Aoistail (Jura),U/S of pond,160550,685595,-5.842194,56.003317
+JUAB07,JUAB07 - Abhainn Ghlean Aoistail (Jura) - 100m d/s of forestry fenceline,jura_coastal,Abhainn Ghlean Aoistail (Jura),100m d/s of forestry fenceline,160922,686197,-5.836778,56.008899
+JUAB08,JUAB08 - Abhainn Ghlean Aoistail (Jura),jura_coastal,Abhainn Ghlean Aoistail (Jura),,160943,686425,-5.836645,56.010953
+JUAB09,JUAB09 - Abhainn Ghlean Aoistail (Jura),jura_coastal,Abhainn Ghlean Aoistail (Jura),,161231,687146,-5.832677,56.01756
+JUAB10,JUAB10 - Abhainn Ghlean Aoistail (Jura) - Argo crossing on mainstem,jura_coastal,Abhainn Ghlean Aoistail (Jura),Argo crossing on mainstem,161003,687084,-5.836271,56.016891
+JUAB11,JUAB11 - Abhainn Ghlean Aoistail (Jura) - 200M U/S OF FALLS,jura_coastal,Abhainn Ghlean Aoistail (Jura),200M U/S OF FALLS,160964,687486,-5.837253,56.020475
+JUAB12,JUAB12 - Abhainn Ghlean Aoistail (Jura) - 70m d/s of water fall,jura_coastal,Abhainn Ghlean Aoistail (Jura),70m d/s of water fall,160839,688130,-5.839827,56.026186
+JUAB13,JUAB13 - Abhainn Ghlean Aoistail (Jura) - u/s of upper falls,jura_coastal,Abhainn Ghlean Aoistail (Jura),u/s of upper falls,160130,688543,-5.851546,56.029534
+Allt Barrandromain 1,"Allt Barrandromain 1 - Allt Barrandromain - Upstream of ford and road, to fallen tree on LB. Downstream off outflow",kerrera_coastal,Allt Barrandromain,"Upstream of ford and road, to fallen tree on LB. Downstream off outflow",184926,723219,-5.482521,56.352279
+Allt Barrandromain 2,Allt Barrandromain 2 - Allt Barrandromain - U/S of Powerhouse and LWD up to bridge,kerrera_coastal,Allt Barrandromain,U/S of Powerhouse and LWD up to bridge,184910,723142,-5.482717,56.351581
+Allt Barrandromain 3,Allt Barrandromain 3 - Allt Barrandromain - At intake,kerrera_coastal,Allt Barrandromain,At intake,184746,722849,-5.485125,56.348879
+AA 1,AA 1 - Abhainn Achachoish - Abhainn Achachoish,kintyre_coastal,Abhainn Achachoish,Abhainn Achachoish,184322,665791,-5.445917,55.836986
+Argyll_0182,Argyll_0182 - Carradale Water - Upstream of left bank burn confluence,kintyre_coastal,Carradale Water,Upstream of left bank burn confluence,178890,639342,-5.511114,55.59733
+Argyll_0185,Argyll_0185 - Barr Water - Upper Glenbarr. Upstream of Arnicle Farm.,kintyre_coastal,Barr Water,Upper Glenbarr. Upstream of Arnicle Farm.,172083,638638,-5.618338,55.587879
+Argyll_0198,Argyll_0198 - Carradale Water - Upstream of Cemetary,kintyre_coastal,Carradale Water,Upstream of Cemetary,179172,641839,-5.508648,55.619852
+Argyll_0225,Argyll_0225 - Carradale Water - 80 m downstream of Auchenbreck bridge crossing,kintyre_coastal,Carradale Water,80 m downstream of Auchenbreck bridge crossing,178444,644313,-5.522178,55.641709
+Glenlussa3,"Glenlussa3 - Glenlussa Water - Lower mainstem, U/S of crossing point.",kintyre_coastal,Glenlussa Water,"Lower mainstem, U/S of crossing point.",174395,625994,-5.571427,55.475566
+LC1,LC1 - Lephin Corrach,kintyre_coastal,Lephin Corrach,,176919,635863,-5.53952,55.565231
+LC2,LC2 - Lephin Corrach,kintyre_coastal,Lephin Corrach,,177829,635941,-5.525181,55.566346
+LC3,LC3 - Lephin Corrach,kintyre_coastal,Lephin Corrach,,178932,635777,-5.507593,55.565377
+TW1,TW1 - Torrisdale Water,kintyre_coastal,Torrisdale Water,,175826,636803,-5.55758,55.57316
+TW2,TW2 - Torrisdale Water,kintyre_coastal,Torrisdale Water,,177132,636893,-5.53698,55.574566
+TW3,TW3 - Torrisdale Water,kintyre_coastal,Torrisdale Water,,178844,636839,-5.509836,55.574861
+ARCAM1,ARCAM1 - Arichonan Burn - Start at conifer plantation,knapdale_coastal,Arichonan Burn,Start at conifer plantation,178107,691422,-5.566049,56.064013
+ARCAM2,ARCAM2 - Arichonan Burn - From small l/b alder tree,knapdale_coastal,Arichonan Burn,From small l/b alder tree,177512,690664,-5.574957,56.05694
+ARCAM3,ARCAM3 - Arichonan Burn,knapdale_coastal,Arichonan Burn,,178270,691778,-5.563731,56.067281
+ARDAM1,ARDAM1 - Carsaig Burn - u/s of lb trib in middle of sheep ford,knapdale_coastal,Carsaig Burn,u/s of lb trib in middle of sheep ford,174424,689939,-5.623831,56.048994
+ARDEM1,ARDEM1 - Carsaig Burn - Adjacent to wall,knapdale_coastal,Carsaig Burn,Adjacent to wall,174608,689813,-5.620778,56.047951
+ARDEM2,ARDEM2 - Carsaig Burn - Opposite forestry track - 2 alder trees on RB,knapdale_coastal,Carsaig Burn,Opposite forestry track - 2 alder trees on RB,174863,690970,-5.617664,56.058445
+ARNAM1,ARNAM1 - Arinafad Beg - Forestry Gate,knapdale_coastal,Arinafad Beg,Forestry Gate,176391,689421,-5.591884,56.045272
+ARNAM2,ARNAM2 - Arinafad Beg,knapdale_coastal,Arinafad Beg,,176001,689623,-5.598301,56.046901
+Argyll_0320,Argyll_0320 - River Lonan - Downstream of bend at Glenamachrie Farm.,knapdale_coastal,River Lonan,Downstream of bend at Glenamachrie Farm.,192213,728621,-5.369095,56.403982
+BNGAM1,BNGAM1 - Barnagad Burn - 50m d/s of road,knapdale_coastal,Barnagad Burn,50m d/s of road,178484,687256,-5.556563,56.02683
+BNGAM2,BNGAM2 - Barnagad Burn,knapdale_coastal,Barnagad Burn,,179076,687510,-5.547292,56.029381
+BNGEM1,BNGEM1 - Barnagad Burn,knapdale_coastal,Barnagad Burn,,178651,686727,-5.553453,56.022164
+BNGEM2,BNGEM2 - Barnagad Burn - Below gorgey section below road up to log jam,knapdale_coastal,Barnagad Burn,Below gorgey section below road up to log jam,178461,686885,-5.556625,56.023493
+BNGEM3,BNGEM3 - Barnagad Burn - Below track - fish from large boulder in middle of burn,knapdale_coastal,Barnagad Burn,Below track - fish from large boulder in middle of burn,178233,686974,-5.56035,56.024185
+CARAM1,CARAM1 - Carsaig Burn - d/s of falls (30m),knapdale_coastal,Carsaig Burn,d/s of falls (30m),174316,688002,-5.623931,56.031575
+CARAM2,CARAM2 - Carsaig Burn - u/s of cemetery & polytunnel in garden on RB,knapdale_coastal,Carsaig Burn,u/s of cemetery & polytunnel in garden on RB,173720,687694,-5.633216,56.028532
+CLEM1,CLEM1 - Lochan Buic burns - 150m downstream of loch confluence.,knapdale_coastal,Lochan Buic burns,150m downstream of loch confluence.,180249,690805,-5.531208,56.059469
+CLEM2,CLEM2 - Lochan Buic burns - Beside forstry road in clearing,knapdale_coastal,Lochan Buic burns,Beside forstry road in clearing,179493,690011,-5.542671,56.052001
+CLEM3,CLEM3 - Lochan Buic burns - above forestry road,knapdale_coastal,Lochan Buic burns,above forestry road,179109,689234,-5.548184,56.044856
+CLEM4,CLEM4 - Lochan Buic burns,knapdale_coastal,Lochan Buic burns,,178953,689240,-5.550688,56.044838
+CLEM4A,CLEM4A - Lochan Buic burns - Fallen conifer d/s of old birch in-stream up to stump/mink raft on RB,knapdale_coastal,Lochan Buic burns,Fallen conifer d/s of old birch in-stream up to stump/mink raft on RB,179061,689103,-5.548845,56.043659
+CLEM4B,CLEM4B - Lochan Buic burns - Start d/s of broken birch on LB up to fallen conifer,knapdale_coastal,Lochan Buic burns,Start d/s of broken birch on LB up to fallen conifer,179702,689146,-5.538611,56.04434
+CLEM5,CLEM5 - Lochan Buic burns,knapdale_coastal,Lochan Buic burns,,178436,688559,-5.558408,56.038492
+Fidhle E1,Fidhle E1 - Loch Linne burns - Upstream of forestry track,knapdale_coastal,Loch Linne burns,Upstream of forestry track,179505,690490,-5.542873,56.056302
+LBAF1,LBAF1 - Loch Coile-Bhar burns - Upstream of footpathe to confluence with Loch.,knapdale_coastal,Loch Coile-Bhar burns,Upstream of footpathe to confluence with Loch.,179485,691470,-5.544001,56.065081
+LBAF2,LBAF2 - Loch Coile-Bhar burns,knapdale_coastal,Loch Coile-Bhar burns,,179580,691579,-5.542567,56.066102
+LBEF1,LBEF1 - Loch Coile-Bhar burns - from posts on LB - road bridge,knapdale_coastal,Loch Coile-Bhar burns,from posts on LB - road bridge,178968,690984,-5.551887,56.060484
+LBEF1A,LBEF1A - Loch Coile-Bhar burns - U/s of lower up to log across burn (20m u/s of loch),knapdale_coastal,Loch Coile-Bhar burns,U/s of lower up to log across burn (20m u/s of loch),178859,690868,-5.553538,56.059393
+LBEF2,LBEF2 - Loch Coile-Bhar burns,knapdale_coastal,Loch Coile-Bhar burns,,178888,690929,-5.553123,56.059954
+LBEM1,LBEM1 - Lochan Buic burns - 50m d/s forestry road,knapdale_coastal,Lochan Buic burns,50m d/s forestry road,179041,689245,-5.549282,56.044923
+LCBAF2,LCBAF2 - Loch Coile-Bhar burns,knapdale_coastal,Loch Coile-Bhar burns,,178494,690690,-5.55924,56.057628
+LCBAF3,LCBAF3 - Loch Coile-Bhar burns,knapdale_coastal,Loch Coile-Bhar burns,,178531,690631,-5.558599,56.057117
+LCBEM1,LCBEM1 - Loch Coile-Bhar burns - u/s culvert of forestry track/above falls,knapdale_coastal,Loch Coile-Bhar burns,u/s culvert of forestry track/above falls,179891,689850,-5.536161,56.05074
+LCBEM1A,"LCBEM1A - Loch Coile-Bhar burns - Wide low gradient stretch, u/s of root pinch point to start of >gradient above large boulder",knapdale_coastal,Loch Coile-Bhar burns,"Wide low gradient stretch, u/s of root pinch point to start of >gradient above large boulder",177343,689810,-5.576955,56.049203
+LCBEM1B,"LCBEM1B - Loch Coile-Bhar burns - Opposite ruin building - start u/s of large boulder, up to roots on both banks.",knapdale_coastal,Loch Coile-Bhar burns,"Opposite ruin building - start u/s of large boulder, up to roots on both banks.",177823,689785,-5.569244,56.049202
+LCBEM2,LCBEM2 - Loch Coile-Bhar burns - 40m Downstream of impassable waterfall (Downstream of footpath),knapdale_coastal,Loch Coile-Bhar burns,40m Downstream of impassable waterfall (Downstream of footpath),177720,689705,-5.570827,56.048437
+LCBEM3,LCBEM3 - Loch Coile-Bhar burns - u/s from track culvert,knapdale_coastal,Loch Coile-Bhar burns,u/s from track culvert,177206,689278,-5.578708,56.044369
+LCBEM4,LCBEM4 - Loch Coile-Bhar burns - 70m u/s tidal limit,knapdale_coastal,Loch Coile-Bhar burns,70m u/s tidal limit,176787,688770,-5.584998,56.039619
+LFEF1,LFEF1 - Loch Linne burns,knapdale_coastal,Loch Linne burns,,180028,691018,-5.534925,56.061277
+LLAF1,LLAF1 - Loch Linne burns,knapdale_coastal,Loch Linne burns,,180003,691528,-5.535745,56.065839
+LLAF2,LLAF2 - Loch Linne burns,knapdale_coastal,Loch Linne burns,,179995,691640,-5.535965,56.06684
+LLAF3,LLAF3 - Loch Linne burns,knapdale_coastal,Loch Linne burns,,180011,691455,-5.535556,56.065188
+LLEM1,LLEM1 - Loch Linne burns,knapdale_coastal,Loch Linne burns,,179238,690412,-5.547088,56.055479
+LLEM1A,LLEM1A - Loch Linne burns - From LWD to fallen tree. Between 9 & 9B,knapdale_coastal,Loch Linne burns,From LWD to fallen tree. Between 9 & 9B,179213,690371,-5.547454,56.0551
+LLEM1B,"LLEM1B - Loch Linne burns - 5Om d/s of 9A, opposite lay-by",knapdale_coastal,Loch Linne burns,"5Om d/s of 9A, opposite lay-by",179209,690354,-5.547505,56.054946
+LLEM2,LLEM2 - Loch Linne burns - U/s wall on LB,knapdale_coastal,Loch Linne burns,U/s wall on LB,178895,690040,-5.552277,56.051985
+LLEM3,LLEM3 - Loch Linne burns - u/s pine tree on RB,knapdale_coastal,Loch Linne burns,u/s pine tree on RB,178544,689634,-5.557566,56.048182
+LLEM4,LLEM4 - Loch Linne burns - u/s of road bridge from large ash on RB up to weir,knapdale_coastal,Loch Linne burns,u/s of road bridge from large ash on RB up to weir,178142,689121,-5.563583,56.043396
+LOEF1,LOEF1 - Loch Linne burns - 100m downnstream of loch confluence,knapdale_coastal,Loch Linne burns,100m downnstream of loch confluence,179240,689980,-5.5467,56.051606
+LOEF2,LOEF2 - Loch Linne burns - d/s of where burn crosses track,knapdale_coastal,Loch Linne burns,d/s of where burn crosses track,179380,690229,-5.544661,56.053904
+LOEF3,LOEF3 - Loch Linne burns - Lower site - up from loch,knapdale_coastal,Loch Linne burns,Lower site - up from loch,179685,690661,-5.540129,56.057918
+LOEF4,LOEF4 - Loch Linne burns - downstream of track bridge,knapdale_coastal,Loch Linne burns,downstream of track bridge,179513,690478,-5.542735,56.056198
+LOEF4a,LOEF4a - Loch Linne burns - D/s of sequence of two bends upto conifer enclosure on both banks,knapdale_coastal,Loch Linne burns,D/s of sequence of two bends upto conifer enclosure on both banks,179721,690685,-5.539572,56.05815
+LOEF4b,LOEF4b - Loch Linne burns - U/s of x2 beaver dams - start 10 u/s of 2nd dam. Edge of conifers on right bank,knapdale_coastal,Loch Linne burns,U/s of x2 beaver dams - start 10 u/s of 2nd dam. Edge of conifers on right bank,179760,690741,-5.538993,56.05867
+Linne A1,Linne A1 - Loch Linne burns - Upstream of Loch,knapdale_coastal,Loch Linne burns,Upstream of Loch,179990,691275,-5.535745,56.063564
+Linne A2,Linne A2 - Loch Linne burns - Upstream of Loch confluence.,knapdale_coastal,Loch Linne burns,Upstream of Loch confluence.,179995,691460,-5.535817,56.065226
+Linne A3,Linne A3 - Loch Linne burns - North end of Loch Linne. Situated 2m upstream of loch confluence to impassable fall.,knapdale_coastal,Loch Linne burns,North end of Loch Linne. Situated 2m upstream of loch confluence to impassable fall.,179920,691465,-5.537023,56.065236
+Linne A4,Linne A4 - Loch Linne burns - Upstream of Loch confluence.,knapdale_coastal,Loch Linne burns,Upstream of Loch confluence.,179895,691410,-5.537379,56.064731
+Linne E1,Linne E1 - Loch Linne burns - Downstream of forestry track. Site upstream of old livestock drinking troughs to footbridge,knapdale_coastal,Loch Linne burns,Downstream of forestry track. Site upstream of old livestock drinking troughs to footbridge,179255,690475,-5.546867,56.056052
+SEPA_490588,SEPA_490588 - Abhainn na Cuile - D/S bend-site 2 u/s small cliff on RB on large mature island,knapdale_coastal,Abhainn na Cuile,D/S bend-site 2 u/s small cliff on RB on large mature island,182815,667551,-5.471343,55.852094
+SEPA_490589,SEPA_490589 - Abhainn na Cuile - Start of site approx 15m u/s rock weir,knapdale_coastal,Abhainn na Cuile,Start of site approx 15m u/s rock weir,183218,667183,-5.464624,55.848975
+SEPA_490590,SEPA_490590 - Abhainn na Cuile - D/S watergate-u/s site for Kintarbey Hydro,knapdale_coastal,Abhainn na Cuile,D/S watergate-u/s site for Kintarbey Hydro,182069,669588,-5.484873,55.870026
+SEPA_490591,"SEPA_490591 - Abhainn na Cuile - U/S bedrock falls, 100m u/s LB trib",knapdale_coastal,Abhainn na Cuile,"U/S bedrock falls, 100m u/s LB trib",183227,668802,-5.465774,55.863499
+SFEM1,SFEM1 - Lochan Buic burns - u/s of seafield farm,knapdale_coastal,Lochan Buic burns,u/s of seafield farm,178419,687939,-5.558168,56.032925
+SFEM2,SFEM2 - Lochan Buic burns - d/s of loch,knapdale_coastal,Lochan Buic burns,d/s of loch,178787,688436,-5.552684,56.037552
+ARGH01,ARGH01 - Allt Bail a Ghobhainn - Allt bail a Ghobhainn (Trib.),loch_fyne_coastal,Allt Bail a Ghobhainn,Allt bail a Ghobhainn (Trib.),208536,710572,-5.091883,56.248962
+ARGH02,ARGH02 - Allt Bail a Ghobhainn - Allt bail a Ghobhainn (Trib.),loch_fyne_coastal,Allt Bail a Ghobhainn,Allt bail a Ghobhainn (Trib.),208395,710666,-5.094223,56.249748
+ARGH03,ARGH03 - Allt Bail a Ghobhainn - Allt bail a Ghobhainn (Trib.),loch_fyne_coastal,Allt Bail a Ghobhainn,Allt bail a Ghobhainn (Trib.),208118,710712,-5.09872,56.250049
+ARGH04,ARGH04 - Allt Bail a Ghobhainn - Allt bail a Ghobhainn (Trib.),loch_fyne_coastal,Allt Bail a Ghobhainn,Allt bail a Ghobhainn (Trib.),207513,710248,-5.108131,56.245642
+ARRHI01,ARRHI01 - Allt Rhiabhachan - Allt a Rhiabhachan (Trib.) - middle,loch_fyne_coastal,Allt Rhiabhachan,Allt a Rhiabhachan (Trib.) - middle,208515,710091,-5.091873,56.244638
+ARRHI02,ARRHI02 - Allt Rhiabhachan - Allt a Rhiabhachan (Trib.) upper,loch_fyne_coastal,Allt Rhiabhachan,Allt a Rhiabhachan (Trib.) upper,208380,709827,-5.093857,56.242215
+ARRHI03,ARRHI03 - Allt Rhiabhachan - Allt a Rhiabhachan (Trib.),loch_fyne_coastal,Allt Rhiabhachan,Allt a Rhiabhachan (Trib.),207983,709239,-5.099826,56.23678
+Acharossan B 1,Acharossan B 1 - Acharossan Burn,loch_fyne_coastal,Acharossan Burn,,194052,677048,-5.299392,55.942212
+Acharossan B 2,Acharossan B 2 - Acharossan Burn - Access from North Bank upstream of fenceline,loch_fyne_coastal,Acharossan Burn,Access from North Bank upstream of fenceline,194472,676919,-5.292581,55.941234
+Acharossan B 3,Acharossan B 3 - Acharossan Burn - Downstream of road bridge,loch_fyne_coastal,Acharossan Burn,Downstream of road bridge,195968,677238,-5.268911,55.944733
+Aray 5,Aray 5 - River Aray - Three Bridges. 40m U/s of bend,loch_fyne_coastal,River Aray,Three Bridges. 40m U/s of bend,208900,712431,-5.087361,56.265786
+Argyll_0223,Argyll_0223 - River Aray - Downstream of bedrock Step,loch_fyne_coastal,River Aray,Downstream of bedrock Step,208990,712708,-5.08611,56.268307
+Argyll_0311,Argyll_0311 - River Aray - Upstream of Long Pool and Electricity pylon crossing,loch_fyne_coastal,River Aray,Upstream of Long Pool and Electricity pylon crossing,208706,714510,-5.091994,56.284359
+Argyll_0328,Argyll_0328 - Unnamed tributary - Left bank tributary of Allt Barain (Drimfern). Fished up to obstacle.,loch_fyne_coastal,Unnamed tributary,Left bank tributary of Allt Barain (Drimfern). Fished up to obstacle.,207766,714973,-5.107492,56.288133
+Craignafeoch B 1,Craignafeoch B 1 - Craignafeoch Burn - 100 m upstream of Resevoir,loch_fyne_coastal,Craignafeoch Burn,100 m upstream of Resevoir,195370,674542,-5.276426,55.920295
+Eas Dubh 1,"Eas Dubh 1 - Eas Dubh (Strachur) - Lower site, start 20m upstream of old wall/building on LB",loch_fyne_coastal,Eas Dubh (Strachur),"Lower site, start 20m upstream of old wall/building on LB",209546,701706,-5.06924,56.169827
+Eas Dubh 2,Eas Dubh 2 - Eas Dubh (Strachur) - Upstream of bridge,loch_fyne_coastal,Eas Dubh (Strachur),Upstream of bridge,209776,701721,-5.065552,56.170053
+Eas Dubh 3,Eas Dubh 3 - Eas Dubh (Strachur) - Old reservoir pump house,loch_fyne_coastal,Eas Dubh (Strachur),Old reservoir pump house,210121,701950,-5.060168,56.172245
+Eas Dubh 4,"Eas Dubh 4 - Eas Dubh (Strachur) - Intake, upstream of meander bend",loch_fyne_coastal,Eas Dubh (Strachur),"Intake, upstream of meander bend",210996,703250,-5.047021,56.184257
+Fyne 01,Fyne 01 - River Fyne - Glide and riffle sequence upstream of whirley pool at gravel pit works.,loch_fyne_coastal,River Fyne,Glide and riffle sequence upstream of whirley pool at gravel pit works.,219600,713600,-4.915642,56.280461
+Fyne 02,Fyne 02 - River Fyne - Downstream of road bridge,loch_fyne_coastal,River Fyne,Downstream of road bridge,220200,713800,-4.9061,56.282483
+Fyne 03,Fyne 03 - River Fyne - Trib. Gravel pit burn. D/S OF TRACK CROSSING,loch_fyne_coastal,River Fyne,Trib. Gravel pit burn. D/S OF TRACK CROSSING,220089,714011,-4.908035,56.284334
+Fyne 03a,"Fyne 03a - River Fyne - 2nd burn past gravel works, downstream of track..",loch_fyne_coastal,River Fyne,"2nd burn past gravel works, downstream of track..",220000,713850,-4.90936,56.282856
+Fyne 03b,Fyne 03b - River Fyne - Upstream of gravel pit track,loch_fyne_coastal,River Fyne,Upstream of gravel pit track,219950,713990,-4.910262,56.284093
+Fyne 04a,Fyne 04a - River Fyne - Downstream of Merk Burn confluence,loch_fyne_coastal,River Fyne,Downstream of Merk Burn confluence,220750,714400,-4.897636,56.288075
+Fyne 04b,Fyne 04b - River Fyne - Upstream of Merk Burn Confluence.,loch_fyne_coastal,River Fyne,Upstream of Merk Burn Confluence.,220850,714500,-4.89609,56.28901
+Fyne 04c,Fyne 04c - River Fyne - Mainstem - riffle downstream of Black bridge pool,loch_fyne_coastal,River Fyne,Mainstem - riffle downstream of Black bridge pool,221100,714700,-4.892193,56.290899
+Fyne 05,"Fyne 05 - River Fyne - Merk Park, upstream of track bridge to marker post.",loch_fyne_coastal,River Fyne,"Merk Park, upstream of track bridge to marker post.",220800,714700,-4.897033,56.290786
+Fyne 06,Fyne 06 - River Fyne - Upstream of footbridge.,loch_fyne_coastal,River Fyne,Upstream of footbridge.,221500,714850,-4.88584,56.292396
+Fyne 07,Fyne 07 - River Fyne - Downstream of Glenfyne Lodge.,loch_fyne_coastal,River Fyne,Downstream of Glenfyne Lodge.,221900,715400,-4.879758,56.297481
+Fyne 07a,"Fyne 07a - River Fyne - Mainstem, riffle/run downstream of Lodge (site 7) near midge pool",loch_fyne_coastal,River Fyne,"Mainstem, riffle/run downstream of Lodge (site 7) near midge pool",221900,715200,-4.879623,56.295686
+Fyne 08,Fyne 08 - River Fyne - Left hand channel of mainstem opposite power station,loch_fyne_coastal,River Fyne,Left hand channel of mainstem opposite power station,223100,716400,-4.861064,56.306903
+Fyne 08a,Fyne 08a - River Fyne - U/S OF SWING BRIDGE,loch_fyne_coastal,River Fyne,U/S OF SWING BRIDGE,223083,716802,-4.861608,56.310504
+Fyne 10,Fyne 10 - River Fyne - Downstream of confluence with Allt a Chaorachain (Inverchorachan),loch_fyne_coastal,River Fyne,Downstream of confluence with Allt a Chaorachain (Inverchorachan),222900,717900,-4.8653,56.320288
+Fyne 11,Fyne 11 - River Fyne - ALLT ACHAORACHAIN (TRIB.) U/S OF TRACK BRIDGE,loch_fyne_coastal,River Fyne,ALLT ACHAORACHAIN (TRIB.) U/S OF TRACK BRIDGE,222896,717738,-4.865256,56.318833
+Fyne 11a,Fyne 11a - River Fyne - Upstream of track on north side of main River Fyne,loch_fyne_coastal,River Fyne,Upstream of track on north side of main River Fyne,222800,718100,-4.86705,56.322045
+Fyne 11b,Fyne 11b - River Fyne - 300m upstream of Allt na Fang confluence by old sheep dip,loch_fyne_coastal,River Fyne,300m upstream of Allt na Fang confluence by old sheep dip,222900,718100,-4.865435,56.322083
+Fyne 11e,Fyne 11e - River Fyne - Brand U/S of bench pool,loch_fyne_coastal,River Fyne,Brand U/S of bench pool,23358,18852,-7.252529,49.950728
+Fyne 12,Fyne 12 - River Fyne - Fording point upstream of falls,loch_fyne_coastal,River Fyne,Fording point upstream of falls,223300,718850,-4.859479,56.328962
+Fyne 12a,Fyne 12a - River Fyne,loch_fyne_coastal,River Fyne,,23720,19383,-7.248023,49.955711
+Fyne 12b,Fyne 12b - River Fyne - Adjacent to old stone wall,loch_fyne_coastal,River Fyne,Adjacent to old stone wall,223544,719171,-4.855754,56.331933
+Fyne 12c,Fyne 12c - River Fyne - Adjacent to RB regen,loch_fyne_coastal,River Fyne,Adjacent to RB regen,223849,719592,-4.851109,56.335824
+Fyne 13,Fyne 13 - River Fyne - Fording point,loch_fyne_coastal,River Fyne,Fording point,224100,719900,-4.84726,56.338681
+Fyne 13b,Fyne 13b - River Fyne - 100M D/S OF RUINED HOUSE,loch_fyne_coastal,River Fyne,100M D/S OF RUINED HOUSE,224348,720352,-4.843556,56.342829
+Fyne 14,"Fyne 14 - River Fyne - Adjacent to old building, opposite small tributary stream",loch_fyne_coastal,River Fyne,"Adjacent to old building, opposite small tributary stream",224600,720700,-4.839716,56.346045
+Fyne 15,Fyne 15 - River Fyne - 20m upstream of confluence,loch_fyne_coastal,River Fyne,20m upstream of confluence,224670,720850,-4.838685,56.347417
+Fyne 16,Fyne 16 - River Fyne - Left bank channel of mature Island,loch_fyne_coastal,River Fyne,Left bank channel of mature Island,224650,720850,-4.839009,56.34741
+Fyne 4a,Fyne 4a - River Fyne - 50m D/S Merk Burn confluence,loch_fyne_coastal,River Fyne,50m D/S Merk Burn confluence,220756,714418,-4.897551,56.288239
+Fyne 7a_SEPA,"Fyne 7a_SEPA - River Fyne - 75 metres D/S weir, in riffle",loch_fyne_coastal,River Fyne,"75 metres D/S weir, in riffle",221906,715232,-4.879547,56.295976
+Kilfinan EB1,Kilfinan EB1 - Kilfinan Burn - Upstream of main road bridge,loch_fyne_coastal,Kilfinan Burn,Upstream of main road bridge,193458,679121,-5.310474,55.960551
+Kinglas 03a,"Kinglas 03a - Kinglas Water - 300M D/S OF WEIR, 20M U/S OF SWING BRIDGE",loch_fyne_coastal,Kinglas Water,"300M D/S OF WEIR, 20M U/S OF SWING BRIDGE",220797,709529,-4.893574,56.244386
+Kinglas 06a,"Kinglas 06a - Kinglas Water - Butter bridge - MIDDLE MAINSTEM, iSLAND U/S OF BRIDGE",loch_fyne_coastal,Kinglas Water,"Butter bridge - MIDDLE MAINSTEM, iSLAND U/S OF BRIDGE",223500,709450,-4.849961,56.244689
+Kinglas 09,Kinglas 09 - Kinglas Water - RB channel of island,loch_fyne_coastal,Kinglas Water,RB channel of island,224220,710130,-4.83881,56.251058
+Kinglas 11,Kinglas 11 - Kinglas Water - u/s RB wall/meander,loch_fyne_coastal,Kinglas Water,u/s RB wall/meander,224619,710835,-4.832846,56.257531
+Kinglas 12,Kinglas 12 - Kinglas Water - u/s of Watergate to ford. Abyssinia,loch_fyne_coastal,Kinglas Water,u/s of Watergate to ford. Abyssinia,225461,711751,-4.819877,56.266061
+LFAR02,LFAR02 - River Aray - D/S OF MALTLANDS BRIDGE. LB BRAID,loch_fyne_coastal,River Aray,D/S OF MALTLANDS BRIDGE. LB BRAID,209250,709800,-5.079821,56.242323
+LFAR02B,LFAR02B - River Aray - ALLT RHIABHACHAN (TRIB.),loch_fyne_coastal,River Aray,ALLT RHIABHACHAN (TRIB.),208907,710233,-5.085659,56.24607
+LFAR03,LFAR03 - River Aray - Hatchery,loch_fyne_coastal,River Aray,Hatchery,208576,711086,-5.09161,56.253589
+LFAR04,LFAR04 - River Aray - THREE BRIDGES,loch_fyne_coastal,River Aray,THREE BRIDGES,208938,712259,-5.086624,56.264258
+LFAR06B,"LFAR06B - River Aray - STRONMAGACHAN, U/S LB TRIB. CONFLUENCE",loch_fyne_coastal,River Aray,"STRONMAGACHAN, U/S LB TRIB. CONFLUENCE",208735,714128,-5.09125,56.280944
+LFAR06C,LFAR06C - River Aray - ALLT A MHAGARAIN (TRIB.) 50 U/S OF CONFLUENCE,loch_fyne_coastal,River Aray,ALLT A MHAGARAIN (TRIB.) 50 U/S OF CONFLUENCE,208687,714186,-5.092066,56.281445
+LFAR07D,LFAR07D - River Aray - 100M D/S OF FENCE LINE. DRIMFERN,loch_fyne_coastal,River Aray,100M D/S OF FENCE LINE. DRIMFERN,208779,714751,-5.090991,56.28655
+LFAR08A,LFAR08A - River Aray - LADYFIELD. RIFFLE D/S OF BRIDGE,loch_fyne_coastal,River Aray,LADYFIELD. RIFFLE D/S OF BRIDGE,208883,715493,-5.089851,56.293249
+LFAR09A,LFAR09A - River Aray - NORTH TULLICH. U/S OF OLD DEER FENCE,loch_fyne_coastal,River Aray,NORTH TULLICH. U/S OF OLD DEER FENCE,209150,716450,-5.086236,56.301942
+LFAR10B,LFAR10B - River Aray - WEST TRIB. 30M U/S OF RD BRIDGE,loch_fyne_coastal,River Aray,WEST TRIB. 30M U/S OF RD BRIDGE,209313,717902,-5.084657,56.315034
+LFAU01,LFAU01 - AUCHALICK,loch_fyne_coastal,AUCHALICK,,191664,674634,-5.335695,55.91953
+LFAU02,LFAU02 - AUCHALICK - Braid section d/s of lower wier and pool/spwn area,loch_fyne_coastal,AUCHALICK,Braid section d/s of lower wier and pool/spwn area,191844,674837,-5.332976,55.921429
+LFAU03,LFAU03 - AUCHALICK - U/S of LWD logjAM (U/S of two lower weirs),loch_fyne_coastal,AUCHALICK,U/S of LWD logjAM (U/S of two lower weirs),192241,675141,-5.326869,55.924327
+LFAU04,LFAU04 - AUCHALICK - Beside LB holiday cottage d/s of rd bridge,loch_fyne_coastal,AUCHALICK,Beside LB holiday cottage d/s of rd bridge,192605,675541,-5.321361,55.928072
+LFAU05,LFAU05 - AUCHALICK - U/S of rd bridge,loch_fyne_coastal,AUCHALICK,U/S of rd bridge,192903,675965,-5.316925,55.932004
+LFAU06,LFAU06 - AUCHALICK - D/S of upper weirs,loch_fyne_coastal,AUCHALICK,D/S of upper weirs,193378,676564,-5.309794,55.937581
+LFAU07,LFAU07 - AUCHALICK - D/S of fishing pond/weir pool. (between upper weirs),loch_fyne_coastal,AUCHALICK,D/S of fishing pond/weir pool. (between upper weirs),193422,676678,-5.309178,55.938622
+LFAU08,LFAU08 - AUCHALICK - RB Trib. 50 u/s of confluence.,loch_fyne_coastal,AUCHALICK,RB Trib. 50 u/s of confluence.,193484,676869,-5.308333,55.940362
+LFAU09,LFAU09 - AUCHALICK - 50m u/s of upper weir/fishing pond/pool d/s of Acharossan,loch_fyne_coastal,AUCHALICK,50m u/s of upper weir/fishing pond/pool d/s of Acharossan,193583,676736,-5.306649,55.939212
+LFAU10,"LFAU10 - AUCHALICK - U/S of WG, beside track.",loch_fyne_coastal,AUCHALICK,"U/S of WG, beside track.",193818,676785,-5.302931,55.939752
+LFAU11,LFAU11 - AUCHALICK - U/S of upper bridge,loch_fyne_coastal,AUCHALICK,U/S of upper bridge,193971,677068,-5.300702,55.942356
+LFAU12,LFAU12 - AUCHALICK - U/S of Acharossan. Gorgey section. d/s of rb trib.,loch_fyne_coastal,AUCHALICK,U/S of Acharossan. Gorgey section. d/s of rb trib.,194195,677028,-5.297091,55.942093
+LFAU13,LFAU13 - AUCHALICK - Upper RB trib. 10m u/s of confluence.,loch_fyne_coastal,AUCHALICK,Upper RB trib. 10m u/s of confluence.,194231,677037,-5.296523,55.942189
+LFCS01,LFCS01 - CUILARSTICH - U/S OF OLD GARAGES,loch_fyne_coastal,CUILARSTICH,U/S OF OLD GARAGES,186860,688511,-5.423414,56.041885
+LFCS02,LFCS02 - CUILARSTICH - BLARBUIE GOLF COURSE. FINISH 10M D/S OF DIPPEN BURN TRIB. CONFLUENCE,loch_fyne_coastal,CUILARSTICH,BLARBUIE GOLF COURSE. FINISH 10M D/S OF DIPPEN BURN TRIB. CONFLUENCE,187543,688926,-5.4128,56.04591
+LFCS03,LFCS03 - CUILARSTICH - BADDEN BURN (TRIB.) D/S OF PIPE OVER BURN,loch_fyne_coastal,CUILARSTICH,BADDEN BURN (TRIB.) D/S OF PIPE OVER BURN,185977,688510,-5.437561,56.041482
+LFCS04,LFCS04 - CUILARSTICH - AT BACK OF HOUSES. MEADOW RD.,loch_fyne_coastal,CUILARSTICH,AT BACK OF HOUSES. MEADOW RD.,185740,689100,-5.44183,56.046667
+LFCS05,LFCS05 - CUILARSTICH - U/S OF CEMETRY RD BRIDGE,loch_fyne_coastal,CUILARSTICH,U/S OF CEMETRY RD BRIDGE,185297,689606,-5.449334,56.051007
+LFCS06,LFCS06 - CUILARSTICH - ADJACENT TO FORESTRY TIMBER DEPOT,loch_fyne_coastal,CUILARSTICH,ADJACENT TO FORESTRY TIMBER DEPOT,184598,691049,-5.461696,56.063634
+LFCS07,LFCS07 - CUILARSTICH - AUCHOISH BURN (TRIB.) FROM BEND UP TO FORESTRY BRIDGE,loch_fyne_coastal,CUILARSTICH,AUCHOISH BURN (TRIB.) FROM BEND UP TO FORESTRY BRIDGE,186588,690992,-5.429749,56.064014
+LFDG01,LFDG01 - DOUGLAS - D/S OF LOWER BRIDGE,loch_fyne_coastal,DOUGLAS,D/S OF LOWER BRIDGE,207126,705275,-5.110747,56.200872
+LFDG02,"LFDG02 - DOUGLAS - D/S OF HIGH LB, RIFFLE SECTION",loch_fyne_coastal,DOUGLAS,"D/S OF HIGH LB, RIFFLE SECTION",206440,704845,-5.121473,56.196736
+LFDG03,LFDG03 - DOUGLAS - RH BRAID,loch_fyne_coastal,DOUGLAS,RH BRAID,205817,704724,-5.131409,56.195397
+LFDG04,LFDG04 - Allt Garbh - U/S OF RD BRIDGE,loch_fyne_coastal,Allt Garbh,U/S OF RD BRIDGE,205708,704757,-5.133187,56.195648
+LFDG04A,LFDG04A - Allt Garbh - GARBH ALLT (TRIB.),loch_fyne_coastal,Allt Garbh,GARBH ALLT (TRIB.),204931,704121,-5.145223,56.189625
+LFDG05,LFDG05 - DOUGLAS - D/S OF POOL BELOW DAM AND FISH LADDER,loch_fyne_coastal,DOUGLAS,D/S OF POOL BELOW DAM AND FISH LADDER,205472,704872,-5.137069,56.196583
+LFKIL01,LFKIL01 - KILAIL,loch_fyne_coastal,KILAIL,,193273,684585,-5.31763,56.009482
+LFKIL02,LFKIL02 - KILAIL,loch_fyne_coastal,KILAIL,,193907,683967,-5.307006,56.004211
+LFKILF01,LFKILF01 - Kilfinan Burn,loch_fyne_coastal,Kilfinan Burn,,192745,679068,-5.321834,55.959768
+LFKILF02,LFKILF02 - Kilfinan Burn,loch_fyne_coastal,Kilfinan Burn,,193432,679095,-5.31087,55.960307
+LFKILF03,LFKILF03 - Kilfinan Burn,loch_fyne_coastal,Kilfinan Burn,,194163,679367,-5.299388,55.96306
+LFKILF04,LFKILF04 - Kilfinan Burn,loch_fyne_coastal,Kilfinan Burn,,194399,681403,-5.297169,55.981424
+LFKILF05,LFKILF05 - Kilfinan Burn,loch_fyne_coastal,Kilfinan Burn,,196427,680686,-5.264179,55.975857
+LFLAR01,LFLAR01 - LARGIEMORE,loch_fyne_coastal,LARGIEMORE,,194380,686491,-5.301366,56.027054
+LFLAR02,LFLAR02 - LARGIEMORE,loch_fyne_coastal,LARGIEMORE,,194675,686358,-5.296539,56.025987
+LFSH01a,LFSH01a - River Shira - D/S OF ALLT BUIDHE,loch_fyne_coastal,River Shira,D/S OF ALLT BUIDHE,212214,712578,-5.034038,56.268427
+LFSH02,LFSH02 - River Shira - ALLT BUIDHE (TRIB.) U/S OF BEND,loch_fyne_coastal,River Shira,ALLT BUIDHE (TRIB.) U/S OF BEND,212264,712548,-5.033211,56.268178
+LFSH05,LFSH05 - River Shira - 50M D/S OF BRIDGE,loch_fyne_coastal,River Shira,50M D/S OF BRIDGE,212559,713416,-5.02907,56.276082
+LFSH05b,LFSH05b - River Shira - Kilblaan Burn,loch_fyne_coastal,River Shira,Kilblaan Burn,212858,713445,-5.024269,56.27646
+LFSH05c,LFSH05c - River Shira - d/s from LB trib,loch_fyne_coastal,River Shira,d/s from LB trib,213154,713921,-5.019833,56.280847
+LFSH06,LFSH06 - River Shira,loch_fyne_coastal,River Shira,,213420,714369,-5.015859,56.284971
+LFSH06b,LFSH06b - River Shira - u/s from Elrigbeag bridge and large fallen tree on LB,loch_fyne_coastal,River Shira,u/s from Elrigbeag bridge and large fallen tree on LB,213745,714820,-5.010935,56.289145
+LFSH07,"LFSH07 - River Shira - NEXT TO ELLERIC MORE, D/S OF STEPPING STONES & RB TRIB.",loch_fyne_coastal,River Shira,"NEXT TO ELLERIC MORE, D/S OF STEPPING STONES & RB TRIB.",213796,715121,-5.010325,56.291866
+LFSH08,LFSH08 - Creag Bhan - CREAG BHAN TRIB. U/S OF CULVERT,loch_fyne_coastal,Creag Bhan,CREAG BHAN TRIB. U/S OF CULVERT,213732,715158,-5.011384,56.292172
+LFSH09,LFSH09 - River Shira - MAINSTEM ALONG ISLAND. EILEAN AN EAGAILL.,loch_fyne_coastal,River Shira,MAINSTEM ALONG ISLAND. EILEAN AN EAGAILL.,213913,715233,-5.008516,56.292916
+LFSH10,LFSH10 - River Shira - STUCKGOAY BURN (TRIB.) 30M U/S OF CONFLUENCE TO BRIDGE,loch_fyne_coastal,River Shira,STUCKGOAY BURN (TRIB.) 30M U/S OF CONFLUENCE TO BRIDGE,214133,715837,-5.005393,56.298422
+LFSTR01,LFSTR01 - STRATHLACHLAN,loch_fyne_coastal,STRATHLACHLAN,,201226,695344,-5.198273,56.10936
+LFSTR02,LFSTR02 - STRATHLACHLAN,loch_fyne_coastal,STRATHLACHLAN,,201226,695929,-5.198709,56.114607
+LFSTR03,LFSTR03 - STRATHLACHLAN,loch_fyne_coastal,STRATHLACHLAN,,203150,696556,-5.168279,56.121029
+LFSTR04,LFSTR04 - STRATHLACHLAN,loch_fyne_coastal,STRATHLACHLAN,,204237,697034,-5.151174,56.125764
+Leacann 10,Leacann 10 - Leacann Water - TRIBUTARY. D/S OF AUCHUNDRAIN BRIDGE,loch_fyne_coastal,Leacann Water,TRIBUTARY. D/S OF AUCHUNDRAIN BRIDGE,202753,702783,-5.179268,56.176725
+Leacann 11,Leacann 11 - Leacann Water - U/S OF FOOT BRIDGE,loch_fyne_coastal,Leacann Water,U/S OF FOOT BRIDGE,202191,702185,-5.187861,56.171128
+Leacann 12,Leacann 12 - Leacann Water,loch_fyne_coastal,Leacann Water,,202141,702232,-5.1887,56.171529
+Leacann 6,Leacann 6 - Leacann Water - D/S of water works,loch_fyne_coastal,Leacann Water,D/S of water works,202306,701138,-5.185234,56.161784
+Leacann 7,"Leacann 7 - Abhainn Dubhan - Abhainn Dubhan, u/s of Leacann confluence",loch_fyne_coastal,Abhainn Dubhan,"Abhainn Dubhan, u/s of Leacann confluence",202247,701858,-5.186718,56.168218
+Leacann 7A,Leacann 7A - Abhainn Dubhan - LRG BOULDER ON RB UP TO TAIL OF POOL,loch_fyne_coastal,Abhainn Dubhan,LRG BOULDER ON RB UP TO TAIL OF POOL,199876,700901,-5.224119,56.158644
+Leacann 7B,"Leacann 7B - Abhainn Dubhan - RB trib (Abhainn Dubhan), u/s of footbridge",loch_fyne_coastal,Abhainn Dubhan,"RB trib (Abhainn Dubhan), u/s of footbridge",202256,701842,-5.186561,56.168078
+Leacann 7C,Leacann 7C - Leacann Water - RIFFLE SECTION,loch_fyne_coastal,Leacann Water,RIFFLE SECTION,202374,701951,-5.184745,56.169105
+Leacann 7ai,Leacann 7ai - Leacann Water - U/S of  confluence,loch_fyne_coastal,Leacann Water,U/S of  confluence,202380,701949,-5.184647,56.169089
+Leacann 9,Leacann 9 - Leacann Water - U/S OF BRIDGE,loch_fyne_coastal,Leacann Water,U/S OF BRIDGE,202239,702292,-5.187169,56.172108
+SEPA 331012,SEPA 331012 - Erallich Water - Erallich u/s 3 bridges,loch_fyne_coastal,Erallich Water,Erallich u/s 3 bridges,208849,712311,-5.088096,56.264689
+SEPA 551688,SEPA 551688 - River Fyne - 50m d/s Merk Burn conf,loch_fyne_coastal,River Fyne,50m d/s Merk Burn conf,220762,714418,-4.897454,56.288241
+SEPA 551689,SEPA 551689 - River Fyne - 50m us Allt Coire an Lnggart conf,loch_fyne_coastal,River Fyne,50m us Allt Coire an Lnggart conf,224628,720784,-4.83932,56.346809
+SEPA 551690,SEPA 551690 - River Fyne - d/s of Allt Ruadh conf,loch_fyne_coastal,River Fyne,d/s of Allt Ruadh conf,223712,719337,-4.853151,56.333485
+SEPA 551691,SEPA 551691 - River Fyne - u/s of Allt Ruadh conf,loch_fyne_coastal,River Fyne,u/s of Allt Ruadh conf,224174,720110,-4.846205,56.340593
+SEPA 551781,SEPA 551781 - River Fyne - 50m d/s of Glenfyne Lodge,loch_fyne_coastal,River Fyne,50m d/s of Glenfyne Lodge,221921,715112,-4.879224,56.294905
+SEPA 551782,"SEPA 551782 - River Fyne - main channel at  Allt Na Lairige Power Station, 70m u/s of tailrace",loch_fyne_coastal,River Fyne,"main channel at  Allt Na Lairige Power Station, 70m u/s of tailrace",223007,716341,-4.862525,56.306339
+SEPA 562437,SEPA 562437 - Erallich Water - u/s of Allt nan Ord conf,loch_fyne_coastal,Erallich Water,u/s of Allt nan Ord conf,207960,711857,-5.102097,56.260257
+SEPA_379317,SEPA_379317 - DOUGLAS - Top of site is 2m u/s forestry firebreak,loch_fyne_coastal,DOUGLAS,Top of site is 2m u/s forestry firebreak,204201,707108,-5.159171,56.216121
+SEPA_479735,SEPA_479735 - DOUGLAS - U/S end of site is 1st riffle d/s fish ladder,loch_fyne_coastal,DOUGLAS,U/S end of site is 1st riffle d/s fish ladder,205429,705250,-5.138038,56.199957
+SEPA_479736,SEPA_479736 - DOUGLAS - Right channel of island from top of big boulder in middle of river up to riffle,loch_fyne_coastal,DOUGLAS,Right channel of island from top of big boulder in middle of river up to riffle,205810,704770,-5.131556,56.195806
+SEPA_479737,SEPA_479737 - DOUGLAS - 200m u/s bridge. Site ends 30m d/s falls by RB trib,loch_fyne_coastal,DOUGLAS,200m u/s bridge. Site ends 30m d/s falls by RB trib,203842,707577,-5.165298,56.22018
+SEPA_479738,SEPA_479738 - DOUGLAS - D/S intake. U/S end of site at ford below LB trib,loch_fyne_coastal,DOUGLAS,D/S intake. U/S end of site at ford below LB trib,204273,707298,-5.158152,56.217855
+SEPA_Fyne 8,SEPA_Fyne 8 - River Fyne,loch_fyne_coastal,River Fyne,,222997,716343,-4.862688,56.306353
+SEPA_Fyne_12a,"SEPA_Fyne_12a - River Fyne - @ Allt Ruadh, 100m D/S forestry block",loch_fyne_coastal,River Fyne,"@ Allt Ruadh, 100m D/S forestry block",223704,719336,-4.85328,56.333473
+SEPA_Fyne_13,"SEPA_Fyne_13 - River Fyne - 100 m U/S bend, beside copse",loch_fyne_coastal,River Fyne,"100 m U/S bend, beside copse",224168,720120,-4.846309,56.340681
+SEPA_Fyne_16,SEPA_Fyne_16 - River Fyne - 50 metres U/S confluence with Allt Coire an Longairt,loch_fyne_coastal,River Fyne,50 metres U/S confluence with Allt Coire an Longairt,224624,720786,-4.839386,56.346826
+SHST01,SHST01 - River Shira - Stuckgoay (Trib.),loch_fyne_coastal,River Shira,Stuckgoay (Trib.),214106,715863,-5.005847,56.298644
+SHST02,SHST02 - River Shira - Stuckgoay (Trib.),loch_fyne_coastal,River Shira,Stuckgoay (Trib.),214027,716026,-5.007236,56.300076
+SKIP01,SKIP01 - SKIPNESS,loch_fyne_coastal,SKIPNESS,,190312,657892,-5.344358,55.768775
+SKIP02,SKIP02 - SKIPNESS,loch_fyne_coastal,SKIPNESS,,189670,658259,-5.354856,55.771788
+SKIP03,SKIP03 - SKIPNESS,loch_fyne_coastal,SKIPNESS,,189554,658738,-5.357072,55.776034
+SKIP04,SKIP04 - SKIPNESS,loch_fyne_coastal,SKIPNESS,,189211,659390,-5.363034,55.781733
+SKIP05,SKIP05 - SKIPNESS - Garbh Allt (Trib.),loch_fyne_coastal,SKIPNESS,Garbh Allt (Trib.),188966,660146,-5.367519,55.788407
+SKIP06,SKIP06 - SKIPNESS,loch_fyne_coastal,SKIPNESS,,189314,660670,-5.362385,55.793259
+Shira 5,Shira 5 - River Shira - At confluence with Kilblaan Burn,loch_fyne_coastal,River Shira,At confluence with Kilblaan Burn,212732,713504,-5.026343,56.276939
+Shira7,Shira7 - River Shira - Stepping stones,loch_fyne_coastal,River Shira,Stepping stones,213624,714624,-5.012749,56.287339
+Shira8,Shira8 - River Shira,loch_fyne_coastal,River Shira,,213420,714199,-5.015739,56.283446
+Shira9,Shira9 - River Shira - Top mainstream site. U/S of Left bank tributary,loch_fyne_coastal,River Shira,Top mainstream site. U/S of Left bank tributary,215814,718150,-4.979884,56.31983
+ABT01,ABT01 - Abhainn Bheag an Tunns - U/s of track crossing. U/s site boundary with large rocks at bend.,river_add,Abhainn Bheag an Tunns,U/s of track crossing. U/s site boundary with large rocks at bend.,192734,695410,-5.334638,56.106343
+ABT02,ABT02 - Abhainn Bheag an Tunns - D/s of intake dam,river_add,Abhainn Bheag an Tunns,D/s of intake dam,193261,695795,-5.326478,56.110024
+ABT03,ABT03 - Abhainn Bheag an Tunns - D/S of rightbank tributary,river_add,Abhainn Bheag an Tunns,D/S of rightbank tributary,194271,696476,-5.31079,56.116569
+ABT04,ABT04 - Abhainn Bheag an Tunns - 500m U/s of rightbank tributary.,river_add,Abhainn Bheag an Tunns,500m U/s of rightbank tributary.,194683,696664,-5.30432,56.118432
+Add WF1,Add WF1 - River Add - 100 m upstream of forestry bridge,river_add,River Add,100 m upstream of forestry bridge,191280,694884,-5.357564,56.100992
+Add WF2,Add WF2 - River Add - 30 m downstream of new wind farm bridge,river_add,River Add,30 m downstream of new wind farm bridge,192797,697678,-5.335388,56.126712
+Add WF3,Add WF3 - River Add - Right channel of Island braid,river_add,River Add,Right channel of Island braid,193173,698061,-5.329647,56.130311
+Add WF3a,Add WF3a - River Add - Unnamed left bank trib. Downstream of tree stumps,river_add,River Add,Unnamed left bank trib. Downstream of tree stumps,193316,697884,-5.327213,56.128785
+Add WF3b,Add WF3b - River Add - Carron Burn tributary. 3 m upstream of confluence,river_add,River Add,Carron Burn tributary. 3 m upstream of confluence,193226,698183,-5.328891,56.131428
+Add WF4,Add WF4 - River Add - Lower Carron upstream of bends,river_add,River Add,Lower Carron upstream of bends,193764,698800,-5.320727,56.137195
+Add WF5,Add WF5 - River Add - Upstream of waterfall adjacent to Carron lower field boundary,river_add,River Add,Upstream of waterfall adjacent to Carron lower field boundary,194527,699503,-5.309013,56.143829
+Add WF6,Add WF6 - River Add - Upstream of braid adjacent to ruined building,river_add,River Add,Upstream of braid adjacent to ruined building,194930,699823,-5.302785,56.146873
+Add WF7,Add WF7 - River Add - Abhainn Bhuidhe tributary adjacent to ruined building,river_add,River Add,Abhainn Bhuidhe tributary adjacent to ruined building,194827,699745,-5.304379,56.146129
+Add10,"Add10 - River Add - Upper mainstem, Carron l",river_add,River Add,"Upper mainstem, Carron l",193764,698800,-5.320727,56.137195
+Add11,"Add11 - River Add - Upper mainstem, Carron ll. U/S of falls @ bothy.",river_add,River Add,"Upper mainstem, Carron ll. U/S of falls @ bothy.",194527,699823,-5.30926,56.1467
+Add12,"Add12 - River Add - Upper mainstem, Carron lll",river_add,River Add,"Upper mainstem, Carron lll",194930,699823,-5.302785,56.146873
+Argyll_0228,Argyll_0228 - Kilmartin Burn - Upstream of right bank trees opposite SWT car park.,river_add,Kilmartin Burn,Upstream of right bank trees opposite SWT car park.,182473,695908,-5.499713,56.106247
+Argyll_0316,Argyll_0316 - Abhainn Bheag an Tunns - Downstream of confluence with Right bank tributary.,river_add,Abhainn Bheag an Tunns,Downstream of confluence with Right bank tributary.,194275,696474,-5.310724,56.116552
+SEPA_374554,SEPA_374554 - River Add - Kilmichael Glen to top of riffle c90m d/s bridge,river_add,River Add,Kilmichael Glen to top of riffle c90m d/s bridge,186638,694943,-5.4321,56.099471
+A63C,"A63C - Clachandubh River - (CB1) U/s of bridge, riffle @ cattle drinking area",river_awe,Clachandubh River,"(CB1) U/s of bridge, riffle @ cattle drinking area",187218,702087,-5.428496,56.1638
+A70,A70 - Finchairn - (F2) LH Braid of Isl. at hydro outflow u/s of road bridge,river_awe,Finchairn,(F2) LH Braid of Isl. at hydro outflow u/s of road bridge,190274,703983,-5.380871,56.182159
+A70a,"A70a - Finchairn - (F3) U/s of falls, adj. to cottage on LB",river_awe,Finchairn,"(F3) U/s of falls, adj. to cottage on LB",190209,704319,-5.382182,56.185144
+A73,A73 - Finchairn - (F1) 60m d/s of road bridge,river_awe,Finchairn,(F1) 60m d/s of road bridge,190181,704220,-5.382554,56.184244
+A73a,A73a - Finchairn - (F1a) 40m u/s of old deer fence d/s of road bridge - lower reach,river_awe,Finchairn,(F1a) 40m u/s of old deer fence d/s of road bridge - lower reach,190209,704319,-5.382182,56.185144
+A89B11,A89B11 - Upstream of forestry track,river_awe,,Upstream of forestry track,195172,706460,-5.304011,56.206508
+A90C,"A90C - Durran, upstream of forestry track",river_awe,,"Durran, upstream of forestry track",196400,707850,-5.285316,56.219502
+AKAA 1,AKAA 1 - Allt na h-Annait - Between ford and fence,river_awe,Allt na h-Annait,Between ford and fence,234576,737809,-4.689324,56.503176
+AKCA 1,AKCA 1 - Allt Coralan - u/s of ford,river_awe,Allt Coralan,u/s of ford,233207,735860,-4.71029,56.485203
+AKCC 1,AKCC 1 - Allt-Coire-Chailein - tributary of Allt Kinglass system qualitative site directly below roadbridge,river_awe,Allt-Coire-Chailein,tributary of Allt Kinglass system qualitative site directly below roadbridge,232599,735694,-4.720045,56.483497
+AKCC 2,AKCC 2 - Allt-Coire-Chailein - Downstream of birch trees on Left Bank,river_awe,Allt-Coire-Chailein,Downstream of birch trees on Left Bank,232400,735600,-4.723212,56.482583
+AKCC 3,AKCC 3 - Allt-Coire-Chailein - Tributary of the Allt Kinglass.  Site located below the first concrete bridge structure on the WHW,river_awe,Allt-Coire-Chailein,Tributary of the Allt Kinglass.  Site located below the first concrete bridge structure on the WHW,232600,735300,-4.719776,56.479962
+AKCC 4,AKCC 4 - Allt-Coire-Chailein - Upstream of third tributary on right bank,river_awe,Allt-Coire-Chailein,Upstream of third tributary on right bank,232550,734950,-4.720362,56.476804
+AKCC 5,AKCC 5 - Allt-Coire-Chailein - Upstream from trees on right bank to brow,river_awe,Allt-Coire-Chailein,Upstream from trees on right bank to brow,232550,734700,-4.720201,56.47456
+AKCC 6,AKCC 6 - Allt-Coire-Chailein - Upstream of RH bend at forestry plantation,river_awe,Allt-Coire-Chailein,Upstream of RH bend at forestry plantation,232600,734400,-4.719198,56.471886
+AKCC 7,AKCC 7 - Allt-Coire-Chailein - RH braid upstream of forestry bloch,river_awe,Allt-Coire-Chailein,RH braid upstream of forestry bloch,232600,734100,-4.719005,56.469194
+ATNL 1,ATNL 1,river_awe,,,232000,735700,-4.729764,56.483338
+ATNL 2,ATNL 2 - Tributary of the Allt Kinglass. Downstream of new watergate within fenced habitat project,river_awe,,Tributary of the Allt Kinglass. Downstream of new watergate within fenced habitat project,232150,735450,-4.72717,56.481148
+Abh Shira 1,Abh Shira 1 - 100m downstream from Victoria Bridge across from most downstream stand of Alders on left bank (looking upstream).,river_awe,,100m downstream from Victoria Bridge across from most downstream stand of Alders on left bank (looking upstream).,227200,742200,-4.811925,56.539926
+Abh Shira 2,Abh Shira 2 - Directly upstream of road bridge,river_awe,,Directly upstream of road bridge,227000,742200,-4.815173,56.539853
+Abh Shira 3,Abh Shira 3 - Upstream of old schoolhouse.,river_awe,,Upstream of old schoolhouse.,225700,742400,-4.836421,56.541167
+Abh Shira 3a,Abh Shira 3a - Abhainn Shira - Trib: Allt Toaig - 50m u/s of bridge.,river_awe,Abhainn Shira,Trib: Allt Toaig - 50m u/s of bridge.,225450,742650,-4.840649,56.543318
+Abh Shira 4,Abh Shira 4 - Downstream of Fording point,river_awe,,Downstream of Fording point,223350,741800,-4.874179,56.534906
+Abh Shira 4a,"Abh Shira 4a - Abhainn Shira - Middle mainstem, riffle 100m d/s of ford. (new 2014)",river_awe,Abhainn Shira,"Middle mainstem, riffle 100m d/s of ford. (new 2014)",224023,742041,-4.863414,56.537321
+Abh Shira 5a,Abh Shira 5a - Abhainn Shira - RB Trib: Allt Suil na Curra - u/s of fording point. (new 2014).,river_awe,Abhainn Shira,RB Trib: Allt Suil na Curra - u/s of fording point. (new 2014).,223380,741698,-4.873622,56.534002
+Abn Shira 5,Abn Shira 5 - Downstream of falls in right hand channel,river_awe,,Downstream of falls in right hand channel,222400,741800,-4.889605,56.534548
+Acaladair 5,Acaladair 5 - Upstream of waterfall,river_awe,,Upstream of waterfall,232357,743861,-4.729237,56.5567
+Achaladair 4,Achaladair 4 - 10m Upstream of right bank tributary confluence,river_awe,,10m Upstream of right bank tributary confluence,232407,744146,-4.728609,56.559275
+Achaladair 6,Achaladair 6 - Upstream of falls,river_awe,,Upstream of falls,232640,743144,-4.724176,56.550367
+Achaladar 3,Achaladar 3 - tributary - 20m upstream of confluence,river_awe,,tributary - 20m upstream of confluence,232395,744113,-4.728782,56.558975
+Achallader 1,Achallader 1 - Upstream of track fording point,river_awe,,Upstream of track fording point,232449,744571,-4.728201,56.563104
+Achallader 2,Achallader 2 - Upstrea of left hand bend in single channel between braids,river_awe,,Upstrea of left hand bend in single channel between braids,232515,744338,-4.726978,56.561037
+Allt Kinglass 0,Allt Kinglass 0 - Allt Kinglass - U/s of confluence with Orchy. Alternative to Orchy site.,river_awe,Allt Kinglass,U/s of confluence with Orchy. Alternative to Orchy site.,229442,738628,-4.773167,56.508693
+Allt Kinglass 1,Allt Kinglass 1 - Allt Kinglass - mainstem qualitative site  approximately 1.5km downstream of confluence with Coire Allan,river_awe,Allt Kinglass,mainstem qualitative site  approximately 1.5km downstream of confluence with Coire Allan,231100,736600,-4.744943,56.491092
+Allt Kinglass 2,"Allt Kinglass 2 - Allt Kinglass - Mainstem, d/s of chailein confluence.",river_awe,Allt Kinglass,"Mainstem, d/s of chailein confluence.",232423,735864,-4.723009,56.48496
+Allt Kinglass 3,Allt Kinglass 3 - Allt Kinglass - Upstream of mature island.,river_awe,Allt Kinglass,Upstream of mature island.,233900,736900,-4.699714,56.494781
+Allt Kinglass 4,Allt Kinglass 4 - Allt Kinglass - Start u/s of bedrock steps at bend.,river_awe,Allt Kinglass,Start u/s of bedrock steps at bend.,234333,737674,-4.693181,56.501879
+Allt Kinglass 5,Allt Kinglass 5 - Allt Kinglass - d/s of ford,river_awe,Allt Kinglass,d/s of ford,235033,738352,-4.682253,56.50821
+Allt Kinglass 6,Allt Kinglass 6 - Allt a Chuirn - upstream of ford to pole on right bank,river_awe,Allt a Chuirn,upstream of ford to pole on right bank,235300,738950,-4.678298,56.51367
+Allt Kinglass 6a,Allt Kinglass 6a - Allt Kinglass - d/s of watergate,river_awe,Allt Kinglass,d/s of watergate,235192,738981,-4.680071,56.51391
+Allt Orain 1,Allt Orain 1 - Downstream from roadbridge and past hotel to the left. Site is located upstream from first right hand bend of stream.,river_awe,,Downstream from roadbridge and past hotel to the left. Site is located upstream from first right hand bend of stream.,227400,741500,-4.808211,56.533719
+Allt Ur 1,Allt Ur 1,river_awe,,,232500,744700,-4.727455,56.56428
+Argyll_0183,Argyll_0183 - Allt-Coire-Chailein - Bend downstream of braided section,river_awe,Allt-Coire-Chailein,Bend downstream of braided section,232616,734053,-4.718716,56.468777
+Argyll_0187,Argyll_0187 - Strae - Lower River Strae. Adjacent to woodland on right bank.,river_awe,Strae,Lower River Strae. Adjacent to woodland on right bank.,214005,728748,-5.016598,56.414205
+Argyll_0194,Argyll_0194 - Water of Tulla - Upstream of large boulder to top of riffle,river_awe,Water of Tulla,Upstream of large boulder to top of riffle,236307,747243,-4.667185,56.588444
+Argyll_0199,Argyll_0199 - Allt Suil na Curra - 25 m upstream of ford on right bank tributary to Abhainn Shira,river_awe,Allt Suil na Curra,25 m upstream of ford on right bank tributary to Abhainn Shira,223376,741697,-4.873687,56.533992
+Argyll_0224,Argyll_0224 - Abhainn Fionain - Along high eroded bank upstream of woody debris,river_awe,Abhainn Fionain,Along high eroded bank upstream of woody debris,199302,717411,-5.245857,56.306497
+Argyll_0226,Argyll_0226 - Allt Tolaghan - 250 m upstream of road bridge downstream of bend,river_awe,Allt Tolaghan,250 m upstream of road bridge downstream of bend,226789,741109,-4.817872,56.529986
+Argyll_0326,Argyll_0326 - Water of Tulla - Run downstream of bend pool with tree on left bank,river_awe,Water of Tulla,Run downstream of bend pool with tree on left bank,236845,747679,-4.65871,56.592544
+Argyll_0335,Argyll_0335 - Inverlochy Burn (unnamed) - Upstream of bedrock crest / Ford,river_awe,Inverlochy Burn (unnamed),Upstream of bedrock crest / Ford,219572,727859,-4.925879,56.408389
+Argyll_0360,Argyll_0360 - Clachan Dubh - Shallow Downstream of bend,river_awe,Clachan Dubh,Shallow Downstream of bend,187880,700844,-5.416865,56.152947
+Awe 1,Awe 1 - River Awe - Caravan Park. R/B u/s of side bar,river_awe,River Awe,Caravan Park. R/B u/s of side bar,203338,729299,-5.189631,56.414826
+Awe 2,Awe 2 - River Awe - Ashes U/S Brander Lodge,river_awe,River Awe,Ashes U/S Brander Lodge,203815,729157,-5.181806,56.413751
+Awe 3,Awe 3 - River Awe - Lower Inverawe. U/S of large boulders,river_awe,River Awe,Lower Inverawe. U/S of large boulders,201707,731865,-5.217969,56.437161
+Awe 89C,Awe 89C,river_awe,,,195800,707700,-5.29486,56.2179
+Bhreac 1,Bhreac 1 - Allt Bhreacnais - Tributary of Loch Tulla. Downstream of roadbridge. Upstream extent of site located by large single oak tree on left bank,river_awe,Allt Bhreacnais,Tributary of Loch Tulla. Downstream of roadbridge. Upstream extent of site located by large single oak tree on left bank,228400,742800,-4.792832,56.54575
+Bhreac 2,"Bhreac 2 - Allt Bhreacnais - Trib to Loch Tulla: Middle, u/s of Easan Dubh RB trib",river_awe,Allt Bhreacnais,"Trib to Loch Tulla: Middle, u/s of Easan Dubh RB trib",228207,743298,-4.796297,56.550148
+CL07,CL07 - Claonaig Water tributary - 50m upstream of junction with main river,river_awe,,Claonaig Water tributary - 50m upstream of junction with main river,184900,658300,-5.430785,55.770058
+CL08,CL08 - Claonaig Water tributary- - 20m above waterfall,river_awe,,Claonaig Water tributary- - 20m above waterfall,184800,658100,-5.432218,55.76822
+CL09,CL09 - Claonaig Water tributary - pposite sheepfold,river_awe,,Claonaig Water tributary - pposite sheepfold,184700,657800,-5.433572,55.765485
+Car Ghl 7,Car Ghl 7 - Upstream of confluence with Allt Fearna,river_awe,,Upstream of confluence with Allt Fearna,198850,717445,-5.253176,56.30661
+Carraig Gheal 1,Carraig Gheal 1 - 50 meters upstream of Loch,river_awe,,50 meters upstream of Loch,195560,719925,-5.308184,56.327447
+Carraig Gheal 10,Carraig Gheal 10 - Uppermost site,river_awe,,Uppermost site,199853,721891,-5.240372,56.346914
+Carraig Gheal 11,Carraig Gheal 11 - Middle site,river_awe,,Middle site,200510,721848,-5.229727,56.346806
+Carraig Gheal 12,Carraig Gheal 12 - Downstream of road,river_awe,,Downstream of road,200824,722260,-5.224967,56.350634
+Carraig Gheal 13,Carraig Gheal 13 - Downstream of confluence with Allt a Bhodaich,river_awe,,Downstream of confluence with Allt a Bhodaich,201073,720772,-5.219819,56.337391
+Carraig Gheal 14,Carraig Gheal 14 - Lower limit at large boulders on left and right banks. Upper limit at bedrock cascades,river_awe,,Lower limit at large boulders on left and right banks. Upper limit at bedrock cascades,201692,720464,-5.209591,56.334888
+Carraig Gheal 15,Carraig Gheal 15 - 50 meters downstream of letf bend in drainage channel,river_awe,,50 meters downstream of letf bend in drainage channel,202107,722733,-5.204597,56.355415
+Carraig Gheal 16,Carraig Gheal 16 - Tributary,river_awe,,Tributary,202907,723489,-5.192238,56.36253
+Carraig Gheal 17,"Carraig Gheal 17 - Lower limit at trees, upper limit at confluence.",river_awe,,"Lower limit at trees, upper limit at confluence.",200838,719377,-5.222558,56.324779
+Carraig Gheal 18,Carraig Gheal 18 - Upstream of fallen trees,river_awe,,Upstream of fallen trees,203772,721854,-5.177039,56.348223
+Carraig Gheal 2,Carraig Gheal 2 - Start at Loch,river_awe,,Start at Loch,195821,719960,-5.303998,56.327873
+Carraig Gheal 3,"Carraig Gheal 3 - U/S braid, start @ tight bend",river_awe,,"U/S braid, start @ tight bend",197343,720814,-5.280084,56.336187
+Carraig Gheal 4,Carraig Gheal 4 - Start @ RB bedrock outcrop with single Rowan tree,river_awe,,Start @ RB bedrock outcrop with single Rowan tree,197676,719828,-5.273949,56.327485
+Carraig Gheal 5,Carraig Gheal 5 - Upstream confluence,river_awe,,Upstream confluence,198054,719759,-5.267794,56.327027
+Carraig Gheal 6,Carraig Gheal 6 - Downstream of confluence from gravel bar on left bank,river_awe,,Downstream of confluence from gravel bar on left bank,198066,719652,-5.267518,56.326073
+Carraig Gheal 7,Carraig Gheal 7 - River Awe,river_awe,River Awe,,198853,717446,-5.253128,56.30662
+Carraig Gheal 8,Carraig Gheal 8 - 100m Upstream of Inverinan Farm,river_awe,,100m Upstream of Inverinan Farm,199213,717472,-5.247339,56.307006
+Carraig Gheal 9,Carraig Gheal 9 - South of sub station,river_awe,,South of sub station,199857,721516,-5.240022,56.343552
+Clach A,Clach A - Riffle by cattle drink diversion,river_awe,,Riffle by cattle drink diversion,187211,702099,-5.428618,56.163905
+Clach B,"Clach B - Middle reaches, downstream of ruined bothy",river_awe,,"Middle reaches, downstream of ruined bothy",187793,700547,-5.418026,56.150245
+Clach C,Clach C - Downstream of new house,river_awe,,Downstream of new house,187804,700114,-5.417504,56.146366
+Claon 5,Claon 5 - - tributary of Claonaig Water - Downstream of forestry plantation,river_awe,,- tributary of Claonaig Water - Downstream of forestry plantation,185800,658400,-5.416544,55.771355
+Creagmhor A1,Creagmhor A1 - Upstream of Loch confluence,river_awe,,Upstream of Loch confluence,180545,691290,-5.526861,56.063954
+Fin F4,Fin F4 - Upstream of falls.,river_awe,,Upstream of falls.,191784,702877,-5.355721,56.172902
+FinF5,"FinF5 - Above bedrock steps, 150m above waterfalls",river_awe,,"Above bedrock steps, 150m above waterfalls",192252,703030,-5.348317,56.174478
+Gain S1,Gain S1 - Upstream of bridge leading to Socach House,river_awe,,Upstream of bridge leading to Socach House,187977,699625,-5.414335,56.142058
+Gain S2,"Gain S2 - Northerly tributary, above large waterfalls. Downstream limit just above 4 foot high waterfall.",river_awe,,"Northerly tributary, above large waterfalls. Downstream limit just above 4 foot high waterfall.",188669,699882,-5.403423,56.14467
+GainC1,"GainC1 - Sluggish water. Downstream limit at reeds, upstream limit at first riffle",river_awe,,"Sluggish water. Downstream limit at reeds, upstream limit at first riffle",191658,701810,-5.356911,56.163277
+GainG1,GainG1 - 150m downstream from Loch outflow. Upstream  from hydorlogical measuring equipment,river_awe,,150m downstream from Loch outflow. Upstream  from hydorlogical measuring equipment,190466,699886,-5.374556,56.145498
+GainG2,GainG2 - 50m above loch,river_awe,,50m above loch,191159,700339,-5.363778,56.149865
+GainG3,GainG3 - Flowing into south east of Loch,river_awe,,Flowing into south east of Loch,191232,700351,-5.362614,56.150005
+GainG4,GainG4 - 60m D/S of Ford,river_awe,,60m D/S of Ford,191995,701286,-5.351085,56.158724
+GainG5,GainG5 - Downstream limit at ford,river_awe,,Downstream limit at ford,192043,701344,-5.350359,56.159265
+GainG6,GainG6 - Below confluence of two stems,river_awe,,Below confluence of two stems,192800,702050,-5.338742,56.165927
+GainS3,"GainS3 - Mainstem of ""Socach"" Burn 100m U/S of confluence wit Gain S2 tributary that has large waterfalls.",river_awe,,"Mainstem of ""Socach"" Burn 100m U/S of confluence wit Gain S2 tributary that has large waterfalls.",188749,699803,-5.402075,56.143997
+GainS4,GainS4 - D/S limit at step below large RB boulder. U/S limit at LB tributary confluence,river_awe,,D/S limit at step below large RB boulder. U/S limit at LB tributary confluence,189835,699725,-5.384567,56.143777
+Galla Beaga 01,Galla Beaga 01 - Galla Beaga - Above ford/crossing point,river_awe,Galla Beaga,Above ford/crossing point,219226,727649,-4.931334,56.406373
+Galla Beaga 02,Galla Beaga 02 - Galla Beaga - u/s of box culvert,river_awe,Galla Beaga,u/s of box culvert,219334,727468,-4.929461,56.40479
+Galla Beaga 03,Galla Beaga 03 - Galla Beaga - 60m u/s of old dam and confluence.,river_awe,Galla Beaga,60m u/s of old dam and confluence.,219765,726979,-4.92215,56.400567
+Kames 1,Kames 1 - Kames River - Straight section upstream of bend,river_awe,Kames River,Straight section upstream of bend,197880,710433,-5.263461,56.243302
+Kames 2,Kames 2 - Kames River - 100m downstream of waterfall,river_awe,Kames River,100m downstream of waterfall,198109,710477,-5.259806,56.243794
+Kames 3,Kames 3 - Kames River - Upstream from braid,river_awe,Kames River,Upstream from braid,198595,710296,-5.251839,56.242377
+Kames 4,Kames 4 - Kames River - Upstream from braided island/boulder garden. End site in tail of deep pool,river_awe,Kames River,Upstream from braided island/boulder garden. End site in tail of deep pool,199205,710206,-5.241945,56.241828
+Kames 5,"Kames 5 - Kames River - Just above S bend, 300m u/s of track bridge",river_awe,Kames River,"Just above S bend, 300m u/s of track bridge",199510,710240,-5.237057,56.242261
+L.Awe 05,L.Awe 05,river_awe,,,207600,726500,-5.118602,56.391473
+L.Awe 06,L.Awe 06 - stream located at Tervine at old cage site. Stream has been straightened. Section fished is 30m upstream from loch shore.,river_awe,,stream located at Tervine at old cage site. Stream has been straightened. Section fished is 30m upstream from loch shore.,207900,726300,-5.113603,56.389801
+L.Awe 105a,L.Awe 105a - Allt Blarghour - Allt Blarghour. Downstream of B840 road bridge,river_awe,Allt Blarghour,Allt Blarghour. Downstream of B840 road bridge,199512,713500,-5.239497,56.271504
+L.Awe 105b,L.Awe 105b - Allt Blarghour - Upstream of hydro powerhouse outflow,river_awe,Allt Blarghour,Upstream of hydro powerhouse outflow,199590,713478,-5.238223,56.27134
+L.Awe 105c,L.Awe 105c - Allt Blarghour - Downstream of track crosssing,river_awe,Allt Blarghour,Downstream of track crosssing,200500,713100,-5.223267,56.268332
+L.Awe 105d,L.Awe 105d - Allt Blarghour - Upstream of right bank tributary,river_awe,Allt Blarghour,Upstream of right bank tributary,200644,713103,-5.220948,56.26842
+L.Awe 105e,L.Awe 105e - Eas an Amair - Eas an Amair tributary. 100 m U/S confluence with Allt Blarghour,river_awe,Eas an Amair,Eas an Amair tributary. 100 m U/S confluence with Allt Blarghour,200566,713046,-5.222162,56.267876
+L.Awe 105f,L.Awe 105f - Allt Blarghour - Upstream of Forestry plantation. Upstream of left bank tributary.,river_awe,Allt Blarghour,Upstream of Forestry plantation. Upstream of left bank tributary.,201826,713297,-5.202039,56.270655
+L.Awe 11,L.Awe 11,river_awe,,,207700,723900,-5.115079,56.36819
+L.Awe 128,L.Awe 128 - started fishing 5m upstream of road bridge.,river_awe,,started fishing 5m upstream of road bridge.,203400,719900,-5.181587,56.330541
+L.Awe 129,L.Awe 129 - started fishing 5m upstream from roadbridge.,river_awe,,started fishing 5m upstream from roadbridge.,203900,720200,-5.173738,56.333439
+L.Awe 131,L.Awe 131 - 10m above bridge over private track to lochside house.,river_awe,,10m above bridge over private track to lochside house.,204200,720600,-5.169191,56.337151
+L.Awe 134,L.Awe 134 - started fishing 5m upstream from roadbridge.,river_awe,,started fishing 5m upstream from roadbridge.,205500,721000,-5.148492,56.341275
+L.Awe 135,L.Awe 135 - by Ard Cottage - started fishing 30m downstream from road bridge.,river_awe,,by Ard Cottage - started fishing 30m downstream from road bridge.,206000,721200,-5.140563,56.343275
+L.Awe 137,L.Awe 137 - 50m upstream from Donald Wilsons caravan.,river_awe,,50m upstream from Donald Wilsons caravan.,206400,721200,-5.134102,56.343438
+L.Awe 140AA,L.Awe 140AA,river_awe,,,208800,721700,-5.095697,56.348899
+L.Awe 140B,L.Awe 140B - downstream of road and 50m down from steep impassable falls,river_awe,,downstream of road and 50m down from steep impassable falls,210100,722700,-5.075417,56.358394
+L.Awe 140C,"L.Awe 140C - At Accurrach Farm, site is located downstream across first field (100m) in straight (fenced off) section.",river_awe,,"At Accurrach Farm, site is located downstream across first field (100m) in straight (fenced off) section.",211400,720500,-5.05283,56.339177
+L.Awe 143,L.Awe 143 - 50m downstream of roadbridge,river_awe,,50m downstream of roadbridge,211700,724300,-5.050708,56.373387
+L.Awe 145A,L.Awe 145A - 100m upstream from roadbridge on track  leading up to Ardteatle Cottage,river_awe,,100m upstream from roadbridge on track  leading up to Ardteatle Cottage,213100,725200,-5.028715,56.382017
+L.Awe 145B,L.Awe 145B - 50m upstream of roadbridge.,river_awe,,50m upstream of roadbridge.,214500,724700,-5.005721,56.378083
+L.Awe 22,L.Awe 22,river_awe,,,204400,721500,-5.16663,56.345308
+L.Awe 23A,L.Awe 23A - site located 30m downstream from first roadbridge across the Kilchrenan Burn when travelling from Inverinan,river_awe,,site located 30m downstream from first roadbridge across the Kilchrenan Burn when travelling from Inverinan,203700,722100,-5.178385,56.3504
+L.Awe 26,L.Awe 26,river_awe,,,202400,721300,-5.198786,56.342683
+L.Awe 33A,L.Awe 33A,river_awe,,,199700,716900,-5.239047,56.302081
+L.Awe 63 Clachan Dubh 1,L.Awe 63 Clachan Dubh 1 - Clachan Dubh - Upstream of bridge / downstream of left bank trib (at riffle),river_awe,Clachan Dubh,Upstream of bridge / downstream of left bank trib (at riffle),187778,701245,-5.418823,56.156498
+L.Awe63 Clachan Dubh CD4,L.Awe63 Clachan Dubh CD4 - Clachan Dubh - Upstream of old ford in garden behind Barmollach house,river_awe,Clachan Dubh,Upstream of old ford in garden behind Barmollach house,187910,699675,-5.415452,56.142476
+LLM1,LLM1 - In man-made channel upstream of Loch an Losgainn Mor,river_awe,,In man-made channel upstream of Loch an Losgainn Mor,186300,712000,-5.451236,56.25229
+LLM2,LLM2 - Downstream of Dam at outflow from Loch an Losgainn Mor,river_awe,,Downstream of Dam at outflow from Loch an Losgainn Mor,185200,712200,-5.469119,56.253588
+LLM3,LLM3 - Small tributary burn flowing along Loch Avich-Kilmelford road entering the loch at most easterly point.,river_awe,,Small tributary burn flowing along Loch Avich-Kilmelford road entering the loch at most easterly point.,187300,711900,-5.435046,56.251842
+LP1,LP1 - Downstream of waterfalls above Loch a Phearsain,river_awe,,Downstream of waterfalls above Loch a Phearsain,185700,714100,-5.462604,56.270853
+LP2,LP2 - 50m upstream of falls which are located above Loch a Phearsain.,river_awe,,50m upstream of falls which are located above Loch a Phearsain.,185800,714200,-5.461074,56.271794
+LP3,LP3 - small tributary at south-east corner of loch,river_awe,,small tributary at south-east corner of loch,185700,713600,-5.462199,56.266369
+Liever 1,Liever 1 - Liever - Downstream of rock weir at nursery,river_awe,Liever,Downstream of rock weir at nursery,189472,705244,-5.394768,56.193115
+Liever 2,Liever 2 - Liever - 100m upstream of old bridge. Downstream of bend at lower end of point bar,river_awe,Liever,100m upstream of old bridge. Downstream of bend at lower end of point bar,189553,705668,-5.393801,56.196953
+Liever 3,Liever 3 - Liever - Upstream of falls. At bend between sub-tributaries,river_awe,Liever,Upstream of falls. At bend between sub-tributaries,189216,706615,-5.399974,56.205297
+Liever 4,Liever 4 - Unnamed Liever Tributary - 5m upstream of confluence,river_awe,Unnamed Liever Tributary,5m upstream of confluence,189263,706698,-5.399284,56.206063
+Liever 5,"Liever 5 - Liever - Downstream of bend, starting at large rock on right bank. 50m downstream of intake",river_awe,Liever,"Downstream of bend, starting at large rock on right bank. 50m downstream of intake",189325,706733,-5.398314,56.206404
+Liever 6,"Liever 6 - Unnamed Liever Tributary - RB Trib, 100m d/s of intake",river_awe,Unnamed Liever Tributary,"RB Trib, 100m d/s of intake",189265,706689,-5.399245,56.205983
+Liever 7,Liever 7 - Liever,river_awe,Liever,,190622,708255,-5.378645,56.220627
+Liever 8,Liever 8 - Liever - d/s of site 1 (Liever 9),river_awe,Liever,d/s of site 1 (Liever 9),191230,709278,-5.369664,56.230069
+Liever 9,Liever 9 - Liever - 2nd riffle d/s of ponded area.,river_awe,Liever,2nd riffle d/s of ponded area.,191425,709568,-5.366753,56.232756
+Lochy 157,Lochy 157 - alongside road - cross marshy field - difficult to locate exactly - no real landmarks - riffle section.,river_awe,,alongside road - cross marshy field - difficult to locate exactly - no real landmarks - riffle section.,224500,728500,-4.846551,56.415998
+Lochy site 01,Lochy site 01 - RIVER LOCHY - 40m d/s of weir.,river_awe,RIVER LOCHY,40m d/s of weir.,219503,727573,-4.926799,56.405797
+Lochy site 2,"Lochy site 2 - RIVER LOCHY - On bend, along wall modification on LB",river_awe,RIVER LOCHY,"On bend, along wall modification on LB",219697,727418,-4.923552,56.40448
+Lochy site 3,"Lochy site 3 - Eas a Ghaill - Lower trib, 50m u/s of confluence. Next to oaks on RB",river_awe,Eas a Ghaill,"Lower trib, 50m u/s of confluence. Next to oaks on RB",220016,727224,-4.918257,56.402861
+Lochy site 4,Lochy site 4 - RIVER LOCHY - 30m U/S of confluence with trib,river_awe,RIVER LOCHY,30m U/S of confluence with trib,220092,727292,-4.917074,56.4035
+Lochy site 5,Lochy site 5 - RIVER LOCHY - U/S small waterfall,river_awe,RIVER LOCHY,U/S small waterfall,220660,727122,-4.907766,56.402191
+Lochy site 6,"Lochy site 6 - RIVER LOCHY - Adjacent to car park, d/s of large waterfall",river_awe,RIVER LOCHY,"Adjacent to car park, d/s of large waterfall",220822,727044,-4.905092,56.401552
+Lochy site 7,Lochy site 7 - RIVER LOCHY - D/S of footbridge,river_awe,RIVER LOCHY,D/S of footbridge,222934,727046,-4.870918,56.402367
+Lochy site 8,Lochy site 8 - RIVER LOCHY - U/S of trib on RB,river_awe,RIVER LOCHY,U/S of trib on RB,223591,727482,-4.86058,56.406525
+Mhoille 1,Mhoille 1 - Below Pylons. Downstream of woodland.,river_awe,,Below Pylons. Downstream of woodland.,213600,729100,-5.023404,56.417204
+Noe 1,Noe 1 - 150m upstream of house.,river_awe,,150m upstream of house.,204950,734200,-5.167202,56.459458
+Orchy 0,"Orchy 0 - River Orchy - Lower mainstem - u/s of bend, pool and golf course.",river_awe,River Orchy,"Lower mainstem - u/s of bend, pool and golf course.",214840,727876,-5.002467,56.40671
+Orchy 1,"Orchy 1 - River Orchy - Upstream of roadbridge, behind the hotel in Dalmally.",river_awe,River Orchy,"Upstream of roadbridge, behind the hotel in Dalmally.",216700,727300,-4.971965,56.402268
+Orchy 10,"Orchy 10 - River Orchy - d/s of cascade, adjacent to road. Fish LB.",river_awe,River Orchy,"d/s of cascade, adjacent to road. Fish LB.",228787,737608,-4.783125,56.499302
+Orchy 12,Orchy 12 - River Orchy - Upper mainstem - LH channel at island u/s of Bridge of Orchy,river_awe,River Orchy,Upper mainstem - LH channel at island u/s of Bridge of Orchy,229669,739941,-4.770343,56.520557
+Orchy 14,"Orchy 14 - River Orchy - upper mainstem, u/s of pool",river_awe,River Orchy,"upper mainstem, u/s of pool",229681,741096,-4.770905,56.530926
+Orchy 1a,Orchy 1a - River Orchy - Corryghoil - 40m d/s of conf. with lochy,river_awe,River Orchy,Corryghoil - 40m d/s of conf. with lochy,219055,727757,-4.934175,56.407276
+Orchy 2,Orchy 2 - Allt Donachain - Downstream of road bridge at Stronmillichan. RB trib to Orchy,river_awe,Allt Donachain,Downstream of road bridge at Stronmillichan. RB trib to Orchy,216200,727800,-4.980406,56.40656
+Orchy 3,Orchy 3 - River Orchy - Just above road for approx 50m. LB trib to Orchy.,river_awe,River Orchy,Just above road for approx 50m. LB trib to Orchy.,219800,727950,-4.922252,56.409293
+Orchy 3b,Orchy 3b - River Orchy - Riffle u/s of oak,river_awe,River Orchy,Riffle u/s of oak,220560,728722,-4.910481,56.416509
+Orchy 4,"Orchy 4 - River Orchy - Downstream of Achnafalnich, below road.",river_awe,River Orchy,"Downstream of Achnafalnich, below road.",221000,729000,-4.903549,56.41917
+Orchy 4a,Orchy 4a - River Orchy - d/s braid at mature island - u/s of trib confluence on LB.,river_awe,River Orchy,d/s braid at mature island - u/s of trib confluence on LB.,221469,729479,-4.896283,56.423646
+Orchy 5,Orchy 5 - River Orchy - Above road,river_awe,River Orchy,Above road,221300,729200,-4.898829,56.421078
+Orchy 6,Orchy 6 - River Orchy - below road,river_awe,River Orchy,below road,221500,729500,-4.895796,56.423846
+Orchy 7,Orchy 7 - River Orchy - Catnish - Riffles adjacent to car park.,river_awe,River Orchy,Catnish - Riffles adjacent to car park.,223320,730691,-4.867133,56.435217
+Orchy 7a,Orchy 7a - Allt an Fhiang - Glen Orchy tributary. below road.,river_awe,Allt an Fhiang,Glen Orchy tributary. below road.,224300,731500,-4.851805,56.442842
+Orchy 8,Orchy 8 - River Orchy - LB riffle u/s of Glen Orchy farm.,river_awe,River Orchy,LB riffle u/s of Glen Orchy farm.,226010,735017,-4.826448,56.475034
+Orchy 80,"Orchy 80 - River Orchy - Tributary of Abhainn Shira - Site located in lowest section of this stream. Fished up to sign on trees ""No Camp Fires""",river_awe,River Orchy,"Tributary of Abhainn Shira - Site located in lowest section of this stream. Fished up to sign on trees ""No Camp Fires""",223400,741600,-4.873231,56.53313
+Orchy 8a,"Orchy 8a - Allt Cnoc an-Tighe - tributary of River Orchy, Glen Orchy. Arichastlic Farm - fished downstream of road bridge - fished up to within 10m of bridge",river_awe,Allt Cnoc an-Tighe,"tributary of River Orchy, Glen Orchy. Arichastlic Farm - fished downstream of road bridge - fished up to within 10m of bridge",225500,734300,-4.834237,56.468412
+Orchy 9,Orchy 9 - River Orchy - Downstream of road bridge,river_awe,River Orchy,Downstream of road bridge,227800,736800,-4.798604,56.491692
+R.Awe 12,R.Awe 12 - River Awe - Stepping stones,river_awe,River Awe,Stepping stones,202586,730709,-5.202864,56.42716
+R.Awe01A,R.Awe01A,river_awe,,,202500,730700,-5.204249,56.427044
+R.Awe01B,R.Awe01B,river_awe,,,202600,730400,-5.202404,56.424394
+R.Awe02,R.Awe02,river_awe,,,203200,729900,-5.192316,56.42016
+R.Awe02B,R.Awe02B,river_awe,,,203400,729900,-5.189079,56.420243
+R.Awe03,R.Awe03,river_awe,,,203700,729300,-5.183774,56.414986
+R.Awe04,R.Awe04 - River Awe,river_awe,River Awe,,202126,731317,-5.21077,56.432421
+R.Awe11,R.Awe11 - River Awe - U/S of caravan park,river_awe,River Awe,U/S of caravan park,203301,729307,-5.190236,56.414883
+R.Awe2,"R.Awe2 - River Awe - Inverawe, D/S of footbridge, RH bank.",river_awe,River Awe,"Inverawe, D/S of footbridge, RH bank.",201820,731614,-5.215949,56.434957
+R.Awe8,R.Awe8 - River Awe - Middle mainstem. 100m D/S of road bridge,river_awe,River Awe,Middle mainstem. 100m D/S of road bridge,203009,729986,-5.195472,56.420852
+R.Awe9a,"R.Awe9a - River Awe - U/S old bridge of Awe, LB braid",river_awe,River Awe,"U/S old bridge of Awe, LB braid",203076,729773,-5.194228,56.418969
+R.Lochy155/Lochy site 1,R.Lochy155/Lochy site 1 - RIVER LOCHY - downstream from roadbridge - fished area downstream from the concrete foundations of the old fish trap,river_awe,RIVER LOCHY,downstream from roadbridge - fished area downstream from the concrete foundations of the old fish trap,219500,727600,-4.926866,56.406038
+R.Lochy156,R.Lochy156 - fished area 100m upstream of confluence - upstream from bad log jam,river_awe,,fished area 100m upstream of confluence - upstream from bad log jam,221000,727200,-4.902318,56.40302
+SEPA_469045,SEPA_469045 - Abhainn a Bhealaich - 15m u/s LB tributary (site 3),river_awe,Abhainn a Bhealaich,15m u/s LB tributary (site 3),196555,706325,-5.281651,56.20589
+SEPA_469047,SEPA_469047 - Abhainn a Bhealaich - 30m u/s mature island,river_awe,Abhainn a Bhealaich,30m u/s mature island,196929,705890,-5.275299,56.202148
+SEPA_469048,SEPA_469048 - Abhainn a Bhealaich - D/S left bank trib,river_awe,Abhainn a Bhealaich,D/S left bank trib,197653,704625,-5.262685,56.191109
+SEPA_469062,SEPA_469062 - Abhainn a Bhealaich,river_awe,Abhainn a Bhealaich,,195662,707606,-5.297009,56.216997
+SEPA_469063,SEPA_469063 - Abhainn a Bhealaich - D/S outfall,river_awe,Abhainn a Bhealaich,D/S outfall,195638,707644,-5.297424,56.217328
+Strae 1,Strae 1 - River Strae - Riffle 30m d/s of island,river_awe,River Strae,Riffle 30m d/s of island,214234,729022,-5.013087,56.416754
+Strae 2,Strae 2 - River Strae - First riffle u/s of keepers cottage,river_awe,River Strae,First riffle u/s of keepers cottage,214708,729484,-5.005742,56.421085
+Strae 3,Strae 3 - River Strae - riffle u/s of island braid,river_awe,River Strae,riffle u/s of island braid,215603,730692,-4.992105,56.432273
+Strae 5,Strae 5 - Eas Eunaich - Adjacent to car park area,river_awe,Eas Eunaich,Adjacent to car park area,214509,729493,-5.008969,56.421088
+Tolaghan 1,Tolaghan 1 - Downstream of campsite,river_awe,,Downstream of campsite,227200,741500,-4.811459,56.533645
+Tolaghan 2,Tolaghan 2 - Allt Tolaghan,river_awe,Allt Tolaghan,,226800,741200,-4.817755,56.530806
+Tolaghan 3,Tolaghan 3 - Allt Tolaghan - Mid/upper mainstem at forest gate.,river_awe,Allt Tolaghan,Mid/upper mainstem at forest gate.,225677,740759,-4.835693,56.526434
+Tolaghan 4,Tolaghan 4 - Allt Tolaghan - Upper mainstem - start just u/s of LB confluence - LH channel of island,river_awe,Allt Tolaghan,Upper mainstem - start just u/s of LB confluence - LH channel of island,224644,740054,-4.851988,56.519724
+W Tulla 1,W Tulla 1 - Water of Tulla - Tributary of Loch Tulla - 200m upstream from roadbridge on gravel area.,river_awe,Water of Tulla,Tributary of Loch Tulla - 200m upstream from roadbridge on gravel area.,231400,744400,-4.745138,56.561194
+W Tulla 10,"W Tulla 10 - Water of Tulla - LH fork, Allt Learg Mheuran. Mixed juv habitat, start at RB trib confluence.",river_awe,Water of Tulla,"LH fork, Allt Learg Mheuran. Mixed juv habitat, start at RB trib confluence.",239996,747969,-4.607634,56.596232
+W Tulla 11,"W Tulla 11 - Water of Tulla - LH fork, Allt Mheuran - large riffle pool area.",river_awe,Water of Tulla,"LH fork, Allt Mheuran - large riffle pool area.",239538,747597,-4.614854,56.592737
+W Tulla 12,"W Tulla 12 - Water of Tulla - Allt Learg Mheuran, u/s of falls.",river_awe,Water of Tulla,"Allt Learg Mheuran, u/s of falls.",239533,747229,-4.614707,56.589433
+W Tulla 2,W Tulla 2 - Water of Tulla - 100m upstream of roadbridge.,river_awe,Water of Tulla,100m upstream of roadbridge.,232100,744800,-4.734021,56.565034
+W Tulla 3,W Tulla 3 - Water of Tulla - Upstream of a small mature braid where track meets the river.,river_awe,Water of Tulla,Upstream of a small mature braid where track meets the river.,234800,745850,-4.690806,56.575415
+W Tulla 3a,"W Tulla 3a - Water of Tulla - Middle mainstem, 100m d/s from old bridge.",river_awe,Water of Tulla,"Middle mainstem, 100m d/s from old bridge.",233687,745271,-4.708529,56.569826
+W Tulla 4,W Tulla 4 - Water of Tulla,river_awe,Water of Tulla,,235800,747100,-4.67534,56.586983
+W Tulla 5,W Tulla 5 - Water of Tulla - Main channel of Island,river_awe,Water of Tulla,Main channel of Island,237100,747800,-4.654638,56.593719
+W Tulla 6,W Tulla 6 - Water of Tulla - RH bend 200m d/s of obstacle section.,river_awe,Water of Tulla,RH bend 200m d/s of obstacle section.,238637,748180,-4.629873,56.59766
+W Tulla 7,"W Tulla 7 - Water of Tulla - Start of long straight, u/s of large obstacle section.",river_awe,Water of Tulla,"Start of long straight, u/s of large obstacle section.",239089,748277,-4.62258,56.598686
+W Tulla 8,W Tulla 8 - Water of Tulla - d/s of railway bridge/ d/s of large pool.,river_awe,Water of Tulla,d/s of railway bridge/ d/s of large pool.,239671,748292,-4.613121,56.59902
+W Tulla 9,"W Tulla 9 - Water of Tulla - Upper mainstem, braided riffle section 50m u/s of rail bridge.",river_awe,Water of Tulla,"Upper mainstem, braided riffle section 50m u/s of rail bridge.",240081,748361,-4.606493,56.599779
+carraig gheal 17a,"carraig gheal 17a - Cam-Allt - small clearing amongst new CP, adj. to track laybe on LH side.",river_awe,Cam-Allt,"small clearing amongst new CP, adj. to track laybe on LH side.",200649,719351,-5.22559,56.324467
+Clunie/020,Clunie/020 - Clunie Water - 60m below Cairnwell bridge,river_dee_grampian,Clunie Water,60m below Cairnwell bridge,314517,780649,-3.4054,56.909249
+SEPA_501224,SEPA_501224 - Culter burn - c60m d/s from bridge. Fish from hedge below pipe up to rip rap on LHB,river_dee_grampian,Culter burn,c60m d/s from bridge. Fish from hedge below pipe up to rip rap on LHB,384016,800331,-2.265409,57.093678
+SEPA_511638,SEPA_511638 - Culter burn - By dirt bike track. Fish from dead tree on RB up under arched willow tree to top of riffle,river_dee_grampian,Culter burn,By dirt bike track. Fish from dead tree on RB up under arched willow tree to top of riffle,382895,801296,-2.283974,57.102306
+SEPA_459816,SEPA_459816 - River Devon - Glensherup Park (u/s bridge). Site starts 2m u/s bridge,river_devon,River Devon,Glensherup Park (u/s bridge). Site starts 2m u/s bridge,297237,705185,-3.659096,56.228069
+Argyll_0191,Argyll_0191 - Glenshellish Burn - 50 m upstream of farm track bridge. Pipe crossing in mid site.,river_eachaig,Glenshellish Burn,50 m upstream of farm track bridge. Pipe crossing in mid site.,211075,697270,-5.041504,56.130637
+Argyll_0229,Argyll_0229 - Allt nan Caorruinn - 300 m Upstream of forestry track stream crossing,river_eachaig,Allt nan Caorruinn,300 m Upstream of forestry track stream crossing,211086,692719,-5.038105,56.08981
+Bala01a,Bala01a - Balagown Burn - 50m d/s of track bridge,river_eachaig,Balagown Burn,50m d/s of track bridge,213662,681956,-4.989281,55.994252
+Bala02,Bala02 - Balagown Burn - 125m U/S of track bridge,river_eachaig,Balagown Burn,125m U/S of track bridge,213588,682048,-4.99053,55.995049
+Bala02a,Bala02a - Balagown Burn - At lower bedrock steps,river_eachaig,Balagown Burn,At lower bedrock steps,213441,682233,-4.993012,55.996651
+Bala03,Bala03 - Balagown Burn - U/s of bedrock steps,river_eachaig,Balagown Burn,U/s of bedrock steps,213179,682428,-4.997342,55.998299
+Bala04,"Bala04 - Balagown Burn - Upper mainstem, 30m d/s of fork",river_eachaig,Balagown Burn,"Upper mainstem, 30m d/s of fork",212704,682803,-5.005208,56.001478
+Bala05,Bala05 - Balagown Burn - Upper LH Trib.,river_eachaig,Balagown Burn,Upper LH Trib.,212554,682875,-5.00766,56.002066
+Bala06,Bala06 - Balagown Burn - Upper RH Trib. u/s of old wooden bridge,river_eachaig,Balagown Burn,Upper RH Trib. u/s of old wooden bridge,212635,682798,-5.00631,56.001407
+Coire Ealt site 1,"Coire Ealt site 1 - Coire Ealt - D/S of bend, at house",river_eachaig,Coire Ealt,"D/S of bend, at house",213572,695842,-5.000389,56.118806
+Coire Ealt site 2,"Coire Ealt site 2 - Coire Ealt - U/S footbridge to pool, d/s of road bridge",river_eachaig,Coire Ealt,"U/S footbridge to pool, d/s of road bridge",213616,695776,-4.999637,56.118231
+Coire Ealt site 3,Coire Ealt site 3 - Coire Ealt - 50m d/s of upper track crossing (intake),river_eachaig,Coire Ealt,50m d/s of upper track crossing (intake),214303,696034,-4.988783,56.120814
+Craigbrack site 1,Craigbrack site 1 - Craigbrack burn - 5m u/s of shore to first footbridge,river_eachaig,Craigbrack burn,5m u/s of shore to first footbridge,213698,695516,-4.998138,56.115931
+Craigbrack site 2,Craigbrack site 2 - Craigbrack burn - d/s of road culvert,river_eachaig,Craigbrack burn,d/s of road culvert,213721,695552,-4.997794,56.116263
+Craigbrack site 3,Craigbrack site 3 - Craigbrack burn - u/s of track crossing,river_eachaig,Craigbrack burn,u/s of track crossing,214393,695720,-4.987119,56.118032
+Curr 1,Curr 1 - River Curr - Downstream of Invernoaden road bridge,river_eachaig,River Curr,Downstream of Invernoaden road bridge,211900,697650,-5.028518,56.134372
+Curr 3,Curr 3 - River Curr - Downstream of road bridge below bedrock section,river_eachaig,River Curr,Downstream of road bridge below bedrock section,209800,699750,-5.063757,56.15238
+Curr 5,Curr 5 - River Curr - Upstream of track bridge. Cattlegrid to top of pool/glide.,river_eachaig,River Curr,Upstream of track bridge. Cattlegrid to top of pool/glide.,212000,701600,-5.029701,56.16985
+Curr 6,"Curr 6 - River Curr - Upper Succoth, upstream of cattle feeder to bedrock falls",river_eachaig,River Curr,"Upper Succoth, upstream of cattle feeder to bedrock falls",213100,702400,-5.012574,56.177461
+Eachaig1,"Eachaig1 - River Eachaig - D/S of footbridge, up to ford.",river_eachaig,River Eachaig,"D/S of footbridge, up to ford.",214256,684908,-4.981813,56.020969
+Eachaig2,Eachaig2 - River Eachaig - From pipe below footbridge to above bridge.,river_eachaig,River Eachaig,From pipe below footbridge to above bridge.,214259,685553,-4.982212,56.026758
+Glenshellish1,Glenshellish1 - Glenshellish Burn - 50m u/s of Allt Robuic confluence,river_eachaig,Glenshellish Burn,50m u/s of Allt Robuic confluence,210660,696541,-5.047653,56.123932
+Invernoaden Burn,Invernoaden Burn - Invernoaden Burn - 10m u/s of road bridge,river_eachaig,Invernoaden Burn,10m u/s of road bridge,211994,697852,-5.02715,56.136221
+Lit Each 3,"Lit Each 3 - Glen Lean, from birch tree on right bank to bend",river_eachaig,,"Glen Lean, from birch tree on right bank to bend",210660,681790,-5.037223,55.991587
+Massan 3,Massan 3 - 500m upstream of Garracher House. Downstream of bend where track meetsthe river,river_eachaig,,500m upstream of Garracher House. Downstream of bend where track meetsthe river,208900,688950,-5.070493,56.055127
+Masson 2,Masson 2 - Stonefield. Downstream of farm from ditch on LB to frnce post on RB,river_eachaig,,Stonefield. Downstream of farm from ditch on LB to frnce post on RB,212000,686450,-5.019035,56.033924
+Stron 1,Stron 1 - 5m upstream of main road A880 bridge,river_eachaig,,5m upstream of main road A880 bridge,219200,684450,-4.902295,56.01875
+Stron 2,Stron 2 - Downstream of lower field boundary,river_eachaig,,Downstream of lower field boundary,219100,684500,-4.903931,56.019161
+Stron 3,Stron 3 - 50m upstream of ruin on right bank from right hand bend,river_eachaig,,50m upstream of ruin on right bank from right hand bend,219000,684650,-4.905634,56.020469
+Stron 4,Stron 4 - Midway upstream in mainstem,river_eachaig,,Midway upstream in mainstem,217400,685100,-4.931574,56.0239
+Stron 5,"Stron 5 - Upper mainstem, upstream of tributary",river_eachaig,,"Upper mainstem, upstream of tributary",218100,685000,-4.92029,56.023269
+Stron 6,Stron 6 - Downstream of Allt Teanga a Bhealaich tributary stream,river_eachaig,,Downstream of Allt Teanga a Bhealaich tributary stream,217100,684950,-4.936278,56.02244
+Stron 7,Stron 7 - 100m upstream of confluence,river_eachaig,,100m upstream of confluence,217050,685050,-4.937148,56.023318
+Kendrum01,Kendrum01 - Kendrum Burn - Kendrum Burn - D/S of bridge.,river_earn,Kendrum Burn,Kendrum Burn - D/S of bridge.,258140,722115,-4.298326,56.369991
+Kendrum02,Kendrum02 - Kendrum Burn - Kendrum Burn - U/S of overhead powerline crossing,river_earn,Kendrum Burn,Kendrum Burn - U/S of overhead powerline crossing,257992,722115,-4.30072,56.369946
+Kendrum04,"Kendrum04 - Kendrum Burn - Kendrum Burn - U/S of waterfall, d/s corner.",river_earn,Kendrum Burn,"Kendrum Burn - U/S of waterfall, d/s corner.",257420,722592,-4.310232,56.374056
+Allt Cam Ghlinne 01,Allt Cam Ghlinne 01 - Allt Cam Ghlinne - Upstream of tree on right bank,river_etive,Allt Cam Ghlinne,Upstream of tree on right bank,224016,753710,-4.871462,56.642019
+Allt Ceitlein 01,Allt Ceitlein 01 - River Etive - Downstream of building,river_etive,River Etive,Downstream of building,214752,747757,-5.018036,56.585039
+Allt Charnan 01,Allt Charnan 01 - Allt Charnan - At bottom of field on right bank,river_etive,Allt Charnan,At bottom of field on right bank,214529,748211,-5.021986,56.589024
+Allt Fhaolain 01,Allt Fhaolain 01 - Allt Fhaolain - Right bank channel of braided section,river_etive,Allt Fhaolain,Right bank channel of braided section,215729,750565,-5.004152,56.610616
+Allt Gaoirean 01,Allt Gaoirean 01 - Allt nan Gaoirean - Site is located downstream of footbridge directly across field from old Schoolhouse building.,river_etive,Allt nan Gaoirean,Site is located downstream of footbridge directly across field from old Schoolhouse building.,214300,747452,-5.025165,56.582124
+Allt Gartain 01,Allt Gartain 01 - Allt Gartain - 60m downstream of road bridge,river_etive,Allt Gartain,60m downstream of road bridge,217100,751400,-4.982438,56.618644
+Allt Mheuran,Allt Mheuran - Allt Mheuran - Adjacent to fording point,river_etive,Allt Mheuran,Adjacent to fording point,213509,746115,-5.037061,56.569816
+Allt a Bhiorain 02,Allt a Bhiorain 02 - Allt a Bhiorain - 20 m downstream of road bridge,river_etive,Allt a Bhiorain,20 m downstream of road bridge,211359,745521,-5.071567,56.563628
+Dalach01,Dalach01 - Abhainn Dalach - RH & LH channel of first braid - lower mainstream,river_etive,Abhainn Dalach,RH & LH channel of first braid - lower mainstream,205795,738895,-5.15701,56.501923
+Dalach01a,Dalach01a - Abhainn Dalach - Riffle u/s of lower bedrock & swing bridge - u/s of bend pool,river_etive,Abhainn Dalach,Riffle u/s of lower bedrock & swing bridge - u/s of bend pool,205608,738962,-5.160093,56.502447
+Dalach02,"Dalach02 - Abhainn Dalach - middle mainstream, d/s of track",river_etive,Abhainn Dalach,"middle mainstream, d/s of track",205604,739189,-5.160327,56.504482
+Dalach03,Dalach03 - Abhainn Dalach,river_etive,Abhainn Dalach,,205149,739922,-5.168257,56.510868
+Dalach04,Dalach04 - Abhainn Dalach - Upper mainstream - 40m d/s of FC deer fence.,river_etive,Abhainn Dalach,Upper mainstream - 40m d/s of FC deer fence.,204800,740050,-5.174015,56.511872
+Dalach05,Dalach05 - Abhainn Dalach - Upper mainstream - RH braid u/s of old ruin.,river_etive,Abhainn Dalach,Upper mainstream - RH braid u/s of old ruin.,204461,740280,-5.179687,56.513794
+Easach01,Easach01 - Allt Easach,river_etive,Allt Easach,,207025,739387,-5.137424,56.506842
+Easach02,Easach02 - Allt Easach - Lower mainstream - u/s of lower bedrock section,river_etive,Allt Easach,Lower mainstream - u/s of lower bedrock section,206918,739376,-5.139151,56.5067
+Etive 01,"Etive 01 - River Etive - Lower Mainstream, RH braid riffle.",river_etive,River Etive,"Lower Mainstream, RH braid riffle.",212901,745744,-5.046674,56.566246
+Etive 02,Etive 02 - River Etive - Lower mainstream - RB riffle up to Allt nan Gouirean confluence.,river_etive,River Etive,Lower mainstream - RB riffle up to Allt nan Gouirean confluence.,214416,747396,-5.02324,56.581668
+Etive 03,Etive 03 - Allt nan Gaoirean - Opposite school house d/s of foot bridge.,river_etive,Allt nan Gaoirean,Opposite school house d/s of foot bridge.,214200,747500,-5.026825,56.582515
+Etive 04,"Etive 04 - River Etive - Middle mainstem, u/s of Allt Charnan, RB riffle",river_etive,River Etive,"Middle mainstem, u/s of Allt Charnan, RB riffle",214740,748036,-5.01843,56.587537
+Etive 05,Etive 05 - Allt Charnan - Next to bottom corner of field,river_etive,Allt Charnan,Next to bottom corner of field,214533,748214,-5.021924,56.589052
+Etive 06,Etive 06 - River Etive - Middle mainstem - on bend adjacent to RB confluence. RB riffle on bed where RB path joins river.,river_etive,River Etive,Middle mainstem - on bend adjacent to RB confluence. RB riffle on bed where RB path joins river.,215541,750001,-5.006808,56.605482
+Etive 07,Etive 07 - River Etive - Middle mainstem u/s of RB trib,river_etive,River Etive,Middle mainstem u/s of RB trib,216663,750906,-4.989199,56.614041
+Etive 34,Etive 34 - River Etive,river_etive,River Etive,,226200,755000,-4.836766,56.65441
+Etive 35,Etive 35,river_etive,,,228300,756000,-4.803223,56.664158
+Etive 36,Etive 36 - Alongside long straight on road  with a grazed bank and raised moraine step alongside,river_etive,,Alongside long straight on road  with a grazed bank and raised moraine step alongside,228100,755600,-4.806215,56.660496
+Etive 37,Etive 37 - 100 m upstream right fork from confluence by road leading to black Corries Lodge.,river_etive,,100 m upstream right fork from confluence by road leading to black Corries Lodge.,228000,755100,-4.80751,56.655972
+Etive 38,Etive 38,river_etive,,,225900,754400,-4.841248,56.648915
+Etive 40,Etive 40,river_etive,,,224200,754300,-4.868868,56.647382
+Etive 41,Etive 41 - 10m upstream from confluence with Coupall River on mainstem of River Etive.,river_etive,,10m upstream from confluence with Coupall River on mainstem of River Etive.,224500,754300,-4.863982,56.647495
+Liver 01,Liver 01 - Liver - d/s of ford,river_etive,Liver,d/s of ford,206412,735789,-5.144694,56.474315
+Liver 02,Liver 02 - Liver - Start at watergate at Bridge,river_etive,Liver,Start at watergate at Bridge,206487,735713,-5.143422,56.473664
+Liver 03,Liver 03 - Liver - Wooded gorge section - large RB boulder at u/s point,river_etive,Liver,Wooded gorge section - large RB boulder at u/s point,207248,735436,-5.130883,56.471491
+Liver 04,"Liver 04 - Liver - Start u/s of bedrock cliff, pool at LB trip confluence.",river_etive,Liver,"Start u/s of bedrock cliff, pool at LB trip confluence.",208315,735189,-5.113408,56.469711
+Liver 05,"Liver 05 - Liver - d/s of falls, start at LWD both banks up to LB trib confluence",river_etive,Liver,"d/s of falls, start at LWD both banks up to LB trib confluence",208898,735140,-5.103923,56.469508
+Liver 06,Liver 06 - Liver - 20m left hand fork,river_etive,Liver,20m left hand fork,209301,735128,-5.097383,56.469564
+R. Etive46,R. Etive46,river_etive,,,214500,748300,-5.022522,56.589811
+R. Etive64,R. Etive64 - 30m upstream from ford in riffle section.,river_etive,,30m upstream from ford in riffle section.,213500,746100,-5.037197,56.569678
+R.Etive39,R.Etive39,river_etive,,,222200,756200,-4.902752,56.663674
+R.Etive42,R.Etive42,river_etive,,,219600,750900,-4.941406,56.615127
+R.Etive44,R.Etive44,river_etive,,,216500,750900,-4.991847,56.613924
+R.EtiveAMS02,R.EtiveAMS02 - approximately 50m downstream of wooden bridge over the Glen Ceitlen Burn.,river_etive,,approximately 50m downstream of wooden bridge over the Glen Ceitlen Burn.,214700,747800,-5.018912,56.585404
+CARN01,CARN01 - Carnachy Burn - Upstream of road bridge next to trees.,river_naver,Carnachy Burn,Upstream of road bridge next to trees.,272132,951425,-4.191588,58.432367
+ALM2,ALM2 - Almond,river_tay,Almond,,288803,731461,-3.806179,56.462122
+BRE1,BRE1 - Brerechan Burn - Just u/s of bridge on the Moulin - Kirmichael road where the stream comes close to road and bends away from it.,river_tay,Brerechan Burn,Just u/s of bridge on the Moulin - Kirmichael road where the stream comes close to road and bends away from it.,300454,763355,-3.629479,56.751142
+ERR1,ERR1 - River Errochty,river_tay,River Errochty,,278070,763800,-3.995506,56.749818
+ERR3,ERR3 - River Errochty,river_tay,River Errochty,,276600,763700,-4.019479,56.748533
+FIL2,FIL2 - River Fillan - Kirkton Bridge. Start point is 3 metre u/s of pipe above bridge (left bank).,river_tay,River Fillan,Kirkton Bridge. Start point is 3 metre u/s of pipe above bridge (left bank).,235800,728100,-4.663352,56.416474
+GAR1a,GAR1a - River Garry - Suspension Bridge (edge of river),river_tay,River Garry,Suspension Bridge (edge of river),283883,765786,-3.901409,56.769134
+GBEG1,GBEG1 - Allt a Ghlinne Bhig,river_tay,Allt a Ghlinne Bhig,,311274,770445,-3.455073,56.817001
+Glamis1,"Glamis1 - Glamis Burn - Just below bridge at pinetum, Glamis Castle",river_tay,Glamis Burn,"Just below bridge at pinetum, Glamis Castle",338904,748234,-2.997256,56.621952
+KEI1,KEI1 - Keithick Burn - Site is ca 20 metres u/s of wee road bridge. Top end is site ends 16 m d/s of weir,river_tay,Keithick Burn,Site is ca 20 metres u/s of wee road bridge. Top end is site ends 16 m d/s of weir,319380,738560,-3.312331,56.532109
+KER1,"KER1 - Kerbet Burn - Just u/s of Douglastown, where track in field comes adjacent to bend in stream",river_tay,Kerbet Burn,"Just u/s of Douglastown, where track in field comes adjacent to bend in stream",341600,747000,-2.953049,56.611212
+LUN1,LUN1 - Lunan Water - Situated just below cattle drink at Millbank. Top end of site is 5 m d/s from field gate (river side of field),river_tay,Lunan Water,Situated just below cattle drink at Millbank. Top end of site is 5 m d/s from field gate (river side of field),318078,740050,-3.333963,56.545266
+LYO6,LYO6 - River Lyon,river_tay,River Lyon,,254800,745900,-4.365601,56.58248
+LYO8,LYO8 - River Lyon - Kenknock. By Ford. Site starts 2 m d/s of ford on left bank and follow the line of the river across,river_tay,River Lyon,Kenknock. By Ford. Site starts 2 m d/s of ford on left bank and follow the line of the river across,252486,743037,-4.401607,56.556059
+LYO9,"LYO9 - River Lyon - Stronuich Ford. Site is d/s of the dam by Stronuich Ford and starts 10 m d/s of backwater, across from big boulder on right bank",river_tay,River Lyon,"Stronuich Ford. Site is d/s of the dam by Stronuich Ford and starts 10 m d/s of backwater, across from big boulder on right bank",251554,742286,-4.416326,56.549025
+ORD4,ORD4 - Ordie Burn,river_tay,Ordie Burn,,307100,733550,-3.510116,56.484847
+SHO1a,SHO1a - Shochie Burn,river_tay,Shochie Burn,,306733,729725,-3.514704,56.450423
+SHO2,SHO2 - Shochie Burn,river_tay,Shochie Burn,,299960,733818,-3.626108,56.48579
+TUM2,TUM2 - Tummel - Dams downstream at Faskally & Clunie,river_tay,Tummel,Dams downstream at Faskally & Clunie,275468,759373,-4.035875,56.709385
+Tum1,Tum1 - Tummel - Clunie,river_tay,Tummel,Clunie,290543,760040,-3.790051,56.719153
+A105A,A105A - 50m downstream from B840 roadbridge,unknown,,50m downstream from B840 roadbridge,199500,713600,-5.239766,56.272396
+A141T2B,A141T2B - Upstream of roadbridge,unknown,,Upstream of roadbridge,208400,721200,-5.101795,56.344252
+A141T2C,A141T2C - Upstream of falls,unknown,,Upstream of falls,208300,721200,-5.103411,56.344211
+A90,A90 - Downstream of road bridge,unknown,,Downstream of road bridge,195800,708100,-5.295168,56.221487
+A90A,"A90A - At Durran, site is located immediately upstream from the roadbridge",unknown,,"At Durran, site is located immediately upstream from the roadbridge",195900,708100,-5.293558,56.22153
+A91A,A91A - site located downstream of road. site completed 10m from roadside.,unknown,,site located downstream of road. site completed 10m from roadside.,196300,708500,-5.287426,56.22529
+A92A,A92A - Downstream of road,unknown,,Downstream of road,196300,708600,-5.287503,56.226187
+A93C,A93C - Down and upstream of upper forestry track,unknown,,Down and upstream of upper forestry track,197100,708900,-5.274851,56.229219
+A94A,"A94A - at Eredine, stream flows alongside road upstream from the bridge.",unknown,,"at Eredine, stream flows alongside road upstream from the bridge.",196900,709500,-5.278532,56.234516
+A94B,A94B - Upstream of falls at end of forestry track,unknown,,Upstream of falls at end of forestry track,197300,709400,-5.272013,56.23379
+A94T1,A94T1 - upstream of road,unknown,,upstream of road,196800,709400,-5.280066,56.233576
+A95A,A95A - Downstream of B840 Road. Start at left hand bend.,unknown,,Downstream of B840 Road. Start at left hand bend.,197200,709900,-5.274007,56.238232
+A95B,A95B - Upstream of B840 road,unknown,,Upstream of B840 road,197200,709750,-5.273892,56.236886
+A95C,A95C - Downstream of lower forestry track,unknown,,Downstream of lower forestry track,197500,709800,-5.269098,56.237463
+A95D,A95D - Downstream of upper forestry track,unknown,,Downstream of upper forestry track,197700,709700,-5.265801,56.236651
+A96T2A,A96T2A - Kames River trib. Upstream of fording point to flight pond.,unknown,,Kames River trib. Upstream of fording point to flight pond.,198100,710600,-5.260045,56.244894
+A96T3A,A96T3A - downstream of forestry track/turning circle culvert,unknown,,downstream of forestry track/turning circle culvert,198200,710300,-5.258205,56.242245
+AD1,AD1 - 100m upstream of road bridge - braid to ford,unknown,,100m upstream of road bridge - braid to ford,179100,717300,-5.571644,56.296522
+AD2,AD2 - Upstream of waterfall,unknown,,Upstream of waterfall,179444,717473,-5.566241,56.298233
+ANC1,ANC1 - between 2 bedrock steps,unknown,,between 2 bedrock steps,183305,667220,-5.463266,55.849346
+ANC2,ANC2 - Downstream of bend,unknown,,Downstream of bend,182900,667505,-5.469951,55.85172
+ANC3,ANC3 - Upstream of tributary on right bank,unknown,,Upstream of tributary on right bank,182970,667995,-5.469227,55.856146
+ANC4,ANC4 - Upstream of bedrock falls beyond egde of clearfell,unknown,,Upstream of bedrock falls beyond egde of clearfell,183205,668840,-5.466155,55.86383
+ANC5,"ANC5 - Downstream of watertgate, upstream of fallen tree",unknown,,"Downstream of watertgate, upstream of fallen tree",182054,669610,-5.48513,55.870217
+AROS 3,AROS 3 - In riffle between two pools,unknown,,In riffle between two pools,152800,745400,-6.022105,56.535385
+AROS 4,"AROS 4 - Seat Pool, From Willow on RB to large rock on LB, d/s of tributary confluence",unknown,,"Seat Pool, From Willow on RB to large rock on LB, d/s of tributary confluence",153900,745500,-6.004358,56.536858
+AROS 5,"AROS 5 - Tributary of R. Aros, Between 2 bends D/S of forestry track",unknown,,"Tributary of R. Aros, Between 2 bends D/S of forestry track",153800,745600,-6.006075,56.537702
+AROS 6,AROS 6 - First riffle u/s junction,unknown,,First riffle u/s junction,152300,745600,-6.030405,56.536914
+AROS 7,"AROS 7 - Upper river, d/s of 2nd bend u/s of confluence",unknown,,"Upper river, d/s of 2nd bend u/s of confluence",152000,745600,-6.035271,56.536756
+AROS 8,"AROS 8 - Trib of Loch Frisa, u/s of dead tree",unknown,,"Trib of Loch Frisa, u/s of dead tree",147900,750400,-6.106428,56.577588
+Ardyne 01,Ardyne 01 - 30m upstream of bridge at Killelan Farm,unknown,,30m upstream of bridge at Killelan Farm,210600,669400,-5.029487,55.880398
+Ardyne 02,Ardyne 02 - staerted fishing 50m upstream of confluence with the mainstem of Ardyne.,unknown,,staerted fishing 50m upstream of confluence with the mainstem of Ardyne.,210700,669600,-5.02803,55.882232
+Ardyne 03,Ardyne 03 - started fishing 10m upstream from confluence with main river.,unknown,,started fishing 10m upstream from confluence with main river.,210600,670500,-5.030256,55.890268
+Ardyne 04,Ardyne 04 - 100m downstrea from broken concrete bridge,unknown,,100m downstrea from broken concrete bridge,211800,673400,-5.013116,55.916758
+Ardyne 05,Ardyne 05 - started fishing 10m upstream of confluence with main river.,unknown,,started fishing 10m upstream of confluence with main river.,211600,673000,-5.016032,55.913091
+Ardyne 06,Ardyne 06 - 50m upstream of joining of Socach and Black Craig burn,unknown,,50m upstream of joining of Socach and Black Craig burn,212800,674800,-4.998109,55.92971
+Ardyne 07,Ardyne 07 - 50m upstrream of confluence with the Socach Burn,unknown,,50m upstrream of confluence with the Socach Burn,212500,674800,-5.002904,55.929593
+Aros 1,Aros 1 - Downstream of stepping stones in left hand channel above island,unknown,,Downstream of stepping stones in left hand channel above island,155200,745100,-5.982895,56.533952
+Aros 2,"Aros 2 - Jucntion burn, downstream of woodland",unknown,,"Jucntion burn, downstream of woodland",152600,745300,-6.025253,56.534384
+Avich 1,Avich 1 - 100m upstream from Loch Avich.,unknown,,100m upstream from Loch Avich.,195400,715400,-5.307255,56.286792
+Avich 2,Avich 2 - 5m upstream of roadbridge - site ends at pipe entering on right bank.,unknown,,5m upstream of roadbridge - site ends at pipe entering on right bank.,194600,715400,-5.320156,56.286446
+Avich 3,Avich 3 - 100m above Loch Avich,unknown,,100m above Loch Avich,193300,714800,-5.340649,56.2805
+Avich 4,Avich 4 - - tributary of Loch Awe - 0m upstream of Loch Avich,unknown,,- tributary of Loch Awe - 0m upstream of Loch Avich,193200,714000,-5.341635,56.273282
+Avich 5,Avich 5 - 100m upstream of Loch Avich,unknown,,100m upstream of Loch Avich,192200,714600,-5.358227,56.278226
+Awe 141A,Awe 141A - downstream from bridge at Cladich. Site located 10m upstream of confluence with Archan River.,unknown,,downstream from bridge at Cladich. Site located 10m upstream of confluence with Archan River.,209600,722400,-5.08328,56.355501
+Awe 141B,Awe 141B - Upstream of falls. Downstream of main A819 road bridge,unknown,,Upstream of falls. Downstream of main A819 road bridge,209900,721900,-5.07807,56.351136
+Awe 42B,Awe 42B,unknown,,,195600,711400,-5.300935,56.251001
+Awe 42D,Awe 42D,unknown,,,195300,711700,-5.306001,56.253562
+Awe 45,Awe 45,unknown,,,195000,709200,-5.308898,56.23101
+Awe 49A,Awe 49A,unknown,,,192100,706800,-5.353712,56.208225
+Awe 49B,Awe 49B,unknown,,,192200,707100,-5.352338,56.210959
+Awe 54A,Awe 54A,unknown,,,190500,705900,-5.378749,56.199452
+Awe 55C,Awe 55C,unknown,,,189400,706300,-5.396764,56.202554
+Awe 55D,Awe 55D,unknown,,,189600,707200,-5.39426,56.210714
+Awe 56,Awe 56,unknown,,,189200,705300,-5.399187,56.193497
+Awe 59A,Awe 59A,unknown,,,187700,704600,-5.422756,56.186552
+Awe 59B,Awe 59B,unknown,,,187700,705200,-5.423235,56.191933
+Awe 59C,Awe 59C,unknown,,,187900,704800,-5.419699,56.188435
+Awe 60,Awe 60,unknown,,,187500,704700,-5.426052,56.18736
+Awe 62,Awe 62 - directly downstream of road bridge at Ford. Site started 10m below bridge.,unknown,,directly downstream of road bridge at Ford. Site started 10m below bridge.,186900,703700,-5.4349,56.178124
+Awe 63A,Awe 63A,unknown,,,186800,702000,-5.435144,56.162833
+Awe 63B,Awe 63B,unknown,,,187100,702100,-5.430403,56.163864
+Awe 63C,Awe 63C,unknown,,,187500,701100,-5.423175,56.155074
+Awe 63D,Awe 63D - Barmolloch Farm - site located upstream of fording point in cottage garden.,unknown,,Barmolloch Farm - site located upstream of fording point in cottage garden.,187900,699700,-5.415632,56.142696
+Awe 63E,Awe 63E,unknown,,,188000,699700,-5.414026,56.142741
+Awe 64,Awe 64,unknown,,,187900,703800,-5.418901,56.179467
+Awe 65,Awe 65,unknown,,,188100,703800,-5.415685,56.179556
+Awe 74A,"Awe 74A - Site located 30m upstream from lochshore, started fishing at top of large corner pool.",unknown,,"Site located 30m upstream from lochshore, started fishing at top of large corner pool.",190900,704800,-5.371447,56.189762
+Awe 74B,Awe 74B,unknown,,,191000,704800,-5.369839,56.189806
+Awe 77,Awe 77 - First stream crossed by road to the NE of Rubha Cuilin Point. Site fished 5m upstream from lochshore,unknown,,First stream crossed by road to the NE of Rubha Cuilin Point. Site fished 5m upstream from lochshore,192300,705500,-5.349476,56.196653
+Awe 78,Awe 78 - site fished started 5m up from lochshore. Footbridge across the site approximately 3/4 up the site,unknown,,site fished started 5m up from lochshore. Footbridge across the site approximately 3/4 up the site,192400,705700,-5.348024,56.19849
+Awe 79,Awe 79 - downstream from road on small burn - qualitative fishing close to shore.,unknown,,downstream from road on small burn - qualitative fishing close to shore.,192800,705900,-5.341744,56.200458
+Awe 84,"Awe 84 - downstream of roadbridge, started fishing 15m down. Stopped fishing 5m upstream of confluence with burn on right.",unknown,,"downstream of roadbridge, started fishing 15m down. Stopped fishing 5m upstream of confluence with burn on right.",194100,706800,-5.321526,56.209095
+Awe 86,Awe 86 - started fishing 15m up from the loch shore,unknown,,started fishing 15m up from the loch shore,194700,707300,-5.312257,56.213838
+Awe 88,Awe 88,unknown,,,195400,707600,-5.301221,56.216831
+Awe 89A1,Awe 89A1 - Main river - upstream of confluence with Allt Doir nan Sobhrachan,unknown,,Main river - upstream of confluence with Allt Doir nan Sobhrachan,195600,707700,-5.298079,56.217814
+Awe 89B2,"Awe 89B2 - Annual Monitoring site - started at first gate in fence,  20m upstream of bridge.",unknown,,"Annual Monitoring site - started at first gate in fence,  20m upstream of bridge.",195500,707500,-5.299535,56.215977
+Awe 89B3,Awe 89B3 - From ford to point where wall meets burn,unknown,,From ford to point where wall meets burn,195500,707400,-5.299458,56.21508
+Awe 89B4,"Awe 89B4 - Tributary of Braevallich River. Upstream of fording point, below dam / water in-take",unknown,,"Tributary of Braevallich River. Upstream of fording point, below dam / water in-take",195500,707300,-5.29938,56.214183
+Awe 89B5,Awe 89B5 - starting 30m upstream of dam,unknown,,starting 30m upstream of dam,195450,707200,-5.300108,56.213265
+Awe 89B5A,Awe 89B5A,unknown,,,195500,707200,-5.299303,56.213286
+Awe 89B5B,Awe 89B5B - Tributary of Braevallich River -  mainstem upstream of tributary confluence . Site starts from old water gate,unknown,,Tributary of Braevallich River -  mainstem upstream of tributary confluence . Site starts from old water gate,195550,707150,-5.29846,56.212859
+Awe 89B6,Awe 89B6 - Main channel. 150m Upstream of confluence with tributary,unknown,,Main channel. 150m Upstream of confluence with tributary,195550,707050,-5.298383,56.211962
+Awe 89B7,Awe 89B7 - Upstream of old watergate below impassable falls.,unknown,,Upstream of old watergate below impassable falls.,195600,707030,-5.297563,56.211804
+Awe 89B8,Awe 89B8 - 100m upstream of impassable falls.,unknown,,100m upstream of impassable falls.,195600,706950,-5.297501,56.211087
+Awe 89B9,Awe 89B9 - Upstream of falls on main channel. Fished up to foprestry section.,unknown,,Upstream of falls on main channel. Fished up to foprestry section.,195500,706850,-5.299033,56.210147
+Awe 89BA1,Awe 89BA1 - Tributary of main Sobrachan channel. 15m upstream of confluence.,unknown,,Tributary of main Sobrachan channel. 15m upstream of confluence.,195520,707200,-5.298981,56.213295
+Awe 89BA2,Awe 89BA2 - Tributary of main channel. Site upstream of track bridge within fenced garden.,unknown,,Tributary of main channel. Site upstream of track bridge within fenced garden.,195650,707050,-5.296773,56.212005
+Awe 89BA2A,Awe 89BA2A - Tributary  (North Fork) -downstream of Track bridge,unknown,,Tributary  (North Fork) -downstream of Track bridge,195600,707100,-5.297617,56.212432
+Awe 89BA5,Awe 89BA5,unknown,,,195800,706400,-5.293859,56.206239
+Awe 89C2,Awe 89C2 - Un-named tributary flowing into Braevallich River opposite Allt Doire nan Sobhrachan.,unknown,,Un-named tributary flowing into Braevallich River opposite Allt Doire nan Sobhrachan.,195800,707600,-5.294783,56.217003
+Awe 89T2A,"Awe 89T2A - Upstream of watergate, below fish trap.",unknown,,"Upstream of watergate, below fish trap.",195600,707600,-5.298002,56.216917
+Awe 90B,Awe 90B - Upstream of waterfall and footbridge.,unknown,,Upstream of waterfall and footbridge.,196100,707800,-5.290107,56.218925
+Awe 92B,Awe 92B - Tributary of Loch Awe between Durran and Eredine. Site upstream of B840 road.,unknown,,Tributary of Loch Awe between Durran and Eredine. Site upstream of B840 road.,196450,708650,-5.285126,56.226699
+Awe88B,Awe88B - Upstream of track culvert,unknown,,Upstream of track culvert,195300,707500,-5.302754,56.215891
+Awe93A,Awe93A - Downstream of road,unknown,,Downstream of road,196500,708950,-5.284551,56.229412
+BA 2,"BA 2 - Upstream of island, pool/glide",unknown,,"Upstream of island, pool/glide",154300,740200,-5.992866,56.489568
+BA1,BA1 - u/s of outflow from lochan,unknown,,u/s of outflow from lochan,154100,740800,-5.996672,56.494841
+BA10,BA10 - Upstream of Gortenbuie,unknown,,Upstream of Gortenbuie,159600,734300,-5.901564,56.439421
+BA3,BA3 - Downstream of fish farm bend. Upstream of overhung bow to riffle.,unknown,,Downstream of fish farm bend. Upstream of overhung bow to riffle.,154200,739600,-5.99392,56.484139
+BA4,BA4 - Upper mainstem downstream of loch. Left bank channel of island.,unknown,,Upper mainstem downstream of loch. Left bank channel of island.,154900,738900,-5.981923,56.47823
+BA5,BA5 - Lower mainstem,unknown,,Lower mainstem,157200,736400,-5.942346,56.457014
+BA6,"BA6 - Tributary, from rowan tree at old footbridge upstream to pool",unknown,,"Tributary, from rowan tree at old footbridge upstream to pool",157000,736500,-5.945677,56.457807
+BA7,BA7 - Lower mainstem adjacent to track,unknown,,Lower mainstem adjacent to track,159100,735400,-5.910668,56.449025
+BA8,BA8 - Downstream of mainstem fork,unknown,,Downstream of mainstem fork,159600,734700,-5.901932,56.443006
+BA9,BA9 - Opposite old sheilings,unknown,,Opposite old sheilings,159800,734600,-5.898603,56.442212
+BEL1,BEL1 - Upper mainstem. Upstream of fording point.,unknown,,Upper mainstem. Upstream of fording point.,147900,747900,-6.103998,56.555186
+BEL2,BEL2 - 30m upstream of confluence with the River Bellart,unknown,,30m upstream of confluence with the River Bellart,148500,745500,-6.091938,56.534001
+BEL3,BEL3 - Upstream of sheep ford to tree on right bank,unknown,,Upstream of sheep ford to tree on right bank,148400,745400,-6.093462,56.533051
+BEL4,BEL4 - Upstream of road bridge up to black & white marker pole beside road,unknown,,Upstream of road bridge up to black & white marker pole beside road,147800,746600,-6.104357,56.543483
+BEL5,BEL5 - Achnacraig. Downstream of gate. Second riffle & run sequence downstream.,unknown,,Achnacraig. Downstream of gate. Second riffle & run sequence downstream.,147100,747000,-6.116101,56.546691
+BEL6,BEL6 - Upstream of confluence at watergate to footbridge,unknown,,Upstream of confluence at watergate to footbridge,143000,751800,-6.187363,56.587475
+BEL7,BEL7 - Upstream from left hand channel of island to riffle at fording point,unknown,,Upstream from left hand channel of island to riffle at fording point,143800,748700,-6.171308,56.560136
+BEL8,BEL8 - Upstream of tree on right bank to tributary confluence (site 7),unknown,,Upstream of tree on right bank to tributary confluence (site 7),143900,748900,-6.169883,56.561983
+BEL9,BEL9 - Mainstem. Alongside willows on right bank,unknown,,Mainstem. Alongside willows on right bank,144200,749000,-6.165113,56.563042
+BUN1,"BUN1 - Downstream of track bridge, from corner pool, upstream to power line",unknown,,"Downstream of track bridge, from corner pool, upstream to power line",141200,720400,-6.185494,56.305146
+BUN2,BUN2 - Upstream of first bend downstream of forestry  track,unknown,,Upstream of first bend downstream of forestry  track,141700,720700,-6.177728,56.308107
+BUN3,BUN3 - Upstream of farm track,unknown,,Upstream of farm track,139900,720400,-6.206446,56.304435
+BUN4,BUN4 - Upper river downstream of Loch. Upstream of fence line to track bridge,unknown,,Upper river downstream of Loch. Upstream of fence line to track bridge,139700,720900,-6.210163,56.308805
+BUN5,"BUN5 - Lower river, 100m upstream of road bridge at metal fence stansion",unknown,,"Lower river, 100m upstream of road bridge at metal fence stansion",138600,721700,-6.228687,56.315368
+Balg1,Balg1 - 20m upstream of iron bridge,unknown,,20m upstream of iron bridge,216848,876203,-5.078319,57.738076
+Balg2,Balg2 - Upstream of braided section,unknown,,Upstream of braided section,216458,876627,-5.085184,57.74172
+Barbreck 6,Barbreck 6 - Upstream of fence line,unknown,,Upstream of fence line,184764,708469,-5.47311,56.219932
+Barr 10,Barr 10 - Allt Mor at Arinanuan - willow tree to ford,unknown,,Allt Mor at Arinanuan - willow tree to ford,173312,639015,-5.599188,55.591833
+Barr 4b,Barr 4b - Allt a Mhuillin - upstream of new culvert,unknown,,Allt a Mhuillin - upstream of new culvert,169452,637298,-5.658875,55.574625
+Barr 7,Barr 7 - Tributary stream at Dun,unknown,,Tributary stream at Dun,170424,637702,-5.643826,55.578707
+Barr 8,Barr 8 - Mainstem 30m downstream of field gate at Arnicle,unknown,,Mainstem 30m downstream of field gate at Arnicle,171235,638165,-5.631372,55.58324
+Barr 9,Barr 9 - Allt nan Dearc - upstream of watergate at Arinanuan,unknown,,Allt nan Dearc - upstream of watergate at Arinanuan,173170,639050,-5.601465,55.592081
+CL01,CL01 - Tidal zone (low tide) in bottom field opposite fallen tree,unknown,,Tidal zone (low tide) in bottom field opposite fallen tree,187200,656300,-5.39263,55.753137
+CL02,CL02 - 50m above road bridge on B842,unknown,,50m above road bridge on B842,186900,656700,-5.397714,55.756593
+CL03,CL03 - In field opposite Auchavae Farm house directly upstream of bend in river,unknown,,In field opposite Auchavae Farm house directly upstream of bend in river,186600,657500,-5.403111,55.763636
+CL04,CL04 - Bruiland - Upstream of swing bridge up to tributary junction,unknown,,Bruiland - Upstream of swing bridge up to tributary junction,186500,658000,-5.405093,55.768076
+CL10,CL10 - Upstream of junction with Loch Cruinn outlat burn,unknown,,Upstream of junction with Loch Cruinn outlat burn,184400,658800,-5.439135,55.77432
+CL11,CL11 - Mid-way between junctions of Larachmor Burn and Loch Cruinn outflow burn,unknown,,Mid-way between junctions of Larachmor Burn and Loch Cruinn outflow burn,184600,658600,-5.435795,55.772616
+COL1,"COL1 - Upper river, upstream of bridge apron",unknown,,"Upper river, upstream of bridge apron",160500,729900,-5.882975,56.40044
+COL2,COL2 - Mainstem at Craig. In front of old cottage between two old fence posts,unknown,,Mainstem at Craig. In front of old cottage between two old fence posts,158500,729600,-5.915026,56.396733
+COL3,COL3 - Opposite cottage adjacent to forestry fence,unknown,,Opposite cottage adjacent to forestry fence,158400,729400,-5.916458,56.394889
+COL4,COL4 - Downstream of falls section. Downstream of island.,unknown,,Downstream of falls section. Downstream of island.,157500,730000,-5.931558,56.399806
+COL5,COL5 - 100m downstream of bridge up to forestry drain on left bank,unknown,,100m downstream of bridge up to forestry drain on left bank,156400,730600,-5.949894,56.404618
+COL6,COL6 - Mainstem. 40m upstream of Island. ?From path up to drainage channel.,unknown,,Mainstem. 40m upstream of Island. ?From path up to drainage channel.,156600,730400,-5.946475,56.402929
+COL7,"COL7 - Mainstem at Uluvalt. Riffle, run & glide downstream of pool. Middle of point bar to large bolder in midstream",unknown,,"Mainstem at Uluvalt. Riffle, run & glide downstream of pool. Middle of point bar to large bolder in midstream",154900,729700,-5.973299,56.395776
+COL8,COL8 - Upstream of road bridge at Lub Fhinn.,unknown,,Upstream of road bridge at Lub Fhinn.,154400,729300,-5.981004,56.391932
+Carr 1,"Carr 1 - Mainstem, 50m downstream of road bridge",unknown,,"Mainstem, 50m downstream of road bridge",179890,637600,-5.493885,55.58216
+Carr 10,Carr 10 - Allt a Chaoruinn. Upstream of confluence.,unknown,,Allt a Chaoruinn. Upstream of confluence.,178848,642562,-5.514364,55.626189
+Carr 11,Carr 11 - Allt Clach-ghuail. Upstream of road bridge to falls,unknown,,Allt Clach-ghuail. Upstream of road bridge to falls,178898,643000,-5.513923,55.63014
+Carr 12,Carr 12 - Mainstem. Downstream of forestry brige above Auchenbreck,unknown,,Mainstem. Downstream of forestry brige above Auchenbreck,178386,644342,-5.523121,55.641943
+Carr 13,Carr 13 - Mainstem adjacent to forestry road from triangular rock.,unknown,,Mainstem adjacent to forestry road from triangular rock.,177591,645511,-5.536673,55.652063
+Carr 5,Carr 5 - Barnfield Burn,unknown,,Barnfield Burn,179174,639193,-5.506496,55.596123
+Carr 6,"Carr 6 - Rhonadale Burn, adjacent to forestry track",unknown,,"Rhonadale Burn, adjacent to forestry track",178263,638821,-5.520626,55.592373
+Carr 7,Carr 7 - Mainstem downstream of kilmicheal Bridge. Fished run & riffle on right bank for 5 mins.,unknown,,Mainstem downstream of kilmicheal Bridge. Fished run & riffle on right bank for 5 mins.,179057,640707,-5.509563,55.609648
+Carr 8,Carr 8 - Abhainn Bheag. Upstream of ford on right hand bend.,unknown,,Abhainn Bheag. Upstream of ford on right hand bend.,178819,640690,-5.51332,55.609387
+Carr 9a,Carr 9a - Mainstem downstream of cemetery. Fished from top of Island on left hand bank for 5 mins.,unknown,,Mainstem downstream of cemetery. Fished from top of Island on left hand bank for 5 mins.,179342,641677,-5.505824,55.618477
+Carr 9b,Carr 9b - Cemetery Burn,unknown,,Cemetery Burn,179358,641697,-5.505587,55.618663
+Carr2a,Carr2a - Sawmill Burn Lower,unknown,,Sawmill Burn Lower,180238,637871,-5.48859,55.584748
+Carr2b,Carr2b - Sawmill Burn upper,unknown,,Sawmill Burn upper,180200,638030,-5.489319,55.586157
+Carr3,Carr3 - Mainstem at Tosh's Park. Downstream of Riht bend below electricity pylon. Fished top riffle for 5 mins.,unknown,,Mainstem at Tosh's Park. Downstream of Riht bend below electricity pylon. Fished top riffle for 5 mins.,179409,637973,-5.501798,55.585288
+Carr4,"Carr4 - Mainstem, 50m upstream of power sub-station. Fished inside of Left hand bend, 20m upstream of power line to pool for 5 mins.",unknown,,"Mainstem, 50m upstream of power sub-station. Fished inside of Left hand bend, 20m upstream of power line to pool for 5 mins.",179233,638612,-5.505097,55.590939
+Clach 1,Clach 1 - Smolt Farm,unknown,,Smolt Farm,168750,640350,-5.672543,55.60166
+Clachaig 1,Clachaig 1 - Under road bridge to waterfall,unknown,,Under road bridge to waterfall,168000,640250,-5.684337,55.600406
+Clachaig 2,Clachaig 2 - High Clachaig,unknown,,High Clachaig,169850,641000,-5.655664,55.608009
+Clachaig 3,Clachaig 3 - Upstream of fence-line at high Clachaig,unknown,,Upstream of fence-line at high Clachaig,169900,664100,-5.674288,55.815164
+Clachan 1,Clachan 1 - Lower mainstem. Upstream of bend at stone wall,unknown,,Lower mainstem. Upstream of bend at stone wall,175724,656186,-5.575022,55.746935
+Clachan 4,Clachan 4 - Upstream from garden on LB,unknown,,Upstream from garden on LB,176385,656035,-5.56439,55.745886
+Clachan 6,Clachan 6 - Balinakil,unknown,,Balinakil,177382,656299,-5.548754,55.748713
+Claon 1,Claon 1 - 50m upstream of road bridge,unknown,,50m upstream of road bridge,187007,656608,-5.39594,55.755815
+Claon 2,Claon 2 - Mainstem at Auchavae - upstream of bridge,unknown,,Mainstem at Auchavae - upstream of bridge,186666,657418,-5.401997,55.76293
+Claon 3,Claon 3 - Bruiland - 20m upstream of confluence with tributary,unknown,,Bruiland - 20m upstream of confluence with tributary,186798,657998,-5.40035,55.76819
+Claon 4,Claon 4 - Searmonaiche - below bridge,unknown,,Searmonaiche - below bridge,185900,658200,-5.414796,55.769605
+Claon 6,Claon 6 - Below junction with Larochmor Burn,unknown,,Below junction with Larochmor Burn,185400,658300,-5.42283,55.77028
+Conie 6,Conie 6 - tributary at Kilervan,unknown,,tributary at Kilervan,169321,612134,-5.640075,55.348912
+Conieglen9,Conieglen9 - Homeston,unknown,,Homeston,167677,615385,-5.668645,55.37729
+Connie 7,Connie 7 - DS road bridge,unknown,,DS road bridge,168857,613788,-5.648742,55.363526
+Crarae 1,Crarae 1 - Downstream of main road bridge.,unknown,,Downstream of main road bridge.,198800,697300,-5.238694,56.12589
+Creran 2,Creran 2 - Mainstem. Downstream of first riffle below new Glen Ure track bridge.,unknown,,Mainstem. Downstream of first riffle below new Glen Ure track bridge.,204100,748550,-5.191788,56.587826
+Creran 3,Creran 3 - Coilleveanach. Downstream of road bridge.,unknown,,Coilleveanach. Downstream of road bridge.,203000,748350,-5.209517,56.585571
+Creran 4,Creran 4 - Mainstem of river. Downstream of Salachial (Island Pool).,unknown,,Mainstem of river. Downstream of Salachial (Island Pool).,205500,750900,-5.170796,56.609488
+Creran 5,Creran 5 - mainstem of river downstream of forestry bridge and old fording point,unknown,,mainstem of river downstream of forestry bridge and old fording point,207100,751400,-5.145143,56.614634
+Creran 6,Creran 6 - Upstream of Ford below forestry bridge,unknown,,Upstream of Ford below forestry bridge,206650,751600,-5.152614,56.616243
+Creran 8,Creran 8 - Downstream of Fording point,unknown,,Downstream of Fording point,204900,747900,-5.178293,56.582329
+Douglas 1,Douglas 1 - Mainstem - Down and upstream of track bridge,unknown,,Mainstem - Down and upstream of track bridge,207150,705300,-5.110379,56.201106
+Douglas 2,Douglas 2 - Main River. Downstream of fording point at end of forestry track.,unknown,,Main River. Downstream of fording point at end of forestry track.,206500,704800,-5.120475,56.196356
+Douglas 3,Douglas 3 - Right bank channel of Island downstream of the A83 Road,unknown,,Right bank channel of Island downstream of the A83 Road,205800,704800,-5.131738,56.196071
+Douglas 4,Douglas 4 - Upstream of track bridge at confluence.,unknown,,Upstream of track bridge at confluence.,205600,704700,-5.134883,56.195093
+Douglas 5,Douglas 5 - 50m downstream of salmon ladder,unknown,,50m downstream of salmon ladder,205400,705200,-5.138468,56.199497
+Douglas 6,Douglas 6 - main river at confluence with Allt Fearna (site 7),unknown,,main river at confluence with Allt Fearna (site 7),204300,707300,-5.157719,56.217884
+Douglas 7,Douglas 7 - mainstem,unknown,,mainstem,203850,707650,-5.165223,56.220839
+Douglas 8,Douglas 8 - Tributary Stream,unknown,,Tributary Stream,204200,707200,-5.159255,56.216946
+Duich 2,Duich 2 - 150m downstream of bridge in riffle & glide section.,unknown,,150m downstream of bridge in riffle & glide section.,131610,654600,-6.274332,55.710297
+Duich 3,Duich 3 - Directly downstream of A846 road bridge. Fished up to bridge apron.,unknown,,Directly downstream of A846 road bridge. Fished up to bridge apron.,131800,654650,-6.271366,55.71085
+Duich 4,Duich 4 - 10m upstream of A846 road bridge. Site started at metal pipe crossing watercourse,unknown,,10m upstream of A846 road bridge. Site started at metal pipe crossing watercourse,131850,654650,-6.270572,55.710878
+Duich 5,Duich 5 - 120m upstream of A846 road bridge. Riffle & glide downstream of left hand bend.,unknown,,120m upstream of A846 road bridge. Riffle & glide downstream of left hand bend.,131950,654700,-6.269034,55.711381
+ENC1,ENC1 - Upstream of track bridge,unknown,,Upstream of track bridge,179450,716550,-5.565373,56.28996
+ENC2,ENC2 - 300m upstream of bridge - large tree on right bank,unknown,,300m upstream of bridge - large tree on right bank,179600,716450,-5.562871,56.289133
+Esrag 1,Esrag 1 - Lower mainstem upstream of new bridge,unknown,,Lower mainstem upstream of new bridge,199060,735063,-5.263287,56.464725
+Esrag 2,Esrag 2 - Upstream of mature Island,unknown,,Upstream of mature Island,198931,735281,-5.265545,56.466626
+Esrag 3,Esrag 3 - Upstream of road bridge in right side of braided channel,unknown,,Upstream of road bridge in right side of braided channel,198743,735733,-5.26894,56.4706
+Esrag 4,Esrag 4 - At head of mature Island,unknown,,At head of mature Island,198691,735957,-5.269955,56.472587
+Esrag 7,Esrag 7 - Water intake site upstream of left hand bend,unknown,,Water intake site upstream of left hand bend,198654,736587,-5.271041,56.478221
+Euch 1,Euch 1 - Lower mainstem. 200m downstream of Rarae Bridge.,unknown,,Lower mainstem. 200m downstream of Rarae Bridge.,182750,721300,-5.516079,56.334077
+Euch 2,Euch 2 - Upstream of Keepers Cottage garden fence,unknown,,Upstream of Keepers Cottage garden fence,182800,721500,-5.515437,56.335893
+Euch 3,Euch 3 - Downstream of old caravan at Lagganmore,unknown,,Downstream of old caravan at Lagganmore,184440,719790,-5.487561,56.321308
+Euch 5,Euch 5 - downstream of track bridge,unknown,,downstream of track bridge,191200,720300,-5.378863,56.328909
+Euch 6,Euch 6 - 50m upstream of bridge,unknown,,50m upstream of bridge,192010,721350,-5.366617,56.338682
+Euch 7,Euch 7 - Upstream of lower track bridge,unknown,,Upstream of lower track bridge,190700,720450,-5.387054,56.330033
+Euchar 6,Euchar 6 - Upstream of road,unknown,,Upstream of road,187410,720540,-5.440235,56.329376
+Euchar AE1,Euchar AE1 - 10m upstream of confluemce,unknown,,10m upstream of confluemce,183850,719700,-5.497008,56.320232
+Euchar AE2,Euchar AE2 - Downstream of waterfall,unknown,,Downstream of waterfall,183900,719600,-5.49612,56.319358
+Euchar RG1,Euchar RG1 - Confluence to debris dam,unknown,,Confluence to debris dam,183920,719700,-5.495879,56.320264
+Euchar RG3,Euchar RG3 - Left hand braid at Island adjacent to lay-by of the A816,unknown,,Left hand braid at Island adjacent to lay-by of the A816,184977,718745,-5.478042,56.312181
+FORSA1,FORSA1 - Mainstem at the Heap flight pond. 60m upstream of confluence with tributary stream.,unknown,,Mainstem at the Heap flight pond. 60m upstream of confluence with tributary stream.,159700,742600,-5.907594,56.513866
+FORSA2,"FORSA2 - Downstream of track, from birch tree on left bank to large gorse bush.",unknown,,"Downstream of track, from birch tree on left bank to large gorse bush.",159750,742650,-5.906829,56.514339
+FORSA3,FORSA3 - Mainstem at Kilbeg. 50m Upstream of watergate.,unknown,,Mainstem at Kilbeg. 50m Upstream of watergate.,160700,741000,-5.88991,56.500034
+FORSA4,FORSA4 - Mainstem at Delfour. Upstream from fording point to weir,unknown,,Mainstem at Delfour. Upstream from fording point to weir,160900,739500,-5.885292,56.486691
+FORSA5,FORSA5 - From Fording point 30m upstream of track bridge to riffle ford point.,unknown,,From Fording point 30m upstream of track bridge to riffle ford point.,161100,738700,-5.881319,56.479622
+FORSA6,FORSA6 - Tributary of River Forsa at Tomsleibhe. Upstream of fording point,unknown,,Tributary of River Forsa at Tomsleibhe. Upstream of fording point,161800,737900,-5.86925,56.472805
+FORSA7,FORSA7 - Rhoail,unknown,,Rhoail,163300,737200,-5.844321,56.467286
+FORSA8,FORSA8 - North fork. 100m upstream of confluence between 2 large bolders.,unknown,,North fork. 100m upstream of confluence between 2 large bolders.,163600,736400,-5.838739,56.460266
+FORSA9,FORSA9 - Upstream of bedrockat fork of river to large bolder on right bank downstream of ford.,unknown,,Upstream of bedrockat fork of river to large bolder on right bank downstream of ford.,163500,736300,-5.840267,56.459319
+FinF1,FinF1 - 30m downstream from roadbridge.,unknown,,30m downstream from roadbridge.,190300,704200,-5.380624,56.184117
+FinF2,"FinF2 - Tributary - downstream of road crossing on the straightened channel, the site was fished 20m downstream of a watergate",unknown,,"Tributary - downstream of road crossing on the straightened channel, the site was fished 20m downstream of a watergate",190100,704200,-5.383841,56.184029
+FinF3,FinF3 - upstream of impassable falls and farm steading. 50m upstream from wooden bridge at farm,unknown,,upstream of impassable falls and farm steading. 50m upstream from wooden bridge at farm,190300,703900,-5.380387,56.181426
+Glenrosa 1,Glenrosa 1 - Coire Fhraoich - upstream of water pipeline,unknown,,Coire Fhraoich - upstream of water pipeline,198600,638300,-5.19808,55.596535
+Glenrosa 2,Glenrosa 2 - Shallow riffle section below sheep dip,unknown,,Shallow riffle section below sheep dip,199500,638000,-5.183602,55.594215
+Glenrosa 3,Glenrosa 3 - Below Glenrosa campsite,unknown,,Below Glenrosa campsite,200350,637500,-5.169773,55.590078
+Glenshurig 1,Glenshurig 1 - - tributary of Glenrosa Water - Downstream of road bridge,unknown,,- tributary of Glenrosa Water - Downstream of road bridge,200300,636900,-5.170131,55.584675
+Iorsa 1,Iorsa 1 - tributary of Iorsa Water - downstream of fording point,unknown,,tributary of Iorsa Water - downstream of fording point,188700,637600,-5.354377,55.586061
+Iorsa 2,Iorsa 2 - - Tributary of Iorsa Water - Downstream of fording point,unknown,,- Tributary of Iorsa Water - Downstream of fording point,189500,638000,-5.342012,55.589995
+Iorsa 3,Iorsa 3 - left half (looking downstream) of flow at mature island,unknown,,left half (looking downstream) of flow at mature island,189900,638100,-5.335753,55.591065
+J Lussa 10,J Lussa 10 - 50m downstream of gorge,unknown,,50m downstream of gorge,162987,691480,-5.808402,56.057285
+J Lussa 11,J Lussa 11 - Upper mainstem - upstream of impassable waterfall,unknown,,Upper mainstem - upstream of impassable waterfall,162692,691900,-5.8135,56.060904
+J Lussa 2,J Lussa 2 - Lower mainstem - upstream of left-hand bend,unknown,,Lower mainstem - upstream of left-hand bend,164533,687964,-5.780544,56.026527
+J Lussa 3,J Lussa 3 - Lower mainstem - below pool situated downstream of the Grundale Burn confluence,unknown,,Lower mainstem - below pool situated downstream of the Grundale Burn confluence,161540,688324,-5.828778,56.028274
+J Lussa 4,J Lussa 4 - 50m upstream of confluence with Lussa River,unknown,,50m upstream of confluence with Lussa River,164028,688285,-5.788911,56.029156
+J Lussa 5,J Lussa 5 - Lower mainstem - 100m upstream of Allt Grundale confluence,unknown,,Lower mainstem - 100m upstream of Allt Grundale confluence,164138,688363,-5.787218,56.029909
+J Lussa 6,J Lussa 6 - Upstream of waterfall - situated directly upstream of ford,unknown,,Upstream of waterfall - situated directly upstream of ford,163140,688953,-5.803718,56.034706
+J Lussa 7,J Lussa 7 - 500m upstream of site 6,unknown,,500m upstream of site 6,162591,689450,-5.812948,56.03889
+J Lussa 8,J Lussa 8 - Mainstem - 100m upstream of fishing loch,unknown,,Mainstem - 100m upstream of fishing loch,164201,689525,-5.787231,56.040358
+J Lussa 9,"J Lussa 9 - Upper mainstem, approx 1km upstream od site 8",unknown,,"Upper mainstem, approx 1km upstream od site 8",163903,690816,-5.793141,56.051785
+Jur Lussa 1,Jur Lussa 1 - Lower mainstem - downstream of cemetary at Inverlussa,unknown,,Lower mainstem - downstream of cemetary at Inverlussa,164452,687035,-5.781025,56.018158
+Kilfinan 1A,Kilfinan 1A - Downstream of Hotel Burn confluence (site 2),unknown,,Downstream of Hotel Burn confluence (site 2),193300,679200,-5.313061,55.961192
+Kilfinan 1B,Kilfinan 1B - 10m upstream of site 1A,unknown,,10m upstream of site 1A,193310,679300,-5.312978,55.962093
+Kilfinan 1C,Kilfinan 1C - 10m upstream of site 1B,unknown,,10m upstream of site 1B,193320,679300,-5.312818,55.962097
+Kilfinan 2A,Kilfinan 2A - Downstream of footbridge,unknown,,Downstream of footbridge,193350,679150,-5.312223,55.960765
+Kilfinan 2B,Kilfinan 2B - Upstream of footbridge,unknown,,Upstream of footbridge,193400,679100,-5.311385,55.960338
+Kilfinan 2C,"Kilfinan 2C - Downstream of roadbridge, braided channel off of main river upstream of Hotel Burn confluence",unknown,,"Downstream of roadbridge, braided channel off of main river upstream of Hotel Burn confluence",193400,679200,-5.311462,55.961235
+Kinglas 1,Kinglas 1 - Upstream of lower footbridge,unknown,,Upstream of lower footbridge,217900,710600,-4.940994,56.252894
+Kinglas 10,Kinglas 10 - 50m downstream of Abyssinia ruin,unknown,,50m downstream of Abyssinia ruin,225400,711800,-4.820893,56.266478
+Kinglas 1a,"Kinglas 1a - Little dam, downstream of weir",unknown,,"Little dam, downstream of weir",217800,710300,-4.942399,56.250164
+Kinglas 4,"Kinglas 4 - Mainstem - 600m upstream of telephone exchange, 200m upstream of forestry block on RB",unknown,,"Mainstem - 600m upstream of telephone exchange, 200m upstream of forestry block on RB",221800,709600,-4.877458,56.2454
+Kinglas 5,Kinglas 5 - Mainstem - 100m upstream of forestry fence on RB,unknown,,Mainstem - 100m upstream of forestry fence on RB,222400,709500,-4.867722,56.244728
+Kinglas 5a,Kinglas 5a - 50m upstream of new fenceline at top of old military road,unknown,,50m upstream of new fenceline at top of old military road,222800,709500,-4.861276,56.244877
+Kinglas 6,Kinglas 6 - 100m upstream of Butterbridge (confluence with Kinglas mainstem),unknown,,100m upstream of Butterbridge (confluence with Kinglas mainstem),223500,709400,-4.849928,56.24424
+Kinglas 6A,Kinglas 6A - Lower portion of south braid of mature Island,unknown,,Lower portion of south braid of mature Island,223500,709450,-4.849961,56.244689
+Kinglas 6B,Kinglas 6B - Lower portion of North braid of mature Island,unknown,,Lower portion of North braid of mature Island,223500,709500,-4.849995,56.245138
+Kinglas 7,Kinglas 7 - 10m upstream of confluence with Kinglas Water,unknown,,10m upstream of confluence with Kinglas Water,223750,709500,-4.845966,56.24523
+Kinglas 8,Kinglas 8 - Kinglas Water - 20m upstream of water gate,unknown,,Kinglas Water - 20m upstream of water gate,223750,709700,-4.846099,56.247025
+Kinglas 9,Kinglas 9 - Mature Island downstream of sheiling on LB,unknown,,Mature Island downstream of sheiling on LB,224200,710100,-4.839112,56.250781
+Kinglas 9a,Kinglas 9a - Main River opposite small sheiling,unknown,,Main River opposite small sheiling,224300,710300,-4.837634,56.252613
+Kinglass 1,Kinglass 1,unknown,,,210400,736600,-5.080642,56.483212
+Kinglass 10,Kinglass 10 - cross river at  Acharn Ruin bridge and stream is lthird upstream from this point.,unknown,,cross river at  Acharn Ruin bridge and stream is lthird upstream from this point.,213500,735700,-5.029735,56.476376
+Kinglass 11,Kinglass 11,unknown,,,213900,735800,-5.023322,56.477431
+Kinglass 11A,Kinglass 11A - Upstream of dead alder and leaning Rowan on right bank,unknown,,Upstream of dead alder and leaning Rowan on right bank,214000,735900,-5.021772,56.478368
+Kinglass 12,Kinglass 12 - downstream of road culvert,unknown,,downstream of road culvert,214200,736200,-5.018743,56.481138
+Kinglass 14,Kinglass 14 - Site located directly downstream of roadbridge on right channel.,unknown,,Site located directly downstream of roadbridge on right channel.,215300,737500,-5.00183,56.493234
+Kinglass 14A,Kinglass 14A - Upstream of track bridge,unknown,,Upstream of track bridge,215300,737600,-5.001901,56.494131
+Kinglass 15,"Kinglass 15 - Downstream of Glenkinglass Lodge, alongside track",unknown,,"Downstream of Glenkinglass Lodge, alongside track",216300,738200,-4.986105,56.499906
+Kinglass 16,Kinglass 16,unknown,,,216700,738400,-4.979758,56.501856
+Kinglass 16A,"Kinglass 16A - Directly behind Lodge, Upstream of hatchery fence to footbridge",unknown,,"Directly behind Lodge, Upstream of hatchery fence to footbridge",216500,738100,-4.982791,56.499086
+Kinglass 16B,"Kinglass 16B - Downstream of Forestry section, alongside pheasant penn",unknown,,"Downstream of Forestry section, alongside pheasant penn",216300,737900,-4.985894,56.497214
+Kinglass 17,Kinglass 17 - 10 up from confluence,unknown,,10 up from confluence,216800,738300,-4.978065,56.500998
+Kinglass 18A,Kinglass 18A - Downstream of Footbridge,unknown,,Downstream of Footbridge,218600,740100,-4.950119,56.517845
+Kinglass 19,Kinglass 19,unknown,,,218600,740400,-4.950329,56.520536
+Kinglass 2,Kinglass 2 - confluence upstream to fording point,unknown,,confluence upstream to fording point,211100,736400,-5.069147,56.4817
+Kinglass 4,Kinglass 4 - next burn up glen road from Narrachan Burn. Site is located directly downstream from wooden bridge and ford.,unknown,,next burn up glen road from Narrachan Burn. Site is located directly downstream from wooden bridge and ford.,211500,736300,-5.06259,56.480963
+Kinglass 5,Kinglass 5,unknown,,,212200,735600,-5.050737,56.474962
+Kinglass 6,Kinglass 6 - Site located on stream that enter mainriver downstream of Acharn Ruin. Cross bridge at Acharn and head downstream.,unknown,,Site located on stream that enter mainriver downstream of Acharn Ruin. Cross bridge at Acharn and head downstream.,212400,735600,-5.047495,56.475042
+Kinglass 7,Kinglass 7,unknown,,,212900,735800,-5.039533,56.477035
+Kinglass 8,Kinglass 8 - Opposiite Acharn Ruin,unknown,,Opposiite Acharn Ruin,213000,735650,-5.037804,56.475729
+Kinglass 9,Kinglass 9,unknown,,,213000,735600,-5.037769,56.475281
+L.Awe 102,L.Awe 102 - 50m downstream of roadbridge - started fishing at ford.,unknown,,50m downstream of roadbridge - started fishing at ford.,198200,712400,-5.259807,56.261082
+L.Awe 105B,L.Awe 105B,unknown,,,200500,713100,-5.223267,56.268332
+L.Awe 108,L.Awe 108 - un-named tributary of Loch Awe - qualitative fishing above and below roadbridg / culvert.,unknown,,un-named tributary of Loch Awe - qualitative fishing above and below roadbridg / culvert.,199800,714200,-5.235385,56.277905
+L.Awe 110,L.Awe 110 - started fishing 10m upstream from roadbridge.,unknown,,started fishing 10m upstream from roadbridge.,200500,714900,-5.224627,56.284479
+L.Awe 112,L.Awe 112 - - tributary of Loch Awe - 10m downstream from roadbridge,unknown,,- tributary of Loch Awe - 10m downstream from roadbridge,200400,715400,-5.226618,56.288921
+L.Awe 114,L.Awe 114 - - tributary of Loch Awe - 20m upstream from road bridge,unknown,,- tributary of Loch Awe - 20m upstream from road bridge,200900,716100,-5.219082,56.295411
+L.Awe 116,L.Awe 116 - - tributary of Loch Awe - started fishing 10m upstream from road culvert.,unknown,,- tributary of Loch Awe - started fishing 10m upstream from road culvert.,201100,716300,-5.216006,56.297289
+L.Awe 118A,L.Awe 118A - Balliemaenoch - directly downstream of road bridge - fished up to tail of pool below bridge.,unknown,,Balliemaenoch - directly downstream of road bridge - fished up to tail of pool below bridge.,201200,716600,-5.214619,56.300021
+L.Awe 118B,L.Awe 118B - Balliemaenoch - above road. Started fishing upstream from roadbridge.,unknown,,Balliemaenoch - above road. Started fishing upstream from roadbridge.,201200,716800,-5.21477,56.301816
+L.Awe 119,L.Awe 119 - un-named tributary of Loch Awe - started 50m upstream from Balliemaenoch Cottage,unknown,,un-named tributary of Loch Awe - started 50m upstream from Balliemaenoch Cottage,201200,716900,-5.214845,56.302713
+L.Awe 120,L.Awe 120 - by Crow Island - site fished 5m upstream of roadbridge.,unknown,,by Crow Island - site fished 5m upstream of roadbridge.,201000,717100,-5.218223,56.304423
+L.Awe 121,L.Awe 121 - 10m upstrream of road bridge.,unknown,,10m upstrream of road bridge.,200800,717300,-5.221601,56.306133
+L.Awe 13,L.Awe 13 - Road crosses stream north of Larach Bhan. Site started 5m upstream from bridge.,unknown,,Road crosses stream north of Larach Bhan. Site started 5m upstream from bridge.,207100,723600,-5.124557,56.365254
+L.Awe 140A,L.Awe 140A - - Rockhill Farm Burn - downstream from Rockhill farm. Site fished located 20m downstream of culvert section .,unknown,,- Rockhill Farm Burn - downstream from Rockhill farm. Site fished located 20m downstream of culvert section .,207300,721900,-5.120077,56.350085
+L.Awe 141T2A,"L.Awe 141T2A - tributary of Cladich River - tributary of Loch Awe, 200m downstream of roadbridge.",unknown,,"tributary of Cladich River - tributary of Loch Awe, 200m downstream of roadbridge.",208600,721600,-5.098856,56.347921
+L.Awe 143A,L.Awe 143A - site fished uupstream of road bridge and started under old-disused bridge.,unknown,,site fished uupstream of road bridge and started under old-disused bridge.,211200,723400,-5.058144,56.365114
+L.Awe 14B,L.Awe 14B - Upstream of road. Site on small island below waterfalls.,unknown,,Upstream of road. Site on small island below waterfalls.,207000,723700,-5.126246,56.36611
+L.Awe 14C,L.Awe 14C - Upstream of waterfall,unknown,,Upstream of waterfall,206900,723700,-5.127863,56.366069
+L.Awe 23B,L.Awe 23B,unknown,,,203500,723500,-5.182664,56.362875
+L.Awe 27,"L.Awe 27 - At Collaig forestry car park. Site is located upstream of the bridge, starting fishing 5m up to waterfall.",unknown,,"At Collaig forestry car park. Site is located upstream of the bridge, starting fishing 5m up to waterfall.",201700,720500,-5.209489,56.335214
+L.Awe 27B,L.Awe 27B - Upstream of falls,unknown,,Upstream of falls,201600,720600,-5.211179,56.336069
+L.Awe 28,L.Awe 28 - Burn that enters loch at Rubh a Eoin - site started approximately 15m upstream from roadbridge.,unknown,,Burn that enters loch at Rubh a Eoin - site started approximately 15m upstream from roadbridge.,200800,719300,-5.223114,56.324073
+L.Awe 29,"L.Awe 29 - Second burn north of Inverinan. Site located below road, 20 yards from Loch",unknown,,"Second burn north of Inverinan. Site located below road, 20 yards from Loch",200500,718600,-5.227426,56.317667
+L.Awe 32A,L.Awe 32A - (Inverinan burn). Below Falls. site is located 10m downstream of roadbridge across the Inverinan burn.,unknown,,(Inverinan burn). Below Falls. site is located 10m downstream of roadbridge across the Inverinan burn.,199800,717500,-5.237889,56.307505
+L.Awe 32B,L.Awe 32B,unknown,,,198700,717700,-5.255791,56.308834
+L.Awe 33B,L.Awe 33B,unknown,,,199200,716700,-5.246961,56.300076
+L.Awe 35,L.Awe 35,unknown,,,199500,715900,-5.241513,56.293027
+L.Awe 38A,L.Awe 38A - tributary of Loch Awe - site started upstream of roadbridge across River Avich where small tributary enters from the right.,unknown,,tributary of Loch Awe - site started upstream of roadbridge across River Avich where small tributary enters from the right.,197100,714100,-5.27884,56.275861
+L.Awe 38B,L.Awe 38B,unknown,,,196000,714300,-5.296729,56.277184
+L.Awe 39A,L.Awe 39A - by Dalavich Chalets. Site located downstream of footbridge. Fished up to large boulders beneath bridge apron.,unknown,,by Dalavich Chalets. Site located downstream of footbridge. Fished up to large boulders beneath bridge apron.,197200,713400,-5.276691,56.269625
+L.Awe 39B,L.Awe 39B,unknown,,,196900,713400,-5.281527,56.269497
+L.Awe 42,L.Awe 42 - Annual Monitoring Site located immediately downstream of bridge,unknown,,Annual Monitoring Site located immediately downstream of bridge,196600,711900,-5.285208,56.255915
+L.Awe 42A,L.Awe 42A,unknown,,,196200,711700,-5.291499,56.253949
+L.Awe 43A,L.Awe 43A,unknown,,,196500,711400,-5.286435,56.251387
+L.Awe 43B,L.Awe 43B,unknown,,,196200,711200,-5.291114,56.249464
+L.Awe 55A,L.Awe 55A - Annual Monitoring Site - Straightened stream section behind nursery. Start fishing from pipe on RB,unknown,,Annual Monitoring Site - Straightened stream section behind nursery. Start fishing from pipe on RB,189500,705300,-5.394362,56.193629
+L.Awe 62B,L.Awe 62B,unknown,,,197200,714100,-5.277228,56.275904
+L.Awe 91B,L.Awe 91B - Upstream of B840 road,unknown,,Upstream of B840 road,196300,708400,-5.287349,56.224393
+L.Awe137B,L.Awe137B - 50m upstream of forestry road,unknown,,50m upstream of forestry road,206600,720100,-5.130063,56.333652
+L.Awe143B,L.Awe143B - Upstream of impassable falls.,unknown,,Upstream of impassable falls.,211500,723500,-5.053366,56.366131
+L.Awe89A,L.Awe89A - 50m upstream from loch,unknown,,50m upstream from loch,195400,707750,-5.301337,56.218176
+L.Awe89B,"L.Awe89B - Upstream pf confluence with tributary T2 (Allt Doire na Sobhrachan), below outflow of hydro development.",unknown,,"Upstream pf confluence with tributary T2 (Allt Doire na Sobhrachan), below outflow of hydro development.",195700,707550,-5.296354,56.216511
+L.Awe89C,L.Awe89C - Upstream of hydro generator outflow,unknown,,Upstream of hydro generator outflow,195650,707600,-5.297197,56.216938
+LUSSA1,LUSSA1 - Mainstem at Ardura. 200m upstream of bridge alongside trees on left bank,unknown,,Mainstem at Ardura. 200m upstream of bridge alongside trees on left bank,168300,730700,-5.757587,56.4115
+LUSSA10,LUSSA10 - Alongside upper garden to tributary burn confluence,unknown,,Alongside upper garden to tributary burn confluence,168900,731000,-5.748149,56.414484
+LUSSA2,LUSSA2 - Mainstem downstream of Peddlars pool. Right channel of Island.,unknown,,Mainstem downstream of Peddlars pool. Right channel of Island.,167500,730900,-5.770701,56.4129
+LUSSA3,LUSSA3 - Mainstem. Right hand channel of island,unknown,,Mainstem. Right hand channel of island,165900,731500,-5.797111,56.417489
+LUSSA4,LUSSA4 - 50m upstream of confluence. Upstream of bends.,unknown,,50m upstream of confluence. Upstream of bends.,165100,732300,-5.810768,56.424263
+LUSSA5,LUSSA5 - Mainstem at Torness. Downstream of waterfalls,unknown,,Mainstem at Torness. Downstream of waterfalls,164900,732500,-5.814182,56.425956
+LUSSA6,LUSSA6 - Downstream of olfd military road bridge.,unknown,,Downstream of olfd military road bridge.,164700,732800,-5.817687,56.428546
+LUSSA7,LUSSA7 - Ishriff. Alongside fenced leftt bank from strainer post to 18th stob.,unknown,,Ishriff. Alongside fenced leftt bank from strainer post to 18th stob.,163200,731100,-5.840415,56.412557
+LUSSA8,"LUSSA8 - Mainstem, 300m downstream of Loch Sguabain. Upstream of small burn flowing from right bank",unknown,,"Mainstem, 300m downstream of Loch Sguabain. Upstream of small burn flowing from right bank",163400,730900,-5.837,56.410864
+LUSSA9,LUSSA9 - Upstream od confluence,unknown,,Upstream od confluence,163000,730400,-5.843015,56.406182
+Laggan 1,"Laggan 1 - Avinlussa, top of beat 3 by pig pen.",unknown,,"Avinlussa, top of beat 3 by pig pen.",135300,658200,-6.219251,55.744583
+Laggan 2,Laggan 2 - Downstream of Mulindry Mill,unknown,,Downstream of Mulindry Mill,135900,659700,-6.21117,55.758352
+Laggan 3,Laggan 3 - 10m downstream of road bridge up to first bend beside farm,unknown,,10m downstream of road bridge up to first bend beside farm,138600,660300,-6.168837,55.765194
+Laggan 4,Laggan 4 - Upstream of road bridge,unknown,,Upstream of road bridge,136200,658000,-6.204761,55.743282
+Laggan 5,Laggan 5 - Renshaw's. 50m downstream of road bridge.,unknown,,Renshaw's. 50m downstream of road bridge.,134500,655600,-6.229435,55.720848
+Laggan 6,Laggan 6 - 50m upstream of road bridge,unknown,,50m upstream of road bridge,134500,655200,-6.229047,55.717264
+Laggan 7,Laggan 7 - Upstream of road bridge,unknown,,Upstream of road bridge,139600,661600,-6.154183,55.777383
+Laggan 8,Laggan 8 - Dunlossit. Upstream of confluence.,unknown,,Dunlossit. Upstream of confluence.,140800,658100,-6.131778,55.746662
+Laggan 9,Laggan 9 - Upstream of fording point,unknown,,Upstream of fording point,140700,658300,-6.133557,55.7484
+Leacann 1,Leacann 1 - Mainstem - 100m upstream of building on RB (at Furnace turn-off),unknown,,Mainstem - 100m upstream of building on RB (at Furnace turn-off),202350,700400,-5.183978,56.155181
+Leacann 2,Leacann 2 - Upstream edge of left hand bend in river. Start upstream of road protection wall.,unknown,,Upstream edge of left hand bend in river. Start upstream of road protection wall.,202300,700500,-5.184856,56.156058
+Leacann 3,Leacann 3 - Mainstem - 50m downstream of weir. Riffle / run.,unknown,,Mainstem - 50m downstream of weir. Riffle / run.,202350,700600,-5.184127,56.156976
+Leacann 4,Leacann 4 - 150m upstream of weir.,unknown,,150m upstream of weir.,202250,700700,-5.185808,56.157831
+Leacann 5,Leacann 5 - 250m upstream of weir.,unknown,,250m upstream of weir.,202250,701000,-5.186031,56.160522
+Leacann 8,Leacann 8 - Below Braleckan Farm. Downstream of track bridge.,unknown,,Below Braleckan Farm. Downstream of track bridge.,202300,702300,-5.186194,56.172205
+Leargy 2,Leargy 2 - 100m downstream of road,unknown,,100m downstream of road,174049,661756,-5.606266,55.796104
+Leargy 3,Leargy 3 - Upstream of old road bridge,unknown,,Upstream of old road bridge,174180,661933,-5.604328,55.797752
+Leargy 4,Leargy 4 - upstream of tributary confuence at High Carse,unknown,,upstream of tributary confuence at High Carse,174215,662268,-5.604049,55.800773
+Leargy 5,Leargy 5 - Downstream of culvert,unknown,,Downstream of culvert,175845,665012,-5.58036,55.826138
+Leargy 6,Leargy 6 - Upstream of culvert,unknown,,Upstream of culvert,175968,665227,-5.578578,55.828123
+Lurgy 1,Lurgy 1 - Downstream of cemetary,unknown,,Downstream of cemetary,173981,661679,-5.607285,55.795382
+Mach 4,Mach 4 - Downstream of Uigle,unknown,,Downstream of Uigle,169356,617084,-5.643606,55.393318
+Mach 8,Mach 8 - Alongside house wall,unknown,,Alongside house wall,168826,623664,-5.657412,55.452073
+More1,More1 - 60m upstream of road bridge,unknown,,60m upstream of road bridge,205485,684263,-5.121845,56.011703
+More2,"More2 - Opposite white house, above confluence",unknown,,"Opposite white house, above confluence",205413,684687,-5.123306,56.015478
+More3,More3 - Downstream of braids where field fence meets LB,unknown,,Downstream of braids where field fence meets LB,205437,684934,-5.1231,56.017703
+More4,More4 - Upstream of 3 tonne weight limit bridge,unknown,,Upstream of 3 tonne weight limit bridge,205467,685464,-5.123004,56.02247
+More5,"More5 - Mainstem, upstream of confluence with mainstem",unknown,,"Mainstem, upstream of confluence with mainstem",205609,685921,-5.12106,56.026628
+More6,"More6 - RB trib, upstream of three culvert pipes",unknown,,"RB trib, upstream of three culvert pipes",205568,685941,-5.121732,56.026791
+Nant 1,Nant 1 - Downstream of road bridge at golf course,unknown,,Downstream of road bridge at golf course,200400,731400,-5.238776,56.432439
+Nant 2,Nant 2 - Downstream of bridge. Fished up to fording point.,unknown,,Downstream of bridge. Fished up to fording point.,201500,728050,-5.218427,56.402854
+Nant 3,Nant 3 - Upstream of forestry bridge,unknown,,Upstream of forestry bridge,202000,727200,-5.209696,56.395439
+Nell 1,Nell 1 - I00m upstream of Irish Ford at Glenfeochan House,unknown,,I00m upstream of Irish Ford at Glenfeochan House,188200,724600,-5.430754,56.36614
+Nell 11,Nell 11 - Downstream of confluence with Eas an Buaile,unknown,,Downstream of confluence with Eas an Buaile,194300,727600,-5.334535,56.395738
+Nell 12,Nell 12 - Upstream of confluence,unknown,,Upstream of confluence,194400,727600,-5.332918,56.395782
+Nell 13,Nell 13 - Downstream of road bridge. Fished up to bedrock section 20m below bridge.,unknown,,Downstream of road bridge. Fished up to bedrock section 20m below bridge.,197450,728450,-5.284249,56.404723
+Nell 2,Nell 2 - Mainstem,unknown,,Mainstem,189200,724500,-5.414515,56.36569
+Nell 3,Nell 3 - Upper mainstem. Opposite cottages. Large rock on RB to twin bows on LB,unknown,,Upper mainstem. Opposite cottages. Large rock on RB to twin bows on LB,190300,724100,-5.396422,56.362591
+Nell 4,Nell 4 - 3m u/s of watergate to large rock on RB,unknown,,3m u/s of watergate to large rock on RB,190650,724080,-5.390751,56.362567
+Nell 5,Nell 5 - 50m downstream with confluence. Start 20m upstream of RH bend,unknown,,50m downstream with confluence. Start 20m upstream of RH bend,191800,724200,-5.372265,56.36415
+Nell 8,"Nell 8 - Torrinturk, upstream of large bolder on RB to riffle",unknown,,"Torrinturk, upstream of large bolder on RB to riffle",190700,728950,-5.393829,56.406265
+Nell 9,"Nell 9 - Upstream of road bridge, starting level with bolder wall",unknown,,"Upstream of road bridge, starting level with bolder wall",193800,728050,-5.342975,56.399556
+Orm 2,Orm 2 - Mainstem - Lower field downstream of right hand bend,unknown,,Mainstem - Lower field downstream of right hand bend,173720,671770,-5.619848,55.885746
+Orm 5,Orm 5 - Allt Doire Duibhe - upstream of confluence,unknown,,Allt Doire Duibhe - upstream of confluence,175602,671676,-5.589743,55.885783
+Orm 6,Orm 6 - Abhainn Mor - 20m upstream of confluence,unknown,,Abhainn Mor - 20m upstream of confluence,175752,671771,-5.587429,55.886705
+Ruel 08,Ruel 08 - downstream of roadbridge - fished up to within 10m of start of bridge apron.,unknown,,downstream of roadbridge - fished up to within 10m of start of bridge apron.,203620,690500,-5.15628,56.066895
+Ruel 10,Ruel 10 - 50m upstream from confluence with main River Ruel channel,unknown,,50m upstream from confluence with main River Ruel channel,199500,683100,-5.216817,55.998805
+Ruel 11,Ruel 11 - tributary of River Ruel - 20m below roadbridge by Ornidale gatehouse.,unknown,,tributary of River Ruel - 20m below roadbridge by Ornidale gatehouse.,200200,683100,-5.205611,55.999097
+Ruel 3,Ruel 3 - tributary - downstream of road - fished up to bridge,unknown,,tributary - downstream of road - fished up to bridge,199500,685500,-5.218608,56.020334
+Ruel 6,Ruel 6 - Downstream from Road,unknown,,Downstream from Road,201400,688400,-5.190323,56.04714
+Ruel 9,Ruel 9 - upstream of road signed Glendaruel Forset. Started fishing 5m upstream of culvert.,unknown,,upstream of road signed Glendaruel Forset. Started fishing 5m upstream of culvert.,201600,687700,-5.1866,56.040944
+Ruel five,Ruel five - upstream of road,unknown,,upstream of road,201907,688673,-5.182399,56.049799
+Ruel four,Ruel four - - tributary of River Ruel - fished downstream of road - fished up to bridge,unknown,,- tributary of River Ruel - fished downstream of road - fished up to bridge,199800,686400,-5.214475,56.028533
+Ruel one,Ruel one - Downstream of road,unknown,,Downstream of road,200216,682007,-5.204543,55.989299
+Ruel six,Ruel six - started fishing 30m downstream of roadbridge,unknown,,started fishing 30m downstream of roadbridge,203300,690800,-5.161632,56.069455
+Ruel three,Ruel three - River Ruel tributary - started fishing 40m downstream from road crossing by camquhart farm.,unknown,,River Ruel tributary - started fishing 40m downstream from road crossing by camquhart farm.,199400,685200,-5.219986,56.017601
+Ruel two,Ruel two - Downstream of road,unknown,,Downstream of road,199603,683086,-5.215157,55.998722
+Ruel01,Ruel01 - - tributary of River Ruel at Primary School gate - fished up to first road culvert at road junction,unknown,,- tributary of River Ruel at Primary School gate - fished up to first road culvert at road junction,199500,684300,-5.217712,56.009569
+Ruel05,Ruel05,unknown,,,199800,686800,-5.214773,56.032121
+Ruel12,Ruel12 - Downstream from Road/ Windfarm,unknown,,Downstream from Road/ Windfarm,202600,689000,-5.171532,56.053019
+Saddel2,Saddel2 - 70m ustream of confluence at trees,unknown,,70m ustream of confluence at trees,178717,631968,-5.507948,55.531118
+Sandhole 1,Sandhole 1 - Upstream of of forestry track bridge,unknown,,Upstream of of forestry track bridge,201300,699700,-5.200332,56.148466
+Shira 1,Shira 1 - Maan.,unknown,,Maan.,212100,712700,-5.035963,56.269476
+Shira 10,Shira 10 - Downsrteam of road bridge,unknown,,Downsrteam of road bridge,214150,715800,-5.005092,56.298096
+Shira 11,Shira 11 - below road bridge,unknown,,below road bridge,215300,716700,-4.987166,56.30662
+Shira 2,Shira 2 - Downstream of road bridge,unknown,,Downstream of road bridge,212300,712700,-5.032738,56.269556
+Shira 3,Shira 3 - From fallen tree in lower field to 100m below track,unknown,,From fallen tree in lower field to 100m below track,212100,712500,-5.035821,56.267682
+Shira 4,"Shira 4 - below road. Into fiels, across fence. 50m above confluence.",unknown,,"below road. Into fiels, across fence. 50m above confluence.",212800,713500,-5.025244,56.27693
+Shira 5A,Shira 5A - 50m downstream from site 5,unknown,,50m downstream from site 5,213750,715100,-5.011052,56.291659
+Shira 5B,Shira 5B - Riffle downstream of old shoolhouse burn confluence,unknown,,Riffle downstream of old shoolhouse burn confluence,213750,715050,-5.011017,56.29121
+Shira 6,Shira 6 - Riffle downstream of Elrig beag bridge,unknown,,Riffle downstream of Elrig beag bridge,213500,714600,-5.014732,56.287075
+Shira 7,"Shira 7 - opposite sheilings, downstream of stepping stones",unknown,,"opposite sheilings, downstream of stepping stones",213800,715100,-5.010246,56.291679
+Shira 8,Shira 8 - Adjacent to site 5. Upstream of road track,unknown,,Adjacent to site 5. Upstream of road track,213750,715250,-5.011158,56.293005
+Shira 9,Shira 9 - Main River - Along Island at Eilean an Eagaill,unknown,,Main River - Along Island at Eilean an Eagaill,213900,715200,-5.008703,56.292615
+Sliddery 1,Sliddery 1 - Mill pool upstream to first tree,unknown,,Mill pool upstream to first tree,194700,624600,-5.249707,55.472005
+Sliddery 2,Sliddery 2 - Corriehiam - from ford to trees,unknown,,Corriehiam - from ford to trees,195600,626300,-5.236744,55.487633
+Sliddery 3,Sliddery 3 - Cnoc na Dail - upstream of tributary to water gate,unknown,,Cnoc na Dail - upstream of tributary to water gate,197100,628500,-5.214653,55.507995
+Sorn 1,"Sorn 1 - Sorn Mainstem-Below white bridge, Campbell's Islay Estate",unknown,,"Sorn Mainstem-Below white bridge, Campbell's Islay Estate",133400,662300,-6.253436,55.780279
+Sorn 10,Sorn 10 - 50m upstream of A846 road bridge in cancalised sedction,unknown,,50m upstream of A846 road bridge in cancalised sedction,136500,664900,-6.206661,55.805275
+Sorn 2,Sorn 2 - Harrisons/Fording Point,unknown,,Harrisons/Fording Point,134600,662400,-6.234454,55.781834
+Sorn 3,Sorn 3 - 20metres above main footbridge,unknown,,20metres above main footbridge,135200,662600,-6.225109,55.783955
+Sorn 4,Sorn 4 - Watsons Pool (below),unknown,,Watsons Pool (below),135500,663400,-6.221115,55.791288
+Sorn 5,Sorn 5 - Dairy site bridge Esknish,unknown,,Dairy site bridge Esknish,136700,664800,-6.203383,55.804488
+Sorn 6,Sorn 6 - 30metres above Road bridge,unknown,,30metres above Road bridge,137200,665400,-6.196007,55.810137
+Sorn 7,Sorn 7 - Above bridge Drumnaski,unknown,,Above bridge Drumnaski,138300,665400,-6.178503,55.810734
+Sorn 8,Sorn 8 - 50metres downstream of Road (track) bridge,unknown,,50metres downstream of Road (track) bridge,135800,662700,-6.215665,55.78518
+Sorn 9,Sorn 9 - 5m upstream of footbridge,unknown,,5m upstream of footbridge,135650,663500,-6.218826,55.792266
+Teatle 1,Teatle 1 - Tributary of Loch Awe - Riffle & pool sequence upstream of Old military track bridge.,unknown,,Tributary of Loch Awe - Riffle & pool sequence upstream of Old military track bridge.,212850,725100,-5.032686,56.381021
+conieglen4,conieglen4 - D/S of culverts,unknown,,D/S of culverts,170696,612001,-5.618326,55.348363
+saddel 5,saddel 5 - U/S of Road Bridge,unknown,,U/S of Road Bridge,176793,633924,-5.539948,55.547784
+saddel6,saddel6 - D/S of cottage,unknown,,D/S of cottage,176646,633773,-5.542152,55.546363

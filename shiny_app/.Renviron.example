@@ -1,0 +1,19 @@
+# DB connection (shiny_reader role -- SELECT-only, see supabase/roles.sql).
+# Use Supabase's pooled/pgbouncer endpoint (6543), not the direct port (5432):
+# shinyapps.io/Posit Connect don't handle many concurrent long-lived direct
+# connections well.
+SUPABASE_DB_HOST=your-project.pooler.supabase.com
+SUPABASE_DB_PORT=6543
+SUPABASE_DB_NAME=postgres
+SUPABASE_DB_USER=shiny_reader
+SUPABASE_DB_PASSWORD=your_password_here
+
+# Used only by the QC & Photo Review tab to generate signed URLs for the
+# private photo storage bucket (see R/fn_db_queries.R::sign_photo_url()).
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your_service_key_here
+STORAGE_BUCKET=ef-photos
+
+# NOTE: .Renviron is NOT deployed automatically to shinyapps.io/Posit
+# Connect -- these must also be set via that platform's own
+# environment-variable configuration UI. See deploy.R.

@@ -1,0 +1,104 @@
+{
+  "event": {
+    "attributes": {
+      "globalid": "{11111111-1111-1111-1111-111111111111}",
+      "objectid": 101,
+      "site_code": "Creran2",
+      "site_type": "existing",
+      "site_select": "Creran2",
+      "new_site_name": null,
+      "new_river_name": null,
+      "catchment": "appin_coastal",
+      "river_name": "River Creran",
+      "survey_date": 1786320000000,
+      "start_time": "09:15:00",
+      "end_time": "11:40:00",
+      "lon_wgs84": -5.2252,
+      "lat_wgs84": 56.5703,
+      "easting": 200701,
+      "northing": 744820,
+      "temp_water": 12.4,
+      "conductivity": 145,
+      "water_lvl": "me",
+      "water_clr": "clr",
+      "water_sample": null,
+      "anode_op": "graeme",
+      "bucket_op": "alan",
+      "banner_net": "rob",
+      "hand_net": "david",
+      "scribe": "graeme",
+      "processing": "alan",
+      "other_staff": null,
+      "eq_type": "backpack",
+      "eq_model": "Model X",
+      "volts": 250,
+      "stop_nets": "both",
+      "anaesthetic": "none",
+      "site_length_lb": 48,
+      "site_length_rb": 52,
+      "site_length": 50,
+      "final_avg_width": 3.2,
+      "final_site_area": 160,
+      "sub_be": 10, "sub_bo": 15, "sub_co": 20, "sub_pe": 10,
+      "sub_gr": 25, "sub_sa": 10, "sub_si": 5, "sub_ho": 5, "sub_total": 100,
+      "flow_sm": 10, "flow_dp": 10, "flow_sp": 20, "flow_dg": 15,
+      "flow_sg": 15, "flow_ru": 15, "flow_ri": 10, "flow_to": 5, "flow_total": 100,
+      "sal_fry_parr_cutoff": 65,
+      "trt_fry_parr_cutoff": 70,
+      "pollution": "no",
+      "pollution_notes": null,
+      "stocking": "no",
+      "stocking_notes": null,
+      "final_comments": "Good conditions, clear water.",
+      "catches_sal_fry": 3, "catches_sal_parr": 3, "catches_trt_fry": 2, "catches_trt_parr": 2, "catches_eel": 0,
+      "site_sal_fry": 3, "site_sal_parr": 3, "site_trt_fry": 2, "site_trt_parr": 2,
+      "site_eel": 0, "site_other": 0, "site_total": 10,
+      "den_sal_fry": 1.9, "den_sal_parr": 1.9, "den_trt_fry": 1.25, "den_trt_parr": 1.25
+    },
+    "geometry": { "x": -5.2252, "y": 56.5703 }
+  },
+  "rep_pass": [
+    {
+      "attributes": {
+        "globalid": "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa}",
+        "parentglobalid": "{11111111-1111-1111-1111-111111111111}",
+        "pass_no": 1,
+        "anode_time": 420,
+        "total_pass_time": 900,
+        "pass_sal_fry": 2, "pass_trt_fry": 1, "pass_sal_parr": 2, "pass_trt_parr": 1,
+        "pass_eel": 0, "pass_other": 0, "pass_total": 6
+      }
+    },
+    {
+      "attributes": {
+        "globalid": "{bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb}",
+        "parentglobalid": "{11111111-1111-1111-1111-111111111111}",
+        "pass_no": 2,
+        "anode_time": 380,
+        "total_pass_time": 850,
+        "pass_sal_fry": 1, "pass_trt_fry": 1, "pass_sal_parr": 1, "pass_trt_parr": 1,
+        "pass_eel": 0, "pass_other": 0, "pass_total": 4
+      }
+    }
+  ],
+  "rep_fish": [
+    { "attributes": { "globalid": "{f0000001-0000-0000-0000-000000000001}", "parentglobalid": "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa}", "entry_mode": "individual", "species": "sal", "length": 55, "lifestage": "fry", "scaled": "no", "tissue_tube": null, "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000002-0000-0000-0000-000000000002}", "parentglobalid": "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa}", "entry_mode": "individual", "species": "sal", "length": 58, "lifestage": "fry", "scaled": "no", "tissue_tube": null, "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000003-0000-0000-0000-000000000003}", "parentglobalid": "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa}", "entry_mode": "individual", "species": "sal", "length": 90, "lifestage": "parr", "scaled": "yes", "tissue_tube": "T-101", "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000004-0000-0000-0000-000000000004}", "parentglobalid": "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa}", "entry_mode": "individual", "species": "sal", "length": 95, "lifestage": "parr", "scaled": "yes", "tissue_tube": "T-102", "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000005-0000-0000-0000-000000000005}", "parentglobalid": "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa}", "entry_mode": "individual", "species": "trt", "length": 60, "lifestage": "fry", "scaled": "no", "tissue_tube": null, "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000006-0000-0000-0000-000000000006}", "parentglobalid": "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa}", "entry_mode": "individual", "species": "trt", "length": 110, "lifestage": "parr", "scaled": "yes", "tissue_tube": "T-103", "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000007-0000-0000-0000-000000000007}", "parentglobalid": "{bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb}", "entry_mode": "individual", "species": "sal", "length": 52, "lifestage": "fry", "scaled": "no", "tissue_tube": null, "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000008-0000-0000-0000-000000000008}", "parentglobalid": "{bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb}", "entry_mode": "individual", "species": "sal", "length": 92, "lifestage": "parr", "scaled": "yes", "tissue_tube": "T-104", "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f0000009-0000-0000-0000-000000000009}", "parentglobalid": "{bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb}", "entry_mode": "individual", "species": "trt", "length": 61, "lifestage": "fry", "scaled": "no", "tissue_tube": null, "count_bulk": 1, "fish_multiplier": 1 } },
+    { "attributes": { "globalid": "{f000000a-0000-0000-0000-00000000000a}", "parentglobalid": "{bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb}", "entry_mode": "individual", "species": "trt", "length": 108, "lifestage": "parr", "scaled": "yes", "tissue_tube": "T-105", "count_bulk": 1, "fish_multiplier": 1 } }
+  ],
+  "rep_photos": [
+    { "attributes": { "globalid": "{cccccccc-cccc-cccc-cccc-cccccccccccc}", "parentglobalid": "{11111111-1111-1111-1111-111111111111}", "objectid": 501, "photo_caption": "Site overview, looking upstream" } },
+    { "attributes": { "globalid": "{c2222222-2222-2222-2222-222222222222}", "parentglobalid": "{11111111-1111-1111-1111-111111111111}", "objectid": 502, "photo_caption": "Downstream stop net" } }
+  ],
+  "rep_widths": [
+    { "attributes": { "globalid": "{dddddddd-dddd-dddd-dddd-dddddddddddd}", "parentglobalid": "{11111111-1111-1111-1111-111111111111}", "width_id": 1, "wet_width": 3.0, "bed_width": 3.5, "bankfull_width": 4.0 } },
+    { "attributes": { "globalid": "{eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee}", "parentglobalid": "{11111111-1111-1111-1111-111111111111}", "width_id": 2, "wet_width": 3.4, "bed_width": 3.8, "bankfull_width": 4.2 } }
+  ]
+}

@@ -1,0 +1,23 @@
+# secrets
+.env
+.Renviron
+!.Renviron.example
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+shiny_app/rsconnect/
+
+# OS
+.DS_Store
+Thumbs.db
