@@ -1,11 +1,20 @@
 """
 FastAPI webhook receiver for Survey123 (efish_neps_v8) submissions.
 
-See esri.py's module docstring for the open risk this endpoint is designed
-around: whether ArcGIS Online delivers the full nested submission tree in a
-single webhook POST, or fires separately per edited sub-layer. Both cases
-funnel through `normalize_payload()` into the same `NormalizedSubmission`
-shape before insertion.
+Confirmed against a live webhook (see esri.py's module docstring for
+citations): the hosted-feature-layer webhook sends a compact per-layer
+change notification (not the full submission), up to 5 times per Survey123
+submission (once per touched layer: event, rep_pass, rep_fish, rep_photos,
+rep_widths). `normalize_payload()` resolves each notification to its
+event's globalid via `esri.resolve_event_global_id()`, then pulls that
+event's complete current tree via `esri.fetch_full_submission()`. Because
+crud.py's upserts are all `ON CONFLICT (global_id) DO UPDATE`, reprocessing
+the same event 5x (once per notification) is safe and self-healing rather
+than something that needs de-duplicating.
+
+The `GET /webhook/survey123` route below is Esri's CRC (Challenge-Response
+Check) handshake, performed at webhook creation AND "regularly" thereafter
+per Esri's docs — it must stay live permanently, not just during setup.
 """
 
 from __future__ import annotations
@@ -51,6 +60,14 @@ async def healthz():
     return {"status": "ok"}
 
 
+@app.get("/webhook/survey123")
+async def crc_challenge(crc_token: str, esri_mod=Depends(get_esri)):
+    """Esri's CRC handshake — sent at webhook creation and periodically
+    thereafter. Must respond within 5s or AGOL considers the webhook invalid
+    and stops delivering events. See esri.py's module docstring."""
+    return {"response_token": esri_mod.compute_crc_response_token(crc_token)}
+
+
 def _attrs(feature) -> dict:
     """Accepts either a bare attributes dict (our own assembled envelope shape,
     matching test fixtures) or an Esri {"attributes": {...}} feature wrapper
@@ -58,37 +75,17 @@ def _attrs(feature) -> dict:
     return feature["attributes"] if isinstance(feature, dict) and "attributes" in feature else feature
 
 
-def _extract_event_global_id(payload: dict) -> str:
-    """
-    Best-effort extraction of the event's globalid from a single-layer-edit
-    style webhook delivery. The exact envelope AGOL sends for this case is
-    UNCONFIRMED (see esri.py docstring / tests/README_e2e.md) — this covers
-    a couple of plausible shapes and should be adjusted once a real payload
-    is captured from a live webhook.
-    """
-    for key in ("events", "adds", "edits", "features"):
-        group = payload.get(key)
-        if not group:
-            continue
-        items = group if isinstance(group, list) else [group]
-        for item in items:
-            features = item.get("features") if isinstance(item, dict) else None
-            features = features or ([item] if isinstance(item, dict) and "attributes" in item else None)
-            if features:
-                attrs = _attrs(features[0])
-                gid = attrs.get("parentglobalid") or attrs.get("globalid")
-                if gid:
-                    return normalize_guid(gid)
-    raise ValueError("Could not locate event globalid in webhook payload; unrecognized envelope shape")
-
-
 async def normalize_payload(payload: dict, esri_mod) -> NormalizedSubmission:
     if "event" in payload and "rep_pass" in payload:
+        # Our own assembled envelope shape (used by tests/fixtures) — parse directly.
         tree = payload
-    else:
-        event_global_id = _extract_event_global_id(payload)
+    elif "layerId" in payload and "changesUrl" in payload:
+        # Real AGOL feature-layer webhook notification (see esri.py docstring).
         token = await esri_mod.get_token()
+        event_global_id = await esri_mod.resolve_event_global_id(payload, token)
         tree = await esri_mod.fetch_full_submission(event_global_id, token)
+    else:
+        raise ValueError(f"Unrecognized webhook payload shape: keys={sorted(payload.keys())}")
 
     event_feature = tree["event"]
     event = EventAttributes.model_validate(_attrs(event_feature))
@@ -150,7 +147,7 @@ async def receive_survey123(
     raw = await request.body()
     settings = get_settings()
     if settings.environment != "development" and not esri_mod.verify_webhook_signature(
-        raw, request.headers.get("x-esri-webhook-signature", "")
+        raw, request.headers.get("x-esriHook-Signature", "")
     ):
         raise HTTPException(status_code=401, detail="invalid signature")
 

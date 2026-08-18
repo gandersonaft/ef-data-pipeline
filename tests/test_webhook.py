@@ -2,9 +2,21 @@ import json
 
 from httpx import ASGITransport, AsyncClient
 
+from app import esri
 from app.db import get_pool
 from app.main import app, get_esri, get_storage
 from tests.conftest import FakeConnection, FakePool
+
+
+async def test_crc_challenge_returns_expected_response_token(client):
+    """Esri's webhook validation handshake -- get this wrong and AGOL stops
+    delivering events entirely, so it's worth pinning down exactly."""
+    resp = await client.get("/webhook/survey123", params={"crc_token": "abc123"})
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["response_token"] == esri.compute_crc_response_token("abc123")
+    assert body["response_token"].startswith("sha256=")
 
 
 async def test_happy_path_insert(client, sample_payload):
@@ -93,6 +105,16 @@ async def test_attachment_download_and_upload(client, mock_esri, mock_storage, s
         path = args[2]
         assert path.startswith("electrofishing/2026/Creran2/")
         assert path.endswith(".jpg")
+
+
+async def test_unrecognized_payload_shape_rejected(client, fake_conn):
+    """Neither our own test-envelope shape nor a real AGOL layerId/changesUrl
+    notification -- should be rejected, not raise an unhandled 500."""
+    resp = await client.post("/webhook/survey123", content=json.dumps({"something": "else"}))
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["status"] == "rejected"
 
 
 async def test_malformed_payload_rejected(client, fake_conn):

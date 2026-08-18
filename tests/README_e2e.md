@@ -2,74 +2,67 @@
 
 The pytest suite (`test_webhook.py`/`test_qc.py`) mocks Postgres, ArcGIS, and Supabase Storage entirely,
 so it never needs live credentials. This document covers the separate, manual step of testing against a
-**real** Survey123 submission — which is also how you resolve the biggest open unknown in this project:
-**whether ArcGIS Online delivers the full nested submission tree in a single webhook POST, or fires
-separately per edited sub-layer** (see `app/esri.py`'s module docstring). The receiver is written to
-handle either case, but that needs confirming against a real delivery before you can trust the happy path
-in production.
+**real** Survey123 submission.
 
-## 1. Run the API locally
+The webhook payload shape, the CRC handshake, and the POST signature scheme are now **confirmed** (see
+`app/esri.py`'s module docstring and the "Confirmed AGOL webhook behavior" section in the top-level
+README) — this doc no longer needs to walk through discovering them, just how to exercise the pipeline
+end to end.
 
+## 1. Run the API
+
+Either locally with a tunnel, or against the deployed Render service — either works for this walkthrough.
+
+**Locally:**
 ```bash
 pip install -r app/requirements.txt
 cp .env.example .env   # fill in real DATABASE_URL / SUPABASE_* / ARCGIS_* / WEBHOOK_SHARED_SECRET
 uvicorn app.main:app --reload
+ngrok http 8000        # or: npx localtunnel --port 8000
 ```
+Note the public HTTPS URL ngrok/localtunnel gives you, e.g. `https://abcd1234.ngrok-free.app`.
 
-## 2. Expose it publicly
+**Or just use the deployed Render URL** if one already exists for this project — check with whoever set
+it up, or `https://ef-data-pipeline-webhook.onrender.com` if it's still the same service.
 
-```bash
-ngrok http 8000
-```
+## 2. Register the webhook in ArcGIS Online — manual prerequisite
 
-(or `npx localtunnel --port 8000`). Note the public HTTPS URL it gives you, e.g.
-`https://abcd1234.ngrok-free.app`.
+This is a setup step in ArcGIS Online that **cannot be automated by this codebase** — it has to be done
+through the AGOL UI against your own AGOL credentials, on the **feature layer item** (not a Survey123-
+item-level webhook — the two have different payload shapes, see the README):
 
-## 3. Register the webhook in ArcGIS Online — manual prerequisite
+1. Go to the `efish_neps_v8` hosted feature layer item in ArcGIS Online (item
+   `8533e51b881b43b4b7281ff5753d42e2`, "Electrofishing Data Entry Prototype V2").
+2. **Settings → Webhooks** → add a new webhook.
+3. Payload URL: `<your base URL>/webhook/survey123`.
+4. Select all layers/tables if possible (main layer, `rep_pass`, `rep_fish`, `rep_photos`, `rep_widths`)
+   — a single submission touches all of them, and each fires its own notification.
+5. Signing secret: the same value as `WEBHOOK_SHARED_SECRET` in your `.env`.
+6. Save. AGOL immediately sends a CRC validation `GET` to your payload URL — if the webhook shows as
+   enabled/active afterward, the handshake succeeded. If it doesn't, check your service logs for a `GET
+   /webhook/survey123?crc_token=...` request and what it returned; it must be `{"response_token":
+   "sha256=<base64 HMAC-SHA256(secret, crc_token)>"}` within 5 seconds.
 
-This is a one-time setup step in ArcGIS Online that **cannot be automated by this codebase** — it has to
-be done through the AGOL UI (or the REST admin `addWebhook` operation) against your own AGOL credentials:
-
-1. Go to the item `8533e51b881b43b4b7281ff5753d42e2` ("Electrofishing Data Entry Prototype V2") in
-   ArcGIS Online.
-2. Settings → Webhooks (or use the `addWebhook` REST admin operation directly against the feature
-   service).
-3. Set the payload URL to `https://abcd1234.ngrok-free.app/webhook/survey123`.
-4. Select the layers/events to trigger on (the main layer at minimum; ideally all of it — main layer,
-   `rep_pass`, `rep_fish`, `rep_photos`, `rep_widths` — so you can observe whichever delivery behavior AGOL
-   actually uses).
-5. Set a signing secret matching `WEBHOOK_SHARED_SECRET` in your `.env`. **The exact header name/scheme
-   AGOL uses for the signature is unconfirmed** — `app/esri.py`'s `verify_webhook_signature()` assumes a
-   hex-encoded HMAC-SHA256 in a header; check what AGOL's webhook config UI actually documents when you
-   set this up, and adjust `verify_webhook_signature()`/the header name read in `main.py` to match. (In
-   `ENVIRONMENT=development`, `main.py` skips signature verification entirely so you can test the rest of
-   the pipeline before this is nailed down.)
-
-## 4. Submit a real test survey
+## 3. Submit a real test survey
 
 Fill out and submit `efish_neps_v8` via the Survey123 field app (or the Survey123 web app), with at least
 2 passes and a few fish per pass, plus a site photo.
 
-## 5. Watch what actually arrives
+## 4. Watch what arrives
 
-Tail the `uvicorn` logs, and check the `webhook_log` table (`select * from webhook_log order by
-received_at desc limit 5;`) for the raw payload AGOL sent. Specifically check:
+Check the `webhook_log` table (`select id, received_at, status, error_detail from webhook_log order by
+received_at desc limit 10;`) — expect up to 5 rows for one submission (one per touched layer). Then check:
 
-- **Does the payload already contain `event`/`rep_pass`/`rep_fish`/`rep_photos`/`rep_widths` as a single
-  nested tree** (matching `tests/fixtures/sample_survey123_payload.json`'s shape), or does it only carry
-  a single edited layer/row, requiring the `esri.fetch_full_submission()` fallback in `main.py`'s
-  `normalize_payload()`?
-- If it's the fallback case: does `_extract_event_global_id()` in `app/main.py` correctly locate the
-  event's globalid from the real envelope shape? This function currently makes a best-effort guess at a
-  couple of plausible shapes — update it once you've seen a real payload.
-- Is `globalid`/`GlobalID` field casing what `app/models.py` assumes (lowercase)? Adjust the Pydantic
-  field aliases if not.
 - Did the resulting rows in `electrofishing_events`, `electrofishing_runs`, `fish_records`,
-  `site_photos`, `site_width_measurements` look right, and did the uploaded photo land in Supabase
-  Storage at the expected `electrofishing/{year}/{site_code}/{global_id}.{ext}` path?
+  `site_photos`, `site_width_measurements` look right?
+- Did the uploaded photo land in Supabase Storage at the expected
+  `electrofishing/{year}/{site_code}/{global_id}.{ext}` path, and does a signed URL for it resolve?
+- Is `electrofishing_events.qc_status`/`qc_flags` populated as expected given what you submitted?
+- Any rows with `status='error'`? Check `error_detail` — `scripts/reprocess_webhook_log.py` can replay
+  them once the underlying issue is fixed.
 
-## 6. Iterate
+## 5. Iterate
 
-Fix whatever the real payload shape reveals, resubmit, and repeat until a live Survey123 submission
-round-trips cleanly end to end (event inserted, runs/fish inserted, photo uploaded and a `site_photos` row
-created, QC flags computed correctly).
+Fix whatever a real submission reveals, resubmit, and repeat until it round-trips cleanly — event
+inserted, runs/fish inserted, photo uploaded and a `site_photos` row created, QC flags computed
+correctly, and no `status='error'` rows left behind.

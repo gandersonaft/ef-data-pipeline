@@ -147,6 +147,8 @@ def mock_esri():
     m.get_token = AsyncMock(return_value="fake-token")
     m.verify_webhook_signature = MagicMock(return_value=True)
     m.normalize_guid = esri.normalize_guid
+    m.compute_crc_response_token = esri.compute_crc_response_token
+    m.resolve_event_global_id = AsyncMock(return_value="11111111-1111-1111-1111-111111111111")
     m.list_attachments = AsyncMock(
         return_value=[esri.AttachmentMeta(attachment_id="1", name="photo.jpg", content_type="image/jpeg")]
     )
