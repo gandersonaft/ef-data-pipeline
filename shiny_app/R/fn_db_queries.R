@@ -131,6 +131,13 @@ sites_for_events <- function(pool, event_ids) {
     dplyr::collect()
 }
 
+distinct_projects <- function(pool) {
+  tbl_projects(pool) |>
+    dplyr::select(project_id, project_code, project_name) |>
+    dplyr::arrange(project_code) |>
+    dplyr::collect()
+}
+
 flagged_events <- function(pool) {
   tbl_events(pool) |>
     dplyr::filter(qc_status == "flagged") |>
@@ -149,12 +156,25 @@ events_browser <- function(pool, event_ids) {
   if (length(event_ids) == 0) {
     return(tibble::tibble())
   }
-  tbl_events(pool) |>
+  df <- tbl_events(pool) |>
     dplyr::filter(event_id %in% !!event_ids) |>
     dplyr::left_join(tbl_projects(pool) |> dplyr::select(project_id, project_code), by = "project_id") |>
     dplyr::select(event_id, site_code, catchment, survey_date, project_id, project_code, qc_status) |>
     dplyr::arrange(dplyr::desc(survey_date)) |>
     dplyr::collect()
+
+  # event_id/project_id are Postgres bigint -> collect() returns them as
+  # bit64::integer64. Plain R operations that don't dispatch to bit64's own
+  # S3 methods (base for-loops, intersect(), etc.) silently reinterpret the
+  # 64-bit bit pattern as a double, corrupting the value (confirmed
+  # 2026-08-19: iterating event_ids in a for loop produced
+  # "1.2351641146031164e-322" instead of a real id). Converting to plain
+  # integer here, once, matches filtered_event_ids()'s established fix for
+  # the exact same issue -- neither id will realistically exceed 32-bit
+  # range for this application.
+  df$event_id <- as.integer(df$event_id)
+  df$project_id <- as.integer(df$project_id)
+  df
 }
 
 #' All fish for one event, across every pass -- deliberately ignores the

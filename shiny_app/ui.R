@@ -25,6 +25,7 @@ ui <- bslib::page_navbar(
   bslib::nav_panel("Length-Frequency & Condition", mod_length_condition_ui("length_condition")),
   bslib::nav_panel("QC & Photo Review", mod_qc_review_ui("qc_review")),
   bslib::nav_panel("Survey Detail", mod_survey_detail_ui("survey_detail")),
+  bslib::nav_panel("Project Tagging", mod_project_tagging_ui("project_tagging")),
   bslib::nav_panel("Site Map", mod_site_map_ui("site_map")),
   header = tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),

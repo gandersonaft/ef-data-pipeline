@@ -39,5 +39,6 @@ server <- function(input, output, session) {
   mod_length_condition_server("length_condition", filtered_events, db_pool)
   mod_qc_review_server("qc_review", db_pool)
   mod_survey_detail_server("survey_detail", filtered_events, db_pool, db_pool_editor)
+  mod_project_tagging_server("project_tagging", filtered_events, db_pool, db_pool_editor)
   mod_site_map_server("site_map", filtered_events, db_pool)
 }

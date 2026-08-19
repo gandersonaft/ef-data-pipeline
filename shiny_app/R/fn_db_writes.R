@@ -53,12 +53,20 @@ delete_fish_record <- function(pool_editor, fish_id) {
   )
 }
 
+#' One UPDATE per event_id, not a single `= any($2)` call -- RPostgres's
+#' dbBind() treats every element of `params` as a same-length batch-execution
+#' vector, not "this one param is itself an array", so passing a multi-
+#' element event_ids vector alongside a length-1 project_id fails with
+#' "Parameter 2 does not have length 1" (confirmed 2026-08-19). A loop is
+#' simple and avoids relying on RPostgres's array-literal binding at all.
 assign_project_to_events <- function(pool_editor, event_ids, project_id) {
-  DBI::dbExecute(
-    pool_editor,
-    "update electrofishing_events set project_id = $1 where event_id = any($2)",
-    params = list(project_id, event_ids)
-  )
+  for (event_id in event_ids) {
+    DBI::dbExecute(
+      pool_editor,
+      "update electrofishing_events set project_id = $1 where event_id = $2",
+      params = list(project_id, event_id)
+    )
+  }
 }
 
 upsert_project <- function(pool_editor, project_code, project_name, client_name, start_date, end_date, notes) {
