@@ -19,11 +19,13 @@ create extension if not exists pgcrypto;
 drop table if exists
     poll_state,
     webhook_log,
+    neps_tool_results,
     fish_records,
     electrofishing_runs,
     site_photos,
     site_width_measurements,
     electrofishing_events,
+    survey_projects,
     sites
 cascade;
 
@@ -64,6 +66,24 @@ create index idx_sites_geom_4326  on sites using gist (geom_4326);
 create index idx_sites_catchment  on sites (catchment);
 
 -- ============================================================================
+-- survey_projects — project/contract grouping tag, independent of catchment
+-- /site (does not filter site selection). NOT the same as `public.projects`,
+-- an unrelated, unused 2025 prototype table left untouched elsewhere in this
+-- project.
+-- ============================================================================
+create table survey_projects (
+    project_id      bigint generated always as identity primary key,
+    project_code    text not null unique,
+    project_name    text not null,
+    client_name     text,
+    start_date      date,
+    end_date        date,
+    notes           text,
+    created_at      timestamptz not null default now(),
+    updated_at      timestamptz not null default now()
+);
+
+-- ============================================================================
 -- electrofishing_events — main survey layer (1 row per Survey123 submission)
 -- ============================================================================
 create table electrofishing_events (
@@ -74,6 +94,7 @@ create table electrofishing_events (
     site_id                 bigint references sites(site_id) on delete set null,
     site_code               text not null,             -- denormalized: site_code (calc)
     site_type               text not null check (site_type in ('existing', 'new')),
+    project_id              bigint references survey_projects(project_id) on delete set null,
 
     catchment                text,                       -- catchment (event's own answer, independent of site)
     river_name               text,                       -- river_name (calc)
@@ -145,8 +166,17 @@ create index idx_events_site_id     on electrofishing_events (site_id);
 create index idx_events_survey_date on electrofishing_events (survey_date);
 create index idx_events_catchment   on electrofishing_events (catchment);
 create index idx_events_qc_status   on electrofishing_events (qc_status);
+create index idx_events_project_id  on electrofishing_events (project_id);
 create index idx_events_location    on electrofishing_events using gist (location);
 create index idx_events_geom_27700  on electrofishing_events using gist (geom_27700);
+
+-- Seed with the real projects recovered from the old (unused) prototype
+-- public.projects table -- see supabase/migrations/0001_project_fish_edit_neps.sql
+-- and scripts/add_project_question.py (XLSForm choices slugs must match).
+insert into survey_projects (project_code, project_name, client_name, start_date, end_date) values
+    ('unassigned', 'Unassigned', null, null, null),
+    ('sos_emp_2025', 'SoS EMP 2025', 'Mowi', '2025-08-13', '2025-10-24'),
+    ('knapdale_beaver', 'Knapdale Beaver Project', 'Nature.Scot', '2025-10-03', '2025-11-02');
 
 -- ============================================================================
 -- site_width_measurements — rep_widths repeat (direct child of main layer)
@@ -241,11 +271,66 @@ create table fish_records (
 
     qc_flag                    jsonb not null default '[]'::jsonb,
 
-    created_at                  timestamptz not null default now()
+    created_at                  timestamptz not null default now(),
+    updated_at                  timestamptz not null default now(),
+
+    -- Soft delete only -- shiny_editor never gets real DELETE on this table.
+    -- Every read must filter deleted_at is null (enforced once in
+    -- shiny_app's tbl_fish() wrapper, not left to each caller).
+    deleted_at                  timestamptz
 );
 create index idx_fish_records_run_id            on fish_records (run_id);
 create index idx_fish_records_species           on fish_records (species);
 create index idx_fish_records_species_lifestage on fish_records (species, lifestage);
+
+-- ============================================================================
+-- neps_tool_results — imported results from the Marine Directorate NEPS
+-- Electrofishing Data Analysis Tool. No event_id/global_id join available
+-- from the external tool's output -- keyed on (site_name, survey_date,
+-- species, lifestage) instead. Inherent limitation if two events share the
+-- same site+date (rare), not a bug.
+-- ============================================================================
+create table neps_tool_results (
+    result_id                       bigint generated always as identity primary key,
+    site_name                       text not null,
+    site_id                         bigint references sites(site_id) on delete set null,
+    easting                         integer,
+    northing                        integer,
+    ha_name                         text,
+    ctm_name                        text,
+    ctm_code                        text,
+    river_order                     integer,
+    survey_date                     date not null,
+    species                         text check (species in ('salmon','trout')),
+    lifestage                       text check (lifestage in ('fry','parr')),
+    area                            numeric(8,1),
+    mean_length                     numeric(6,1),
+    mean_width                      numeric(6,2),
+    density_predictions_successful  boolean,
+    total_number_passes_warning     text,
+    missing_pass_warning            text,
+    nearest_river_distance          numeric(10,2),
+    distance_warning                text,
+    confluence_warning              text,
+    organisation                    text,
+    organisation_team               text,
+    organisation_warnings           text,
+    predictor_warnings              text,
+    predictor_warnings_detailed     text,
+    fished_area_warnings            text,
+    total_number_passes             integer,
+    counts                          text,
+    probs                           text,
+    observed_density                numeric(10,4),
+    benchmark                       numeric(10,4),
+    density_difference              numeric(10,4),
+    density_per_difference          numeric(10,4),
+    benchmark_warnings              text,
+    imported_at                     timestamptz not null default now(),
+    unique (site_name, survey_date, species, lifestage)
+);
+create index idx_neps_results_site_id     on neps_tool_results (site_id);
+create index idx_neps_results_survey_date on neps_tool_results (survey_date);
 
 -- ============================================================================
 -- webhook_log — operational log/replay queue for /webhook/survey123 deliveries
@@ -317,4 +402,12 @@ create trigger trg_sites_touch_updated_at
 
 create trigger trg_events_touch_updated_at
     before update on electrofishing_events
+    for each row execute function fn_touch_updated_at();
+
+create trigger trg_survey_projects_touch_updated_at
+    before update on survey_projects
+    for each row execute function fn_touch_updated_at();
+
+create trigger trg_fish_records_touch_updated_at
+    before update on fish_records
     for each row execute function fn_touch_updated_at();

@@ -23,6 +23,7 @@ ui <- bslib::page_navbar(
   bslib::nav_panel("Depletion & Density", mod_depletion_ui("depletion")),
   bslib::nav_panel("Length-Frequency & Condition", mod_length_condition_ui("length_condition")),
   bslib::nav_panel("QC & Photo Review", mod_qc_review_ui("qc_review")),
+  bslib::nav_panel("Site Map", mod_site_map_ui("site_map")),
   header = tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
     # Confirmed 2026-08-18: a DT output inside a bslib::nav_panel that isn't

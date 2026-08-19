@@ -14,6 +14,7 @@ library(glue)
 library(httr2)
 library(tidyr)
 library(purrr)
+library(leaflet)
 # jsonlite is deliberately NOT attached with library() -- it masks
 # shiny::validate() with jsonlite::validate(), silently breaking every
 # empty-state validate(need(...)) call in the mod_*.R files. Used namespaced
@@ -46,3 +47,4 @@ source("R/fn_depletion.R")
 source("R/mod_depletion.R")
 source("R/mod_length_condition.R")
 source("R/mod_qc_review.R")
+source("R/mod_site_map.R")

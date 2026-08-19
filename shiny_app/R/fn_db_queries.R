@@ -105,6 +105,28 @@ runs_for_events <- function(pool, event_ids) {
     dplyr::collect()
 }
 
+#' One row per site among the given event_ids, with WGS84 lon/lat (already
+#' ready for leaflet -- no CRS conversion needed, see sites.lon/sites.lat in
+#' supabase/schema.sql) and a small popup summary.
+sites_for_events <- function(pool, event_ids) {
+  if (length(event_ids) == 0) {
+    return(tibble::tibble())
+  }
+
+  tbl_events(pool) |>
+    dplyr::filter(event_id %in% !!event_ids, !is.na(site_id)) |>
+    dplyr::group_by(site_id) |>
+    dplyr::summarise(
+      last_survey_date = max(survey_date, na.rm = TRUE),
+      event_count = dplyr::n(),
+      .groups = "drop"
+    ) |>
+    dplyr::inner_join(tbl_sites(pool), by = "site_id") |>
+    dplyr::filter(!is.na(lon), !is.na(lat)) |>
+    dplyr::select(site_id, site_code, site_label, catchment, lon, lat, last_survey_date, event_count) |>
+    dplyr::collect()
+}
+
 flagged_events <- function(pool) {
   tbl_events(pool) |>
     dplyr::filter(qc_status == "flagged") |>
