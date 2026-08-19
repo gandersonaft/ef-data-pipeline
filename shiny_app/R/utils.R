@@ -24,6 +24,30 @@ humanize_slug <- function(slug) {
     tools::toTitleCase()
 }
 
+#' Derive fry/parr where the real answer is missing but can be inferred from
+#' length vs this event's own cutoff -- confirmed with the user 2026-08-19:
+#' fry is strictly below the cutoff, parr is at or above it. Only salmon/trout
+#' have a fry/parr concept at all (sal_fry_parr_cutoff_mm/trt_fry_parr_cutoff_mm
+#' are the only two cutoffs captured on the form); every other species passes
+#' through unchanged. A real, user-entered lifestage is NEVER overridden --
+#' this only fills the gap for the ~802/803 salmon/trout records that have
+#' none (confirmed 2026-08-19: the form's own fry/parr question is almost
+#' never actually answered in the field). Deliberately query-time only, not
+#' written back to fish_records.lifestage -- the raw stored NULL still
+#' honestly reflects "never directly answered"; only display/export/grouping
+#' see the derived value.
+derive_lifestage <- function(species, lifestage, length_mm, sal_cutoff, trt_cutoff) {
+  cutoff <- dplyr::case_when(
+    species == "sal" ~ sal_cutoff,
+    species == "trt" ~ trt_cutoff,
+    TRUE ~ NA_real_
+  )
+  derived <- dplyr::if_else(!is.na(length_mm) & !is.na(cutoff),
+                             dplyr::if_else(length_mm < cutoff, "fry", "parr"),
+                             NA_character_)
+  dplyr::coalesce(lifestage, derived)
+}
+
 empty_state <- function(message) {
   div(
     class = "ef-empty-state",

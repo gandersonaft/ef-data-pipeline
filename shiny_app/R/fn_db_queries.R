@@ -90,7 +90,9 @@ fish_for_events <- function(pool, event_ids) {
       site_code, survey_date, catchment, area_m2,
       sal_fry_parr_cutoff_mm, trt_fry_parr_cutoff_mm
     ) |>
-    dplyr::collect()
+    dplyr::collect() |>
+    dplyr::mutate(lifestage = derive_lifestage(species, lifestage, length_mm,
+                                                sal_fry_parr_cutoff_mm, trt_fry_parr_cutoff_mm))
 }
 
 #' Every pass actually conducted for the given events -- (event_id, run_id,
