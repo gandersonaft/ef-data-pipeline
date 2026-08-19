@@ -1,10 +1,14 @@
-# Tab 3: QC & Photo Review. Read-only in v1 (per design decision) -- a "mark
-# reviewed" write-back is deferred: it needs a write-capable DB role, a
-# reviewer identity, and an audit trail, none of which exist yet.
+# Sub-tab: QC Review (inside Projects, see mod_projects.R). Read-only in v1
+# (per design decision) -- a "mark reviewed" write-back is deferred: it needs
+# a write-capable DB role, a reviewer identity, and an audit trail, none of
+# which exist yet.
 #
-# Photos are event-level (site_photos), not per-fish -- selecting a flagged
-# event shows every photo taken at that site visit, not just the one flagged
-# run/fish.
+# List-only, no inline photo gallery -- clicking a flagged event drills down
+# into the Survey Detail tab instead (which already has its own Photos
+# sub-tab), per the approved dashboard restructure: "drill-down is the
+# connective tissue" replacing duplicated inline detail views. See
+# go_to_survey_detail() in server.R for the actual nav-switch + event
+# preselect mechanism.
 
 format_qc_flags <- function(flags_json) {
   flags <- tryCatch(jsonlite::fromJSON(flags_json), error = function(e) NULL)
@@ -21,14 +25,12 @@ format_qc_flags <- function(flags_json) {
 mod_qc_review_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    DT::dataTableOutput(ns("flagged_table")),
-    hr(),
-    h4("Photos for selected event"),
-    uiOutput(ns("photo_gallery"))
+    p(class = "text-muted small", "Click a flagged event to open it in Survey Detail (site details, fish records, photos)."),
+    DT::dataTableOutput(ns("flagged_table"))
   )
 }
 
-mod_qc_review_server <- function(id, pool) {
+mod_qc_review_server <- function(id, pool, go_to_survey_detail) {
   moduleServer(id, function(input, output, session) {
     flagged <- reactive({
       flagged_events(pool)
@@ -53,45 +55,13 @@ mod_qc_review_server <- function(id, pool) {
           options = list(pageLength = 10, columnDefs = list(list(visible = FALSE, targets = 0)))
         )
     })
-
-    selected_event_id <- reactive({
-      df <- flagged()
-      idx <- input$flagged_table_rows_selected
-      if (is.null(idx) || nrow(df) == 0) {
-        return(NULL)
-      }
-      df$event_id[idx]
-    })
-
-    output$photo_gallery <- renderUI({
-      event_id <- selected_event_id()
-      if (is.null(event_id)) {
-        return(empty_state("Select a flagged event above to view its site photos."))
-      }
-
-      photos <- site_photos_for_event(pool, event_id)
-      if (nrow(photos) == 0) {
-        return(empty_state("No photos were attached to this site visit."))
-      }
-
-      tagList(lapply(seq_len(nrow(photos)), function(i) {
-        url <- sign_photo_url(photos$storage_path[i])
-        div(
-          style = "display: inline-block; margin: 0.5rem; text-align: center;",
-          if (!is.na(url)) {
-            tags$img(src = url, style = "max-width: 300px; max-height: 300px; border-radius: 4px;")
-          } else {
-            empty_state("Could not sign photo URL.")
-          },
-          tags$div(photos$caption[i])
-        )
-      }))
-    })
-
-    # See mod_length_condition.R for why: outputs in a non-default
-    # bslib::nav_panel tab can otherwise never receive the signal to start
-    # computing at all.
     outputOptions(output, "flagged_table", suspendWhenHidden = FALSE)
-    outputOptions(output, "photo_gallery", suspendWhenHidden = FALSE)
+
+    observeEvent(input$flagged_table_rows_selected, {
+      idx <- input$flagged_table_rows_selected
+      req(idx)
+      event_id <- flagged()$event_id[idx]
+      go_to_survey_detail(paste0("live-", event_id))
+    })
   })
 }

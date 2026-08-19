@@ -1,6 +1,7 @@
 ui <- bslib::page_navbar(
+  id = "main_nav",
   title = "NEPS Electrofishing",
-  theme = bslib::bs_theme(version = 5),
+  theme = ef_theme,
   sidebar = bslib::sidebar(
     title = "Filters",
     selectInput("catchment", "Catchment", choices = NULL, multiple = TRUE),
@@ -20,13 +21,8 @@ ui <- bslib::page_navbar(
     ),
     actionButton("reset_filters", "Reset filters")
   ),
-  bslib::nav_panel("Depletion & Density", mod_depletion_ui("depletion")),
-  bslib::nav_panel("Trends & Reports", mod_trends_ui("trends")),
-  bslib::nav_panel("Length-Frequency & Condition", mod_length_condition_ui("length_condition")),
-  bslib::nav_panel("QC & Photo Review", mod_qc_review_ui("qc_review")),
+  bslib::nav_panel("Projects", mod_projects_ui("projects")),
   bslib::nav_panel("Survey Detail", mod_survey_detail_ui("survey_detail")),
-  bslib::nav_panel("Project Tagging", mod_project_tagging_ui("project_tagging")),
-  bslib::nav_panel("NEPS Tool Export/Import", mod_neps_tool_ui("neps_tool")),
   bslib::nav_panel("Site Map", mod_site_map_ui("site_map")),
   header = tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),

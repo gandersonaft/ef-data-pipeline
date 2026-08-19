@@ -1,29 +1,38 @@
-# Tab: Survey Detail. Pick a survey event (any qc_status -- unlike the QC
-# tab's flagged-only picker), then see/edit everything about it: full site
-# details (every field captured on the form, displayed read-only, grouped by
-# the form's own section headings), editable fish records across all passes,
-# and its photo gallery (reusing mod_qc_review.R's pattern, now reachable
-# for any event, not just flagged ones).
+# Tab: Survey Detail. Pick a survey event -- LIVE (any qc_status, unlike the
+# QC tab's flagged-only picker) or HISTORICAL (SFCC/Rockpool archive, see
+# fn_unified_queries.R) -- then see everything about it. Opens on a Summary
+# sub-tab (KPIs + scoped length-frequency) by default, per the approved
+# mockup (mockups/dashboard-restructure-v4.html), then Site Details, Fish
+# Records, Photos.
 #
-# Timestamp-only audit (updated_at) -- no reviewer identity or audit log yet
-# (tech-demo phase; see fn_db_writes.R header comment for why this isn't a
-# blocker). "Delete" is a soft delete (deleted_at) -- labelled "Hide" in the
-# UI, not "Delete", so that's not misleading.
+# Historical events are READ-ONLY: no fish editing, no project tagging, no
+# photos (the legacy Rockpool workflow never captured them). They're listed
+# alongside live events in the same picker (event_key "live-<id>"/"hist-<id>"
+# avoids collisions), not a separate 4th tab, per HANDOFF.md's instruction.
+# The picker does NOT apply the sidebar's catchment/site filters to
+# historical rows -- those dropdowns are populated from live slugs that don't
+# map onto SFCC's own free-text catchment values -- only live events respect
+# the full sidebar filter set (same scope decision already made for Site Map
+# in fn_unified_queries.R).
+#
+# Timestamp-only audit (updated_at) for live edits -- no reviewer identity or
+# audit log yet (tech-demo phase; see fn_db_writes.R header comment for why
+# this isn't a blocker). "Delete" is a soft delete (deleted_at) -- labelled
+# "Hide" in the UI, not "Delete", so that's not misleading.
+
+#' Shared row-label/value renderer for the Site Details grouped display.
+kv <- function(label, value) {
+  if (is.null(value) || length(value) == 0 || is.na(value)) value <- "—"
+  tags$div(
+    class = "row mb-1",
+    tags$div(class = "col-5 col-md-4 text-muted", label),
+    tags$div(class = "col-7 col-md-8", as.character(value))
+  )
+}
+section <- function(title, ...) tagList(h5(title, class = "mt-3"), ...)
 
 #' @param row A single-row tibble from event_full_detail().
 render_event_detail <- function(row) {
-  kv <- function(label, value) {
-    if (is.null(value) || length(value) == 0 || is.na(value)) value <- "—"
-    tags$div(
-      class = "row mb-1",
-      tags$div(class = "col-5 col-md-4 text-muted", label),
-      tags$div(class = "col-7 col-md-8", as.character(value))
-    )
-  }
-  section <- function(title, ...) {
-    tagList(h5(title, class = "mt-3"), ...)
-  }
-
   tagList(
     section("Site Details",
       kv("Site", row$site_code), kv("Site type", row$site_type),
@@ -68,6 +77,46 @@ render_event_detail <- function(row) {
   )
 }
 
+#' @param row A single-row tibble from historical_event_full_detail().
+render_historical_event_detail <- function(row) {
+  tagList(
+    section("Site Details",
+      kv("Site", row$site_code), kv("Method", row$method), kv("Planned runs", row$planned_runs),
+      kv("Survey date", format(row$survey_date, "%Y-%m-%d")),
+      kv("Easting", row$easting), kv("Northing", row$northing)
+    ),
+    section("Team & Equipment",
+      kv("Water temp (°C)", row$water_temp_c), kv("Conductivity (µS/cm)", row$conductivity_us),
+      kv("Water height", row$water_height), kv("Water clarity", row$water_clarity),
+      kv("Team lead", row$team_lead), kv("Staff count", row$staff_count),
+      kv("Equipment", row$equipment), kv("Volts", row$volts)
+    ),
+    section("Site Dimensions",
+      kv("Reach length (m)", row$reach_length_m), kv("Wetted width (m)", row$wetted_width_m),
+      kv("Bed width (m)", row$bed_width_m), kv("Bank width (m)", row$bank_width_m),
+      kv("Area (m²)", row$area_m2)
+    ),
+    section("Habitat",
+      kv("Substrate: bedrock", row$sub_be), kv("Substrate: boulder", row$sub_bo),
+      kv("Substrate: cobble", row$sub_co), kv("Substrate: pebble", row$sub_pe),
+      kv("Substrate: gravel", row$sub_gr), kv("Substrate: sand", row$sub_sa),
+      kv("Substrate: silt", row$sub_si), kv("Substrate: hollow/other", row$sub_ho),
+      kv("Flow: smooth", row$flow_sm), kv("Flow: deep pool", row$flow_dp),
+      kv("Flow: shallow pool", row$flow_sp), kv("Flow: deep glide", row$flow_dg),
+      kv("Flow: shallow glide", row$flow_sg), kv("Flow: run", row$flow_ru),
+      kv("Flow: riffle", row$flow_ri), kv("Flow: torrent", row$flow_to)
+    ),
+    section("Notes",
+      kv("Pollution observed", row$pollution_observed), kv("Pollution notes", row$pollution_notes),
+      kv("Stocking observed", row$stocking_observed), kv("Stocking notes", row$stocking_notes)
+    ),
+    section("Provenance (SFCC archive)",
+      kv("SFCC event trust", row$event_trust), kv("SFCC event status", row$event_status),
+      kv("Individual fish data available", row$has_individual_fish_data)
+    )
+  )
+}
+
 mod_survey_detail_ui <- function(id) {
   ns <- NS(id)
   picker_id <- ns("picker_wrapper")
@@ -90,65 +139,236 @@ mod_survey_detail_ui <- function(id) {
         )
       )
     ),
+    div(class = "text-muted small mb-1", "Teal = live survey event, grey = historical (SFCC archive) event."),
     div(id = picker_id, DT::dataTableOutput(ns("events_table"))),
     hr(),
     uiOutput(ns("detail_panel"))
   )
 }
 
-mod_survey_detail_server <- function(id, filtered_events, pool, pool_editor) {
+#' @param jump_to_event Reactive (reactiveVal from server.R) holding an
+#'   event_key ("live-<id>"/"hist-<id>") set by another tab's drill-down
+#'   click (see go_to_survey_detail() in server.R). Pre-selects that row in
+#'   the picker once it's present in combined_events_df() -- a NULL/no-op
+#'   value on ordinary loads.
+mod_survey_detail_server <- function(id, filtered_events, pool, pool_editor, jump_to_event) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    events_df <- reactive({ events_browser(pool, filtered_events()) })
-
-    output$events_table <- DT::renderDataTable({
-      df <- events_df()
-      validate(need(nrow(df) > 0, "No events match the current filters."))
+    live_events_df <- reactive({
+      df <- events_browser(pool, filtered_events())
+      if (nrow(df) == 0) return(tibble::tibble())
       df |>
         dplyr::transmute(
-          event_id, Site = site_code, Catchment = humanize_slug(catchment),
-          Date = format(survey_date, "%Y-%m-%d"), Project = dplyr::coalesce(project_code, "—"),
-          QC = qc_status
+          event_key = paste0("live-", event_id), source = "live", native_id = event_id,
+          site_code, catchment = humanize_slug(catchment), survey_date,
+          project_code = dplyr::coalesce(project_code, "—"), status_label = qc_status
+        )
+    })
+
+    # No sidebar-filter dependency -- see file header comment. Computed once
+    # per session (no reactive inputs to invalidate it), not re-pulled on
+    # every filter change.
+    historical_events_df <- reactive({
+      df <- historical_events_browser(pool)
+      if (nrow(df) == 0) return(tibble::tibble())
+      df |>
+        dplyr::transmute(
+          event_key, source, native_id = historical_event_id,
+          site_code, catchment = dplyr::coalesce(catchment, "—"), survey_date,
+          project_code = "—",
+          status_label = dplyr::if_else(has_individual_fish_data, "Archive (fish data)", "Archive (summary only)")
+        )
+    })
+
+    combined_events_df <- reactive({
+      dplyr::bind_rows(live_events_df(), historical_events_df()) |>
+        dplyr::arrange(dplyr::desc(survey_date))
+    })
+
+    output$events_table <- DT::renderDataTable({
+      df <- combined_events_df()
+      validate(need(nrow(df) > 0, "No events available."))
+      df |>
+        dplyr::transmute(
+          event_key, native_id,
+          Site = site_code, Catchment = catchment,
+          Date = format(survey_date, "%Y-%m-%d"),
+          Project = project_code, Status = status_label,
+          Source = dplyr::if_else(source == "live", "Live", "Historical (SFCC)")
         ) |>
         DT::datatable(
           rownames = FALSE, selection = "single",
-          options = list(pageLength = 10, columnDefs = list(list(visible = FALSE, targets = 0)))
+          options = list(pageLength = 10, columnDefs = list(list(visible = FALSE, targets = c(0, 1))))
         )
     })
     outputOptions(output, "events_table", suspendWhenHidden = FALSE)
 
-    selected_event_id <- reactive({
+    events_proxy <- DT::dataTableProxy("events_table")
+    observeEvent(jump_to_event(), {
+      key <- jump_to_event()
+      req(key)
+      df <- combined_events_df()
+      idx <- which(df$event_key == key)
+      if (length(idx) == 1) {
+        DT::selectRows(events_proxy, idx)
+      } else {
+        showNotification(
+          "That event is outside the current sidebar filters -- widen Catchment/Site/Date/Species to find it here.",
+          type = "warning"
+        )
+      }
+    }, ignoreInit = TRUE)
+
+    selected_event <- reactive({
       idx <- input$events_table_rows_selected
-      df <- events_df()
+      df <- combined_events_df()
       if (is.null(idx) || nrow(df) == 0) return(NULL)
-      df$event_id[idx]
+      df[idx, ]
+    })
+
+    # Live-only id, NULL for a historical selection -- every write-capable
+    # observer below (fish edit/add/hide) gates on this exactly as it did
+    # before historical events existed, so none of that logic needed to
+    # change.
+    selected_event_id <- reactive({
+      ev <- selected_event()
+      if (is.null(ev) || ev$source != "live") return(NULL)
+      ev$native_id
     })
 
     output$detail_panel <- renderUI({
-      event_id <- selected_event_id()
-      if (is.null(event_id)) {
+      ev <- selected_event()
+      if (is.null(ev)) {
         return(empty_state("Select an event above to view its details."))
       }
-      tabsetPanel(
-        tabPanel("Site Details", uiOutput(ns("site_details"))),
-        tabPanel("Fish Records",
-          DT::dataTableOutput(ns("fish_table")),
-          br(),
-          actionButton(ns("add_fish"), "Add fish"),
-          actionButton(ns("hide_fish"), "Hide selected row", class = "btn-outline-danger")
-        ),
-        tabPanel("Photos", uiOutput(ns("photo_gallery")))
-      )
+      if (ev$source == "live") {
+        tabsetPanel(
+          tabPanel("Summary", uiOutput(ns("summary_panel"))),
+          tabPanel("Site Details", uiOutput(ns("site_details"))),
+          tabPanel("Fish Records",
+            DT::dataTableOutput(ns("fish_table")),
+            br(),
+            actionButton(ns("add_fish"), "Add fish"),
+            actionButton(ns("hide_fish"), "Hide selected row", class = "btn-outline-danger")
+          ),
+          tabPanel("Photos", uiOutput(ns("photo_gallery")))
+        )
+      } else {
+        tagList(
+          div(class = "alert alert-secondary mt-2",
+              "This is a historical (SFCC archive) record migrated from the legacy Rockpool database. It's read-only -- editing, project tagging, and photos aren't available for archive events."),
+          tabsetPanel(
+            tabPanel("Summary", uiOutput(ns("summary_panel"))),
+            tabPanel("Site Details", uiOutput(ns("site_details"))),
+            tabPanel("Fish Records", uiOutput(ns("fish_table_historical_wrap"))),
+            tabPanel("Photos", uiOutput(ns("photo_gallery")))
+          )
+        )
+      }
     })
 
-    output$site_details <- renderUI({
-      event_id <- selected_event_id()
-      req(event_id)
-      row <- event_full_detail(pool, event_id)
-      validate(need(nrow(row) > 0, "Event not found."))
-      render_event_detail(row)
+    ## -- Summary sub-tab (both sources) ------------------------------------
+
+    output$summary_panel <- renderUI({
+      ev <- selected_event()
+      req(ev)
+      if (ev$source == "live") {
+        fish_df <- fish_for_events(pool, ev$native_id)
+        runs_df <- runs_for_events(pool, ev$native_id)
+        dep <- build_depletion_table(fish_df, runs_df)
+        tagList(
+          bslib::layout_column_wrap(
+            width = 1 / 3,
+            bslib::value_box(title = "Total fish caught", value = as.character(sum(fish_df$fish_multiplier, na.rm = TRUE)), theme = "primary"),
+            bslib::value_box(title = "Species x lifestage groups", value = as.character(nrow(dep)), theme = "secondary"),
+            bslib::value_box(title = "Passes", value = as.character(dplyr::n_distinct(fish_df$pass_no)), theme = "bg-light")
+          ),
+          if (nrow(dep) > 0) {
+            DT::datatable(
+              dep |> dplyr::transmute(
+                Species = species_label, Lifestage = lifestage_label, Catch = total_catch,
+                `N est` = round(n_est, 1), `N se` = round(n_se, 1),
+                `Density (fish/100m²)` = round(density_per_100m2, 1)
+              ),
+              rownames = FALSE, options = list(dom = "t")
+            )
+          } else {
+            empty_state("No fish records to summarise.")
+          },
+          if (nrow(fish_df) > 0) plotOutput(ns("summary_length_freq"), height = "300px")
+        )
+      } else {
+        fish_df <- historical_fish_for_event(pool, ev$native_id)
+        density_df <- historical_density_for_event(pool, ev$native_id)
+        run_counts_df <- historical_run_counts_for_event(pool, ev$native_id)
+        has_fish <- nrow(fish_df) > 0
+        tagList(
+          bslib::layout_column_wrap(
+            width = 1 / 3,
+            bslib::value_box(title = "Individual fish records", value = if (has_fish) as.character(nrow(fish_df)) else "None", theme = "primary"),
+            bslib::value_box(title = "Data available", value = if (has_fish) "Per-fish (SFCC export)" else "Aggregate counts only", theme = "secondary"),
+            bslib::value_box(title = "SFCC density estimates", value = as.character(nrow(density_df)), theme = "bg-light")
+          ),
+          if (nrow(density_df) > 0) {
+            tagList(
+              h5("SFCC's own Zippin / Carle-Strub estimates"),
+              DT::datatable(
+                density_df |> dplyr::transmute(
+                  Species = label_species(species), `Age class` = age_class,
+                  Zippin = round(zippin_estimate, 1), `Carle-Strub` = round(carle_strub_estimate, 1),
+                  `Avg length (mm)` = average_length_mm
+                ),
+                rownames = FALSE, options = list(dom = "t")
+              )
+            )
+          },
+          if (has_fish) {
+            plotOutput(ns("summary_length_freq"), height = "300px")
+          } else if (nrow(run_counts_df) > 0) {
+            tagList(
+              h5("Aggregate catch counts (no individual fish data for this event)"),
+              DT::datatable(
+                run_counts_df |> dplyr::transmute(Species = label_species(species), `Age class` = age_class, Run = run_no, Count = count),
+                rownames = FALSE, options = list(dom = "t")
+              )
+            )
+          } else {
+            empty_state("No catch data available for this historical event.")
+          }
+        )
+      }
     })
+
+    output$summary_length_freq <- renderPlot({
+      ev <- selected_event()
+      req(ev)
+      fish_df <- if (ev$source == "live") fish_for_events(pool, ev$native_id) else historical_fish_for_event(pool, ev$native_id)
+      validate(need(nrow(fish_df) > 0 && any(!is.na(fish_df$length_mm)), "No length data to plot."))
+      plot_df <- fish_df |> dplyr::mutate(species_label = label_species(species))
+      ggplot2::ggplot(plot_df, ggplot2::aes(x = length_mm, fill = species_label)) +
+        ggplot2::geom_histogram(binwidth = 5, position = "identity", alpha = 0.6) +
+        ggplot2::labs(x = "Length (mm)", y = "Count", fill = "Species") +
+        ggplot2::theme_minimal()
+    })
+
+    ## -- Site Details sub-tab (both sources) --------------------------------
+
+    output$site_details <- renderUI({
+      ev <- selected_event()
+      req(ev)
+      if (ev$source == "live") {
+        row <- event_full_detail(pool, ev$native_id)
+        validate(need(nrow(row) > 0, "Event not found."))
+        render_event_detail(row)
+      } else {
+        row <- historical_event_full_detail(pool, ev$native_id)
+        validate(need(nrow(row) > 0, "Event not found."))
+        render_historical_event_detail(row)
+      }
+    })
+
+    ## -- Fish Records sub-tab: LIVE (editable) ------------------------------
 
     fish_df <- reactiveVal(tibble::tibble())
     observeEvent(selected_event_id(), {
@@ -242,10 +462,46 @@ mod_survey_detail_server <- function(id, filtered_events, pool, pool_editor) {
       removeModal()
     })
 
+    ## -- Fish Records sub-tab: HISTORICAL (read-only) -----------------------
+
+    output$fish_table_historical_wrap <- renderUI({
+      ev <- selected_event()
+      req(ev, ev$source == "historical")
+      fish_n <- nrow(historical_fish_for_event(pool, ev$native_id))
+      run_n <- nrow(historical_run_counts_for_event(pool, ev$native_id))
+      if (fish_n == 0 && run_n == 0) {
+        return(empty_state("No fish or catch-count data available for this historical event."))
+      }
+      DT::dataTableOutput(ns("fish_table_historical"))
+    })
+
+    output$fish_table_historical <- DT::renderDataTable({
+      ev <- selected_event()
+      req(ev, ev$source == "historical")
+      fish_df <- historical_fish_for_event(pool, ev$native_id)
+      if (nrow(fish_df) > 0) {
+        fish_df |>
+          dplyr::transmute(
+            Run = run_no, Species = label_species(species), `Length (mm)` = length_mm,
+            `Age class` = age_class, Lifestage = unname(lifestage_labels[lifestage])
+          ) |>
+          DT::datatable(rownames = FALSE, options = list(pageLength = 15))
+      } else {
+        historical_run_counts_for_event(pool, ev$native_id) |>
+          dplyr::transmute(Species = label_species(species), `Age class` = age_class, Run = run_no, Count = count) |>
+          DT::datatable(rownames = FALSE, options = list(pageLength = 15))
+      }
+    })
+
+    ## -- Photos sub-tab (live only) ------------------------------------------
+
     output$photo_gallery <- renderUI({
-      event_id <- selected_event_id()
-      req(event_id)
-      photos <- site_photos_for_event(pool, event_id)
+      ev <- selected_event()
+      req(ev)
+      if (ev$source != "live") {
+        return(empty_state("Historical (SFCC archive) events have no photos -- photo capture wasn't part of the legacy Rockpool workflow."))
+      }
+      photos <- site_photos_for_event(pool, ev$native_id)
       if (nrow(photos) == 0) {
         return(empty_state("No photos were attached to this site visit."))
       }

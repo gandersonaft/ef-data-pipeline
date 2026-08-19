@@ -34,12 +34,18 @@ server <- function(input, output, session) {
     )
   })
 
-  mod_depletion_server("depletion", filtered_events, db_pool)
-  mod_trends_server("trends", filtered_events, db_pool)
-  mod_length_condition_server("length_condition", filtered_events, db_pool)
-  mod_qc_review_server("qc_review", db_pool)
-  mod_survey_detail_server("survey_detail", filtered_events, db_pool, db_pool_editor)
-  mod_project_tagging_server("project_tagging", filtered_events, db_pool, db_pool_editor)
-  mod_neps_tool_server("neps_tool", filtered_events, db_pool, db_pool_editor)
+  # Drill-down connective tissue between Projects (e.g. QC Review's flagged
+  # events list) and Survey Detail -- jump_to_event carries the target
+  # event_key, go_to_survey_detail() both sets it and switches the top-level
+  # nav, so any module that's handed the callback can open a specific survey
+  # without needing to know about ui.R's tab structure itself.
+  jump_to_event <- reactiveVal(NULL)
+  go_to_survey_detail <- function(event_key) {
+    jump_to_event(event_key)
+    bslib::nav_select(id = "main_nav", selected = "Survey Detail", session = session)
+  }
+
+  mod_projects_server("projects", filtered_events, db_pool, db_pool_editor, go_to_survey_detail)
+  mod_survey_detail_server("survey_detail", filtered_events, db_pool, db_pool_editor, jump_to_event)
   mod_site_map_server("site_map", filtered_events, db_pool)
 }
