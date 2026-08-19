@@ -4,6 +4,13 @@
 # historical sites are archive data, not something to visually conflate
 # with current survey coverage. KPI strip + card wrapper per the approved
 # mockup (mockups/dashboard-restructure-v4.html).
+#
+# Also draws the OS Open Rivers network (river_network table, see migration
+# 0003_river_network.sql) underneath the site markers for hydrological
+# context -- unfiltered, same "fixed backdrop" reasoning as historical sites.
+# Deliberately NOT the AFT_CEH network also found in this data drop -- that
+# one's licensed via SFCC/CEH and must never be loaded into this app at all,
+# see fn_unified_queries.R::river_network_geojson()'s header comment.
 
 mod_site_map_ui <- function(id) {
   ns <- NS(id)
@@ -15,7 +22,7 @@ mod_site_map_ui <- function(id) {
       bslib::value_box(title = "Historical sites (SFCC archive)", value = textOutput(ns("kpi_historical")), theme = "bg-light")
     ),
     bslib::card(
-      bslib::card_header("Site Map", span(class = "text-muted small", " — teal = live survey site, grey = historical (SFCC archive) site")),
+      bslib::card_header("Site Map", span(class = "text-muted small", " — teal = live survey site, grey = historical (SFCC archive) site, blue = river network (OS Open Rivers)")),
       leaflet::leafletOutput(ns("map"), height = "600px")
     )
   )
@@ -47,6 +54,8 @@ mod_site_map_server <- function(id, filtered_events, pool) {
       dplyr::bind_rows(live_sites(), historical_sites())
     })
 
+    river_geojson <- reactive({ river_network_geojson(pool) })
+
     output$kpi_sites <- renderText({ nrow(all_sites()) })
     output$kpi_catchments <- renderText({ dplyr::n_distinct(all_sites()$catchment, na.rm = TRUE) })
     output$kpi_historical <- renderText({ nrow(historical_sites()) })
@@ -60,6 +69,9 @@ mod_site_map_server <- function(id, filtered_events, pool) {
 
       leaflet::leaflet(df) |>
         leaflet::addTiles() |>
+        leaflet::addGeoJSON(
+          river_geojson(), weight = 1, color = "#5A8FBE", opacity = 0.5, fillOpacity = 0
+        ) |>
         leaflet::addCircleMarkers(
           lng = ~lon, lat = ~lat,
           radius = 6, stroke = TRUE, weight = 1, fillOpacity = 0.85,

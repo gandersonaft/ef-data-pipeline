@@ -105,3 +105,23 @@ historical_run_counts_for_event <- function(pool, historical_event_id) {
     dplyr::filter(historical_event_id == !!historical_event_id) |>
     dplyr::collect()
 }
+
+#' Whole clipped river network (see supabase/migrations/0003_river_network.sql,
+#' scripts/load_river_network.R) as one GeoJSON FeatureCollection string,
+#' built server-side in PostGIS -- avoids adding an `sf` dependency to the
+#' Shiny app just for this one map layer, since leaflet::addGeoJSON() already
+#' takes a raw GeoJSON string directly. Unfiltered (not sidebar-scoped) --
+#' it's a fixed backdrop on Site Map, same reasoning as historical_sites_for_map().
+river_network_geojson <- function(pool) {
+  DBI::dbGetQuery(pool, "
+    select jsonb_build_object(
+      'type', 'FeatureCollection',
+      'features', coalesce(jsonb_agg(jsonb_build_object(
+        'type', 'Feature',
+        'geometry', ST_AsGeoJSON(ST_Transform(geom_27700, 4326))::jsonb,
+        'properties', jsonb_build_object('name', coalesce(name1, name2))
+      )), '[]'::jsonb)
+    )::text as geojson
+    from river_network
+  ")$geojson
+}
