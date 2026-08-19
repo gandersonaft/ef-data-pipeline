@@ -70,9 +70,27 @@ render_event_detail <- function(row) {
 
 mod_survey_detail_ui <- function(id) {
   ns <- NS(id)
+  picker_id <- ns("picker_wrapper")
   tagList(
-    h4("Select a survey event"),
-    DT::dataTableOutput(ns("events_table")),
+    div(
+      style = "display: flex; justify-content: space-between; align-items: center;",
+      h4("Select a survey event"),
+      # Plain client-side toggle (display:none), not a Shiny actionButton --
+      # keeps the DT output permanently mounted so input$events_table_rows_selected
+      # (and the currently selected event) survives collapsing the picker,
+      # rather than resetting on every show/hide the way removing and
+      # re-rendering the table via renderUI would.
+      tags$button(
+        "Hide event list", type = "button", class = "btn btn-sm btn-outline-secondary",
+        onclick = sprintf(
+          "var el = document.getElementById('%s'); var hidden = el.style.display === 'none';
+           el.style.display = hidden ? '' : 'none';
+           this.textContent = hidden ? 'Hide event list' : 'Show event list';",
+          picker_id
+        )
+      )
+    ),
+    div(id = picker_id, DT::dataTableOutput(ns("events_table"))),
     hr(),
     uiOutput(ns("detail_panel"))
   )

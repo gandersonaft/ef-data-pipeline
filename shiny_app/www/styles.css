@@ -3,3 +3,18 @@
   border-radius: 6px;
   background: #f8f9fa;
 }
+
+/* DataTables' own wrapper floats its length/filter controls without a
+   clearfix, and this app's Bootstrap 5 theme doesn't supply one either --
+   the wrapper's parent container collapses to zero height around the
+   floated children, so whatever comes right after a DT table in the page
+   (confirmed 2026-08-19: the Survey Detail tab's Site Details/Fish
+   Records/Photos sub-tabs) renders UNDERNEATH the table instead of below
+   it. Applies to every DT table in the app, not just one tab -- most
+   visible on Survey Detail because there's interactive content directly
+   below it, but the same collapse happens everywhere else too. */
+.dataTables_wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
