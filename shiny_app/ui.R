@@ -1,6 +1,6 @@
 ui <- bslib::page_navbar(
   id = "main_nav",
-  title = "NEPS Electrofishing",
+  title = "EF database frontend beta",
   theme = ef_theme,
   sidebar = bslib::sidebar(
     title = "Filters",
