@@ -131,6 +131,24 @@ sites_for_events <- function(pool, event_ids) {
     dplyr::collect()
 }
 
+#' NEPS tool results matched back to our species codes, for comparison
+#' columns on the Depletion & Density tab. Matched on (site_code,
+#' survey_date, species, lifestage) since neps_tool_results has no event_id
+#' -- the external tool's own output doesn't carry one.
+neps_results_for_events <- function(pool, events_df) {
+  if (nrow(events_df) == 0) return(tibble::tibble())
+  species_reverse_map <- c(salmon = "sal", trout = "trt")
+
+  dplyr::tbl(pool, "neps_tool_results") |>
+    dplyr::collect() |>
+    dplyr::mutate(species = unname(species_reverse_map[species])) |>
+    dplyr::inner_join(
+      events_df |> dplyr::select(event_id, site_code, survey_date),
+      by = c("site_name" = "site_code", "survey_date" = "survey_date")
+    ) |>
+    dplyr::select(event_id, species, lifestage, observed_density, benchmark, benchmark_warnings)
+}
+
 distinct_projects <- function(pool) {
   tbl_projects(pool) |>
     dplyr::select(project_id, project_code, project_name) |>

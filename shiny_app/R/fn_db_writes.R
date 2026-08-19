@@ -69,6 +69,60 @@ assign_project_to_events <- function(pool_editor, event_ids, project_id) {
   }
 }
 
+#' Import a row of the Marine Directorate NEPS tool's results export (its
+#' exact column names, confirmed via the tool's own "Data Dictionary for
+#' results export" section) into neps_tool_results. Upserted on
+#' (site_name, survey_date, species, lifestage) since the external tool's
+#' output carries no event_id/global_id of ours to join on.
+import_neps_results <- function(pool_editor, df) {
+  for (i in seq_len(nrow(df))) {
+    r <- df[i, ]
+    site_id <- DBI::dbGetQuery(
+      pool_editor, "select site_id from sites where site_code = $1", params = list(trimws(r$Site_Name))
+    )$site_id
+    site_id <- if (length(site_id) == 1) site_id else NA_integer_
+
+    cols <- c(
+      "site_name", "site_id", "easting", "northing", "ha_name", "ctm_name", "ctm_code", "river_order",
+      "survey_date", "species", "lifestage", "area", "mean_length", "mean_width",
+      "density_predictions_successful", "total_number_passes_warning", "missing_pass_warning",
+      "nearest_river_distance", "distance_warning", "confluence_warning", "organisation",
+      "organisation_team", "organisation_warnings", "predictor_warnings", "predictor_warnings_detailed",
+      "fished_area_warnings", "total_number_passes", "counts", "probs", "observed_density", "benchmark",
+      "density_difference", "density_per_difference", "benchmark_warnings"
+    )
+    vals <- list(r$Site_Name, site_id, r$Easting, r$Northing, r$HAName, r$CTMName, r$CTMCode,
+                 r$River_Order, r$date, r$species, r$lifestage, r$area, r$mean_length, r$mean_width,
+                 r$Density_Predictions_Successful, r$Total_Number_Passes_Warning, r$Missing_Pass_Warning,
+                 r$Nearest_River_Distance, r$Distance_Warning, r$Confluence_Warning, r$Organisation,
+                 r$Organisation_Team, r$Organisation_Warnings, r$Predictor_Warnings,
+                 r$Predictor_Warnings_Detailed, r$Fished_Area_Warnings, r$total_number_passes,
+                 as.character(r$counts), as.character(r$probs), r$Observed_Density, r$Benchmark,
+                 r$density_difference, r$density_per_difference, r$Benchmark_Warnings)
+    # Column list and placeholder count generated from the SAME `cols`
+    # vector, not hand-counted separately -- a 34-column hand-count mismatch
+    # ($1..$33 for 34 columns) caused "INSERT has more target columns than
+    # expressions" (confirmed 2026-08-19). Building both from one source
+    # makes that class of bug impossible to reintroduce.
+    stopifnot(length(cols) == length(vals))
+    placeholders <- paste0("$", seq_along(vals), collapse = ", ")
+
+    DBI::dbExecute(
+      pool_editor,
+      paste0(
+        "insert into neps_tool_results (", paste(cols, collapse = ", "), ")
+         values (", placeholders, ")
+         on conflict (site_name, survey_date, species, lifestage) do update set
+           easting = excluded.easting, northing = excluded.northing, area = excluded.area,
+           observed_density = excluded.observed_density, benchmark = excluded.benchmark,
+           density_difference = excluded.density_difference, density_per_difference = excluded.density_per_difference,
+           imported_at = now()"
+      ),
+      params = vals
+    )
+  }
+}
+
 upsert_project <- function(pool_editor, project_code, project_name, client_name, start_date, end_date, notes) {
   DBI::dbGetQuery(
     pool_editor,
