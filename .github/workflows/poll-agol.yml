@@ -1,0 +1,34 @@
+name: Poll AGOL for new submissions
+
+# AGOL webhooks never deliver (see README) -- this replaces them by polling
+# the feature service on a schedule instead. Runs on GitHub Actions rather
+# than a Render cron job because the repo is public, so Actions minutes are
+# free, and Render's cron jobs need a paid workspace plan that isn't
+# worthwhile for this project's traffic.
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r app/requirements.txt
+
+      - run: python scripts/poll_submissions.py
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
+          ARCGIS_CLIENT_ID: ${{ secrets.ARCGIS_CLIENT_ID }}
+          ARCGIS_CLIENT_SECRET: ${{ secrets.ARCGIS_CLIENT_SECRET }}
+          AGOL_FEATURE_SERVICE_URL: ${{ secrets.AGOL_FEATURE_SERVICE_URL }}
+          WEBHOOK_SHARED_SECRET: ${{ secrets.WEBHOOK_SHARED_SECRET }}
