@@ -24,6 +24,11 @@ jobs:
 
       - run: python scripts/poll_submissions.py
         env:
+          # scripts/poll_submissions.py does `from app import ...`, but
+          # running it as `python scripts/poll_submissions.py` puts scripts/
+          # on sys.path, not the repo root -- PYTHONPATH=. makes `app`
+          # importable regardless of the runner's working directory.
+          PYTHONPATH: .
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
