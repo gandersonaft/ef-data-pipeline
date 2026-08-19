@@ -8,12 +8,15 @@ mod_length_condition_ui <- function(id) {
   tagList(
     h4("Length-frequency"),
     plotOutput(ns("length_hist"), height = "350px"),
+    downloadButton(ns("download_length_hist"), "Download chart (PNG)"),
     hr(),
     h4("Length-weight"),
     plotOutput(ns("weight_scatter"), height = "300px"),
+    downloadButton(ns("download_weight_scatter"), "Download chart (PNG)"),
     hr(),
     h4("Condition factor (K)"),
-    plotOutput(ns("condition_box"), height = "300px")
+    plotOutput(ns("condition_box"), height = "300px"),
+    downloadButton(ns("download_condition_box"), "Download chart (PNG)")
   )
 }
 
@@ -23,7 +26,10 @@ mod_length_condition_server <- function(id, filtered_events, pool) {
       fish_for_events(pool, filtered_events())
     })
 
-    output$length_hist <- renderPlot({
+    # Each plot is built once as a reactive ggplot object, consumed by both
+    # its renderPlot (on-screen) and its downloadHandler (PNG export) --
+    # never duplicate the plot-building code between the two.
+    length_hist_plot <- reactive({
       df <- fish_data()
       validate(need(nrow(df) > 0, "No fish records match the current filters."))
 
@@ -50,8 +56,13 @@ mod_length_condition_server <- function(id, filtered_events, pool) {
       }
       p
     })
+    output$length_hist <- renderPlot({ length_hist_plot() })
+    output$download_length_hist <- downloadHandler(
+      filename = function() paste0("length_frequency_", Sys.Date(), ".png"),
+      content = function(file) ggplot2::ggsave(file, plot = length_hist_plot(), width = 8, height = 5, dpi = 150)
+    )
 
-    output$weight_scatter <- renderPlot({
+    weight_scatter_plot <- reactive({
       df <- fish_data() |> dplyr::filter(!is.na(wet_weight_g))
       validate(need(
         nrow(df) > 0,
@@ -63,8 +74,13 @@ mod_length_condition_server <- function(id, filtered_events, pool) {
         labs(x = "Fork length (mm)", y = "Weight (g)", color = "Species") +
         theme_minimal()
     })
+    output$weight_scatter <- renderPlot({ weight_scatter_plot() })
+    output$download_weight_scatter <- downloadHandler(
+      filename = function() paste0("length_weight_", Sys.Date(), ".png"),
+      content = function(file) ggplot2::ggsave(file, plot = weight_scatter_plot(), width = 8, height = 5, dpi = 150)
+    )
 
-    output$condition_box <- renderPlot({
+    condition_box_plot <- reactive({
       df <- fish_data() |> dplyr::filter(!is.na(condition_factor))
       validate(need(
         nrow(df) > 0,
@@ -76,6 +92,11 @@ mod_length_condition_server <- function(id, filtered_events, pool) {
         labs(x = "Species", y = "Condition factor (K)") +
         theme_minimal()
     })
+    output$condition_box <- renderPlot({ condition_box_plot() })
+    output$download_condition_box <- downloadHandler(
+      filename = function() paste0("condition_factor_", Sys.Date(), ".png"),
+      content = function(file) ggplot2::ggsave(file, plot = condition_box_plot(), width = 8, height = 5, dpi = 150)
+    )
 
     # Outputs living in a bslib::nav_panel that isn't the initially-active tab
     # can fail to ever receive Shiny's client -> server "became visible, please

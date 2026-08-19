@@ -4,7 +4,8 @@
 mod_depletion_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    DT::dataTableOutput(ns("table"))
+    DT::dataTableOutput(ns("table")),
+    downloadButton(ns("download_table"), "Download table (CSV)")
   )
 }
 
@@ -17,7 +18,9 @@ mod_depletion_server <- function(id, filtered_events, pool) {
       build_depletion_table(fish_df, runs_df)
     })
 
-    output$table <- DT::renderDataTable({
+    # Shared between the on-screen table and the CSV download, so the export
+    # has the same readable column names/rounding as what's displayed.
+    display_table <- reactive({
       df <- depletion_data()
       validate(need(nrow(df) > 0, "No electrofishing passes match the current filters."))
 
@@ -34,9 +37,18 @@ mod_depletion_server <- function(id, filtered_events, pool) {
           `N SE` = round(n_se, 2),
           `Capture prob.` = round(capture_prob, 3),
           `Density /100m2` = round(density_per_100m2, 2)
-        ) |>
+        )
+    })
+
+    output$table <- DT::renderDataTable({
+      display_table() |>
         DT::datatable(rownames = FALSE, filter = "top", options = list(pageLength = 15))
     })
+
+    output$download_table <- downloadHandler(
+      filename = function() paste0("depletion_density_", Sys.Date(), ".csv"),
+      content = function(file) write.csv(display_table(), file, row.names = FALSE, na = "")
+    )
 
     # See mod_length_condition.R for why this is needed: outputs in a
     # non-default bslib::nav_panel tab can otherwise never receive the signal

@@ -21,6 +21,7 @@ ui <- bslib::page_navbar(
     actionButton("reset_filters", "Reset filters")
   ),
   bslib::nav_panel("Depletion & Density", mod_depletion_ui("depletion")),
+  bslib::nav_panel("Trends & Reports", mod_trends_ui("trends")),
   bslib::nav_panel("Length-Frequency & Condition", mod_length_condition_ui("length_condition")),
   bslib::nav_panel("QC & Photo Review", mod_qc_review_ui("qc_review")),
   bslib::nav_panel("Site Map", mod_site_map_ui("site_map")),
