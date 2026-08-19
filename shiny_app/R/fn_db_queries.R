@@ -111,26 +111,53 @@ runs_for_events <- function(pool, event_ids) {
     dplyr::collect()
 }
 
+#' Live has no `method` field like historical_events does, so pass-count is
+#' the only available proxy -- capped at "4+ passes" so Site Map's colour
+#' palette doesn't grow unbounded as the season fills in more events.
+pass_count_label <- function(n) {
+  if (is.na(n) || n == 0) return("Live: unknown")
+  if (n >= 4) return("Live: 4+ passes")
+  paste0("Live: ", n, if (n == 1) " pass" else " passes")
+}
+
 #' One row per site among the given event_ids, with WGS84 lon/lat (already
 #' ready for leaflet -- no CRS conversion needed, see sites.lon/sites.lat in
-#' supabase/schema.sql) and a small popup summary.
+#' supabase/schema.sql), a small popup summary, and method_label (the most
+#' recent event's pass-count, see pass_count_label()) for Site Map's
+#' method-based colour scale.
 sites_for_events <- function(pool, event_ids) {
   if (length(event_ids) == 0) {
     return(tibble::tibble())
   }
 
-  tbl_events(pool) |>
+  # event_id/site_id come back as bit64::integer64 from collect() -- convert
+  # immediately, same fix as filtered_event_ids()/events_browser() elsewhere
+  # in this file (base R join/dplyr ops on integer64 silently corrupt it).
+  pass_counts <- tbl_runs(pool) |>
+    dplyr::filter(event_id %in% !!event_ids) |>
+    dplyr::count(event_id, name = "pass_count") |>
+    dplyr::collect() |>
+    dplyr::mutate(event_id = as.integer(event_id))
+
+  events_summary <- tbl_events(pool) |>
     dplyr::filter(event_id %in% !!event_ids, !is.na(site_id)) |>
+    dplyr::select(event_id, site_id, survey_date) |>
+    dplyr::collect() |>
+    dplyr::mutate(event_id = as.integer(event_id), site_id = as.integer(site_id)) |>
+    dplyr::left_join(pass_counts, by = "event_id") |>
     dplyr::group_by(site_id) |>
+    dplyr::arrange(dplyr::desc(survey_date)) |>
     dplyr::summarise(
-      last_survey_date = max(survey_date, na.rm = TRUE),
+      last_survey_date = dplyr::first(survey_date),
       event_count = dplyr::n(),
+      method_label = pass_count_label(dplyr::first(pass_count)),
       .groups = "drop"
-    ) |>
-    dplyr::inner_join(tbl_sites(pool), by = "site_id") |>
+    )
+
+  events_summary |>
+    dplyr::inner_join(tbl_sites(pool) |> dplyr::collect() |> dplyr::mutate(site_id = as.integer(site_id)), by = "site_id") |>
     dplyr::filter(!is.na(lon), !is.na(lat)) |>
-    dplyr::select(site_id, site_code, site_label, catchment, lon, lat, last_survey_date, event_count) |>
-    dplyr::collect()
+    dplyr::select(site_id, site_code, site_label, catchment, lon, lat, last_survey_date, event_count, method_label)
 }
 
 #' NEPS tool results matched back to our species codes, for comparison
@@ -213,10 +240,18 @@ fish_for_event_detail <- function(pool, event_id) {
 
 #' Every captured field for one event (water/crew/equipment/dimensions/
 #' substrate/flow/comments), for read-only display on the Survey Detail tab
-#' -- none of this is shown anywhere else in the app today.
+#' -- none of this is shown anywhere else in the app today. lon/lat (WGS84)
+#' are computed from the event's own geom_27700 -- electrofishing_events
+#' only stores easting/northing natively, same as historical_events (see
+#' fn_unified_queries.R::historical_sites_for_map()'s identical pattern) --
+#' for the per-record mini-map on Site Details.
 event_full_detail <- function(pool, event_id) {
   tbl_events(pool) |>
     dplyr::filter(event_id == !!event_id) |>
+    dplyr::mutate(
+      lon = sql("ST_X(ST_Transform(geom_27700, 4326))"),
+      lat = sql("ST_Y(ST_Transform(geom_27700, 4326))")
+    ) |>
     dplyr::collect()
 }
 

@@ -12,6 +12,28 @@ lifestage_labels <- c(fry = "Fry (0+)", parr = "Parr (1+)")
 label_species <- function(code) unname(species_labels[code])
 label_lifestage <- function(code) unname(lifestage_labels[code])
 
+# Fixed colours for the length-frequency chart on Survey Detail -- deliberately
+# NOT ggplot's default hue scale, which reassigns colours depending on which
+# species happen to be present in a given record's data, so the same species
+# could render a different colour on different records. Reuses the app's own
+# theme colours (ef_theme's primary/warning, see theme.R) for visual
+# consistency rather than picking new ones. Only salmon/trout ever appear on
+# that chart (eels and everything else are excluded there by design).
+species_colors <- c(sal = "#1C6E76", trt = "#B06B1B")
+
+# Substrate/flow composition fields on electrofishing_events/historical_events
+# are real percentages (confirmed against real data: sub_total/flow_total ==
+# 100) -- order here is the stacking order for the single-column 100%-stacked
+# bar charts on Survey Detail, coarsest/calmest to finest/fastest.
+substrate_labels <- c(
+  sub_be = "Bedrock", sub_bo = "Boulder", sub_co = "Cobble", sub_pe = "Pebble",
+  sub_gr = "Gravel", sub_sa = "Sand", sub_si = "Silt", sub_ho = "Hollow/other"
+)
+flow_labels <- c(
+  flow_sm = "Smooth", flow_dp = "Deep pool", flow_sp = "Shallow pool", flow_dg = "Deep glide",
+  flow_sg = "Shallow glide", flow_ru = "Run", flow_ri = "Riffle", flow_to = "Torrent"
+)
+
 # Catchment slugs (e.g. "river_awe", "appin_coastal") aren't hardcoded here --
 # there are ~29 of them defined in the form's `catchment` choices list, and the
 # authoritative set/label mapping can drift over time. Filter dropdowns should
