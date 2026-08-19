@@ -38,5 +38,6 @@ server <- function(input, output, session) {
   mod_trends_server("trends", filtered_events, db_pool)
   mod_length_condition_server("length_condition", filtered_events, db_pool)
   mod_qc_review_server("qc_review", db_pool)
+  mod_survey_detail_server("survey_detail", filtered_events, db_pool, db_pool_editor)
   mod_site_map_server("site_map", filtered_events, db_pool)
 }

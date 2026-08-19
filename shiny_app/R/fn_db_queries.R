@@ -4,9 +4,13 @@
 
 tbl_events <- function(pool) dplyr::tbl(pool, "electrofishing_events")
 tbl_runs <- function(pool) dplyr::tbl(pool, "electrofishing_runs")
-tbl_fish <- function(pool) dplyr::tbl(pool, "fish_records")
+# Soft-deleted fish (deleted_at is not null -- see supabase/schema.sql and
+# fn_db_writes.R::delete_fish_record()) are excluded here, once, so every
+# caller automatically gets this without needing to remember it individually.
+tbl_fish <- function(pool) dplyr::tbl(pool, "fish_records") |> dplyr::filter(is.na(deleted_at))
 tbl_sites <- function(pool) dplyr::tbl(pool, "sites")
 tbl_site_photos <- function(pool) dplyr::tbl(pool, "site_photos")
+tbl_projects <- function(pool) dplyr::tbl(pool, "survey_projects")
 
 distinct_catchments <- function(pool) {
   tbl_events(pool) |>
@@ -132,6 +136,47 @@ flagged_events <- function(pool) {
     dplyr::filter(qc_status == "flagged") |>
     dplyr::select(event_id, site_code, catchment, survey_date, qc_flags, final_comments) |>
     dplyr::arrange(dplyr::desc(survey_date)) |>
+    dplyr::collect()
+}
+
+#' Broad event browser for the Survey Detail and Project Tagging tabs --
+#' same event_ids as filtered_events(), but WITHOUT the species-driven
+#' exclusion (an event must be pickable even if none of its fish match the
+#' current species checkbox filter) and regardless of qc_status (unlike
+#' flagged_events(), which only lists flagged events -- this is what makes a
+#' normal/`ok` event's site details and photos reachable at all).
+events_browser <- function(pool, event_ids) {
+  if (length(event_ids) == 0) {
+    return(tibble::tibble())
+  }
+  tbl_events(pool) |>
+    dplyr::filter(event_id %in% !!event_ids) |>
+    dplyr::left_join(tbl_projects(pool) |> dplyr::select(project_id, project_code), by = "project_id") |>
+    dplyr::select(event_id, site_code, catchment, survey_date, project_id, project_code, qc_status) |>
+    dplyr::arrange(dplyr::desc(survey_date)) |>
+    dplyr::collect()
+}
+
+#' All fish for one event, across every pass -- deliberately ignores the
+#' species sidebar filter (editing must show everything at that event, same
+#' reasoning as the QC tab's photo gallery). Excludes soft-deleted rows via
+#' the shared tbl_fish() filter.
+fish_for_event_detail <- function(pool, event_id) {
+  tbl_fish(pool) |>
+    dplyr::inner_join(tbl_runs(pool), by = "run_id", suffix = c("", "_run")) |>
+    dplyr::filter(event_id == !!event_id) |>
+    dplyr::select(fish_id, run_id, pass_no, species, lifestage, length_mm, wet_weight_g,
+                  condition_factor, scaled, tissue_tube, count_bulk, fish_multiplier, updated_at) |>
+    dplyr::arrange(pass_no, fish_id) |>
+    dplyr::collect()
+}
+
+#' Every captured field for one event (water/crew/equipment/dimensions/
+#' substrate/flow/comments), for read-only display on the Survey Detail tab
+#' -- none of this is shown anywhere else in the app today.
+event_full_detail <- function(pool, event_id) {
+  tbl_events(pool) |>
+    dplyr::filter(event_id == !!event_id) |>
     dplyr::collect()
 }
 

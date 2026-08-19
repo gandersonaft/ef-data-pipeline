@@ -37,15 +37,33 @@ db_pool <- pool::dbPool(
   sslmode = "require"
 )
 
+# Write-capable shiny_editor pool (see supabase/roles.sql), kept SEPARATE
+# from db_pool (shiny_reader, above) so every existing read-only query
+# function keeps zero write capability, by construction -- only the Survey
+# Detail (fish edit), Project Tagging, and NEPS Tool Export/Import modules
+# ever touch this pool.
+db_pool_editor <- pool::dbPool(
+  drv = RPostgres::Postgres(),
+  host = Sys.getenv("SUPABASE_DB_HOST"),
+  port = as.integer(Sys.getenv("SUPABASE_DB_PORT", "5432")),
+  dbname = Sys.getenv("SUPABASE_DB_NAME", "postgres"),
+  user = Sys.getenv("SUPABASE_DB_EDITOR_USER"),
+  password = Sys.getenv("SUPABASE_DB_EDITOR_PASSWORD"),
+  sslmode = "require"
+)
+
 onStop(function() {
   pool::poolClose(db_pool)
+  pool::poolClose(db_pool_editor)
 })
 
 source("R/utils.R")
 source("R/fn_db_queries.R")
+source("R/fn_db_writes.R")
 source("R/fn_depletion.R")
 source("R/mod_depletion.R")
 source("R/mod_length_condition.R")
 source("R/mod_qc_review.R")
 source("R/mod_site_map.R")
 source("R/mod_trends.R")
+source("R/mod_survey_detail.R")
