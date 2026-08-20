@@ -27,7 +27,7 @@ species_colors <- c(sal = "#1C6E76", trt = "#B06B1B")
 # bar charts on Survey Detail, coarsest/calmest to finest/fastest.
 substrate_labels <- c(
   sub_be = "Bedrock", sub_bo = "Boulder", sub_co = "Cobble", sub_pe = "Pebble",
-  sub_gr = "Gravel", sub_sa = "Sand", sub_si = "Silt", sub_ho = "Hollow/other"
+  sub_gr = "Gravel", sub_sa = "Sand", sub_si = "Silt", sub_ho = "High Organic"
 )
 flow_labels <- c(
   flow_sm = "Smooth", flow_dp = "Deep pool", flow_sp = "Shallow pool", flow_dg = "Deep glide",
