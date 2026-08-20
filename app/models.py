@@ -276,5 +276,14 @@ class NormalizedSubmission(BaseModel):
     # this form has had required-field validation stripped for testing, so
     # incomplete rows are a real, expected occurrence, not a hypothetical).
     # Recorded here rather than letting one bad row crash the entire
-    # submission -- see processing.py's build_normalized_submission().
+    # submission -- see processing.py's build_normalized_submission(). Fish
+    # whose parent rep_pass row itself failed validation (see skipped_runs
+    # below) are folded in here too, tagged accordingly.
     skipped_fish: list[dict] = []
+    # Individual rep_pass rows that failed validation (confirmed real:
+    # 2026-08-20, a submission arrived with pass_no = null and crashed the
+    # whole poll batch, blocking every later submission behind it since the
+    # high-water mark can't advance past a batch that raises). Same
+    # reasoning as skipped_fish -- one bad pass must not cost the rest of
+    # this submission, or worse, every submission after it.
+    skipped_runs: list[dict] = []

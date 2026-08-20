@@ -117,6 +117,17 @@ async def main() -> None:
                 f"  objectid={object_id} globalid={global_id} -> "
                 f"event_id={result['event_id']} qc_status={result['qc_status']}"
             )
+            # A bad rep_pass/rep_fish row no longer crashes the batch (see
+            # app/processing.py, 2026-08-20), but a skip is still worth
+            # shouting about in this log -- it means real field data didn't
+            # make it in and the source submission needs a look in AGOL.
+            if result["runs_skipped"] or result["fish_skipped"]:
+                print(
+                    f"    WARNING: skipped {result['runs_skipped']} pass row(s) and "
+                    f"{result['fish_skipped']} fish row(s) that failed validation -- "
+                    f"check qc_flags on event_id={result['event_id']} and the source "
+                    f"submission in AGOL."
+                )
 
             max_object_id = max(max_object_id, object_id)
 

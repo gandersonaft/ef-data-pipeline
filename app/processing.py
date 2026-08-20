@@ -41,9 +41,25 @@ def build_normalized_submission(tree: dict, raw_payload: dict) -> NormalizedSubm
     if isinstance(event_feature, dict) and event_feature.get("geometry"):
         geometry = Geometry.model_validate(event_feature["geometry"])
 
-    pass_list = [RunAttributes.model_validate(_attrs(p)) for p in tree.get("rep_pass", [])]
     photo_list = [PhotoAttributes.model_validate(_attrs(p)) for p in tree.get("rep_photos", [])]
     width_list = [WidthAttributes.model_validate(_attrs(w)) for w in tree.get("rep_widths", [])]
+
+    # Validate rep_pass rows individually rather than in one list
+    # comprehension, same reasoning as rep_fish below: confirmed real
+    # 2026-08-20 -- a submission arrived with pass_no = null (device still
+    # running an older form build, most likely) and crashed the whole
+    # poll batch, which blocks every later submission behind it too, since
+    # the high-water mark only advances once a batch fully succeeds. One
+    # bad pass must not cost the rest of this submission, or worse, every
+    # submission queued up after it.
+    pass_list: list[RunAttributes] = []
+    skipped_runs: list[dict] = []
+    for p in tree.get("rep_pass", []):
+        raw_attrs = _attrs(p)
+        try:
+            pass_list.append(RunAttributes.model_validate(raw_attrs))
+        except ValidationError as e:
+            skipped_runs.append({"attributes": raw_attrs, "error": str(e)})
 
     # Validate fish rows individually rather than in one list comprehension:
     # this form has had required-field validation stripped for testing, so
@@ -59,6 +75,20 @@ def build_normalized_submission(tree: dict, raw_payload: dict) -> NormalizedSubm
         except ValidationError as e:
             skipped_fish.append({"attributes": raw_attrs, "error": str(e)})
 
+    valid_run_guids = {normalize_guid(run.globalid) for run in pass_list}
+    # Fish whose parent rep_pass row failed validation above have no valid
+    # run to attach to -- without this, they'd simply vanish from the
+    # submission (silently, not even counted as skipped) since the
+    # RunWithFish comprehension below only ever matches fish to a run that's
+    # actually in pass_list.
+    orphaned_fish = [f for f in fish_list if normalize_guid(f.parentglobalid) not in valid_run_guids]
+    if orphaned_fish:
+        skipped_fish.extend(
+            {"attributes": f.model_dump(), "error": "parent rep_pass row failed validation (see skipped_runs)"}
+            for f in orphaned_fish
+        )
+    fish_list = [f for f in fish_list if normalize_guid(f.parentglobalid) in valid_run_guids]
+
     runs = [
         RunWithFish(
             run=run,
@@ -69,7 +99,7 @@ def build_normalized_submission(tree: dict, raw_payload: dict) -> NormalizedSubm
 
     return NormalizedSubmission(
         event=event, geometry=geometry, runs=runs, photos=photo_list, widths=width_list,
-        raw_payload=raw_payload, skipped_fish=skipped_fish,
+        raw_payload=raw_payload, skipped_fish=skipped_fish, skipped_runs=skipped_runs,
     )
 
 
@@ -126,7 +156,11 @@ async def process_submission(
             [{"type": "incomplete_fish_record", "count": len(submission.skipped_fish)}]
             if submission.skipped_fish else []
         )
-        status, flags = qc.summarize(pass_flags, k_flags, incomplete_flags)
+        incomplete_run_flags = (
+            [{"type": "incomplete_run_record", "count": len(submission.skipped_runs)}]
+            if submission.skipped_runs else []
+        )
+        status, flags = qc.summarize(pass_flags, k_flags, incomplete_flags, incomplete_run_flags)
         await crud.update_qc(conn, event_id, status, flags)
 
     return {
@@ -134,6 +168,7 @@ async def process_submission(
         "runs": len(run_id_map),
         "fish": len(fish_rows),
         "fish_skipped": len(submission.skipped_fish),
+        "runs_skipped": len(submission.skipped_runs),
         "photos": len(photo_uploads),
         "qc_status": status,
         "qc_flags": flags,

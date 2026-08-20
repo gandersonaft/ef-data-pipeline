@@ -55,6 +55,34 @@ async def test_one_invalid_fish_row_does_not_lose_the_whole_submission(client, s
     assert any(f["type"] == "incomplete_fish_record" and f["count"] == 1 for f in body["qc_flags"])
 
 
+async def test_one_invalid_pass_row_does_not_lose_the_whole_batch(client, sample_payload):
+    """Confirmed 2026-08-20 against live data: a rep_pass row arrived with
+    pass_no = null (device likely still on an older form build), which
+    crashed build_normalized_submission() entirely -- and since the
+    poller's high-water mark only advances once a whole batch of
+    submissions succeeds, this one bad row blocked every later submission
+    behind it too, indefinitely. One bad pass must cost only that pass
+    (and the fish orphaned by it, which have no valid run to attach to),
+    not the rest of this submission or any submission after it."""
+    payload = json.loads(json.dumps(sample_payload))  # deep copy
+    payload["rep_pass"][0]["attributes"]["pass_no"] = None
+
+    resp = await client.post("/webhook/survey123", content=json.dumps(payload))
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["event_id"] == 1
+    assert body["runs"] == 1  # one of the original 2 passes was invalid and skipped
+    # the 6 fish belonging to the skipped pass are orphaned (no valid run to attach to)
+    # and folded into fish_skipped alongside any independently-invalid fish rows
+    assert body["fish"] == 4
+    assert body["fish_skipped"] == 6
+    assert body["runs_skipped"] == 1
+    assert body["qc_status"] == "flagged"
+    assert any(f["type"] == "incomplete_run_record" and f["count"] == 1 for f in body["qc_flags"])
+    assert any(f["type"] == "incomplete_fish_record" and f["count"] == 6 for f in body["qc_flags"])
+
+
 async def test_qc_flag_pass_progression(client, qc_flagged_payload):
     resp = await client.post("/webhook/survey123", content=json.dumps(qc_flagged_payload))
 
