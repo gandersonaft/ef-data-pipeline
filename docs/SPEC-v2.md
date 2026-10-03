@@ -1,7 +1,7 @@
 # EF Data Pipeline v2: Specification (DRAFT for sign-off)
 
 Status: **planning only. No code, schema, or infrastructure changes are made until the Decision Register (section 14) is signed off.**
-Drafted: 2026-10-03. Revision 5: 2026-10-03 (reconciled with the SFCC Scottish Tech Army scope document; dynamic run count; granular data sharing; see sections 1.1 and 17). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
+Drafted: 2026-10-03. Revision 6: 2026-10-03 (live-system freeze, rolling legacy contract, Track B ownership, additional functionality catalogue; see sections 1.3, 15A and 17). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
 
 Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could not verify from the repo; you know the answer. **[BASELINE]** = how the current build does it.
 
@@ -44,6 +44,13 @@ SFCC's scope document (draft, from a discovery call) asks Scottish Tech Army (ST
 4. SFCC staff can do routine administration (add a user/trust/site, fix a record, adjust a QC threshold, restore a backup) without writing code.
 5. No single-developer dependency: repo owned by SFCC, documented, tested, deployable by pipeline.
 6. Documentation structured for AI-assisted maintenance (10.5).
+
+### 1.3 Live-system freeze (non-negotiable constraint)
+The prototype is **live and working** and is being used for the current field season. Until the season is over and SFCC/AFT agree otherwise:
+1. **No change to the running system**: the Survey123 form (v8) and its feature layer, the hourly GitHub Actions poller, the Render service, the live Supabase project and its schema, the Shiny app on its host, and the public repository's `main` branch are all left as they are.
+2. All v2 work happens in **separate places**: this spec on a docs-only branch; any future code on a separate branch; any database work on a **Supabase branch or a restored copy**, never the live project; any new form as a **separate** Survey123 item and layer, never an edit of v8.
+3. Deferred until after the season: making the repo private and cleaning its history (D15); the Phase 0a backup is read-only and low risk, but is scheduled for the first quiet window after fieldwork ends rather than during active data collection, unless you decide otherwise.
+4. Deliberate exceptions need your explicit go-ahead each time. This document is the only thing changed so far.
 
 ### Non-goals (unless you say otherwise)
 - Replacing the Marine Directorate NEPS tool or Rockpool as systems of record for their own modelled outputs.
@@ -549,7 +556,7 @@ Any panel whose prerequisites are absent shows an explicit empty state naming th
 | 8b. Azure environment | IaC, dev/staging/prod, dry-run migration Supabase -> Azure, monitoring | Full restore on Azure reproduces data; SFCC IT sign-off |
 | 9. Cutover | Switch form, retire unused services, docs, runbook | One full field week ingested without manual intervention |
 
-**Calendar constraints from the scope document (today is 2026-10-03):** the season (July to October) is ending, the FMS AGM and charitable transition is in November 2026, and the legacy contract has a renewal date [CONFIRM]. A realistic shape: Oct-Dec 2026 decisions, backups, data dictionary, Azure environment and auth (Track A start); Jan-Mar 2027 model, migration rehearsals, form v9 build; Apr-Jun 2027 staging tests, AFT pilot on the new form, final legacy migration rehearsal; **cut-over before the 2027 season starts in July**, with legacy kept read-only as fallback for the season. If the legacy renewal date forces an earlier decision, the legacy system can be kept read-only while the new one is finished.
+**Calendar constraints from the scope document (today is 2026-10-03):** the season (July to October) is ending, the FMS AGM and charitable transition is in November 2026, and the legacy contract is, as far as you know, now **rolling** (no fixed renewal date) [CONFIRM the notice period and any exit terms with SFCC]. A realistic shape: Oct-Dec 2026 decisions, backups, data dictionary, Azure environment and auth (Track A start); Jan-Mar 2027 model, migration rehearsals, form v9 build; Apr-Jun 2027 staging tests, AFT pilot on the new form, final legacy migration rehearsal; **cut-over before the 2027 season starts in July**, with legacy kept read-only as fallback for the season. A rolling contract removes a hard renewal deadline: the legacy system can stay in service, then be switched to read-only and ended on notice once the new system is accepted. The notice period (and any minimum term, exit or data-return clauses) sets the earliest sensible end date, so SFCC should check them early. Contract exit itself is SFCC's responsibility (outside our scope).
 
 Rollback: every phase's migration is additive until Phase 9; the baseline keeps running untouched until cutover.
 
@@ -580,8 +587,8 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | D20 | Governance and cost | RESOLVED in principle: SFCC owns, hosts on Azure, pays; SFCC data/technical owner is the SFCC database lead (a named person at SFCC/FMS). Still open: Azure subscription and any non-profit credits, support model, IaC tool, region, post-handover support | SFCC to confirm; blocks Phase 0 sign-off |
 | D21 | Prototype hosting until handover | Stay on Supabase + GH Actions / build on Azure from the start | Prototype on current stack with the portability rule (7.2); stand up an Azure dev environment in Phase 2 to prove the move early |
 | D16 | Existing v8 data | RESOLVED: it is real data. Migrate into the new model as `source_system='survey123_v8'`, with backup first (section 5.4) | Done; implementation in Phase 3 |
-| D15 | Public repo hygiene (**urgent**) | Keep public / make private / scrub | **Make the repo private now** and rewrite or remove sensitive content: `data/site_data.csv` holds ~1,200 named sites with exact coordinates from multiple trusts, and the repo names clients and a project ref. Public history retains it even after deletion, so a private repo plus history clean-up (or a fresh repo) is needed. Decide with SFCC who owns the repo (D20) |
-| D22 | Delivery split with STA volunteers | One combined programme / Track A (platform, STA-friendly) + Track B (domain, SFCC/AFT-led) | Two tracks with the sequencing rule in 1.1 |
+| D15 | Public repo hygiene (**deferred until after the season**) | Keep public / make private / scrub | **Make the repo private and remove sensitive content once the live season is over** (live system must not be disturbed, 1.3). Concern remains: `data/site_data.csv` holds ~1,200 named sites with exact coordinates from multiple trusts, and the repo names clients and a project ref; git history keeps them even after deletion, so a private repo plus history clean-up (or a fresh repo) is needed. Schedule it as the first post-season task and decide repo ownership with SFCC (D20) |
+| D22 | Delivery split with STA volunteers | One combined programme / Track A (platform, STA-friendly) + Track B (domain, SFCC/AFT-led) | Two tracks with the sequencing rule in 1.1. **Track B is expected to be led by you** (not yet formally agreed); Track B now also owns the additional functionality catalogue (15A) |
 | D23 | Legacy data extraction route | Developer dump + schema / SFCC export tools / reverse-engineer | Developer dump + schema docs, with export tools as fallback |
 
 ---
@@ -609,6 +616,10 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | NEPS run count | Can become multi-run by adding runs during a survey | Section 3.2c |
 | Next-season pilot timing | Up in the air | Section 13 calendar assumes pre-July 2027 |
 | SFCC scope document | Provided (limited detail, drafted from a discovery call) | Section 1.1 |
+| Repo clean-up | Leave for now; the system is live and must not be disturbed this season | 1.3; D15 deferred |
+| Track ownership | Not yet determined; Track B probably yours | D22 |
+| Legacy contract | Rolling | Section 13 calendar |
+| Additional functionality | Wanted, to be specified | Section 15A |
 
 ### Pilot status and next-season pilot
 This season's pilot was effectively one operator (you) on the v8 form and the Shiny prototype. The network pilot therefore still needs: a second AFT surveyor group on the new form, then one additional trust, with a defined support person and a feedback loop. Scope and dates depend on SFCC naming a technical owner (D20) and on method census results.
@@ -630,6 +641,107 @@ Before freezing the form, poll SFCC trusts on current practice so the form fits 
 6. Who needs access to whose data; reporting obligations.
 7. Number of staff who would use the form.
 Output: a one-page summary that locks the protocol list (D6) and form scope. This becomes a Phase 0 deliverable; I can draft the questionnaire (as a form or document) once you want it.
+
+---
+
+## 15A. Additional functionality catalogue (Track B)
+
+You asked for additional functionality to be specified. You did not list particular features, so this is **my proposed catalogue for you to prune, re-rank and add to**. It is deliberately broad ("include all options"). Nothing here is committed to; the tier column is a suggestion.
+
+Tiers: **M** = MVP, needed for parity with the prototype plus the three protocols; **S** = should have for the 2027 season; **C** = could have; **L** = later. Effort: S/M/L (small, medium, large, relative). Track: B = domain-led; A = platform.
+
+### A. Field capture (form v9 and companion tools)
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F01 | Protocol-aware form with dynamic runs | Core of section 5 | Data dictionary | L | M |
+| F02 | Site history on screen | On choosing a site: last survey date, method, past density, notes, access info | Unified events (4.3) | M | S |
+| F03 | Pre-populated team and equipment | Remember crew roles, equipment, settings per team/user | User/org model (4.7) | S | S |
+| F04 | Live depletion and catch preview | On-screen running totals per run/species; presentation only, never ingested | Form | M | S |
+| F05 | Timer integration | Anode-live timer, Timed target 5/10 min countdown, per-run timers | Form | S | M |
+| F06 | Offline basemap and site layer | Cached tiles, nearby sites, river network for navigation | AGOL/Field tooling | M | S |
+| F07 | GPS quality and drift guard | Capture accuracy, warn on poor fix, clock-drift check | Form | S | S |
+| F08 | Sample tracking | Scale/tissue tube IDs, genetic/age sample logs, later lab result linkage | fish_records | M | C |
+| F09 | Per-fish photos | Optional fish-level photos (forward-compat field already exists) | Storage | M | C |
+| F10 | Habitat templates | Quick substrate/flow entry presets and %-must-total-100 helper | Form | S | S |
+| F11 | Draft and resume | Multi-day surveys, recoverable drafts | Platform | S | M |
+| F12 | Paper/spreadsheet fallback template per protocol | Offline-of-last-resort entry and bulk import | Importer (F31) | M | S |
+
+### B. Planning, logistics, safety, people
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F13 | Season planner | Planned vs completed sites per trust/catchment, coverage-gap map, rotating-site schedules | Sites, events | M | S |
+| F14 | Site allocation to teams | Assign sites to teams/dates; surfaces in the form's site list | F13 | M | C |
+| F15 | Access and landowner notes | Per-site access instructions, landowner contacts (restricted visibility) | Sites, RLS | S | S |
+| F16 | Health and safety capture | Pre-survey risk assessment, team briefing sign-off, incident log | Form | M | S |
+| F17 | Equipment and calibration log | Per-kit voltage/settings history, service dates, battery logs | Equipment lookup | M | C |
+| F18 | Consents and permits | Track fishing consents/permissions (e.g. protected-species or SSSI consents) with expiry alerts | Org model | M | C |
+| F19 | Competence and training records | Link team leader/operator qualifications (SFCC training scheme) to surveys; warn if a survey lacks a qualified lead | Users, SFCC training data | M | S |
+
+### C. Data quality and curation
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F20 | QC review queue | Prioritised list by severity, assign reviewer, resolve with reason, sign-off | QC engine (9) | M | M |
+| F21 | Site-history anomaly detection | Flag surveys far outside that site's historical range (density, length distribution) | Unified history | M | S |
+| F22 | Bulk correction tools | Safe batch edits with preview, audit, undo | edit_log | M | S |
+| F23 | Duplicate and near-duplicate detection | Same site/date/method, offline double-submits, nearby new sites | QC | S | S |
+| F24 | Site master management | Merge/rename/retire sites, promote new sites, reconcile legacy duplicates (SiteCode is not unique in legacy) | Sites, legacy | M | M |
+| F25 | Data completeness scorecard | Per trust: fields missing, unreviewed events, photo coverage | QC | S | C |
+
+### D. Analysis and reporting
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F26 | Per-protocol analyses | Section 8: CPUE, depletion, minimum density, NEPS tool | event_estimates | L | M |
+| F27 | Long-term trends per site/catchment | Time series with uncertainty, protocol-aware, era-aware | Unified history | M | M |
+| F28 | Catchment and project summaries | Aggregated densities, species composition, comparisons | F26 | M | M |
+| F29 | Age/growth and year-class | Age-length keys from scales, cohort tracking, growth curves | F08 data | L | C |
+| F30 | Capture-probability analytics | Compare per-team/per-run capture probability, effort effects | F26 | M | C |
+
+### E. Data movement and integration
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F31 | Bulk CSV importer | Validated import per protocol (paper entry, other trusts' spreadsheets) with dry-run and error report | Data dictionary | M | S |
+| F32 | NEPS tool round-trip | Export inputs, import outputs keyed on event_id (4.4), including single-run | NEPS tool formats | M | M |
+| F33 | Member exports | CSV/GeoPackage/GeoJSON/KML with data dictionary (10.4) | Auth, RLS | M | M |
+| F34 | Read-only API | Authenticated REST/OData access to a trust's own data (and shares) for their R/Python work | Auth, RLS | M | S |
+| F35 | Open-data publication | Opt-in aggregated or full publication, e.g. Darwin Core / GBIF, only for data a trust releases | Sharing grants | M | L |
+| F36 | Reference-data joins | SEPA waterbody IDs, WFD classification, OS Open Rivers (already in prototype), barrier/obstruction inventories | GIS layers | M | C |
+| F37 | Environmental context | Temperature loggers and gauge data (e.g. SEPA flow/level) linked to surveys | External data | M | L |
+
+### F. Collaboration and governance
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F38 | Granular sharing grants | 4.7: scope, level, expiry, revoke | RLS | M | S |
+| F39 | Data-request workflow | A trust or third party requests data; owner approves/denies; time-limited access; log | F38 | M | C |
+| F40 | Audit and access reporting | Who viewed/exported what and when, per trust | Audit log | S | S |
+| F41 | Notifications | Email/in-app for QC flags, unreviewed surveys, ingest failures, share requests | Platform | S | S |
+| F42 | Citations and versioning | Stable dataset versions for reports and publications | Exports | S | L |
+
+### G. Reporting products
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F43 | Automated annual trust report | Per-trust PDF/Word/HTML with maps, densities, trends, QC summary | F26-F28 | L | S |
+| F44 | Project reports | Client-facing report for a tagged project (e.g. a contract) | Projects | M | S |
+| F45 | Network summary | SFCC/FMS national overview across consenting trusts (aggregates only) | F38 | M | C |
+| F46 | Map products | Density choropleths, trend arrows, survey coverage, printable maps | GIS | M | S |
+| F47 | Public aggregate map | Anonymised/generalised public view, no exact coordinates | Governance | M | L |
+
+### H. Platform and admin (Track A leaning)
+| ID | Feature | What it does | Depends on | Effort | Tier |
+|---|---|---|---|---|---|
+| F48 | Admin console | 10.5 | Auth | M | M |
+| F49 | Health and cost dashboard | Ingest status, queue depth, Azure cost vs budget | Monitoring | S | S |
+| F50 | Self-service restore points | SFCC staff can restore a trust's data to a point in time safely | Backups | M | C |
+
+### Suggested bundles
+- **MVP (parity + protocols):** F01, F05, F11, F20, F24, F26, F27, F28, F32, F33, F48.
+- **2027 season "should":** F02, F03, F04, F06, F07, F10, F12, F13, F15, F16, F19, F21, F22, F23, F31, F34, F38, F40, F41, F43, F44, F46, F49.
+- **Later / optional:** F08, F09, F14, F17, F18, F25, F29, F30, F35, F36, F37, F39, F42, F45, F47, F50.
+
+### Questions for you on the catalogue
+1. Which of these did you have in mind? Strike, add and re-tier freely.
+2. Anything missing from your own wish list (reports SFCC or trusts already ask for, exports they use, analyses regulators request)?
+3. Which are *regulatory or contractual* obligations (e.g. NEPS submission format, reporting to Marine Directorate) as opposed to nice-to-have?
+4. Which would the trusts pay attention to first (what does the network actually complain about in the legacy system beyond cost and access)?
 
 ---
 
@@ -655,7 +767,7 @@ Output: a one-page summary that locks the protocol list (D6) and form scope. Thi
 | Spec widens beyond STA scope | Tracks and acceptance criteria (1.1, 1.2); feature work separately approved |
 | Site locations exposed (public repo, exports) | Private repo and history clean-up (D15); export controls; sensitivity policy |
 | Cost exceeds target | Scale-to-zero design, budget alerts, 7.3 review at each phase |
-| Legacy renewal date or Nov 2026 transition forces a rushed cutover | Calendar in section 13; legacy read-only fallback |
+| Nov 2026 transition or an unexpected notice period forces a rushed cutover | Calendar in section 13; rolling contract; legacy read-only fallback; check notice terms early |
 | Scope document says AGOL licensing "to confirm" | Confirm group licence covers the layer and users before Phase 1 |
 | Scope creep from "include all options" | Options are recorded here; only the signed-off choices go into Phase 1 |
 
@@ -690,6 +802,12 @@ Output: a one-page summary that locks the protocol list (D6) and form scope. Thi
 - Data sharing: granular grants model (D18 resolved); Rockpool upload export removed (D14), replaced by member exports.
 - New decisions D22 (delivery split) and D23 (legacy extraction); D15 made urgent (site coordinates in the public repo).
 - Personal names deliberately kept out of this file because the repository is public.
+
+### Revision 6 (2026-10-03)
+- Live-system freeze (1.3): nothing live is touched this season; v2 work isolated; repo clean-up (D15) deferred until after the season.
+- Legacy contract is rolling: removed the renewal-date constraint, added notice-period check.
+- Track B expected to be yours (D22, not yet agreed).
+- Added section 15A: 50-item additional functionality catalogue with tiers, dependencies and bundles, for you to prune.
 
 ### Sources used for protocol facts (web search summaries only; the documents themselves could not be opened)
 | Fact | Source | Confidence |
