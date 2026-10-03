@@ -1,7 +1,7 @@
 # EF Data Pipeline v2: Specification (DRAFT for sign-off)
 
 Status: **planning only. No code, schema, or infrastructure changes are made until the Decision Register (section 14) is signed off.**
-Drafted: 2026-10-03. Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
+Drafted: 2026-10-03. Revision 2: 2026-10-03 (your answers on 1mm, single-run, form; see section 17 for the change log and source confidence). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
 
 Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could not verify from the repo; you know the answer. **[BASELINE]** = how the current build does it.
 
@@ -50,11 +50,11 @@ Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could n
 
 | | Timed | SFCC 1mm | NEPS |
 |---|---|---|---|
-| Intent | Semi-quantitative: relative abundance / presence | Quantitative site survey to the SFCC standard, lengths to 1 mm [CONFIRM what "1mm" denotes] | Quantitative survey feeding the national programme (Marine Directorate NEPS tool) |
-| Run modes | **Single only** (one timed fishing effort). Multi-timed is an option, see D3 | Single or multi | Single or multi |
-| Area measured | Optional (effort is time, not area) | Required | Required |
-| Effort metric | Fishing time (seconds) per run | Area, plus pass times | Area, plus pass times |
-| Individual lengths | Optional (option: counts only) | Required for salmonids [CONFIRM] | Required for salmonids [CONFIRM] |
+| Intent | Index of abundance: catch per unit effort (time), used to cover many sites quickly or where removal sampling is impractical | Quantitative, area-delimited site survey to the SFCC standard; **fork length recorded in 1 mm bins** (the legacy alternative is 5 mm bins) | Quantitative, area-delimited survey feeding the national programme (Marine Directorate NEPS tool) |
+| Run modes | **Single only** (one timed fishing effort). Multi-timed is an option, see D3 | Single or multi | Single or multi. **NEPS national default is single-pass; roughly a third of sites are three-pass**, with identical first-pass effort in both [UNVERIFIED, from search summary] |
+| Area measured | Optional (effort is time, not area) | Required | Required (all NEPS data are area-delimited) |
+| Effort metric | **Anode-live time** from the equipment timer (time actually fished, not wall-clock). Target duration commonly ~5 min (Galloway) to ~10 min (SFCC inventory summary): store as a configurable target, [CONFIRM yours] | Area, plus pass times | Area, plus pass times |
+| Individual lengths | Optional (option: counts only) | Parr: all measured. Fry: if more than ~50 per run, a measured subsample of at least 50 and the rest counted [UNVERIFIED] | Same measured-subsample pattern [CONFIRM against the NEPS protocol] |
 | Lifestage | Optional | Fry/parr (or SFCC age class 0-4, see D6) | Fry/parr with species-specific length cutoffs |
 | Primary output | CPUE (fish per minute), presence/absence, species richness | Density (fish/100 m2) via depletion (multi) or assumed capture probability (single) | NEPS tool output: density, benchmark, EQR-style comparison |
 | Poolable with others? | No (different metric) | Only with other SFCC quantitative | Only with other NEPS, and with SFCC quantitative by explicit choice |
@@ -70,6 +70,14 @@ Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could n
 | `neps` | `multi` | depletion locally + NEPS tool |
 
 Everything else is rejected at capture time and by a DB `CHECK`.
+
+### 3.2b Single-run in practice (your answer: all cases occur)
+All three occur and must be representable:
+1. **Single by design** (e.g. NEPS national single-pass sites): `run_mode='single'`, `run_mode_reason='design'`.
+2. **Planned multi, cut short** (e.g. weather, equipment, access): `run_mode='single'` (what was actually done), `planned_runs>=2`, `run_mode_reason='cut_short'`, with a required free-text `termination_reason`. Analysis treats it as single-pass.
+3. **Multi that is analysed as single** (first pass of a multi-pass survey used for a single-pass-equivalent density): derived, not captured. Provide a `first_pass_only` analysis view over any multi event (relies on first-pass effort being identical, per NEPS).
+
+You also want density from single-run data, so the output matrix in section 8 includes it for both SFCC and NEPS, always labelled by how it was derived.
 
 ### 3.3 Run-mode semantics to settle (feeds D3)
 - `planned_runs` vs `actual_runs`: a multi-run survey can end early (e.g. zero catch on pass 2 ends it). Store both, flag mismatch as info, not error.
@@ -104,7 +112,11 @@ survey_projects ─< events
 
 **runs** (shared): `run_id`, `event_id`, `run_no`, `effort_seconds` (anode time; for Timed this *is* the timed effort), `total_run_seconds`, form-reported totals (cross-check only). Unique `(event_id, run_no)`. Timed always has exactly one run, so the timed effort lives in the same column and nothing needs a special case.
 
-**fish_records** (shared): `fish_id`, `run_id`, `species`, `length_mm` (nullable), `lifestage` (nullable), `age_class` (nullable 0-4, SFCC resolution), `count` (bulk count, default 1), `weight_g`, `condition_factor` (trigger), `scaled`, `tissue_tube`, `entry_mode`, `qc_flag`, soft-delete `deleted_at`.
+**fish_records** (shared): `fish_id`, `run_id`, `species`, `length_mm` (nullable; the recorded value, binned per `events.length_bin_mm`), `lifestage` (nullable), `age_class` (nullable 0-4, SFCC resolution), `count` (bulk count, default 1), `measured` (boolean: true = individually measured fish; false = counted-only remainder of a subsampled group), `weight_g`, `condition_factor` (trigger), `scaled`, `tissue_tube`, `entry_mode`, `qc_flag`, soft-delete `deleted_at`.
+
+**Length recording and subsampling (new in rev 2)**
+- `events.length_bin_mm` in {1, 5, NULL}. New SFCC 1mm and NEPS surveys use 1; legacy 5 mm surveys carry 5; Timed with no lengths carries NULL. Length-frequency charts bin at `max(length_bin_mm, chart bin)`, never finer than the data.
+- Fry subsampling: per run, per species and lifestage, store measured fish as individual rows (`measured=true`) and the remainder as one counted row (`measured=false`, `count=n_remaining`, `length_mm=NULL`). Catch totals sum both; length-frequency uses measured rows only and is expanded to the total by proportion (option: show raw measured only). QC checks that measured count meets the protocol minimum when the group size exceeds the threshold.
 
 **Protocol extension examples**
 - `event_neps`: fry/parr cutoffs per species, NEPS tool inputs not already in events, HA/CTM metadata if captured at survey time.
@@ -121,7 +133,7 @@ survey_projects ─< events
 
 Pre-aggregated-only legacy events (counts per run, no individual fish): represent as `fish_records` with `count = n` and `length_mm = NULL` (this is exactly the existing bulk mode). That removes the need for `historical_run_counts`. **[REC]**
 
-Legacy method labels map to protocol as: `Quantitative (1mm)` -> `sfcc_1mm`; `Timed` -> `timed`; `Quantitative (5mm)` and `Presence/Absence` have no v2 protocol. Options: (a) add `sfcc_5mm` and `presence_absence` as read-only legacy protocols **[REC]**, (b) collapse to a generic `legacy_other`. Needs your call (D6).
+Legacy method labels map to protocol as: `Quantitative (1mm)` -> `sfcc_1mm` (`length_bin_mm=1`); `Quantitative (5mm)` -> `sfcc_5mm` (`length_bin_mm=5`, same analysis as 1mm but coarser length data); `Timed` -> `timed`; `Presence/Absence` has no v2 protocol. Options: (a) add `sfcc_5mm` and `presence_absence` as read-only legacy protocols **[REC]**, (b) collapse to a generic `legacy_other`, (c) model SFCC quantitative as one protocol `sfcc_quant` with `length_bin_mm` in {1,5} and offer only 1 for new surveys. (c) is cleaner now that 1mm vs 5mm is known to be a recording resolution, not a different method. Needs your call (D6).
 
 ### 4.4 NEPS tool results
 Re-key `neps_tool_results` on `event_id` instead of `(site_name, survey_date, species, lifestage)`. Import matches on the old key and writes `event_id`; unmatched or ambiguous rows (same site and date, two events) go to a review queue, not a silent guess.
@@ -178,8 +190,29 @@ Re-key `neps_tool_results` on `event_id` instead of `(site_name, survey_date, sp
 
 Form-side requirements (carry over): required-field validation must be **on** in production (baseline had it stripped for testing, which is why QC flagged incomplete fish rows), calculated fields from the baseline (`dep_*`, `den_*`, `catch_summary*`) stay presentation-only and are never ingested.
 
-### 5.4 Accessing the existing form
-The XLSForm lives on your Windows machine (`C:\Users\graem\ArcGIS\My Survey Designs\...`), which this cloud session cannot see. To base v2 form logic on it, I need the `.xlsx` (or a pasted export) in the repo or attached. [CONFIRM]
+### 5.4 The form is a clean-sheet redesign (your direction)
+`efish_neps_v8` is a working demo. It is treated as **reference material, not a constraint**: v9 is designed from the protocols outward, and the form is a first-class deliverable with its own spec, review and field testing, not an afterthought to the database.
+
+**Principles**
+1. **Form and data dictionary are co-designed first.** One data dictionary (field, type, allowed values, protocol applicability, required-when, unit, QC rule links) drives the XLSForm, the database schema, the pydantic models and the QC rules. Schema is derived from it, not the other way round.
+2. **Protocol drives the form.** First screen: protocol, run mode (and `run_mode_reason` / `planned_runs` if cut short). Everything downstream uses `relevant` and `constraint` logic from that choice.
+3. **Required-field validation is on in production.** Nothing stripped "for testing". A separate training/test build of the form exists for that.
+4. **Raw observations only are authoritative.** Calculated helper fields (running totals, depletion previews, summary HTML) are allowed on screen for the operator but are never ingested.
+5. **Fast in the field.** Fish entry optimised for gloved, wet, one-handed use: species/lifestage quick buttons, length stepper at the event's bin size (1 or 5 mm), bulk-count mode, subsample-remainder mode, undo of last fish.
+6. **Versioned.** Form carries `form_version`; every event stores it; the data dictionary records which version introduced/removed each field. Changing a form after republish requires a checklist (see 6.2 relationship-ID verification).
+7. **Offline-first, with robust sync.** Test on the actual devices, with poor signal, before any season.
+
+**Form v9 deliverables**
+- Data dictionary (one sheet per entity: event, run, fish, photo, width, plus protocol extensions).
+- XLSForm(s) per decision D2, with a choices list for species, lifestage, protocols, sites, projects (generated from the DB so they cannot drift).
+- Site list pipeline: DB `sites` -> CSV/feature layer used by the form (D8).
+- A test matrix: 5 protocol/run combinations x (online, offline, resume draft, edit after submit) with expected ingested rows.
+- Field UX review with the people who will use it, before build is frozen.
+- Retirement plan for v8 (D16).
+
+**Existing v8 data**: you describe v8 as a demo, so its submissions may be test data. Options are keep and tag, migrate, or discard (D16). Nothing is deleted without your explicit say-so.
+
+**Reading the old form**: v8 lives at `C:\Users\graem\ArcGIS\My Survey Designs\...`, not visible from this cloud session. It is only needed as a reference for field names and ideas; if you want me to mine it, attach the `.xlsx`. No longer blocking.
 
 ---
 
@@ -258,6 +291,7 @@ Roles (least privilege), extending baseline: `ingest_writer` (insert/update ever
 | Carle-Strub N and density | no | no | yes | no | yes (cross-check) |
 | Assumed-p density | no | optional | no | no | no |
 | NEPS tool density + benchmark | no | no | no | **yes (primary)** | **yes (primary)** |
+| First-pass-only (single-equivalent) density from a multi event | no | no | yes | no | yes |
 | Length-frequency | if lengths taken | yes | yes | yes | yes |
 | Condition factor | if weights | if weights | if weights | if weights | if weights |
 
@@ -297,6 +331,11 @@ Severity: `error` (blocks "ok"), `warn`, `info`. Event `qc_status`: `pending` ->
 | Ingest mismatch (form total > 0, ingested 0) | all | error |
 | Form-reported vs server-derived totals disagree | all | info |
 | Retired/unknown site code | all | error |
+| Survey date outside the NEPS sampling window (default 1 Jul-30 Sep) | neps | info |
+| Cut-short survey without `termination_reason` | single with planned_runs>=2 | error |
+| Measured count below protocol minimum for a subsampled group | sfcc, neps | warn |
+| Recorded length not on the event's bin grid (e.g. 5 mm event with length 47) | all with lengths | warn |
+| Timed effort far from target duration | timed | warn |
 
 Thresholds live in a `qc_config` table (editable), not code constants. Every flag stores rule id, severity, detail, and the offending row id.
 
@@ -351,17 +390,18 @@ Any panel whose prerequisites are absent shows an explicit empty state naming th
 
 | Phase | Scope | Exit criteria |
 |---|---|---|
-| 0. Decisions | Resolve section 14; obtain XLSForm, Rockpool upload template, sample single-run/timed data | Sign-off recorded here |
-| 1. Data model | Migrations for events/runs/fish/extension tables, lookups, constraints, `edit_log`, `qc_config`, `event_estimates`; apply on a Supabase **branch** first | Migrations pass on branch; constraint tests pass |
-| 2. Historical remap | Move `historical_*` into unified model (if D5 = unify) | Row counts reconcile exactly with baseline; spot-check 20 events |
-| 3. Form v9 | Protocol-aware XLSForm | Field-tested on all 5 combinations offline |
+| 0. Decisions + sources | Resolve section 14; get SFCC/NEPS protocol PDFs into the repo (section 15); settle Timed details | Sign-off recorded here |
+| 1. Data dictionary + form design | Dictionary, XLSForm(s), test matrix, field UX review | You approve the dictionary and a clickable form on a real device |
+| 2. Data model | Migrations derived from the dictionary; lookups, constraints, `edit_log`, `qc_config`, `event_estimates`; apply on a Supabase **branch** first | Migrations pass on branch; constraint tests pass |
+| 3. Historical remap | Move `historical_*` into the unified model (if D5 = unify) | Row counts reconcile exactly with baseline; spot-check 20 events |
 | 4. Ingest | Poller with `editDate`, dynamic relationship IDs, mismatch assertion | Each of the 5 combos ingests end to end; edit round-trips |
 | 5. QC + estimates | Rule engine, estimator jobs | Golden-value tests pass; QC table reviewed by you |
-| 6. Dashboard | Filters, protocol-aware panels, map encodings | Walk-through per protocol |
-| 7. Exports | NEPS (single + multi), SFCC CSV, KML | Round-trip into the NEPS tool succeeds |
-| 8. Cutover | Switch form, retire unused services, docs, runbook | One full field week ingested without manual intervention |
+| 6. Field pilot | Real surveys on the new form, side by side with paper/old process | Pilot week with no data loss; field feedback applied |
+| 7. Dashboard | Filters, protocol-aware panels, map encodings | Walk-through per protocol |
+| 8. Exports | NEPS (single + multi), KML, CSV (SFCC upload format deferred, see D14) | Round-trip into the NEPS tool succeeds |
+| 9. Cutover | Switch form, retire unused services, docs, runbook | One full field week ingested without manual intervention |
 
-Rollback: every phase's migration is additive until Phase 8; the baseline keeps running untouched until cutover.
+Rollback: every phase's migration is additive until Phase 9; the baseline keeps running untouched until cutover.
 
 ---
 
@@ -372,31 +412,41 @@ Rollback: every phase's migration is additive until Phase 8; the baseline keeps 
 | D0 | Where does v2 live? | New repo; new branch/folder in this repo; in-place evolution | New long-lived branch in this repo (keeps history and lessons), merge at cutover |
 | D1 | Capture platform | Survey123 / Field Maps / ODK-Kobo / PWA | Survey123 |
 | D2 | Forms | One / two / three | One protocol-aware form |
-| D3 | Timed multi-run? Single-run termination rules? | Timed single only / allow multi-timed | Timed single only |
+| D3 | Timed multi-run? | Timed single only / allow multi-timed | Timed single only (single-run termination is now handled by `run_mode_reason`, section 3.2b) |
 | D4 | Data model | A wide / B per-protocol / C core + extensions | C |
 | D5 | Legacy SFCC data | Keep separate / unify / unify + side table for SFCC estimates | Unify + side table |
-| D6 | Legacy protocols (5mm, Presence/Absence) and SFCC age class 0-4 | Read-only legacy protocols / collapse to `legacy_other`; keep age class or collapse to fry/parr | Read-only legacy protocols; store age class and derive lifestage |
+| D6 | 1mm vs 5mm, Presence/Absence legacy, SFCC age class 0-4 | (a) separate legacy protocols, (b) `legacy_other`, (c) one `sfcc_quant` protocol with `length_bin_mm`; keep age class or collapse to fry/parr | (c) for SFCC quantitative; Presence/Absence as read-only legacy; store age class and derive lifestage |
 | D7 | Pooling default | Always separate / separate with toggle / always pooled | Separate with explicit toggle and caveat |
 | D8 | Site master | CSV file / `sites` table with promotion workflow | Table is master; CSV becomes an export |
 | D9 | Ingest | Webhook / polling / Extract Changes | Polling on `editDate` |
 | D10 | FastAPI service | Keep / retire | Retire unless webhooks are revived |
 | D11 | Analysis location | R at read time / SQL views / precomputed `event_estimates` | Precomputed |
-| D12 | Single-run SFCC density | Minimum only / assumed capture probability (configurable) | Show both, label clearly |
+| D12 | Single-run density (SFCC and NEPS) | Minimum only / assumed capture probability (configurable) / NEPS tool model | RESOLVED by you: all are wanted. Show each, labelled by derivation; assumptions stored per estimate |
 | D13 | Required-field validation in form | On / off | On in production |
 | D14 | SFCC/Rockpool export | None / CSV matching template / CSV + validation | CSV + validation (needs the template) |
+| D16 | Existing v8 demo data | Discard / keep as `source_system='survey123_v8_demo'` / migrate into the new model | Your call (see section 15, Q4). Default: keep, tagged, excluded from reports unless included |
 | D15 | Public repo hygiene | Keep public / make private | Make private if feasible, otherwise scrub client names and project ref |
 
 ---
 
-## 15. Information I need from you (cannot be derived from the repo)
+## 15. Open items
 
-1. **What does "SFCC 1mm" mean in your protocol?** (Length recorded to 1 mm vs 5 mm bins? Anything else that changes data capture?)
-2. **Timed**: how is a timed survey run in practice? (Fixed duration, e.g. 5 min? One habitat or several? Are lengths taken? Is area recorded?)
-3. **Single-run NEPS/SFCC**: how are these used? (Always one pass by design, or sometimes a planned-multi cut short?) Do you want density for single-run SFCC at all, or only catch and minimum density?
-4. The current **XLSForm** (`efish_neps_v8`) as a file in the repo or attached, so form v9 builds on the real structure.
-5. The **Rockpool upload template** if you need to submit data back to SFCC.
-6. Whether v2 is replacing the current system for everyone at AFT, or running alongside it.
-7. Any survey seasons or deadlines the cutover must avoid.
+### Answered
+| Question | Your answer | Effect |
+|---|---|---|
+| What is "1mm"? | Bin size for recorded fork length | `length_bin_mm`, section 4.2; 5 mm is the legacy alternative (D6) |
+| How are Timed surveys run? | "Check the SFCC docs" | Searched; see section 17. Core facts found, details still to confirm |
+| Single-run use | All cases possible; density wanted | Section 3.2b; D12 resolved |
+| Existing form | Demo only, needs complete revision and respect | Section 5.4 |
+| Rockpool upload template | Not available now | D14 deferred; export designed as a later phase |
+
+### Still needed
+1. **SFCC and NEPS protocol documents in the repo.** I could not open `fms.scot`, `gov.scot` or `sfcc.co.uk` (blocked in this environment). Please drop into `docs/sources/`: the SFCC *Introduction to Electrofishing Training Manual (2021)* and *Team Leader Manual (2021)* (available from SFCC on request), the SFCC *Data Collection Protocols Inventory*, and the NEPS *Field Data Collection Protocol*. Then I can replace every [UNVERIFIED] with a quoted rule.
+2. **Timed specifics for your practice**: target duration (5 vs 10 min), stop nets or not, whether lengths are taken, area recorded or not, one habitat or several per site.
+3. **Existing v8 data**: is any of it real survey data worth keeping (D16)?
+4. **5 mm for new surveys**: should the new form ever offer 5 mm bins, or only 1 mm (legacy 5 mm kept read-only)?
+5. **Who uses the form and on what devices** (number of staff, phones/tablets, signal conditions). Drives offline and UX requirements.
+6. Does v2 replace the current system for everyone at AFT, and are there survey seasons the cutover must avoid?
 
 ---
 
@@ -411,3 +461,26 @@ Rollback: every phase's migration is additive until Phase 8; the baseline keeps 
 | Estimates stale after a fish edit | Recompute job triggered on write; `computed_at` shown |
 | Single-run density over-interpreted | Always labelled minimum or assumed-p, with the assumption stored |
 | Scope creep from "include all options" | Options are recorded here; only the signed-off choices go into Phase 1 |
+
+---
+
+## 17. Change log and source confidence
+
+### Revision 2 (2026-10-03)
+- 1mm defined as fork-length bin size: added `length_bin_mm`, a length-grid QC rule, simplified legacy 5 mm handling (D6 option c).
+- Single-run: added `run_mode_reason`, `termination_reason`, first-pass-only analysis view; D12 resolved (all density types shown, labelled).
+- Subsampling model for large fry catches (`measured` flag, remainder as counted row).
+- Form redesigned as a clean-sheet deliverable; phases reordered so dictionary + form design come before the schema; field pilot added; Rockpool export deferred.
+- Open items rewritten (section 15).
+
+### Sources used for protocol facts (web search summaries only; the documents themselves could not be opened)
+| Fact | Source | Confidence |
+|---|---|---|
+| Timed surveys standardise effort or are used where removal sampling is impractical; ~10 min total, equipment timer counts anode-live time | SFCC Data Collection Protocols Inventory (2022), via search summary: https://fms.scot/wp-content/uploads/2023/08/220309-SFCC-Data-Collection-Protocols-Inventory.pdf | Medium |
+| Galloway timed surveys are 5 min, two-person team | https://www.gallowayfisheriestrust.org/timed-electrofishing-surveys-luce-urr.php | Medium (one trust's practice) |
+| Timed catch is an index of abundance (CPUE) | https://www.sciencedirect.com/science/article/abs/pii/S0165783617302849 and trust pages | High (general method) |
+| Semi-quantitative: ~100 m2, no stop nets, fished upstream | SFCC inventory, via search summary | Medium; semi-quantitative is not one of your three types, noted only for context |
+| NEPS: single-pass national default, ~1/3 of sites three-pass, equal first-pass effort, all data area-delimited, sampling window 1 Jul-30 Sep | https://www.gov.scot/publications/national-electrofishing-programme-scotland-neps-2021/pages/3/ via search summary | Medium-high |
+| Parr measured to nearest mm; if more than 50 fry per run, measure at least 50 | NEPS/SFCC Field Data Collection Protocol, via search summary: https://www.gov.scot/binaries/content/documents/govscot/publications/factsheet/2020/11/electrofishing-programme-for-scotland-standard-operating-procedures/documents/standard-operating-procedures/field-data-collection-protocol/field-data-collection-protocol/govscot:document/Field+Data+Collection+Protocol.pdf | Medium; verify exact rule and which protocol it belongs to |
+
+Everything marked [UNVERIFIED] or [CONFIRM] in this document is unresolved until the source documents are in `docs/sources/`.
