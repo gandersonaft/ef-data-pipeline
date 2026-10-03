@@ -1,7 +1,7 @@
 # EF Data Pipeline v2: Specification (DRAFT for sign-off)
 
 Status: **planning only. No code, schema, or infrastructure changes are made until the Decision Register (section 14) is signed off.**
-Drafted: 2026-10-03. Revision 3: 2026-10-03 (network-wide scale, Timed details, 5 mm retained; see section 17). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
+Drafted: 2026-10-03. Revision 4: 2026-10-03 (SFCC ownership, Azure hosting, AGOL group licence, v8 data is real; see section 17). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
 
 Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could not verify from the repo; you know the answer. **[BASELINE]** = how the current build does it.
 
@@ -15,7 +15,8 @@ Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could n
 3. Each survey type gets the analysis that is *statistically valid for it*. No silent pooling of incompatible methods.
 4. One storage model that also holds legacy SFCC/Rockpool history, so old and new surveys are queryable the same way.
 5. **Built for SFCC network-wide use: 50-100 users across multiple trusts/organisations, on tablets (some phones), in poor-signal conditions.** This is a design driver for platform, offline behaviour, data ownership and support, not a later add-on (sections 4.7, 5.5, 7.1).
-6. Outputs: dashboard, NEPS tool export/import round-trip, SFCC/Rockpool-compatible export, KML/GPS waypoints, CSV.
+6. **Prototype now, SFCC-owned production later.** AFT is the pilot and prototyping trust; at completion SFCC owns and operates the system, hosted on **Azure** and paid for by SFCC. Everything is built to be handed over (section 7.2).
+7. Outputs: dashboard, NEPS tool export/import round-trip, SFCC/Rockpool-compatible export, KML/GPS waypoints, CSV.
 
 ### Non-goals (unless you say otherwise)
 - Replacing the Marine Directorate NEPS tool or Rockpool as systems of record for their own modelled outputs.
@@ -54,7 +55,7 @@ Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could n
 | Intent | Index of abundance: catch per unit effort (time), used to cover many sites quickly or where removal sampling is impractical | Quantitative, area-delimited site survey to the SFCC standard; **fork length recorded in 1 mm bins** (the legacy alternative is 5 mm bins) | Quantitative, area-delimited survey feeding the national programme (Marine Directorate NEPS tool) |
 | Run modes | **Single only** (one timed fishing effort). Multi-timed is an option, see D3 | Single or multi | Single or multi. **NEPS national default is single-pass; roughly a third of sites are three-pass**, with identical first-pass effort in both [UNVERIFIED, from search summary] |
 | Area measured | Optional (effort is time, not area). **No stop nets** (your answer): stored as `stop_nets=false`, defaulted for Timed | Required | Required (all NEPS data are area-delimited) |
-| Effort metric | **Anode-live time** from the equipment timer (time actually fished, not wall-clock). Your answer: a **target duration** applies. Stored per event (`target_duration_s`) with the org/network default configurable (commonly 5 to 10 min in the sources I could find), and the form shows the timer against target | Area, plus pass times | Area, plus pass times |
+| Effort metric | **Anode-live time** from the equipment timer (time actually fished, not wall-clock). Your answer: **5 or 10 minutes**. Stored per event as `target_duration_s` (300 or 600; form offers exactly these two, extensible via a lookup table), org default configurable, and the form shows the timer against target | Area, plus pass times | Area, plus pass times |
 | Individual lengths | Optional: **may be taken** (your answer), so the form offers a per-survey "lengths taken?" switch | Parr: all measured. Fry: if more than ~50 per run, a measured subsample of at least 50 and the rest counted [UNVERIFIED] | Same measured-subsample pattern [CONFIRM against the NEPS protocol] |
 | Lifestage | Optional | Fry/parr (or SFCC age class 0-4, see D6) | Fry/parr with species-specific length cutoffs |
 | Primary output | CPUE (fish per minute), presence/absence, species richness | Density (fish/100 m2) via depletion (multi) or assumed capture probability (single) | NEPS tool output: density, benchmark, EQR-style comparison |
@@ -176,18 +177,27 @@ Fifty to a hundred users across trusts means ownership and access are data-model
 | Custom PWA | Yes if built well | Highest | Total control; you maintain it |
 | Spreadsheet/paper then entry | n/a | Lowest | Keep as a documented fallback import path regardless (6.5) |
 
-### 5.1b Platform implications of 50-100 users (D17)
-| Concern | Survey123 / AGOL | ODK / KoboToolbox / ODK Central |
-|---|---|---|
-| Licensing | Each submitter needs a named-user AGOL licence (Creator/Field Worker) under a **shared organisation**; 50-100 cross-trust users means someone's AGOL org licenses or invites them all. Cost and admin are real [CONFIRM how SFCC/AFT would license this] | No per-user licence cost; self-host or hosted |
-| Cross-org isolation | Via groups/views; clumsy | Projects/users per project in ODK Central |
-| Offline | Strong | Strong (Collect app), forms and attachments queue and sync |
-| Distribution of form updates | Via AGOL, users re-download | Pull from server on connect |
-| Reliable server-to-server data feed | Webhooks failed in your org; polling works | REST service/webhooks work; or poll the OData API |
-| Maintenance burden | Esri-managed | You manage a server (or pay a host) |
-| Familiarity | You know it | New to learn |
+### 5.1b Platform at 50-100 users (D17, updated)
+**New fact: SFCC holds a group AGOL licence, and every trust has per-employee user licences.** The main Survey123 blocker (licensing and admin of cross-trust submitters) is therefore removed. Revised view:
 
-Take-away: for a **network** rollout, ODK Central becomes materially more attractive than for an AFT-only tool. The decision is a genuine fork (D17), not a foregone Survey123. Both can be evaluated with the same XLSForm in Phase 1, since the form is authored as XLSForm either way.
+| Concern | Survey123 / AGOL (SFCC group licence) | ODK Central |
+|---|---|---|
+| Licensing | Already in place for all trusts | New to procure and run |
+| Identity | Users already have AGOL accounts; reuse for sign-in and org membership (via AGOL groups) | New identity store |
+| Offline | Strong | Strong |
+| Cross-org isolation | Via AGOL groups / views owned by SFCC's org; needs design, see below | Native projects |
+| Server data feed | Webhooks failed in AFT's org; **SFCC org admins may be able to fix this** (Org Settings -> Webhooks), but polling stays the guaranteed path | Reliable |
+| Maintenance | Esri-managed | You run a server (on Azure) |
+| Familiarity / existing investment | You and AFT already use it; the pilot was on it | New |
+
+**Revised recommendation [REC]: Survey123 on SFCC's AGOL org.** ODK Central is kept as a documented fallback only if the AGOL group/view isolation proves unworkable in the pilot.
+
+Design points this creates (carry into Phase 1):
+- **One hosted feature layer owned by an SFCC service account**, with per-trust access via **groups and filtered views** (so a trust sees and edits only its own records, and a network admin sees all). Verify that offline editing works with view-filtered layers on the devices in use.
+- **Site list** distributed to the form per trust (feature layer or CSV attachment), generated from the central `sites` table.
+- **Identity in data**: capture the AGOL username on every submission (`submitted_by`); map username -> user -> organisation membership in the DB, so org ownership of each event is derived, not typed by the surveyor.
+- **Form versioning**: republishing the shared form affects all trusts at once; use a staging copy of the form (and layer) for testing and promote deliberately.
+- Webhook request to SFCC AGOL admins is a **free experiment** to run in parallel, not a dependency.
 
 ### 5.2 One form or several (D2)
 
@@ -248,7 +258,13 @@ Form-side requirements (carry over): required-field validation must be **on** in
 - Field UX review with the people who will use it, before build is frozen.
 - Retirement plan for v8 (D16).
 
-**Existing v8 data**: you describe v8 as a demo, so its submissions may be test data. Options are keep and tag, migrate, or discard (D16). Nothing is deleted without your explicit say-so.
+**Existing v8 data is real (your answer): this year's actual surveys.** They are protected and migrated, never discarded:
+1. **Before anything else**: take and verify a full backup of the current Supabase project (`pg_dump` plus the photo bucket), stored outside the repo. Nothing in Phases 1+ touches the live database until the backup restores cleanly on a branch.
+2. All migrations run on a Supabase branch (or restored copy) first, with row-count reconciliation per table.
+3. v8 events become `events` rows with `protocol='neps'`, `source_system='survey123_v8'`, `form_version='v8'`, original `global_id` preserved as `source_id`, `raw_payload` retained.
+4. Known v8 gaps are carried as explicit data-quality flags, not silently filled: no weight field; required-field validation was disabled so some fish rows were incomplete (existing `incomplete_fish_record` flags retained); lifestage derived from length where unanswered (retain `lifestage_source='derived'`); run mode inferred from pass count (`run_mode_reason='design'` unknown, so mark `inferred`); `length_bin_mm=1` assumed [CONFIRM], `area_m2` from form calc.
+5. Edits already made through the Shiny fish editor are preserved (soft-deletes and `updated_at` kept), and a pre/post comparison of key totals (fish by species/lifestage, density per event) proves nothing changed.
+6. The v8 form stays live and ingestable until cutover (Phase 9), so this season's remaining surveys are not interrupted.
 
 **Reading the old form**: v8 lives at `C:\Users\graem\ArcGIS\My Survey Designs\...`, not visible from this cloud session. It is only needed as a reference for field names and ideas; if you want me to mine it, attach the `.xlsx`. No longer blocking.
 
@@ -301,11 +317,22 @@ A survey that creates a new site enters `sites` as `source='survey_new_site'` wi
 
 | Layer | Options | Rec |
 |---|---|---|
-| DB | Supabase Postgres + PostGIS (baseline); self-hosted PG; Neon | Keep Supabase |
-| Ingest runtime | GH Actions cron (baseline); Render cron; Supabase Edge Function + pg_cron; keep FastAPI webhook | GH Actions or Render cron. Drop the FastAPI web service unless webhooks are revived. Saves a running service |
-| Storage | Supabase Storage private bucket | Keep |
-| Dashboard | R Shiny on Posit Connect Cloud (baseline); Shiny on Render; Python (Streamlit/Dash); Metabase/Superset | Keep Shiny: the analysis stack (FSA, NEPS tool format) is R |
-| Secrets | `.env` + Actions secrets + Render env | Same, but never commit real values; note repo is **public** |
+| DB | Supabase Postgres + PostGIS (prototype); **Azure Database for PostgreSQL Flexible Server with PostGIS (production target)**; self-hosted PG | Prototype on Supabase, target Azure; keep everything plain Postgres/PostGIS so the move is a dump/restore |
+| Ingest runtime | GH Actions cron (prototype); **Azure Functions (timer trigger) or Container Apps Jobs (production target)**; keep FastAPI webhook only if webhooks start working | Same Python ingest code runs in all of them. Drop the FastAPI web service unless webhooks are revived |
+| Storage | Supabase Storage (prototype); **Azure Blob Storage with private containers and SAS URLs (production target)** | Wrap in a small storage interface now (`put`, `sign_url`) so the backend swaps without touching callers |
+| Dashboard | R Shiny on Posit Connect Cloud (prototype); **Shiny in a container on Azure Container Apps / App Service, or ShinyProxy for per-user sessions (production target)**; Posit Connect on Azure (paid licence); Python alternatives | Keep Shiny (R analysis stack: FSA, NEPS tool formats); containerise it now |
+| Secrets | `.env` + Actions secrets (prototype); **Azure Key Vault + managed identity (production target)** | Never commit real values; note repo is currently **public** |
+
+### 7.2 Handover to SFCC and Azure (new, your answer)
+You are prototyping; SFCC will own, host (Azure) and pay. This shapes how everything is built:
+1. **Portability rule**: no Supabase-only features in core logic (no PostgREST/Supabase Auth/Storage API/Supabase RLS role magic as dependencies). Plain Postgres + PostGIS + SQL migrations in the repo; blob and auth behind small interfaces. Supabase remains a fine prototype host.
+2. **Target Azure architecture** (to be validated with SFCC IT): Azure Database for PostgreSQL Flexible Server (PostGIS extension), Blob Storage, Functions/Container Apps Jobs for ingest, Container Apps or App Service for the dashboard, Key Vault, Application Insights/Log Analytics for monitoring, private networking as SFCC requires.
+3. **Infrastructure as code** (Bicep or Terraform, SFCC's preference [CONFIRM]) so SFCC can recreate the environment; environments: dev, staging (including a staging AGOL form/layer), production.
+4. **Identity**: the dashboard sign-in options are Microsoft Entra ID (if SFCC/trusts use M365/Entra and B2B guests) or **AGOL OAuth sign-in** so users reuse their existing AGOL identity. [REC] AGOL OAuth if trusts are not all in one Entra tenant; decide with SFCC IT (D19).
+5. **Ownership and licence**: code moves to an SFCC-owned repo/organisation; agree a licence (open vs internal); no personal credentials or accounts in the delivery chain; document who holds each secret.
+6. **Data protection**: agreements between trusts and SFCC on hosting, access, retention; UK GDPR review for user/staff data (names of surveyors); Azure region UK South/West.
+7. **Handover package**: architecture doc, runbooks (deploy, restore, rotate secrets, add a trust, republish form), data dictionary, test suite, onboarding guide, a named SFCC technical owner, and a warranty/support period.
+8. **Migration of real data** from Supabase to Azure at handover is a rehearsed, verified step (counts, checksums, photos), not an afterthought (section 5.4 applies to this move too).
 
 ### 7.1 Scale and operations (new)
 - **Authentication**: for the dashboard, Supabase Auth (email/SSO) with org membership; the current shared Shiny DB credentials do not scale to 50-100 people. Options: (a) Shiny behind Posit Connect auth with per-user DB session role, (b) replace Shiny with a stack that supports per-user auth natively, (c) keep Shiny for analysts only and give surveyors a lightweight "my surveys" view elsewhere. Decide in D19.
@@ -441,15 +468,17 @@ Any panel whose prerequisites are absent shows an explicit empty state naming th
 
 | Phase | Scope | Exit criteria |
 |---|---|---|
+| 0a. Protect real data | Full verified backup of Supabase (DB + photos), restore test on a branch | Restore reproduces row counts exactly |
 | 0. Decisions + census | Resolve section 14; run the network method census (section 15); get protocol PDFs into the repo; governance and licensing answers (D17-D20) | Protocol list locked, platform chosen, sign-off recorded here |
 | 1. Data dictionary + form design | Dictionary, XLSForm(s), test matrix, field UX review | You approve the dictionary and a clickable form on a real device |
 | 2. Data model | Migrations derived from the dictionary; lookups, constraints, `edit_log`, `qc_config`, `event_estimates`; apply on a Supabase **branch** first | Migrations pass on branch; constraint tests pass |
-| 3. Historical remap | Move `historical_*` into the unified model (if D5 = unify) | Row counts reconcile exactly with baseline; spot-check 20 events |
+| 3. Data migration | Move `historical_*` and **live v8 events** into the unified model (rehearsed on a branch) | Row counts and key totals reconcile exactly with baseline; spot-check 20 events including edited fish |
 | 4. Ingest | Poller with `editDate`, dynamic relationship IDs, mismatch assertion | Each of the 5 combos ingests end to end; edit round-trips |
 | 5. QC + estimates | Rule engine, estimator jobs | Golden-value tests pass; QC table reviewed by you |
 | 6. Field pilot | One pilot trust, real surveys on tablets/phones in poor signal, side by side with the old process; then staged rollout trust by trust | Pilot week with zero data loss and offline sync verified; support route tested; feedback applied |
 | 7. Dashboard | Filters, protocol-aware panels, map encodings | Walk-through per protocol |
 | 8. Exports | NEPS (single + multi), KML, CSV (SFCC upload format deferred, see D14) | Round-trip into the NEPS tool succeeds |
+| 8b. Azure environment | IaC, dev/staging/prod, dry-run migration Supabase -> Azure, monitoring | Full restore on Azure reproduces data; SFCC IT sign-off |
 | 9. Cutover | Switch form, retire unused services, docs, runbook | One full field week ingested without manual intervention |
 
 Rollback: every phase's migration is additive until Phase 9; the baseline keeps running untouched until cutover.
@@ -475,11 +504,12 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | D12 | Single-run density (SFCC and NEPS) | Minimum only / assumed capture probability (configurable) / NEPS tool model | RESOLVED by you: all are wanted. Show each, labelled by derivation; assumptions stored per estimate |
 | D13 | Required-field validation in form | On / off | On in production |
 | D14 | SFCC/Rockpool export | None / CSV matching template / CSV + validation | CSV + validation (needs the template) |
-| D17 | Capture platform at network scale | Survey123 (licensing, shared AGOL org) / ODK Central / Kobo | Evaluate both in Phase 1 with one XLSForm; default ODK Central if per-user AGOL licensing across trusts is impractical |
+| D17 | Capture platform at network scale | Survey123 / ODK Central / Kobo | **Survey123 on SFCC's AGOL org** (group licence confirmed). ODK Central only as a fallback if group/view isolation fails the pilot |
 | D18 | Data sharing between organisations | Org-private / network read / fully shared | Org-private edit, network read of site-level aggregates, per-org opt-in for detail |
-| D19 | Dashboard auth and platform | Shiny + Connect auth / different stack / analysts-only Shiny plus simpler surveyor view | Needs input; per-user auth is mandatory either way |
-| D20 | Governance and cost | Who hosts, administers, pays, supports; agreements with trusts | SFCC/AFT to decide; blocks Phase 6 pilot scope |
-| D16 | Existing v8 demo data | Discard / keep as `source_system='survey123_v8_demo'` / migrate into the new model | Your call (see section 15, Q4). Default: keep, tagged, excluded from reports unless included |
+| D19 | Dashboard auth and platform | Entra ID / AGOL OAuth sign-in; Shiny container + ShinyProxy / Posit Connect / different stack | AGOL OAuth unless SFCC IT prefers Entra; Shiny in containers on Azure; per-user auth mandatory |
+| D20 | Governance and cost | RESOLVED in principle: SFCC owns, hosts on Azure, pays. Still open: named technical owner, support model, trust data agreements, IaC tool, Azure region | SFCC to name an owner before Phase 6 |
+| D21 | Prototype hosting until handover | Stay on Supabase + GH Actions / build on Azure from the start | Prototype on current stack with the portability rule (7.2); stand up an Azure dev environment in Phase 2 to prove the move early |
+| D16 | Existing v8 data | RESOLVED: it is real data. Migrate into the new model as `source_system='survey123_v8'`, with backup first (section 5.4) | Done; implementation in Phase 3 |
 | D15 | Public repo hygiene | Keep public / make private | Make private if feasible, otherwise scrub client names and project ref |
 
 ---
@@ -490,15 +520,27 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | Question | Your answer | Effect |
 |---|---|---|
 | What is "1mm"? | Bin size for recorded fork length | `length_bin_mm`, section 4.2 |
-| Timed specifics | Target duration; no stop nets; lengths maybe taken | Section 3.1: `target_duration_s`, `stop_nets=false` default, "lengths taken?" switch |
+| Timed specifics | 5 or 10 min target; no stop nets; lengths maybe taken | `target_duration_s` in {300, 600}; section 3.1 |
 | Single-run use | All cases possible; density wanted | Section 3.2b; D12 resolved |
-| Existing form (v8) | Demo only, needs complete revision | Section 5.4 |
-| 5 mm bins | Some trusts may still use them; keep as option for now | D6; revisit after method census |
-| Rockpool upload template | Not available now | D14 deferred |
-| Scale and conditions | SFCC network-wide, 50-100 users, tablets/phones, poor signal | Sections 4.7, 5.1b, 5.5, 6.2b, 7.1; D17-D20 |
-| Protocol PDFs | Can't provide just now | Rules stay [UNVERIFIED]; Phase 0 gate before form freeze |
+| v8 form | Demo form; needs complete revision | Section 5.4 |
+| v8 data | **Real surveys from this season; keep** | Backup-first migration, section 5.4; D16 resolved |
+| 5 mm bins | Option kept for now | D6; revisit after the census |
+| Rockpool upload template | Not available | D14 deferred |
+| Scale | SFCC network-wide, 50-100 users, tablets/phones, poor signal | Sections 4.7, 5.5, 6.2b |
+| Ownership / hosting | SFCC owns at completion; Azure; SFCC pays; you are prototyping | Section 7.2; D20 resolved in principle, D21 |
+| Licensing | SFCC group AGOL licence, per-employee user licences in each trust | D17: Survey123 recommended; section 5.1b |
+| Pilot | AFT has piloted recording and access this season, via you | Pilot scope below |
+| Protocol PDFs | Can't provide now | Still [UNVERIFIED]; gate before form freeze |
 
-**About v8:** `efish_neps_v8` is the Survey123 form this repo currently ingests (main event + pass/fish/photo/width repeats). v2 replaces it with a clean-sheet form. Open question is only whether its existing demo submissions are worth keeping (D16).
+### Pilot status and next-season pilot
+This season's pilot was effectively one operator (you) on the v8 form and the Shiny prototype. The network pilot therefore still needs: a second AFT surveyor group on the new form, then one additional trust, with a defined support person and a feedback loop. Scope and dates depend on SFCC naming a technical owner (D20) and on method census results.
+
+### Still needed
+1. **Protocol documents** (SFCC training and team-leader manuals, Protocols Inventory, NEPS Field Data Collection Protocol) in `docs/sources/` when available.
+2. **SFCC technical owner and IT contact** for Azure, AGOL admin (webhook experiment, groups/views), identity (Entra vs AGOL OAuth), and IaC preference.
+3. **Trust data-sharing position** (D18) and any hosting agreements needed.
+4. **v8 facts to confirm**: was length recorded to 1 mm in v8, and were all v8 NEPS surveys single-pass or multi-pass (the data will show pass counts, but intent matters for `run_mode_reason`)?
+5. **Next-season timing** for the pilot expansion.
 
 ### New: network method census (your suggestion)
 Before freezing the form, poll SFCC trusts on current practice so the form fits real methods, not assumptions. Proposed short questionnaire (one per trust):
@@ -510,14 +552,6 @@ Before freezing the form, poll SFCC trusts on current practice so the form fits 
 6. Who needs access to whose data; reporting obligations.
 7. Number of staff who would use the form.
 Output: a one-page summary that locks the protocol list (D6) and form scope. This becomes a Phase 0 deliverable; I can draft the questionnaire (as a form or document) once you want it.
-
-### Still needed
-1. **Protocol documents** (SFCC training and team-leader manuals, Protocols Inventory, NEPS Field Data Collection Protocol) in `docs/sources/` when you can. Not blocking planning, but required before form v9 is frozen.
-2. **Timed**: the actual target duration value(s) you use.
-3. **v8 data (D16)**: keep, migrate or discard?
-4. **Governance (D18, D20)**: who is the "network owner" (SFCC? AFT as pilot?), who pays, and are trusts already agreed to share data?
-5. **Licensing**: does anyone already hold an AGOL organisation that could host 50-100 cross-trust submitters, or is that a blocker (D17)?
-6. Whether AFT is the pilot trust, and the season timing for a pilot.
 
 ---|---|---|
 | What is "1mm"? | Bin size for recorded fork length | `length_bin_mm`, section 4.2; 5 mm is the legacy alternative (D6) |
@@ -546,7 +580,10 @@ Output: a one-page summary that locks the protocol list (D6) and form scope. Thi
 | Mixed-method pooling produces misleading trends | Separate-by-default, visible caveats, `method` carried on every estimate |
 | Estimates stale after a fish edit | Recompute job triggered on write; `computed_at` shown |
 | Single-run density over-interpreted | Always labelled minimum or assumed-p, with the assumption stored |
-| Per-user licensing/admin cost across trusts blocks Survey123 | Evaluate ODK Central in Phase 1 (D17) |
+| AGOL group/view isolation or offline-with-views fails in pilot | Test early in Phase 1/6; ODK Central fallback (D17) |
+| Real v8 data damaged during migration | Verified backup, branch rehearsal, reconciliation, v8 kept live until cutover (5.4) |
+| Prototype choices block Azure hand-over | Portability rule, storage/auth interfaces, early Azure dev environment (7.2, D21) |
+| No SFCC technical owner after handover | Name owner in D20, handover package, support period |
 | Poor-signal sync loses or duplicates data | Idempotent submissions, resumable photo upload, duplicate QC, pilot in worst-signal sites |
 | Trusts disagree on methods or data sharing | Method census, governance decision (D18) before pilot |
 | Shared DB credentials do not scale to 100 users | Per-user auth + RLS (D19) before any rollout |
@@ -568,6 +605,13 @@ Output: a one-page summary that locks the protocol list (D6) and form scope. Thi
 - Timed: target duration, no stop nets by default, optional lengths.
 - 5 mm kept as an option; network method census added as a Phase 0 deliverable.
 - Protocol PDFs deferred; unverified rules remain flagged.
+
+### Revision 4 (2026-10-03)
+- v8 data confirmed real: backup-first migration plan, preserved provenance, data-quality flags (D16 resolved).
+- Timed target duration 5 or 10 min.
+- SFCC owns/hosts/pays, Azure target: handover section 7.2, Azure service mapping, portability rule, new phases 0a and 8b, D21.
+- SFCC group AGOL licence: Survey123 recommended again (D17); ODK Central demoted to fallback; AGOL group/view design points; webhook experiment via SFCC admins; AGOL OAuth sign-in option (D19).
+- Pilot status noted; open items rewritten.
 
 ### Sources used for protocol facts (web search summaries only; the documents themselves could not be opened)
 | Fact | Source | Confidence |
