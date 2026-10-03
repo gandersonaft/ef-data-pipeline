@@ -518,57 +518,7 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 
 ### Answered so far
 | Question | Your answer | Effect |
-|---|---|---|
-| What is "1mm"? | Bin size for recorded fork length | `length_bin_mm`, section 4.2 |
-| Timed specifics | 5 or 10 min target; no stop nets; lengths maybe taken | `target_duration_s` in {300, 600}; section 3.1 |
-| Single-run use | All cases possible; density wanted | Section 3.2b; D12 resolved |
-| v8 form | Demo form; needs complete revision | Section 5.4 |
-| v8 data | **Real surveys from this season; keep** | Backup-first migration, section 5.4; D16 resolved |
-| 5 mm bins | Option kept for now | D6; revisit after the census |
-| Rockpool upload template | Not available | D14 deferred |
-| Scale | SFCC network-wide, 50-100 users, tablets/phones, poor signal | Sections 4.7, 5.5, 6.2b |
-| Ownership / hosting | SFCC owns at completion; Azure; SFCC pays; you are prototyping | Section 7.2; D20 resolved in principle, D21 |
-| Licensing | SFCC group AGOL licence, per-employee user licences in each trust | D17: Survey123 recommended; section 5.1b |
-| Pilot | AFT has piloted recording and access this season, via you | Pilot scope below |
-| Protocol PDFs | Can't provide now | Still [UNVERIFIED]; gate before form freeze |
-
-### Pilot status and next-season pilot
-This season's pilot was effectively one operator (you) on the v8 form and the Shiny prototype. The network pilot therefore still needs: a second AFT surveyor group on the new form, then one additional trust, with a defined support person and a feedback loop. Scope and dates depend on SFCC naming a technical owner (D20) and on method census results.
-
-### Still needed
-1. **Protocol documents** (SFCC training and team-leader manuals, Protocols Inventory, NEPS Field Data Collection Protocol) in `docs/sources/` when available.
-2. **SFCC technical owner and IT contact** for Azure, AGOL admin (webhook experiment, groups/views), identity (Entra vs AGOL OAuth), and IaC preference.
-3. **Trust data-sharing position** (D18) and any hosting agreements needed.
-4. **v8 facts to confirm**: was length recorded to 1 mm in v8, and were all v8 NEPS surveys single-pass or multi-pass (the data will show pass counts, but intent matters for `run_mode_reason`)?
-5. **Next-season timing** for the pilot expansion.
-
-### New: network method census (your suggestion)
-Before freezing the form, poll SFCC trusts on current practice so the form fits real methods, not assumptions. Proposed short questionnaire (one per trust):
-1. Which survey types are run (Timed, quantitative 1mm, 5mm, NEPS, semi-quantitative, presence/absence, other)?
-2. Passes used (single, two, three, more) and when.
-3. Length recording resolution (1 mm, 5 mm, other), fry subsampling thresholds.
-4. Timed duration, stop nets, whether lengths are taken, whether area is recorded.
-5. Devices, signal conditions, and current data-entry route (paper, spreadsheet, other app, Rockpool direct).
-6. Who needs access to whose data; reporting obligations.
-7. Number of staff who would use the form.
-Output: a one-page summary that locks the protocol list (D6) and form scope. This becomes a Phase 0 deliverable; I can draft the questionnaire (as a form or document) once you want it.
-
----|---|---|
-| What is "1mm"? | Bin size for recorded fork length | `length_bin_mm`, section 4.2; 5 mm is the legacy alternative (D6) |
-| How are Timed surveys run? | "Check the SFCC docs" | Searched; see section 17. Core facts found, details still to confirm |
-| Single-run use | All cases possible; density wanted | Section 3.2b; D12 resolved |
-| Existing form | Demo only, needs complete revision and respect | Section 5.4 |
-| Rockpool upload template | Not available now | D14 deferred; export designed as a later phase |
-
-### Still needed
-1. **SFCC and NEPS protocol documents in the repo.** I could not open `fms.scot`, `gov.scot` or `sfcc.co.uk` (blocked in this environment). Please drop into `docs/sources/`: the SFCC *Introduction to Electrofishing Training Manual (2021)* and *Team Leader Manual (2021)* (available from SFCC on request), the SFCC *Data Collection Protocols Inventory*, and the NEPS *Field Data Collection Protocol*. Then I can replace every [UNVERIFIED] with a quoted rule.
-2. **Timed specifics for your practice**: target duration (5 vs 10 min), stop nets or not, whether lengths are taken, area recorded or not, one habitat or several per site.
-3. **Existing v8 data**: is any of it real survey data worth keeping (D16)?
-4. **5 mm for new surveys**: should the new form ever offer 5 mm bins, or only 1 mm (legacy 5 mm kept read-only)?
-5. **Who uses the form and on what devices** (number of staff, phones/tablets, signal conditions). Drives offline and UX requirements.
-6. Does v2 replace the current system for everyone at AFT, and are there survey seasons the cutover must avoid?
-
----
+|---
 
 ## 16. Risks
 
