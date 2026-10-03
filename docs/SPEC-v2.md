@@ -1,7 +1,7 @@
 # EF Data Pipeline v2: Specification (DRAFT for sign-off)
 
 Status: **planning only. No code, schema, or infrastructure changes are made until the Decision Register (section 14) is signed off.**
-Drafted: 2026-10-03. Revision 4: 2026-10-03 (SFCC ownership, Azure hosting, AGOL group licence, v8 data is real; see section 17). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
+Drafted: 2026-10-03. Revision 5: 2026-10-03 (reconciled with the SFCC Scottish Tech Army scope document; dynamic run count; granular data sharing; see sections 1.1 and 17). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
 
 Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could not verify from the repo; you know the answer. **[BASELINE]** = how the current build does it.
 
@@ -17,6 +17,33 @@ Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could n
 5. **Built for SFCC network-wide use: 50-100 users across multiple trusts/organisations, on tablets (some phones), in poor-signal conditions.** This is a design driver for platform, offline behaviour, data ownership and support, not a later add-on (sections 4.7, 5.5, 7.1).
 6. **Prototype now, SFCC-owned production later.** AFT is the pilot and prototyping trust; at completion SFCC owns and operates the system, hosted on **Azure** and paid for by SFCC. Everything is built to be handed over (section 7.2).
 7. Outputs: dashboard, NEPS tool export/import round-trip, SFCC/Rockpool-compatible export, KML/GPS waypoints, CSV.
+
+### 1.1 Relationship to the SFCC project scope (Scottish Tech Army bid)
+SFCC's scope document (draft, from a discovery call) asks Scottish Tech Army (STA) volunteers to **productionise the prototype**. It is the authoritative statement of organisational goals; this spec is the detailed technical target underneath it. Points taken from it:
+
+| Scope document says | Effect on this spec |
+|---|---|
+| SFCC is a department of Fisheries Management Scotland (FMS); FMS becomes a charity after its AGM in **November 2026** | Time pressure and capacity constraint. Section 13 calendar |
+| The legacy national database (~15+ years old, bespoke) costs **~GBP 13,000/year** plus hundreds of pounds per change, and has data access/export problems | The new system **replaces** it. Cost target and self-administration become hard requirements (7.3, 10.5) |
+| Success = lower recurring cost, better data access/export, long-term dataset migrated intact, less dependence on individual developers, SFCC staff can administer and make straightforward changes, documentation and AI-assisted tooling for maintenance | Added as acceptance criteria (section 1.2) |
+| Preferred hosting: Azure, infrastructure controlled by FMS/SFCC | Already in 7.2 |
+| Role-based access: each organisation sees and downloads only its own data | MVP rule. Granular sharing built on top (4.7) |
+| Migrate historical data **from the legacy database** | Bigger than my earlier assumption of a one-off CSV migration of AFT's export. See 4.3 |
+| Survey season is roughly July to October; cut-over must respect it | Section 13 calendar |
+| In scope: Azure migration, auth and access control, reliable Survey123 transfer, backup/monitoring/testing/recovery, better frontend, CI/CD, legacy migration, documentation and knowledge transfer including safe use of AI tools. Out of scope (draft): ongoing support SFCC cannot sustain; new features beyond the prototype's reporting [to confirm] | **Scope tension, see below** |
+
+**Scope tension to resolve (D22).** The STA scope is "turn the prototype into a secure, reliable, maintainable production system". This spec additionally proposes a **new data model, a new protocol-aware form (Timed, SFCC 1mm, NEPS, single/multi), and new analyses**. Those are feature work the STA scope lists as "to confirm" or out of scope. Recommended split:
+- **Track A (platform, STA-friendly):** Azure environment, IaC, auth/RBAC, ingest hardening, backups/monitoring, CI/CD, legacy migration pipeline, docs. Largely independent of survey protocol details.
+- **Track B (domain, SFCC/AFT-led):** data dictionary, protocol rules, form v9, QC rules, analyses, method census. Needs domain experts, not general volunteers.
+- **Sequencing rule:** settle the target data model (Track B, Phases 1-2) *before* the big historical migration and production cut-over (Track A), so the national dataset is migrated once, not twice. Track A can start the Azure environment and auth in parallel because they do not depend on the model.
+
+### 1.2 Acceptance criteria (from the scope document's success measures)
+1. Annual running cost materially below GBP 13,000 (target to be set, 7.3).
+2. National historical dataset migrated with reconciled counts and no loss.
+3. Each organisation can access, export and map **its own** data without developer help.
+4. SFCC staff can do routine administration (add a user/trust/site, fix a record, adjust a QC threshold, restore a backup) without writing code.
+5. No single-developer dependency: repo owned by SFCC, documented, tested, deployable by pipeline.
+6. Documentation structured for AI-assisted maintenance (10.5).
 
 ### Non-goals (unless you say otherwise)
 - Replacing the Marine Directorate NEPS tool or Rockpool as systems of record for their own modelled outputs.
@@ -81,6 +108,15 @@ All three occur and must be representable:
 
 You also want density from single-run data, so the output matrix in section 8 includes it for both SFCC and NEPS, always labelled by how it was derived.
 
+### 3.2c Run count is dynamic, not chosen up front (your answer)
+A NEPS (or SFCC) survey can start as one run and become multi-run **by adding further runs during the survey**. So the form must not force a single/multi choice at the start:
+- The pass loop begins with run 1. At the end of every run the operator is asked "Add another run?" (yes -> run n+1, no -> finish).
+- `run_mode` is **derived**: `actual_runs = 1` -> `single`, `>= 2` -> `multi` (a generated or view column, never typed). `planned_runs` stays optional for crews that decide in advance.
+- Run 1 effort is identical whether or not later runs happen (NEPS design), so a survey that becomes multi-run later is internally consistent and its first run remains a valid single-run-equivalent.
+- Consequence for the Timed protocol: still exactly one run (adding runs is not offered).
+- `run_mode_reason` is simplified: `design` (stopped at 1 as planned), `cut_short` (planned more, did fewer, reason required), `extended` (more runs added than planned). `extended` is informational.
+- Edits after submit can add or remove runs; analysis and estimates recompute (8.4).
+
 ### 3.3 Run-mode semantics to settle (feeds D3)
 - `planned_runs` vs `actual_runs`: a multi-run survey can end early (e.g. zero catch on pass 2 ends it). Store both, flag mismatch as info, not error.
 - A survey planned as multi but only one pass done: store `run_mode='multi'`, `actual_runs=1`, and mark analysis as "not estimable".
@@ -117,7 +153,7 @@ survey_projects ─< events
 **fish_records** (shared): `fish_id`, `run_id`, `species`, `length_mm` (nullable; the recorded value, binned per `events.length_bin_mm`), `lifestage` (nullable), `age_class` (nullable 0-4, SFCC resolution), `count` (bulk count, default 1), `measured` (boolean: true = individually measured fish; false = counted-only remainder of a subsampled group), `weight_g`, `condition_factor` (trigger), `scaled`, `tissue_tube`, `entry_mode`, `qc_flag`, soft-delete `deleted_at`.
 
 **Length recording and subsampling (new in rev 2)**
-- `events.length_bin_mm` in {1, 5, NULL}. New SFCC 1mm and NEPS surveys use 1; legacy 5 mm surveys carry 5; Timed with no lengths carries NULL. Length-frequency charts bin at `max(length_bin_mm, chart bin)`, never finer than the data.
+- `events.length_bin_mm` in {1, 5, NULL}; **default 1** (your answer), 5 selectable as an option for trusts that still use it. New SFCC 1mm and NEPS surveys use 1; legacy 5 mm surveys carry 5; Timed with no lengths carries NULL. Length-frequency charts bin at `max(length_bin_mm, chart bin)`, never finer than the data.
 - Fry subsampling: per run, per species and lifestage, store measured fish as individual rows (`measured=true`) and the remainder as one counted row (`measured=false`, `count=n_remaining`, `length_mm=NULL`). Catch totals sum both; length-frequency uses measured rows only and is expanded to the total by proportion (option: show raw measured only). QC checks that measured count meets the protocol minimum when the group size exceeds the threshold.
 
 **Protocol extension examples**
@@ -137,6 +173,15 @@ Pre-aggregated-only legacy events (counts per run, no individual fish): represen
 
 Legacy method labels map to protocol as: `Quantitative (1mm)` -> `sfcc_1mm` (`length_bin_mm=1`); `Quantitative (5mm)` -> `sfcc_5mm` (`length_bin_mm=5`, same analysis as 1mm but coarser length data); `Timed` -> `timed`; `Presence/Absence` has no v2 protocol. Options: (a) add `sfcc_5mm` and `presence_absence` as read-only legacy protocols **[REC]**, (b) collapse to a generic `legacy_other`, (c) model SFCC quantitative as one protocol `sfcc_quant` with `length_bin_mm` in {1,5} and offer only 1 for new surveys. (c) is cleaner now that 1mm vs 5mm is known to be a recording resolution, not a different method. Needs your call (D6).
 
+### 4.3b National legacy migration (scope document changes the size of this)
+The earlier migration (`scripts/migrate_sfcc_historical.py`, migration 0002) loaded **AFT's SFCC/Rockpool export**: 1,961 events, 66,627 fish, with 7 trusts' data commingled. The scope document makes migrating the **entire legacy national database** an explicit goal. Implications:
+1. **Source access**: the legacy schema, documentation and a full data extract depend on the incumbent developer and on SFCC's contract. Options: (a) developer-supplied full dump plus schema docs **[REC]**, (b) SFCC admin-level use of the system's built-in export tools (Site/Event/Fish profilers; what the AFT export used), (c) scrape/reverse-engineer (not recommended). SFCC owns the contract negotiation (out of our scope).
+2. **Scale and variety**: many years, many trusts, methods including `Quantitative (1mm)`, `Quantitative (5mm)`, `Timed`, `Presence/Absence`. This is why the legacy protocol values (D6) must stay supported.
+3. **Ownership**: each legacy record maps to its owning trust (`event_trust` -> `org_id`) so access control (4.7) applies to history from day one.
+4. **Repeatable, idempotent ETL** with a reconciliation report per run (counts by trust, year, method; fish totals; events without fish; orphans). Keep a dry-run mode. Rehearse on a copy.
+5. **Mapping decisions** for each legacy field into the unified model (4.3), with the data dictionary recording legacy-only fields that are not carried forward.
+6. **Cut-over window**: legacy stays authoritative until a defined freeze date after the season; a final delta migration follows the freeze.
+
 ### 4.4 NEPS tool results
 Re-key `neps_tool_results` on `event_id` instead of `(site_name, survey_date, species, lifestage)`. Import matches on the old key and writes `event_id`; unmatched or ambiguous rows (same site and date, two events) go to a review queue, not a silent guess.
 
@@ -152,7 +197,7 @@ Fifty to a hundred users across trusts means ownership and access are data-model
 - Every `event` carries `org_id` (who owns the data) and `submitted_by`. `sites` carry an owning `org_id` and a visibility setting.
 - Roles: `surveyor` (submit own), `team_lead`, `org_reviewer` (QC and edit their org's data), `org_admin`, `network_admin` (cross-org), `read_only_network`.
 - RLS policies enforce org scoping in the database, not just in the UI.
-- Sharing policy is a **governance decision (D18)**: org-private, network-shared read, or fully shared. Default **[REC]**: org-private for editing, network-shared read for site-level aggregates, with a per-org opt-in for event detail.
+- **Data ownership and sharing (your answer, D18 resolved).** Trusts own their own data and may share it **on a granular basis if they agree**. Model: default = org-private. Sharing is an explicit, revocable grant in `data_shares(grantor_org, grantee (org / group / network), scope, access_level, granted_by, granted_at, expires_at, revoked_at)`, where `scope` can be as narrow as one event or site, or as wide as a project, catchment, year range, species, or all data; `access_level` in {`view_aggregate`, `view_detail`, `download`}. Reads go through views that union "own" and "shared with me" under RLS, so sharing is enforced in the database. Every grant and access is audit-logged. The scope document's MVP rule (each organisation sees and downloads only its own data) is therefore the default with zero grants; granular sharing is a later phase that needs no model change. Existing data-sharing agreements are to be reviewed and updated (D18).
 - Reference data (species, protocols, cutoffs, QC thresholds) is network-level; each org may have overrides (e.g. default target duration, default length bin) in `org_settings`.
 - Legacy Rockpool data stays attributed to its `event_trust`, mapped to `org_id`.
 
@@ -211,10 +256,10 @@ Design points this creates (carry into Phase 1):
 
 | Section | Timed | SFCC 1mm | NEPS |
 |---|---|---|---|
-| Protocol, run mode | required | required | required |
+| Protocol (run count follows from how many runs are added) | required | required | required |
 | Site select / new site | yes | yes | yes |
 | Site dimensions (widths, lengths, area) | optional | required | required |
-| Pass loop | exactly 1 (timer) | 1 if single, repeat if multi | 1 if single, repeat if multi |
+| Pass loop | exactly 1 (timer vs 5/10 min target) | starts at 1; "Add another run?" after each run | starts at 1; "Add another run?" after each run |
 | Pass-level timer | countdown/stopwatch for effort | per pass | per pass |
 | Fish entry | species + count; length optional | individual (length mm) or bulk | individual or bulk, cutoff-driven lifestage |
 | Fry/parr cutoffs | n/a | default per species, editable | default per species, editable |
@@ -334,6 +379,23 @@ You are prototyping; SFCC will own, host (Azure) and pay. This shapes how everyt
 7. **Handover package**: architecture doc, runbooks (deploy, restore, rotate secrets, add a trust, republish form), data dictionary, test suite, onboarding guide, a named SFCC technical owner, and a warranty/support period.
 8. **Migration of real data** from Supabase to Azure at handover is a rehearsed, verified step (counts, checksums, photos), not an afterthought (section 5.4 applies to this move too).
 
+### 7.3 Cost model (new, scope document)
+Target: running cost **well below GBP 13,000/year**; the ceiling is to be set by SFCC. The workload is strongly seasonal (July to October), which suits scale-to-zero and small tiers. Planning ranges below are **estimates to be validated with the Azure pricing calculator**, not quotes.
+
+| Component | Cost-conscious choice | Notes |
+|---|---|---|
+| PostgreSQL + PostGIS | Azure Database for PostgreSQL Flexible Server, Burstable tier, right-sized storage | Backups included in retention window; scale up only if needed |
+| Blob storage (photos) | Cool/Hot tier by age, lifecycle rule to cool/archive old photos | Photos dominate storage growth |
+| Ingest | Azure Functions Consumption or Container Apps Jobs | Pennies per month at this volume |
+| Dashboard | Shiny in a container on Container Apps / App Service, min replicas 0-1 | **Avoid Posit Connect licence** (costly); use open-source Shiny hosting |
+| Identity | AGOL OAuth (no extra cost) or Entra ID | Entra external identities may add cost; check |
+| Monitoring | Log Analytics with a daily cap, Azure Monitor alerts | Cap ingestion to control cost |
+| Environments | dev/staging stopped or minimal off-season | Only production is always-on |
+| AGOL | Existing SFCC group licence | Confirm covers this layer and users |
+| Non-profit credits | Microsoft nonprofit offers, if FMS qualifies | Check eligibility after charitable status |
+
+Track cost with an Azure budget alert from day one. Report actual monthly cost against target in the handover.
+
 ### 7.1 Scale and operations (new)
 - **Authentication**: for the dashboard, Supabase Auth (email/SSO) with org membership; the current shared Shiny DB credentials do not scale to 50-100 people. Options: (a) Shiny behind Posit Connect auth with per-user DB session role, (b) replace Shiny with a stack that supports per-user auth natively, (c) keep Shiny for analysts only and give surveyors a lightweight "my surveys" view elsewhere. Decide in D19.
 - **Hosting capacity**: Supabase plan tier (connections, storage for photos at network scale), Posit Connect Cloud limits on concurrent users; estimate photo volume (surveys x photos x size) before choosing tiers.
@@ -429,6 +491,12 @@ Keep the approved 3 top-level tabs (Projects / Survey Detail / Site Map). v2 cha
 - **Survey Detail**: Site-first picker as built. The Summary tab adapts: Timed shows catch, effort, CPUE; quantitative shows the three-tier density table; single-run shows the "minimum / assumed-p" labelling and hides depletion. Legacy events show a "legacy record" banner and hide sections with no data.
 - **Site Map**: colour by protocol (and shape by run mode); legend; OS Open Rivers overlay kept.
 
+### 10.5 Administration console and maintainability (scope document)
+SFCC staff must run the system without a developer. Required, in addition to analyst features:
+- **Admin console** (role-restricted): manage organisations, users and roles; manage sites and the site master; approve new-site promotions; edit lookups (species, protocols, cutoffs, timed durations); edit QC thresholds (`qc_config`); view ingest health and failures; replay failed ingests; manage data-sharing grants; trigger exports; view audit log; one-click "restore point" status.
+- **Runbooks** for routine tasks (add a trust, rotate a secret, restore from backup, republish the form, deploy).
+- **AI-assisted maintenance readiness**: `CLAUDE.md` / `AGENTS.md` at the repo root describing architecture, conventions, how to run tests, what never to touch; a short architecture overview; small well-named modules; a strong automated test suite so AI-proposed changes can be verified; documented safe workflow (branch, tests, review, deploy). Written *for* both humans and coding assistants.
+
 ### 10.2 Write-capable features (keep guarded)
 Fish record edit (soft delete), project tagging, NEPS import, site promotion, QC "mark reviewed". All writes through `shiny_editor`, all logged to `edit_log`, estimates recomputed after edits.
 
@@ -437,7 +505,7 @@ Any panel whose prerequisites are absent shows an explicit empty state naming th
 
 ### 10.4 Exports (all options)
 1. NEPS tool input workbook (baseline `fn_neps_export.R`, extend to single-run).
-2. **SFCC/Rockpool upload-format CSV** (new). Options: just CSV matching their import template, or also a validation report. [CONFIRM Rockpool upload format]
+2. ~~SFCC/Rockpool upload CSV~~ **Removed**: the scope document confirms this system *replaces* the legacy national database, so there is no upload target. Replaced by a first-class **data export for members** (all of their own data plus granted shares) in open formats: CSV, GeoPackage/GeoJSON, KML, and an analysis-ready tidy format for R/Python, with a data dictionary included in every export.
 3. Plain CSV per table / filtered view.
 4. KML waypoints with site size data (existing `efish-site-kml-export` skill).
 5. Chart/table export buttons (baseline).
@@ -481,6 +549,8 @@ Any panel whose prerequisites are absent shows an explicit empty state naming th
 | 8b. Azure environment | IaC, dev/staging/prod, dry-run migration Supabase -> Azure, monitoring | Full restore on Azure reproduces data; SFCC IT sign-off |
 | 9. Cutover | Switch form, retire unused services, docs, runbook | One full field week ingested without manual intervention |
 
+**Calendar constraints from the scope document (today is 2026-10-03):** the season (July to October) is ending, the FMS AGM and charitable transition is in November 2026, and the legacy contract has a renewal date [CONFIRM]. A realistic shape: Oct-Dec 2026 decisions, backups, data dictionary, Azure environment and auth (Track A start); Jan-Mar 2027 model, migration rehearsals, form v9 build; Apr-Jun 2027 staging tests, AFT pilot on the new form, final legacy migration rehearsal; **cut-over before the 2027 season starts in July**, with legacy kept read-only as fallback for the season. If the legacy renewal date forces an earlier decision, the legacy system can be kept read-only while the new one is finished.
+
 Rollback: every phase's migration is additive until Phase 9; the baseline keeps running untouched until cutover.
 
 ---
@@ -503,14 +573,16 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | D11 | Analysis location | R at read time / SQL views / precomputed `event_estimates` | Precomputed |
 | D12 | Single-run density (SFCC and NEPS) | Minimum only / assumed capture probability (configurable) / NEPS tool model | RESOLVED by you: all are wanted. Show each, labelled by derivation; assumptions stored per estimate |
 | D13 | Required-field validation in form | On / off | On in production |
-| D14 | SFCC/Rockpool export | None / CSV matching template / CSV + validation | CSV + validation (needs the template) |
+| D14 | Legacy upload export | RESOLVED: not needed (this replaces the legacy system). Replaced by member data exports (10.4) | Done |
 | D17 | Capture platform at network scale | Survey123 / ODK Central / Kobo | **Survey123 on SFCC's AGOL org** (group licence confirmed). ODK Central only as a fallback if group/view isolation fails the pilot |
-| D18 | Data sharing between organisations | Org-private / network read / fully shared | Org-private edit, network read of site-level aggregates, per-org opt-in for detail |
+| D18 | Data sharing between organisations | RESOLVED in principle: trusts own their data; default private; sharing by explicit granular, revocable grants (4.7). Still to do: update the existing data-sharing agreements | Implement grants after the MVP's own-data-only rule |
 | D19 | Dashboard auth and platform | Entra ID / AGOL OAuth sign-in; Shiny container + ShinyProxy / Posit Connect / different stack | AGOL OAuth unless SFCC IT prefers Entra; Shiny in containers on Azure; per-user auth mandatory |
-| D20 | Governance and cost | RESOLVED in principle: SFCC owns, hosts on Azure, pays. Still open: named technical owner, support model, trust data agreements, IaC tool, Azure region | SFCC to name an owner before Phase 6 |
+| D20 | Governance and cost | RESOLVED in principle: SFCC owns, hosts on Azure, pays; SFCC data/technical owner is the SFCC database lead (a named person at SFCC/FMS). Still open: Azure subscription and any non-profit credits, support model, IaC tool, region, post-handover support | SFCC to confirm; blocks Phase 0 sign-off |
 | D21 | Prototype hosting until handover | Stay on Supabase + GH Actions / build on Azure from the start | Prototype on current stack with the portability rule (7.2); stand up an Azure dev environment in Phase 2 to prove the move early |
 | D16 | Existing v8 data | RESOLVED: it is real data. Migrate into the new model as `source_system='survey123_v8'`, with backup first (section 5.4) | Done; implementation in Phase 3 |
-| D15 | Public repo hygiene | Keep public / make private | Make private if feasible, otherwise scrub client names and project ref |
+| D15 | Public repo hygiene (**urgent**) | Keep public / make private / scrub | **Make the repo private now** and rewrite or remove sensitive content: `data/site_data.csv` holds ~1,200 named sites with exact coordinates from multiple trusts, and the repo names clients and a project ref. Public history retains it even after deletion, so a private repo plus history clean-up (or a fresh repo) is needed. Decide with SFCC who owns the repo (D20) |
+| D22 | Delivery split with STA volunteers | One combined programme / Track A (platform, STA-friendly) + Track B (domain, SFCC/AFT-led) | Two tracks with the sequencing rule in 1.1 |
+| D23 | Legacy data extraction route | Developer dump + schema / SFCC export tools / reverse-engineer | Developer dump + schema docs, with export tools as fallback |
 
 ---
 
@@ -530,7 +602,13 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | Ownership / hosting | SFCC owns at completion; Azure; SFCC pays; you are prototyping | Section 7.2; D20 resolved in principle, D21 |
 | Licensing | SFCC group AGOL licence, per-employee user licences in each trust | D17: Survey123 recommended; section 5.1b |
 | Pilot | AFT has piloted recording and access this season, via you | Pilot scope below |
-| Protocol PDFs | Can't provide now | Still [UNVERIFIED]; gate before form freeze |
+| Protocol PDFs | Will try to get | Still [UNVERIFIED]; gate before form freeze |
+| SFCC technical owner | The SFCC database lead (named in the scope document) | D20 |
+| Data sharing | Trusts own data; granular sharing by agreement; agreements need updating | 4.7; D18 |
+| Default length bin | 1 mm | `length_bin_mm` default 1 |
+| NEPS run count | Can become multi-run by adding runs during a survey | Section 3.2c |
+| Next-season pilot timing | Up in the air | Section 13 calendar assumes pre-July 2027 |
+| SFCC scope document | Provided (limited detail, drafted from a discovery call) | Section 1.1 |
 
 ### Pilot status and next-season pilot
 This season's pilot was effectively one operator (you) on the v8 form and the Shiny prototype. The network pilot therefore still needs: a second AFT surveyor group on the new form, then one additional trust, with a defined support person and a feedback loop. Scope and dates depend on SFCC naming a technical owner (D20) and on method census results.
@@ -572,6 +650,13 @@ Output: a one-page summary that locks the protocol list (D6) and form scope. Thi
 | Poor-signal sync loses or duplicates data | Idempotent submissions, resumable photo upload, duplicate QC, pilot in worst-signal sites |
 | Trusts disagree on methods or data sharing | Method census, governance decision (D18) before pilot |
 | Shared DB credentials do not scale to 100 users | Per-user auth + RLS (D19) before any rollout |
+| Incumbent developer controls access to legacy schema/data | Raise early with SFCC; D23; export-tool fallback; reconciliation reports |
+| Volunteer (STA) capacity and continuity | Two-track split (D22), thorough docs and tests, small well-defined work packages, named SFCC owner |
+| Spec widens beyond STA scope | Tracks and acceptance criteria (1.1, 1.2); feature work separately approved |
+| Site locations exposed (public repo, exports) | Private repo and history clean-up (D15); export controls; sensitivity policy |
+| Cost exceeds target | Scale-to-zero design, budget alerts, 7.3 review at each phase |
+| Legacy renewal date or Nov 2026 transition forces a rushed cutover | Calendar in section 13; legacy read-only fallback |
+| Scope document says AGOL licensing "to confirm" | Confirm group licence covers the layer and users before Phase 1 |
 | Scope creep from "include all options" | Options are recorded here; only the signed-off choices go into Phase 1 |
 
 ---
@@ -597,6 +682,14 @@ Output: a one-page summary that locks the protocol list (D6) and form scope. Thi
 - SFCC owns/hosts/pays, Azure target: handover section 7.2, Azure service mapping, portability rule, new phases 0a and 8b, D21.
 - SFCC group AGOL licence: Survey123 recommended again (D17); ODK Central demoted to fallback; AGOL group/view design points; webhook experiment via SFCC admins; AGOL OAuth sign-in option (D19).
 - Pilot status noted; open items rewritten.
+
+### Revision 5 (2026-10-03)
+- Reconciled with the SFCC project scope document: added 1.1 (relationship, scope tension, tracks), 1.2 (acceptance criteria), 4.3b (national legacy migration), 7.3 (cost model), 10.5 (admin console, AI-maintainability), calendar constraints.
+- Run count is dynamic (3.2c): `run_mode` derived from the number of runs added; "Add another run?" in the form; `extended` reason.
+- Length bin default 1 mm.
+- Data sharing: granular grants model (D18 resolved); Rockpool upload export removed (D14), replaced by member exports.
+- New decisions D22 (delivery split) and D23 (legacy extraction); D15 made urgent (site coordinates in the public repo).
+- Personal names deliberately kept out of this file because the repository is public.
 
 ### Sources used for protocol facts (web search summaries only; the documents themselves could not be opened)
 | Fact | Source | Confidence |
