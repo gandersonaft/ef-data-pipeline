@@ -1,7 +1,7 @@
 # EF Data Pipeline v2: Specification (DRAFT for sign-off)
 
 Status: **planning only. No code, schema, or infrastructure changes are made until the Decision Register (section 14) is signed off.**
-Drafted: 2026-10-03. Revision 2: 2026-10-03 (your answers on 1mm, single-run, form; see section 17 for the change log and source confidence). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
+Drafted: 2026-10-03. Revision 3: 2026-10-03 (network-wide scale, Timed details, 5 mm retained; see section 17). Baseline reviewed: `main` @ `5b256cd` (NEPS-only pipeline + historical SFCC migration).
 
 Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could not verify from the repo; you know the answer. **[BASELINE]** = how the current build does it.
 
@@ -14,7 +14,8 @@ Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could n
 2. NEPS and SFCC each supported as **single-run** or **multi-run**.
 3. Each survey type gets the analysis that is *statistically valid for it*. No silent pooling of incompatible methods.
 4. One storage model that also holds legacy SFCC/Rockpool history, so old and new surveys are queryable the same way.
-5. Outputs: dashboard, NEPS tool export/import round-trip, SFCC/Rockpool-compatible export, KML/GPS waypoints, CSV.
+5. **Built for SFCC network-wide use: 50-100 users across multiple trusts/organisations, on tablets (some phones), in poor-signal conditions.** This is a design driver for platform, offline behaviour, data ownership and support, not a later add-on (sections 4.7, 5.5, 7.1).
+6. Outputs: dashboard, NEPS tool export/import round-trip, SFCC/Rockpool-compatible export, KML/GPS waypoints, CSV.
 
 ### Non-goals (unless you say otherwise)
 - Replacing the Marine Directorate NEPS tool or Rockpool as systems of record for their own modelled outputs.
@@ -52,9 +53,9 @@ Conventions: **[REC]** = recommended option. **[CONFIRM]** = something I could n
 |---|---|---|---|
 | Intent | Index of abundance: catch per unit effort (time), used to cover many sites quickly or where removal sampling is impractical | Quantitative, area-delimited site survey to the SFCC standard; **fork length recorded in 1 mm bins** (the legacy alternative is 5 mm bins) | Quantitative, area-delimited survey feeding the national programme (Marine Directorate NEPS tool) |
 | Run modes | **Single only** (one timed fishing effort). Multi-timed is an option, see D3 | Single or multi | Single or multi. **NEPS national default is single-pass; roughly a third of sites are three-pass**, with identical first-pass effort in both [UNVERIFIED, from search summary] |
-| Area measured | Optional (effort is time, not area) | Required | Required (all NEPS data are area-delimited) |
-| Effort metric | **Anode-live time** from the equipment timer (time actually fished, not wall-clock). Target duration commonly ~5 min (Galloway) to ~10 min (SFCC inventory summary): store as a configurable target, [CONFIRM yours] | Area, plus pass times | Area, plus pass times |
-| Individual lengths | Optional (option: counts only) | Parr: all measured. Fry: if more than ~50 per run, a measured subsample of at least 50 and the rest counted [UNVERIFIED] | Same measured-subsample pattern [CONFIRM against the NEPS protocol] |
+| Area measured | Optional (effort is time, not area). **No stop nets** (your answer): stored as `stop_nets=false`, defaulted for Timed | Required | Required (all NEPS data are area-delimited) |
+| Effort metric | **Anode-live time** from the equipment timer (time actually fished, not wall-clock). Your answer: a **target duration** applies. Stored per event (`target_duration_s`) with the org/network default configurable (commonly 5 to 10 min in the sources I could find), and the form shows the timer against target | Area, plus pass times | Area, plus pass times |
+| Individual lengths | Optional: **may be taken** (your answer), so the form offers a per-survey "lengths taken?" switch | Parr: all measured. Fry: if more than ~50 per run, a measured subsample of at least 50 and the rest counted [UNVERIFIED] | Same measured-subsample pattern [CONFIRM against the NEPS protocol] |
 | Lifestage | Optional | Fry/parr (or SFCC age class 0-4, see D6) | Fry/parr with species-specific length cutoffs |
 | Primary output | CPUE (fish per minute), presence/absence, species richness | Density (fish/100 m2) via depletion (multi) or assumed capture probability (single) | NEPS tool output: density, benchmark, EQR-style comparison |
 | Poolable with others? | No (different metric) | Only with other SFCC quantitative | Only with other NEPS, and with SFCC quantitative by explicit choice |
@@ -144,6 +145,16 @@ Re-key `neps_tool_results` on `event_id` instead of `(site_name, survey_date, sp
 - `neps`, `sfcc_1mm`: `area_m2 IS NOT NULL` once `qc_status <> 'pending'` (enforced as QC flag, not a hard insert failure, so partial field data can still land).
 - Species, lifestage and protocol enums as lookup tables, not inline `CHECK` lists, so adding a species is data, not DDL. **[REC]**
 
+### 4.7 Multi-organisation model (new: network-wide use)
+Fifty to a hundred users across trusts means ownership and access are data-model concerns:
+- `organisations` (trust/board/agency) and `users` (linked to Supabase Auth or the form platform identity), with `memberships(user, org, role)`.
+- Every `event` carries `org_id` (who owns the data) and `submitted_by`. `sites` carry an owning `org_id` and a visibility setting.
+- Roles: `surveyor` (submit own), `team_lead`, `org_reviewer` (QC and edit their org's data), `org_admin`, `network_admin` (cross-org), `read_only_network`.
+- RLS policies enforce org scoping in the database, not just in the UI.
+- Sharing policy is a **governance decision (D18)**: org-private, network-shared read, or fully shared. Default **[REC]**: org-private for editing, network-shared read for site-level aggregates, with a per-org opt-in for event detail.
+- Reference data (species, protocols, cutoffs, QC thresholds) is network-level; each org may have overrides (e.g. default target duration, default length bin) in `org_settings`.
+- Legacy Rockpool data stays attributed to its `event_trust`, mapped to `org_id`.
+
 ### 4.6 Other model decisions
 - **IDs**: keep Esri `globalid` (normalised) as the idempotency key via `(source_system, source_id)`.
 - **Geometry**: keep dual 4326 + 27700, generated columns.
@@ -164,6 +175,19 @@ Re-key `neps_tool_results` on `event_id` instead of `(site_name, survey_date, sp
 | ODK / KoboToolbox (XLSForm) | Yes | New stack; export via API | Open, no AGOL dependency, webhooks (REST services) are reliable. Reuses XLSForm skills |
 | Custom PWA | Yes if built well | Highest | Total control; you maintain it |
 | Spreadsheet/paper then entry | n/a | Lowest | Keep as a documented fallback import path regardless (6.5) |
+
+### 5.1b Platform implications of 50-100 users (D17)
+| Concern | Survey123 / AGOL | ODK / KoboToolbox / ODK Central |
+|---|---|---|
+| Licensing | Each submitter needs a named-user AGOL licence (Creator/Field Worker) under a **shared organisation**; 50-100 cross-trust users means someone's AGOL org licenses or invites them all. Cost and admin are real [CONFIRM how SFCC/AFT would license this] | No per-user licence cost; self-host or hosted |
+| Cross-org isolation | Via groups/views; clumsy | Projects/users per project in ODK Central |
+| Offline | Strong | Strong (Collect app), forms and attachments queue and sync |
+| Distribution of form updates | Via AGOL, users re-download | Pull from server on connect |
+| Reliable server-to-server data feed | Webhooks failed in your org; polling works | REST service/webhooks work; or poll the OData API |
+| Maintenance burden | Esri-managed | You manage a server (or pay a host) |
+| Familiarity | You know it | New to learn |
+
+Take-away: for a **network** rollout, ODK Central becomes materially more attractive than for an AFT-only tool. The decision is a genuine fork (D17), not a foregone Survey123. Both can be evaluated with the same XLSForm in Phase 1, since the form is authored as XLSForm either way.
 
 ### 5.2 One form or several (D2)
 
@@ -189,6 +213,20 @@ Re-key `neps_tool_results` on `event_id` instead of `(site_name, survey_date, sp
 | Photos | yes | yes | yes |
 
 Form-side requirements (carry over): required-field validation must be **on** in production (baseline had it stripped for testing, which is why QC flagged incomplete fish rows), calculated fields from the baseline (`dep_*`, `den_*`, `catch_summary*`) stay presentation-only and are never ingested.
+
+### 5.5 Field conditions and scale requirements (new)
+| Requirement | Detail |
+|---|---|
+| Devices | Tablets primarily, phones secondarily; one responsive layout; large touch targets (gloved, wet hands); sunlight-readable; works with a stylus or rubber-tipped touch |
+| Offline | 100% of a survey completable with **no signal at all**: site list, choices, basemap/site location, and photo capture all local. Submissions queue and send when signal returns |
+| Sync | Resumable uploads of photos; idempotent submissions (a re-sent submission never duplicates); visible "unsent / sent" status; no silent data loss |
+| Draft safety | Autosave every entry; recoverable after crash or battery loss; a survey stays open across a field day |
+| Reference data on device | Site list filtered to the user's org plus nearby sites; refreshed when online; version stamped |
+| Form update rollout | Staged: pilot trust first; `form_version` on every event; older versions accepted by ingest for a defined grace period |
+| Time and GPS | Device clock and GPS accuracy stored; warn on large clock drift (poor-signal devices drift); location accuracy captured |
+| Training and support | Short field guide, in-form help text, training build of the form with dummy data, a support route for 50-100 users (who answers, how fast) |
+| Load | Peak is end of survey day; ingest must handle bursts of tens of events and hundreds of photos; photo size capped or compressed on device |
+| Data entry fallback | A paper or spreadsheet route per protocol for device failure, importable later (6.5) |
 
 ### 5.4 The form is a clean-sheet redesign (your direction)
 `efish_neps_v8` is a working demo. It is treated as **reference material, not a constraint**: v9 is designed from the protocols outward, and the form is a first-class deliverable with its own spec, review and field testing, not an afterthought to the database.
@@ -235,6 +273,12 @@ Form-side requirements (carry over): required-field validation must be **on** in
 - Sanity assertion: if the main-layer record's form-reported fish total > 0 and ingested fish = 0, mark event `qc_status='flagged'` with `ingest_mismatch` and alert.
 - Soft-deleted AGOL features: mark event `source_deleted_at`, do not hard-delete.
 
+### 6.2b Scale considerations
+- Submissions can arrive days late (offline). `survey_date` is the survey; `received_at` and `submitted_at` are separate fields. Reports use `survey_date`.
+- Poll frequency, API rate limits and run duration are sized for ~100 users in season; ingest is incremental and per-event transactional so one failure never blocks the batch.
+- Dead-letter queue: events that fail ingest are stored with the error, visible to `network_admin`, and replayable.
+- Duplicate guard: same `(source_id)` or same `(site, survey_date, protocol, submitted_by)` with a different id raises a QC warning, since offline devices can double-submit.
+
 ### 6.3 Photos
 Download attachments to a private Supabase Storage bucket at `electrofishing/{year}/{site_code}/{global_id}.{ext}`; signed URLs generated at read time, never cached as permanent values.
 
@@ -262,6 +306,13 @@ A survey that creates a new site enters `sites` as `source='survey_new_site'` wi
 | Storage | Supabase Storage private bucket | Keep |
 | Dashboard | R Shiny on Posit Connect Cloud (baseline); Shiny on Render; Python (Streamlit/Dash); Metabase/Superset | Keep Shiny: the analysis stack (FSA, NEPS tool format) is R |
 | Secrets | `.env` + Actions secrets + Render env | Same, but never commit real values; note repo is **public** |
+
+### 7.1 Scale and operations (new)
+- **Authentication**: for the dashboard, Supabase Auth (email/SSO) with org membership; the current shared Shiny DB credentials do not scale to 50-100 people. Options: (a) Shiny behind Posit Connect auth with per-user DB session role, (b) replace Shiny with a stack that supports per-user auth natively, (c) keep Shiny for analysts only and give surveyors a lightweight "my surveys" view elsewhere. Decide in D19.
+- **Hosting capacity**: Supabase plan tier (connections, storage for photos at network scale), Posit Connect Cloud limits on concurrent users; estimate photo volume (surveys x photos x size) before choosing tiers.
+- **Backups and retention**: PITR on, restore tested; retention policy agreed with participating trusts.
+- **Monitoring**: ingest health dashboard, alerting, an owner on call during season.
+- **Cost model**: who pays for hosting, AGOL/ODK, storage, and who administers (D20).
 
 Roles (least privilege), extending baseline: `ingest_writer` (insert/update everything ingest touches), `shiny_reader` (select), `shiny_editor` (fish edits, project tagging, NEPS import, site promotion; no hard DELETE anywhere), plus RLS review per `supabase/rls_recommendations.sql`.
 
@@ -390,13 +441,13 @@ Any panel whose prerequisites are absent shows an explicit empty state naming th
 
 | Phase | Scope | Exit criteria |
 |---|---|---|
-| 0. Decisions + sources | Resolve section 14; get SFCC/NEPS protocol PDFs into the repo (section 15); settle Timed details | Sign-off recorded here |
+| 0. Decisions + census | Resolve section 14; run the network method census (section 15); get protocol PDFs into the repo; governance and licensing answers (D17-D20) | Protocol list locked, platform chosen, sign-off recorded here |
 | 1. Data dictionary + form design | Dictionary, XLSForm(s), test matrix, field UX review | You approve the dictionary and a clickable form on a real device |
 | 2. Data model | Migrations derived from the dictionary; lookups, constraints, `edit_log`, `qc_config`, `event_estimates`; apply on a Supabase **branch** first | Migrations pass on branch; constraint tests pass |
 | 3. Historical remap | Move `historical_*` into the unified model (if D5 = unify) | Row counts reconcile exactly with baseline; spot-check 20 events |
 | 4. Ingest | Poller with `editDate`, dynamic relationship IDs, mismatch assertion | Each of the 5 combos ingests end to end; edit round-trips |
 | 5. QC + estimates | Rule engine, estimator jobs | Golden-value tests pass; QC table reviewed by you |
-| 6. Field pilot | Real surveys on the new form, side by side with paper/old process | Pilot week with no data loss; field feedback applied |
+| 6. Field pilot | One pilot trust, real surveys on tablets/phones in poor signal, side by side with the old process; then staged rollout trust by trust | Pilot week with zero data loss and offline sync verified; support route tested; feedback applied |
 | 7. Dashboard | Filters, protocol-aware panels, map encodings | Walk-through per protocol |
 | 8. Exports | NEPS (single + multi), KML, CSV (SFCC upload format deferred, see D14) | Round-trip into the NEPS tool succeeds |
 | 9. Cutover | Switch form, retire unused services, docs, runbook | One full field week ingested without manual intervention |
@@ -415,7 +466,7 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | D3 | Timed multi-run? | Timed single only / allow multi-timed | Timed single only (single-run termination is now handled by `run_mode_reason`, section 3.2b) |
 | D4 | Data model | A wide / B per-protocol / C core + extensions | C |
 | D5 | Legacy SFCC data | Keep separate / unify / unify + side table for SFCC estimates | Unify + side table |
-| D6 | 1mm vs 5mm, Presence/Absence legacy, SFCC age class 0-4 | (a) separate legacy protocols, (b) `legacy_other`, (c) one `sfcc_quant` protocol with `length_bin_mm`; keep age class or collapse to fry/parr | (c) for SFCC quantitative; Presence/Absence as read-only legacy; store age class and derive lifestage |
+| D6 | 1mm vs 5mm (**5 mm kept as a selectable option for now**, to be revisited after the method census, section 15), Presence/Absence legacy, SFCC age class 0-4 | (a) separate legacy protocols, (b) `legacy_other`, (c) one `sfcc_quant` protocol with `length_bin_mm`; keep age class or collapse to fry/parr | (c) for SFCC quantitative; Presence/Absence as read-only legacy; store age class and derive lifestage |
 | D7 | Pooling default | Always separate / separate with toggle / always pooled | Separate with explicit toggle and caveat |
 | D8 | Site master | CSV file / `sites` table with promotion workflow | Table is master; CSV becomes an export |
 | D9 | Ingest | Webhook / polling / Extract Changes | Polling on `editDate` |
@@ -424,6 +475,10 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | D12 | Single-run density (SFCC and NEPS) | Minimum only / assumed capture probability (configurable) / NEPS tool model | RESOLVED by you: all are wanted. Show each, labelled by derivation; assumptions stored per estimate |
 | D13 | Required-field validation in form | On / off | On in production |
 | D14 | SFCC/Rockpool export | None / CSV matching template / CSV + validation | CSV + validation (needs the template) |
+| D17 | Capture platform at network scale | Survey123 (licensing, shared AGOL org) / ODK Central / Kobo | Evaluate both in Phase 1 with one XLSForm; default ODK Central if per-user AGOL licensing across trusts is impractical |
+| D18 | Data sharing between organisations | Org-private / network read / fully shared | Org-private edit, network read of site-level aggregates, per-org opt-in for detail |
+| D19 | Dashboard auth and platform | Shiny + Connect auth / different stack / analysts-only Shiny plus simpler surveyor view | Needs input; per-user auth is mandatory either way |
+| D20 | Governance and cost | Who hosts, administers, pays, supports; agreements with trusts | SFCC/AFT to decide; blocks Phase 6 pilot scope |
 | D16 | Existing v8 demo data | Discard / keep as `source_system='survey123_v8_demo'` / migrate into the new model | Your call (see section 15, Q4). Default: keep, tagged, excluded from reports unless included |
 | D15 | Public repo hygiene | Keep public / make private | Make private if feasible, otherwise scrub client names and project ref |
 
@@ -431,9 +486,40 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 
 ## 15. Open items
 
-### Answered
+### Answered so far
 | Question | Your answer | Effect |
 |---|---|---|
+| What is "1mm"? | Bin size for recorded fork length | `length_bin_mm`, section 4.2 |
+| Timed specifics | Target duration; no stop nets; lengths maybe taken | Section 3.1: `target_duration_s`, `stop_nets=false` default, "lengths taken?" switch |
+| Single-run use | All cases possible; density wanted | Section 3.2b; D12 resolved |
+| Existing form (v8) | Demo only, needs complete revision | Section 5.4 |
+| 5 mm bins | Some trusts may still use them; keep as option for now | D6; revisit after method census |
+| Rockpool upload template | Not available now | D14 deferred |
+| Scale and conditions | SFCC network-wide, 50-100 users, tablets/phones, poor signal | Sections 4.7, 5.1b, 5.5, 6.2b, 7.1; D17-D20 |
+| Protocol PDFs | Can't provide just now | Rules stay [UNVERIFIED]; Phase 0 gate before form freeze |
+
+**About v8:** `efish_neps_v8` is the Survey123 form this repo currently ingests (main event + pass/fish/photo/width repeats). v2 replaces it with a clean-sheet form. Open question is only whether its existing demo submissions are worth keeping (D16).
+
+### New: network method census (your suggestion)
+Before freezing the form, poll SFCC trusts on current practice so the form fits real methods, not assumptions. Proposed short questionnaire (one per trust):
+1. Which survey types are run (Timed, quantitative 1mm, 5mm, NEPS, semi-quantitative, presence/absence, other)?
+2. Passes used (single, two, three, more) and when.
+3. Length recording resolution (1 mm, 5 mm, other), fry subsampling thresholds.
+4. Timed duration, stop nets, whether lengths are taken, whether area is recorded.
+5. Devices, signal conditions, and current data-entry route (paper, spreadsheet, other app, Rockpool direct).
+6. Who needs access to whose data; reporting obligations.
+7. Number of staff who would use the form.
+Output: a one-page summary that locks the protocol list (D6) and form scope. This becomes a Phase 0 deliverable; I can draft the questionnaire (as a form or document) once you want it.
+
+### Still needed
+1. **Protocol documents** (SFCC training and team-leader manuals, Protocols Inventory, NEPS Field Data Collection Protocol) in `docs/sources/` when you can. Not blocking planning, but required before form v9 is frozen.
+2. **Timed**: the actual target duration value(s) you use.
+3. **v8 data (D16)**: keep, migrate or discard?
+4. **Governance (D18, D20)**: who is the "network owner" (SFCC? AFT as pilot?), who pays, and are trusts already agreed to share data?
+5. **Licensing**: does anyone already hold an AGOL organisation that could host 50-100 cross-trust submitters, or is that a blocker (D17)?
+6. Whether AFT is the pilot trust, and the season timing for a pilot.
+
+---|---|---|
 | What is "1mm"? | Bin size for recorded fork length | `length_bin_mm`, section 4.2; 5 mm is the legacy alternative (D6) |
 | How are Timed surveys run? | "Check the SFCC docs" | Searched; see section 17. Core facts found, details still to confirm |
 | Single-run use | All cases possible; density wanted | Section 3.2b; D12 resolved |
@@ -460,6 +546,10 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 | Mixed-method pooling produces misleading trends | Separate-by-default, visible caveats, `method` carried on every estimate |
 | Estimates stale after a fish edit | Recompute job triggered on write; `computed_at` shown |
 | Single-run density over-interpreted | Always labelled minimum or assumed-p, with the assumption stored |
+| Per-user licensing/admin cost across trusts blocks Survey123 | Evaluate ODK Central in Phase 1 (D17) |
+| Poor-signal sync loses or duplicates data | Idempotent submissions, resumable photo upload, duplicate QC, pilot in worst-signal sites |
+| Trusts disagree on methods or data sharing | Method census, governance decision (D18) before pilot |
+| Shared DB credentials do not scale to 100 users | Per-user auth + RLS (D19) before any rollout |
 | Scope creep from "include all options" | Options are recorded here; only the signed-off choices go into Phase 1 |
 
 ---
@@ -472,6 +562,12 @@ Rollback: every phase's migration is additive until Phase 9; the baseline keeps 
 - Subsampling model for large fry catches (`measured` flag, remainder as counted row).
 - Form redesigned as a clean-sheet deliverable; phases reordered so dictionary + form design come before the schema; field pilot added; Rockpool export deferred.
 - Open items rewritten (section 15).
+
+### Revision 3 (2026-10-03)
+- Network-wide scale (50-100 users, multiple trusts, tablets/phones, poor signal): added multi-organisation model, platform implications (ODK Central vs Survey123), field-conditions requirements, ingest scale notes, auth and operations section, decisions D17-D20.
+- Timed: target duration, no stop nets by default, optional lengths.
+- 5 mm kept as an option; network method census added as a Phase 0 deliverable.
+- Protocol PDFs deferred; unverified rules remain flagged.
 
 ### Sources used for protocol facts (web search summaries only; the documents themselves could not be opened)
 | Fact | Source | Confidence |
